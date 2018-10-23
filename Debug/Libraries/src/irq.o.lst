@@ -1,0 +1,276 @@
+   1              		.cpu arm7tdmi-s
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"irq.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  17              		.global	ISRDummyHandler
+  19              	ISRDummyHandler:
+  20              	.LFB0:
+  21              		.file 1 "../Libraries/src/irq.c"
+   1:../Libraries/src/irq.c **** /*
+   2:../Libraries/src/irq.c ****  * irq.c
+   3:../Libraries/src/irq.c ****  *
+   4:../Libraries/src/irq.c ****  *  Created on: Dec 1, 2010
+   5:../Libraries/src/irq.c ****  *      Author: tw
+   6:../Libraries/src/irq.c ****  */
+   7:../Libraries/src/irq.c **** 
+   8:../Libraries/src/irq.c **** #include "lpc246x.h"
+   9:../Libraries/src/irq.c **** #include "irq.h"
+  10:../Libraries/src/irq.c **** 
+  11:../Libraries/src/irq.c **** void ISRDummyHandler(void){
+  22              		.loc 1 11 0
+  23              		.cfi_startproc
+  24              		@ Interrupt Service Routine.
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 1, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 0C082DE9 		stmfd	sp!, {r2, r3, fp}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 12
+  31              		.cfi_offset 11, -4
+  32              		.cfi_offset 3, -8
+  33              		.cfi_offset 2, -12
+  34 0004 08B08DE2 		add	fp, sp, #8
+  35              	.LCFI1:
+  36              		.cfi_def_cfa 11, 4
+  12:../Libraries/src/irq.c **** 
+  13:../Libraries/src/irq.c **** 	/*** Do Interrupt handling here ***/
+  14:../Libraries/src/irq.c **** 
+  15:../Libraries/src/irq.c **** 	VICVectAddr = 0;       /* Acknowledge Interrupt */
+  37              		.loc 1 15 0
+  38 0008 FF30E0E3 		mvn	r3, #255
+  39 000c 0020A0E3 		mov	r2, #0
+  40 0010 002083E5 		str	r2, [r3, #0]
+  16:../Libraries/src/irq.c **** }
+  41              		.loc 1 16 0
+  42 0014 08D04BE2 		sub	sp, fp, #8
+  43 0018 0C08BDE8 		ldmfd	sp!, {r2, r3, fp}
+  44 001c 04F05EE2 		subs	pc, lr, #4
+  45              		.cfi_endproc
+  46              	.LFE0:
+  48              		.align	2
+  49              		.global	init_VIC
+  51              	init_VIC:
+  52              	.LFB1:
+  17:../Libraries/src/irq.c **** 
+  18:../Libraries/src/irq.c **** 
+  19:../Libraries/src/irq.c **** /*** initialize the interrupt controller ***/
+  20:../Libraries/src/irq.c **** void init_VIC(void)
+  21:../Libraries/src/irq.c **** {
+  53              		.loc 1 21 0
+  54              		.cfi_startproc
+  55              		@ Function supports interworking.
+  56              		@ args = 0, pretend = 0, frame = 16
+  57              		@ frame_needed = 1, uses_anonymous_args = 0
+  58              		@ link register save eliminated.
+  59 0020 04B02DE5 		str	fp, [sp, #-4]!
+  60              	.LCFI2:
+  61              		.cfi_def_cfa_offset 4
+  62              		.cfi_offset 11, -4
+  63 0024 00B08DE2 		add	fp, sp, #0
+  64              	.LCFI3:
+  65              		.cfi_def_cfa_register 11
+  66 0028 14D04DE2 		sub	sp, sp, #20
+  22:../Libraries/src/irq.c ****     unsigned int i = 0;
+  67              		.loc 1 22 0
+  68 002c 0030A0E3 		mov	r3, #0
+  69 0030 08300BE5 		str	r3, [fp, #-8]
+  23:../Libraries/src/irq.c ****     unsigned int *vect_addr, *vect_cntl;
+  24:../Libraries/src/irq.c **** 
+  25:../Libraries/src/irq.c ****     /* initialize VIC */
+  26:../Libraries/src/irq.c ****     VICIntEnClr = 0xffffffff;
+  70              		.loc 1 26 0
+  71 0034 8C309FE5 		ldr	r3, .L5
+  72 0038 0020E0E3 		mvn	r2, #0
+  73 003c 002083E5 		str	r2, [r3, #0]
+  27:../Libraries/src/irq.c ****     VICVectAddr = 0;
+  74              		.loc 1 27 0
+  75 0040 FF30E0E3 		mvn	r3, #255
+  76 0044 0020A0E3 		mov	r2, #0
+  77 0048 002083E5 		str	r2, [r3, #0]
+  28:../Libraries/src/irq.c ****     VICIntSelect = 0;
+  78              		.loc 1 28 0
+  79 004c 78309FE5 		ldr	r3, .L5+4
+  80 0050 0020A0E3 		mov	r2, #0
+  81 0054 002083E5 		str	r2, [r3, #0]
+  29:../Libraries/src/irq.c **** 
+  30:../Libraries/src/irq.c ****     /* set all the vector and vector control register to 0 */
+  31:../Libraries/src/irq.c ****     for ( i = 0; i < VIC_SIZE; i++ )
+  82              		.loc 1 31 0
+  83 0058 0030A0E3 		mov	r3, #0
+  84 005c 08300BE5 		str	r3, [fp, #-8]
+  85 0060 120000EA 		b	.L3
+  86              	.L4:
+  32:../Libraries/src/irq.c ****     {
+  33:../Libraries/src/irq.c **** 		vect_addr = (unsigned int *)(VIC_BASE_ADDR + VECT_ADDR_INDEX + i*4);
+  87              		.loc 1 33 0 discriminator 2
+  88 0064 08301BE5 		ldr	r3, [fp, #-8]
+  89 0068 013183E2 		add	r3, r3, #1073741824
+  90 006c 0F3D43E2 		sub	r3, r3, #960
+  91 0070 0331A0E1 		mov	r3, r3, asl #2
+  92 0074 0C300BE5 		str	r3, [fp, #-12]
+  34:../Libraries/src/irq.c **** 		vect_cntl = (unsigned int *)(VIC_BASE_ADDR + VECT_CNTL_INDEX + i*4);
+  93              		.loc 1 34 0 discriminator 2
+  94 0078 08301BE5 		ldr	r3, [fp, #-8]
+  95 007c 013183E2 		add	r3, r3, #1073741824
+  96 0080 0E3D43E2 		sub	r3, r3, #896
+  97 0084 0331A0E1 		mov	r3, r3, asl #2
+  98 0088 10300BE5 		str	r3, [fp, #-16]
+  35:../Libraries/src/irq.c **** 		*vect_addr = 0x0;
+  99              		.loc 1 35 0 discriminator 2
+ 100 008c 0C301BE5 		ldr	r3, [fp, #-12]
+ 101 0090 0020A0E3 		mov	r2, #0
+ 102 0094 002083E5 		str	r2, [r3, #0]
+  36:../Libraries/src/irq.c **** 		*vect_cntl = 0xF;
+ 103              		.loc 1 36 0 discriminator 2
+ 104 0098 10301BE5 		ldr	r3, [fp, #-16]
+ 105 009c 0F20A0E3 		mov	r2, #15
+ 106 00a0 002083E5 		str	r2, [r3, #0]
+  31:../Libraries/src/irq.c ****     for ( i = 0; i < VIC_SIZE; i++ )
+ 107              		.loc 1 31 0 discriminator 2
+ 108 00a4 08301BE5 		ldr	r3, [fp, #-8]
+ 109 00a8 013083E2 		add	r3, r3, #1
+ 110 00ac 08300BE5 		str	r3, [fp, #-8]
+ 111              	.L3:
+  31:../Libraries/src/irq.c ****     for ( i = 0; i < VIC_SIZE; i++ )
+ 112              		.loc 1 31 0 is_stmt 0 discriminator 1
+ 113 00b0 08301BE5 		ldr	r3, [fp, #-8]
+ 114 00b4 1F0053E3 		cmp	r3, #31
+ 115 00b8 E9FFFF9A 		bls	.L4
+  37:../Libraries/src/irq.c ****     }
+  38:../Libraries/src/irq.c ****     return;
+  39:../Libraries/src/irq.c **** }
+ 116              		.loc 1 39 0 is_stmt 1
+ 117 00bc 00D08BE2 		add	sp, fp, #0
+ 118 00c0 04B09DE4 		ldmfd	sp!, {fp}
+ 119 00c4 1EFF2FE1 		bx	lr
+ 120              	.L6:
+ 121              		.align	2
+ 122              	.L5:
+ 123 00c8 14F0FFFF 		.word	-4076
+ 124 00cc 0CF0FFFF 		.word	-4084
+ 125              		.cfi_endproc
+ 126              	.LFE1:
+ 128              		.align	2
+ 129              		.global	install_irq
+ 131              	install_irq:
+ 132              	.LFB2:
+  40:../Libraries/src/irq.c **** 
+  41:../Libraries/src/irq.c **** /*** routine to install the interupt ***/
+  42:../Libraries/src/irq.c **** unsigned int install_irq (unsigned int irq_nr, void (*HandlerAddr)(void), unsigned int priority)
+  43:../Libraries/src/irq.c **** {
+ 133              		.loc 1 43 0
+ 134              		.cfi_startproc
+ 135              		@ Function supports interworking.
+ 136              		@ args = 0, pretend = 0, frame = 24
+ 137              		@ frame_needed = 1, uses_anonymous_args = 0
+ 138              		@ link register save eliminated.
+ 139 00d0 04B02DE5 		str	fp, [sp, #-4]!
+ 140              	.LCFI4:
+ 141              		.cfi_def_cfa_offset 4
+ 142              		.cfi_offset 11, -4
+ 143 00d4 00B08DE2 		add	fp, sp, #0
+ 144              	.LCFI5:
+ 145              		.cfi_def_cfa_register 11
+ 146 00d8 1CD04DE2 		sub	sp, sp, #28
+ 147 00dc 10000BE5 		str	r0, [fp, #-16]
+ 148 00e0 14100BE5 		str	r1, [fp, #-20]
+ 149 00e4 18200BE5 		str	r2, [fp, #-24]
+  44:../Libraries/src/irq.c **** 		unsigned int *vect_addr;
+  45:../Libraries/src/irq.c **** 		unsigned int *vect_cntl;
+  46:../Libraries/src/irq.c **** 
+  47:../Libraries/src/irq.c ****     VICIntEnClr = 1 << irq_nr;	/* Disable Interrupt */
+ 150              		.loc 1 47 0
+ 151 00e8 88309FE5 		ldr	r3, .L10
+ 152 00ec 10201BE5 		ldr	r2, [fp, #-16]
+ 153 00f0 0110A0E3 		mov	r1, #1
+ 154 00f4 1122A0E1 		mov	r2, r1, asl r2
+ 155 00f8 002083E5 		str	r2, [r3, #0]
+  48:../Libraries/src/irq.c ****     if ( irq_nr >= VIC_SIZE )
+ 156              		.loc 1 48 0
+ 157 00fc 10301BE5 		ldr	r3, [fp, #-16]
+ 158 0100 1F0053E3 		cmp	r3, #31
+ 159 0104 0100009A 		bls	.L8
+  49:../Libraries/src/irq.c ****     {
+  50:../Libraries/src/irq.c **** 		return ( FALSE );
+ 160              		.loc 1 50 0
+ 161 0108 0030A0E3 		mov	r3, #0
+ 162 010c 150000EA 		b	.L9
+ 163              	.L8:
+  51:../Libraries/src/irq.c ****     }
+  52:../Libraries/src/irq.c ****     else
+  53:../Libraries/src/irq.c ****     {
+  54:../Libraries/src/irq.c **** 		/* find first un-assigned VIC address for the handler */
+  55:../Libraries/src/irq.c **** 		vect_addr = (unsigned int *)(VIC_BASE_ADDR + VECT_ADDR_INDEX + irq_nr*4);
+ 164              		.loc 1 55 0
+ 165 0110 10301BE5 		ldr	r3, [fp, #-16]
+ 166 0114 013183E2 		add	r3, r3, #1073741824
+ 167 0118 0F3D43E2 		sub	r3, r3, #960
+ 168 011c 0331A0E1 		mov	r3, r3, asl #2
+ 169 0120 08300BE5 		str	r3, [fp, #-8]
+  56:../Libraries/src/irq.c **** 		vect_cntl = (unsigned int *)(VIC_BASE_ADDR + VECT_CNTL_INDEX + irq_nr*4);
+ 170              		.loc 1 56 0
+ 171 0124 10301BE5 		ldr	r3, [fp, #-16]
+ 172 0128 013183E2 		add	r3, r3, #1073741824
+ 173 012c 0E3D43E2 		sub	r3, r3, #896
+ 174 0130 0331A0E1 		mov	r3, r3, asl #2
+ 175 0134 0C300BE5 		str	r3, [fp, #-12]
+  57:../Libraries/src/irq.c **** 		*vect_addr = (unsigned int)HandlerAddr;	/* set interrupt vector */
+ 176              		.loc 1 57 0
+ 177 0138 14201BE5 		ldr	r2, [fp, #-20]
+ 178 013c 08301BE5 		ldr	r3, [fp, #-8]
+ 179 0140 002083E5 		str	r2, [r3, #0]
+  58:../Libraries/src/irq.c **** 		*vect_cntl = priority;
+ 180              		.loc 1 58 0
+ 181 0144 0C301BE5 		ldr	r3, [fp, #-12]
+ 182 0148 18201BE5 		ldr	r2, [fp, #-24]
+ 183 014c 002083E5 		str	r2, [r3, #0]
+  59:../Libraries/src/irq.c **** 		VICIntEnable = 1 << irq_nr;	/* Enable Interrupt */
+ 184              		.loc 1 59 0
+ 185 0150 24309FE5 		ldr	r3, .L10+4
+ 186 0154 10201BE5 		ldr	r2, [fp, #-16]
+ 187 0158 0110A0E3 		mov	r1, #1
+ 188 015c 1122A0E1 		mov	r2, r1, asl r2
+ 189 0160 002083E5 		str	r2, [r3, #0]
+  60:../Libraries/src/irq.c **** 		return( TRUE );
+ 190              		.loc 1 60 0
+ 191 0164 0130A0E3 		mov	r3, #1
+ 192              	.L9:
+  61:../Libraries/src/irq.c ****     }
+  62:../Libraries/src/irq.c **** }
+ 193              		.loc 1 62 0
+ 194 0168 0300A0E1 		mov	r0, r3
+ 195 016c 00D08BE2 		add	sp, fp, #0
+ 196 0170 04B09DE4 		ldmfd	sp!, {fp}
+ 197 0174 1EFF2FE1 		bx	lr
+ 198              	.L11:
+ 199              		.align	2
+ 200              	.L10:
+ 201 0178 14F0FFFF 		.word	-4076
+ 202 017c 10F0FFFF 		.word	-4080
+ 203              		.cfi_endproc
+ 204              	.LFE2:
+ 206              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 irq.c
+     /tmp/ccBZmeMT.s:16     .text:00000000 $a
+     /tmp/ccBZmeMT.s:19     .text:00000000 ISRDummyHandler
+     /tmp/ccBZmeMT.s:51     .text:00000020 init_VIC
+     /tmp/ccBZmeMT.s:123    .text:000000c8 $d
+     /tmp/ccBZmeMT.s:128    .text:000000d0 $a
+     /tmp/ccBZmeMT.s:131    .text:000000d0 install_irq
+     /tmp/ccBZmeMT.s:201    .text:00000178 $d
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

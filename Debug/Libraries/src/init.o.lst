@@ -1,0 +1,323 @@
+   1              		.cpu arm7tdmi-s
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"init.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  17              		.global	SystemInit
+  19              	SystemInit:
+  20              	.LFB0:
+  21              		.file 1 "../Libraries/src/init.c"
+   1:../Libraries/src/init.c **** #include "lpc246x.h"
+   2:../Libraries/src/init.c **** #include "init.h"
+   3:../Libraries/src/init.c **** 
+   4:../Libraries/src/init.c **** /** Do not step through this function. Run through the whole function at once when debugging. **/
+   5:../Libraries/src/init.c **** 
+   6:../Libraries/src/init.c **** int SystemInit(void)
+   7:../Libraries/src/init.c **** {
+  22              		.loc 1 7 0
+  23              		.cfi_startproc
+  24              		@ Function supports interworking.
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 1, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 04B02DE5 		str	fp, [sp, #-4]!
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 4
+  31              		.cfi_offset 11, -4
+  32 0004 00B08DE2 		add	fp, sp, #0
+  33              	.LCFI1:
+  34              		.cfi_def_cfa_register 11
+  35 0008 0CD04DE2 		sub	sp, sp, #12
+   8:../Libraries/src/init.c **** 	unsigned int MValue, NValue;
+   9:../Libraries/src/init.c **** 
+  10:../Libraries/src/init.c **** 	MValue = 0;
+  36              		.loc 1 10 0
+  37 000c 0030A0E3 		mov	r3, #0
+  38 0010 08300BE5 		str	r3, [fp, #-8]
+  11:../Libraries/src/init.c **** 	NValue = 0;
+  39              		.loc 1 11 0
+  40 0014 0030A0E3 		mov	r3, #0
+  41 0018 0C300BE5 		str	r3, [fp, #-12]
+  12:../Libraries/src/init.c **** 
+  13:../Libraries/src/init.c **** 	PINSEL0 |= 0x00000000;
+  42              		.loc 1 13 0
+  43 001c 10329FE5 		ldr	r3, .L8
+  44 0020 0C229FE5 		ldr	r2, .L8
+  45 0024 002092E5 		ldr	r2, [r2, #0]
+  46 0028 002083E5 		str	r2, [r3, #0]
+  14:../Libraries/src/init.c **** 	PINSEL1 |= 0x00000000;
+  47              		.loc 1 14 0
+  48 002c 04329FE5 		ldr	r3, .L8+4
+  49 0030 00229FE5 		ldr	r2, .L8+4
+  50 0034 002092E5 		ldr	r2, [r2, #0]
+  51 0038 002083E5 		str	r2, [r3, #0]
+  15:../Libraries/src/init.c **** 
+  16:../Libraries/src/init.c **** 	MEMMAP = 1;
+  52              		.loc 1 16 0
+  53 003c F8319FE5 		ldr	r3, .L8+8
+  54 0040 0120A0E3 		mov	r2, #1
+  55 0044 002083E5 		str	r2, [r3, #0]
+  17:../Libraries/src/init.c **** 
+  18:../Libraries/src/init.c **** 	PCONP |= 0x80000000;
+  56              		.loc 1 18 0
+  57 0048 F0319FE5 		ldr	r3, .L8+12
+  58 004c EC219FE5 		ldr	r2, .L8+12
+  59 0050 002092E5 		ldr	r2, [r2, #0]
+  60 0054 022182E3 		orr	r2, r2, #-2147483648
+  61 0058 002083E5 		str	r2, [r3, #0]
+  19:../Libraries/src/init.c **** 
+  20:../Libraries/src/init.c **** 	if(PLLSTAT & (1<<25))
+  62              		.loc 1 20 0
+  63 005c E0319FE5 		ldr	r3, .L8+16
+  64 0060 003093E5 		ldr	r3, [r3, #0]
+  65 0064 023403E2 		and	r3, r3, #33554432
+  66 0068 000053E3 		cmp	r3, #0
+  67 006c 0800000A 		beq	.L2
+  21:../Libraries/src/init.c **** 	{
+  22:../Libraries/src/init.c **** 		PLLCON = 1;
+  68              		.loc 1 22 0
+  69 0070 D0319FE5 		ldr	r3, .L8+20
+  70 0074 0120A0E3 		mov	r2, #1
+  71 0078 002083E5 		str	r2, [r3, #0]
+  23:../Libraries/src/init.c **** 		PLLFEED = 0xAA;
+  72              		.loc 1 23 0
+  73 007c C8319FE5 		ldr	r3, .L8+24
+  74 0080 AA20A0E3 		mov	r2, #170
+  75 0084 002083E5 		str	r2, [r3, #0]
+  24:../Libraries/src/init.c **** 		PLLFEED = 0x55;
+  76              		.loc 1 24 0
+  77 0088 BC319FE5 		ldr	r3, .L8+24
+  78 008c 5520A0E3 		mov	r2, #85
+  79 0090 002083E5 		str	r2, [r3, #0]
+  80              	.L2:
+  25:../Libraries/src/init.c **** 	}
+  26:../Libraries/src/init.c **** 
+  27:../Libraries/src/init.c **** 	PLLCON = 0;						/* Disable PLL, disconnected */
+  81              		.loc 1 27 0
+  82 0094 AC319FE5 		ldr	r3, .L8+20
+  83 0098 0020A0E3 		mov	r2, #0
+  84 009c 002083E5 		str	r2, [r3, #0]
+  28:../Libraries/src/init.c **** 	PLLFEED = 0xaa;
+  85              		.loc 1 28 0
+  86 00a0 A4319FE5 		ldr	r3, .L8+24
+  87 00a4 AA20A0E3 		mov	r2, #170
+  88 00a8 002083E5 		str	r2, [r3, #0]
+  29:../Libraries/src/init.c **** 	PLLFEED = 0x55;
+  89              		.loc 1 29 0
+  90 00ac 98319FE5 		ldr	r3, .L8+24
+  91 00b0 5520A0E3 		mov	r2, #85
+  92 00b4 002083E5 		str	r2, [r3, #0]
+  30:../Libraries/src/init.c **** 
+  31:../Libraries/src/init.c **** 	SCS |= 0x20;					/* enable main oscialltor */
+  93              		.loc 1 31 0
+  94 00b8 90319FE5 		ldr	r3, .L8+28
+  95 00bc 8C219FE5 		ldr	r2, .L8+28
+  96 00c0 002092E5 		ldr	r2, [r2, #0]
+  97 00c4 202082E3 		orr	r2, r2, #32
+  98 00c8 002083E5 		str	r2, [r3, #0]
+  32:../Libraries/src/init.c **** 	while(!(SCS & 0x40));			/* wait until ready */
+  99              		.loc 1 32 0
+ 100 00cc 0000A0E1 		mov	r0, r0	@ nop
+ 101              	.L3:
+ 102              		.loc 1 32 0 is_stmt 0 discriminator 1
+ 103 00d0 78319FE5 		ldr	r3, .L8+28
+ 104 00d4 003093E5 		ldr	r3, [r3, #0]
+ 105 00d8 403003E2 		and	r3, r3, #64
+ 106 00dc 000053E3 		cmp	r3, #0
+ 107 00e0 FAFFFF0A 		beq	.L3
+  33:../Libraries/src/init.c **** 
+  34:../Libraries/src/init.c **** 	CLKSRCSEL = 0x1;				/* use main oscillator */
+ 108              		.loc 1 34 0 is_stmt 1
+ 109 00e4 68319FE5 		ldr	r3, .L8+32
+ 110 00e8 0120A0E3 		mov	r2, #1
+ 111 00ec 002083E5 		str	r2, [r3, #0]
+  35:../Libraries/src/init.c **** 
+  36:../Libraries/src/init.c **** 	PLLCFG = 15 | (0 << 16);
+ 112              		.loc 1 36 0
+ 113 00f0 60319FE5 		ldr	r3, .L8+36
+ 114 00f4 0F20A0E3 		mov	r2, #15
+ 115 00f8 002083E5 		str	r2, [r3, #0]
+  37:../Libraries/src/init.c **** 	PLLFEED = 0xAA;
+ 116              		.loc 1 37 0
+ 117 00fc 48319FE5 		ldr	r3, .L8+24
+ 118 0100 AA20A0E3 		mov	r2, #170
+ 119 0104 002083E5 		str	r2, [r3, #0]
+  38:../Libraries/src/init.c **** 	PLLFEED = 0x55;
+ 120              		.loc 1 38 0
+ 121 0108 3C319FE5 		ldr	r3, .L8+24
+ 122 010c 5520A0E3 		mov	r2, #85
+ 123 0110 002083E5 		str	r2, [r3, #0]
+  39:../Libraries/src/init.c **** 
+  40:../Libraries/src/init.c **** 	PLLCON = 1;
+ 124              		.loc 1 40 0
+ 125 0114 2C319FE5 		ldr	r3, .L8+20
+ 126 0118 0120A0E3 		mov	r2, #1
+ 127 011c 002083E5 		str	r2, [r3, #0]
+  41:../Libraries/src/init.c **** 	PLLFEED = 0xAA;
+ 128              		.loc 1 41 0
+ 129 0120 24319FE5 		ldr	r3, .L8+24
+ 130 0124 AA20A0E3 		mov	r2, #170
+ 131 0128 002083E5 		str	r2, [r3, #0]
+  42:../Libraries/src/init.c **** 	PLLFEED = 0x55;
+ 132              		.loc 1 42 0
+ 133 012c 18319FE5 		ldr	r3, .L8+24
+ 134 0130 5520A0E3 		mov	r2, #85
+ 135 0134 002083E5 		str	r2, [r3, #0]
+  43:../Libraries/src/init.c **** 
+  44:../Libraries/src/init.c **** 	CCLKCFG = 7; /*configure cclk divisor so that the pll output results in 48MHz (former config resul
+ 136              		.loc 1 44 0
+ 137 0138 1C319FE5 		ldr	r3, .L8+40
+ 138 013c 0720A0E3 		mov	r2, #7
+ 139 0140 002083E5 		str	r2, [r3, #0]
+  45:../Libraries/src/init.c **** 	USBCLKCFG = 3;
+ 140              		.loc 1 45 0
+ 141 0144 14319FE5 		ldr	r3, .L8+44
+ 142 0148 0320A0E3 		mov	r2, #3
+ 143 014c 002083E5 		str	r2, [r3, #0]
+  46:../Libraries/src/init.c **** 
+  47:../Libraries/src/init.c **** 	while(((PLLSTAT & (1 << 26)) == 0));
+ 144              		.loc 1 47 0
+ 145 0150 0000A0E1 		mov	r0, r0	@ nop
+ 146              	.L4:
+ 147              		.loc 1 47 0 is_stmt 0 discriminator 1
+ 148 0154 E8309FE5 		ldr	r3, .L8+16
+ 149 0158 003093E5 		ldr	r3, [r3, #0]
+ 150 015c 013303E2 		and	r3, r3, #67108864
+ 151 0160 000053E3 		cmp	r3, #0
+ 152 0164 FAFFFF0A 		beq	.L4
+  48:../Libraries/src/init.c **** 
+  49:../Libraries/src/init.c **** 	MValue = PLLSTAT & 0x00007FFF;
+ 153              		.loc 1 49 0 is_stmt 1
+ 154 0168 D4309FE5 		ldr	r3, .L8+16
+ 155 016c 003093E5 		ldr	r3, [r3, #0]
+ 156 0170 8338A0E1 		mov	r3, r3, asl #17
+ 157 0174 A338A0E1 		mov	r3, r3, lsr #17
+ 158 0178 08300BE5 		str	r3, [fp, #-8]
+  50:../Libraries/src/init.c **** 	NValue = (PLLSTAT & 0x00FF0000) >> 16;
+ 159              		.loc 1 50 0
+ 160 017c C0309FE5 		ldr	r3, .L8+16
+ 161 0180 003093E5 		ldr	r3, [r3, #0]
+ 162 0184 FF3803E2 		and	r3, r3, #16711680
+ 163 0188 2338A0E1 		mov	r3, r3, lsr #16
+ 164 018c 0C300BE5 		str	r3, [fp, #-12]
+ 165              	.L6:
+  51:../Libraries/src/init.c **** 
+  52:../Libraries/src/init.c **** 	while((MValue != 15) && (NValue != 0));
+ 166              		.loc 1 52 0 discriminator 1
+ 167 0190 08301BE5 		ldr	r3, [fp, #-8]
+ 168 0194 0F0053E3 		cmp	r3, #15
+ 169 0198 0200000A 		beq	.L5
+ 170              		.loc 1 52 0 is_stmt 0 discriminator 2
+ 171 019c 0C301BE5 		ldr	r3, [fp, #-12]
+ 172 01a0 000053E3 		cmp	r3, #0
+ 173 01a4 F9FFFF1A 		bne	.L6
+ 174              	.L5:
+  53:../Libraries/src/init.c **** 
+  54:../Libraries/src/init.c **** 	PLLCON = 3;
+ 175              		.loc 1 54 0 is_stmt 1
+ 176 01a8 98309FE5 		ldr	r3, .L8+20
+ 177 01ac 0320A0E3 		mov	r2, #3
+ 178 01b0 002083E5 		str	r2, [r3, #0]
+  55:../Libraries/src/init.c **** 	PLLFEED = 0xAA;
+ 179              		.loc 1 55 0
+ 180 01b4 90309FE5 		ldr	r3, .L8+24
+ 181 01b8 AA20A0E3 		mov	r2, #170
+ 182 01bc 002083E5 		str	r2, [r3, #0]
+  56:../Libraries/src/init.c **** 	PLLFEED = 0x55;
+ 183              		.loc 1 56 0
+ 184 01c0 84309FE5 		ldr	r3, .L8+24
+ 185 01c4 5520A0E3 		mov	r2, #85
+ 186 01c8 002083E5 		str	r2, [r3, #0]
+  57:../Libraries/src/init.c **** 
+  58:../Libraries/src/init.c **** 	while(((PLLSTAT & (1 << 25)) == 0));
+ 187              		.loc 1 58 0
+ 188 01cc 0000A0E1 		mov	r0, r0	@ nop
+ 189              	.L7:
+ 190              		.loc 1 58 0 is_stmt 0 discriminator 1
+ 191 01d0 6C309FE5 		ldr	r3, .L8+16
+ 192 01d4 003093E5 		ldr	r3, [r3, #0]
+ 193 01d8 023403E2 		and	r3, r3, #33554432
+ 194 01dc 000053E3 		cmp	r3, #0
+ 195 01e0 FAFFFF0A 		beq	.L7
+  59:../Libraries/src/init.c **** 
+  60:../Libraries/src/init.c **** 	PCLKSEL0 = 0xAAAAAAAA;
+ 196              		.loc 1 60 0 is_stmt 1
+ 197 01e4 78309FE5 		ldr	r3, .L8+48
+ 198 01e8 78209FE5 		ldr	r2, .L8+52
+ 199 01ec 002083E5 		str	r2, [r3, #0]
+  61:../Libraries/src/init.c **** 	PCLKSEL1 = 0xAAAAAAAA;
+ 200              		.loc 1 61 0
+ 201 01f0 74309FE5 		ldr	r3, .L8+56
+ 202 01f4 6C209FE5 		ldr	r2, .L8+52
+ 203 01f8 002083E5 		str	r2, [r3, #0]
+  62:../Libraries/src/init.c **** 
+  63:../Libraries/src/init.c **** 
+  64:../Libraries/src/init.c **** 	MAMCR = 0;
+ 204              		.loc 1 64 0
+ 205 01fc 6C309FE5 		ldr	r3, .L8+60
+ 206 0200 0020A0E3 		mov	r2, #0
+ 207 0204 002083E5 		str	r2, [r3, #0]
+  65:../Libraries/src/init.c **** 
+  66:../Libraries/src/init.c **** 	MAMTIM = 4;					/* wait 4 clock cycles */
+ 208              		.loc 1 66 0
+ 209 0208 64309FE5 		ldr	r3, .L8+64
+ 210 020c 0420A0E3 		mov	r2, #4
+ 211 0210 002083E5 		str	r2, [r3, #0]
+  67:../Libraries/src/init.c **** 
+  68:../Libraries/src/init.c **** 	MAMCR = 2;					/* fully enabled */
+ 212              		.loc 1 68 0
+ 213 0214 54309FE5 		ldr	r3, .L8+60
+ 214 0218 0220A0E3 		mov	r2, #2
+ 215 021c 002083E5 		str	r2, [r3, #0]
+  69:../Libraries/src/init.c **** 
+  70:../Libraries/src/init.c **** 	return (0);
+ 216              		.loc 1 70 0
+ 217 0220 0030A0E3 		mov	r3, #0
+  71:../Libraries/src/init.c **** }
+ 218              		.loc 1 71 0
+ 219 0224 0300A0E1 		mov	r0, r3
+ 220 0228 00D08BE2 		add	sp, fp, #0
+ 221 022c 04B09DE4 		ldmfd	sp!, {fp}
+ 222 0230 1EFF2FE1 		bx	lr
+ 223              	.L9:
+ 224              		.align	2
+ 225              	.L8:
+ 226 0234 00C002E0 		.word	-536690688
+ 227 0238 04C002E0 		.word	-536690684
+ 228 023c 40C01FE0 		.word	-534790080
+ 229 0240 C4C01FE0 		.word	-534789948
+ 230 0244 88C01FE0 		.word	-534790008
+ 231 0248 80C01FE0 		.word	-534790016
+ 232 024c 8CC01FE0 		.word	-534790004
+ 233 0250 A0C11FE0 		.word	-534789728
+ 234 0254 0CC11FE0 		.word	-534789876
+ 235 0258 84C01FE0 		.word	-534790012
+ 236 025c 04C11FE0 		.word	-534789884
+ 237 0260 08C11FE0 		.word	-534789880
+ 238 0264 A8C11FE0 		.word	-534789720
+ 239 0268 AAAAAAAA 		.word	-1431655766
+ 240 026c ACC11FE0 		.word	-534789716
+ 241 0270 00C01FE0 		.word	-534790144
+ 242 0274 04C01FE0 		.word	-534790140
+ 243              		.cfi_endproc
+ 244              	.LFE0:
+ 246              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 init.c
+     /tmp/ccmE3OIM.s:16     .text:00000000 $a
+     /tmp/ccmE3OIM.s:19     .text:00000000 SystemInit
+     /tmp/ccmE3OIM.s:226    .text:00000234 $d
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

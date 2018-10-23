@@ -1,0 +1,1146 @@
+Archive member included because of file (symbol)
+
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivsi3.o)
+                              ./Libraries/src/UART.o (__aeabi_uidiv)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divsi3.o)
+                              ./Libraries/src/UART.o (__aeabi_idiv)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_dvmd_tls.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_addsubdf3.o)
+                              ./Libraries/src/UART.o (__aeabi_dadd)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_cmpdf2.o)
+                              ./Libraries/src/UART.o (__aeabi_dcmplt)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_truncdfsf2.o)
+                              ./Libraries/src/UART.o (__aeabi_d2f)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_addsubsf3.o)
+                              ./Libraries/src/UART.o (__aeabi_ui2f)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_muldivsf3.o)
+                              ./Libraries/src/UART.o (__aeabi_fmul)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_fixunssfsi.o)
+                              ./Libraries/src/UART.o (__aeabi_f2uiz)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-printf.o)
+                              ./Libraries/src/UART.o (printf)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reent.o)
+                              ./Libraries/src/libnosys_gnu.o (errno)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-printf.o) (_vfprintf_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wsetup.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o) (__swsetup_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o) (_dtoa_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fflush.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o) (_fflush_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o) (__sinit)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-freer.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reent.o) (_free_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fwalk.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o) (_fwalk)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-impure.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fflush.o) (_global_impure_ptr)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-locale.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o) (_localeconv_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-makebuf.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wsetup.o) (__smakebuf_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mallocr.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o) (_malloc_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memchr.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o) (memchr)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memcpy.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o) (memcpy)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memset.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o) (memset)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mlock.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-freer.o) (__malloc_lock)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mprec.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o) (_Balloc)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-s_fpclassify.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o) (__fpclassifyd)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-sbrkr.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-freer.o) (_sbrk_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o) (__sread)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strcmp.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-locale.o) (strcmp)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strlen.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o) (strlen)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfiprintf.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o) (__sprint_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-writer.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o) (_write_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-callocr.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mprec.o) (_calloc_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-closer.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o) (_close_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fclose.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o) (fclose)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fputwc.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfiprintf.o) (_fputwc_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fstatr.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-makebuf.o) (_fstat_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fvwrite.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfiprintf.o) (__sfvwrite_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-isattyr.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-makebuf.o) (_isatty_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-lseekr.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o) (_lseek_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memmove.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fvwrite.o) (memmove)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-readr.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o) (_read_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reallocr.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fvwrite.o) (_realloc_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wbuf.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fputwc.o) (__swbuf_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wcrtomb.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fputwc.o) (_wcrtomb_r)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wctomb_r.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wcrtomb.o) (__wctomb)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_muldivdf3.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o) (__aeabi_dmul)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_fixdfsi.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o) (__aeabi_d2iz)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_aeabi_uldivmod.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o) (__aeabi_uldivmod)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(bpabi.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_aeabi_uldivmod.o) (__gnu_uldivmod_helper)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divdi3.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(bpabi.o) (__divdi3)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivdi3.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(bpabi.o) (__udivdi3)
+/home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_clzsi2.o)
+                              /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divdi3.o) (__clzsi2)
+
+Allocating common symbols
+Common symbol       size              file
+
+SendCB_Empty        0x1               ./Libraries/src/cb.o
+SendCB_Array        0x10              ./Libraries/src/cb.o
+RecvCB_Empty        0x1               ./Libraries/src/cb.o
+errno               0x4               /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reent.o)
+RecvCB_Full         0x1               ./Libraries/src/cb.o
+SendCB_In           0x1               ./Libraries/src/cb.o
+RecvCB_Out          0x1               ./Libraries/src/cb.o
+SendCB_Out          0x1               ./Libraries/src/cb.o
+RecvCB_In           0x1               ./Libraries/src/cb.o
+SendCB_Full         0x1               ./Libraries/src/cb.o
+RecvCB_Array        0x10              ./Libraries/src/cb.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x00000000         0x0007e000
+ram              0x40000000         0x00010000
+usbram           0x7fd00000         0x00004000
+ethram           0x7fe00000         0x00004000
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./Libraries/src/UART.o
+LOAD ./Libraries/src/boot.o
+LOAD ./Libraries/src/cb.o
+LOAD ./Libraries/src/init.o
+LOAD ./Libraries/src/irq.o
+LOAD ./Libraries/src/libnosys_gnu.o
+LOAD ./Libraries/src/lpc2478_lib.o
+LOAD ./main.o
+START GROUP
+LOAD /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a
+LOAD /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a
+END GROUP
+                0x4000fffc                __stack_end__ = 0x4000fffc
+                0x00000000                . = 0x0
+
+startup         0x00000000       0x44
+ *(.startup)
+ .startup       0x00000000       0x44 ./Libraries/src/boot.o
+
+prog            0x00000048     0xac54
+ *(.text)
+ .text          0x00000048        0x0 ./Libraries/src/UART.o
+ .text          0x00000048       0xdc ./Libraries/src/boot.o
+                0x00000048                start
+                0x00000108                endless_loop
+ .text          0x00000124        0x0 ./Libraries/src/cb.o
+ .text          0x00000124        0x0 ./Libraries/src/init.o
+ .text          0x00000124        0x0 ./Libraries/src/irq.o
+ .text          0x00000124        0x0 ./Libraries/src/libnosys_gnu.o
+ .text          0x00000124        0x0 ./Libraries/src/lpc2478_lib.o
+ .text          0x00000124        0x0 ./main.o
+ .text          0x00000124      0x114 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivsi3.o)
+                0x00000124                __udivsi3
+                0x00000124                __aeabi_uidiv
+                0x00000218                __aeabi_uidivmod
+ .text          0x00000238      0x148 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divsi3.o)
+                0x00000238                __aeabi_idiv
+                0x00000238                __divsi3
+                0x00000360                __aeabi_idivmod
+ .text          0x00000380        0x4 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_dvmd_tls.o)
+                0x00000380                __aeabi_ldiv0
+                0x00000380                __aeabi_idiv0
+ .text          0x00000384      0x41c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_addsubdf3.o)
+                0x00000384                __aeabi_drsub
+                0x0000038c                __aeabi_dsub
+                0x0000038c                __subdf3
+                0x00000390                __adddf3
+                0x00000390                __aeabi_dadd
+                0x000006a0                __aeabi_ui2d
+                0x000006a0                __floatunsidf
+                0x000006c4                __floatsidf
+                0x000006c4                __aeabi_i2d
+                0x000006ec                __extendsfdf2
+                0x000006ec                __aeabi_f2d
+                0x0000072c                __aeabi_ul2d
+                0x0000072c                __floatundidf
+                0x00000740                __floatdidf
+                0x00000740                __aeabi_l2d
+ .text          0x000007a0      0x144 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_cmpdf2.o)
+                0x000007a0                __gtdf2
+                0x000007a0                __gedf2
+                0x000007a8                __ltdf2
+                0x000007a8                __ledf2
+                0x000007b0                __cmpdf2
+                0x000007b0                __eqdf2
+                0x000007b0                __nedf2
+                0x00000838                __aeabi_cdrcmple
+                0x00000854                __aeabi_cdcmple
+                0x00000854                __aeabi_cdcmpeq
+                0x0000086c                __aeabi_dcmpeq
+                0x00000884                __aeabi_dcmplt
+                0x0000089c                __aeabi_dcmple
+                0x000008b4                __aeabi_dcmpge
+                0x000008cc                __aeabi_dcmpgt
+ .text          0x000008e4       0xa0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_truncdfsf2.o)
+                0x000008e4                __aeabi_d2f
+                0x000008e4                __truncdfsf2
+ .text          0x00000984      0x2ac /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_addsubsf3.o)
+                0x00000984                __aeabi_frsub
+                0x0000098c                __subsf3
+                0x0000098c                __aeabi_fsub
+                0x00000990                __aeabi_fadd
+                0x00000990                __addsf3
+                0x00000b4c                __aeabi_ui2f
+                0x00000b4c                __floatunsisf
+                0x00000b54                __aeabi_i2f
+                0x00000b54                __floatsisf
+                0x00000b74                __floatundisf
+                0x00000b74                __aeabi_ul2f
+                0x00000b84                __floatdisf
+                0x00000b84                __aeabi_l2f
+ .text          0x00000c30      0x2f8 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_muldivsf3.o)
+                0x00000c30                __mulsf3
+                0x00000c30                __aeabi_fmul
+                0x00000dc8                __divsf3
+                0x00000dc8                __aeabi_fdiv
+ .text          0x00000f28       0x54 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_fixunssfsi.o)
+                0x00000f28                __aeabi_f2uiz
+                0x00000f28                __fixunssfsi
+ .text          0x00000f7c       0x74 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-printf.o)
+                0x00000f7c                _printf_r
+                0x00000fb0                printf
+ .text          0x00000ff0      0x1a8 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reent.o)
+                0x00000ff0                cleanup_glue
+                0x0000101c                _reclaim_reent
+                0x00001124                _wrapup_reent
+ .text          0x00001198     0x22b0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o)
+                0x00001198                _vfprintf_r
+                0x0000341c                vfprintf
+ .text          0x00003448      0x12c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wsetup.o)
+                0x00003448                __swsetup_r
+ *fill*         0x00003574        0x4 00
+ .text          0x00003578     0x1860 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o)
+                0x00003770                _dtoa_r
+ .text          0x00004dd8      0x288 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fflush.o)
+                0x00004dd8                _fflush_r
+                0x00005020                fflush
+ .text          0x00005060      0x2e8 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o)
+                0x00005070                _cleanup_r
+                0x00005104                __sfmoreglue
+                0x0000514c                _cleanup
+                0x0000515c                __sinit
+                0x000051d4                __sfp
+                0x000052f0                __sfp_lock_acquire
+                0x000052f4                __sfp_lock_release
+                0x000052f8                __sinit_lock_acquire
+                0x000052fc                __sinit_lock_release
+                0x00005300                __fp_lock_all
+                0x00005324                __fp_unlock_all
+ .text          0x00005348      0x360 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-freer.o)
+                0x00005348                _malloc_trim_r
+                0x00005444                _free_r
+ .text          0x000056a8      0x10c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fwalk.o)
+                0x000056a8                _fwalk
+                0x0000572c                _fwalk_reent
+ .text          0x000057b4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-impure.o)
+ .text          0x000057b4       0xd0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-locale.o)
+                0x000057b4                _setlocale_r
+                0x00005820                __locale_charset
+                0x0000582c                __locale_mb_cur_max
+                0x0000583c                __locale_msgcharset
+                0x00005848                __locale_cjk_lang
+                0x00005850                _localeconv_r
+                0x0000585c                setlocale
+                0x00005878                localeconv
+ .text          0x00005884      0x160 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-makebuf.o)
+                0x00005884                __smakebuf_r
+ .text          0x000059e4      0x714 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mallocr.o)
+                0x000059e4                _malloc_r
+ .text          0x000060f8       0xf8 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memchr.o)
+                0x000060f8                memchr
+ .text          0x000061f0      0x1b4 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memcpy.o)
+                0x000061f0                memcpy
+ .text          0x000063a4      0x10c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memset.o)
+                0x000063a4                memset
+ .text          0x000064b0        0x8 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mlock.o)
+                0x000064b0                __malloc_lock
+                0x000064b4                __malloc_unlock
+ .text          0x000064b8      0xd14 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mprec.o)
+                0x000064b8                _Balloc
+                0x0000653c                _Bfree
+                0x00006558                __multadd
+                0x00006634                __s2b
+                0x0000671c                __hi0bits
+                0x0000676c                __lo0bits
+                0x000067fc                __i2b
+                0x00006820                __multiply
+                0x00006a18                __pow5mult
+                0x00006b0c                __lshift
+                0x00006c08                __mcmp
+                0x00006c6c                __mdiff
+                0x00006dbc                __ulp
+                0x00006e18                __b2d
+                0x00006edc                __d2b
+                0x00006fec                __ratio
+                0x00007070                _mprec_log10
+                0x000070c4                __copybits
+                0x00007138                __any_on
+ .text          0x000071cc       0x84 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-s_fpclassify.o)
+                0x000071cc                __fpclassifyd
+ .text          0x00007250       0x40 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-sbrkr.o)
+                0x00007250                _sbrk_r
+ .text          0x00007290       0xdc /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o)
+                0x00007290                __sread
+                0x000072c4                __seofread
+                0x000072cc                __swrite
+                0x00007324                __sseek
+                0x00007358                __sclose
+ .text          0x0000736c      0x230 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strcmp.o)
+                0x0000736c                strcmp
+ .text          0x0000759c       0x60 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strlen.o)
+                0x0000759c                strlen
+ .text          0x000075fc     0x1260 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfiprintf.o)
+                0x000075fc                __sprint_r
+                0x000076bc                _vfiprintf_r
+                0x00008830                vfiprintf
+ .text          0x0000885c       0x44 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-writer.o)
+                0x0000885c                _write_r
+ .text          0x000088a0       0x90 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-callocr.o)
+                0x000088a0                _calloc_r
+ .text          0x00008930       0x3c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-closer.o)
+                0x00008930                _close_r
+ .text          0x0000896c      0x10c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fclose.o)
+                0x0000896c                _fclose_r
+                0x00008a64                fclose
+ .text          0x00008a78      0x1a8 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fputwc.o)
+                0x00008a78                _fputwc_r
+                0x00008bd4                fputwc
+ .text          0x00008c20       0x40 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fstatr.o)
+                0x00008c20                _fstat_r
+ .text          0x00008c60      0x4ac /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fvwrite.o)
+                0x00008c60                __sfvwrite_r
+ .text          0x0000910c       0x3c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-isattyr.o)
+                0x0000910c                _isatty_r
+ .text          0x00009148       0x44 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-lseekr.o)
+                0x00009148                _lseek_r
+ .text          0x0000918c      0x130 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memmove.o)
+                0x0000918c                memmove
+ .text          0x000092bc       0x44 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-readr.o)
+                0x000092bc                _read_r
+ .text          0x00009300      0x55c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reallocr.o)
+                0x00009300                _realloc_r
+ .text          0x0000985c      0x158 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wbuf.o)
+                0x0000985c                __swbuf_r
+                0x00009998                __swbuf
+ .text          0x000099b4      0x130 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wcrtomb.o)
+                0x000099b4                _wcrtomb_r
+                0x00009a40                wcrtomb
+ .text          0x00009ae4       0x7c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wctomb_r.o)
+                0x00009ae4                __ascii_wctomb
+                0x00009b10                _wctomb_r
+ .text          0x00009b60      0x49c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_muldivdf3.o)
+                0x00009b60                __aeabi_dmul
+                0x00009b60                __muldf3
+                0x00009df0                __aeabi_ddiv
+                0x00009df0                __divdf3
+ .text          0x00009ffc       0x5c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_fixdfsi.o)
+                0x00009ffc                __fixdfsi
+                0x00009ffc                __aeabi_d2iz
+ .text          0x0000a058       0x3c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_aeabi_uldivmod.o)
+                0x0000a058                __aeabi_uldivmod
+ .text          0x0000a094       0x84 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(bpabi.o)
+                0x0000a094                __gnu_ldivmod_helper
+                0x0000a0d8                __gnu_uldivmod_helper
+ .text          0x0000a118      0x4dc /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divdi3.o)
+                0x0000a118                __divdi3
+ .text          0x0000a5f4      0x488 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivdi3.o)
+                0x0000a5f4                __udivdi3
+ .text          0x0000aa7c       0x48 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_clzsi2.o)
+                0x0000aa7c                __clzsi2
+ *(.rodata)
+ .rodata        0x0000aac4        0x8 ./Libraries/src/UART.o
+ .rodata        0x0000aacc       0x20 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o)
+ .rodata        0x0000aaec        0x4 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-impure.o)
+                0x0000aaec                _global_impure_ptr
+ .rodata        0x0000aaf0      0x128 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mprec.o)
+                0x0000ab00                __mprec_tens
+                0x0000abc8                __mprec_tinytens
+                0x0000abf0                __mprec_bigtens
+ .rodata        0x0000ac18       0x20 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfiprintf.o)
+ *(.rodata*)
+ .rodata.str1.4
+                0x0000ac38       0x42 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o)
+                                 0x44 (size before relaxing)
+ *fill*         0x0000ac7a        0x2 00
+ .rodata.str1.4
+                0x0000ac7c       0x10 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o)
+                                 0x14 (size before relaxing)
+ .rodata.str1.4
+                0x0000ac8c        0x2 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-impure.o)
+                                  0x4 (size before relaxing)
+ *fill*         0x0000ac8e        0x2 00
+ .rodata.str1.4
+                0x0000ac90        0xc /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-locale.o)
+                                 0x14 (size before relaxing)
+ .rodata.str1.4
+                0x00000000       0x30 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfiprintf.o)
+ *(.glue_7)
+ .glue_7        0x00000000        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x00000000        0x0 linker stubs
+ *(.eh_frame)
+
+.vfp11_veneer   0x0000ac9c        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x0000ac9c        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.text.UART0Handler
+                0x0000ac9c       0x20
+ .text.UART0Handler
+                0x0000ac9c       0x20 ./Libraries/src/UART.o
+                0x0000ac9c                UART0Handler
+
+.text.uart_enable_power
+                0x0000acbc       0xd8
+ .text.uart_enable_power
+                0x0000acbc       0xd8 ./Libraries/src/UART.o
+
+.text.uart_set_clock
+                0x0000ad94      0x178
+ .text.uart_set_clock
+                0x0000ad94      0x178 ./Libraries/src/UART.o
+
+.text.uart_set_divisors
+                0x0000af10      0x268
+ .text.uart_set_divisors
+                0x0000af10      0x268 ./Libraries/src/UART.o
+
+.text.uart_init
+                0x0000b178      0x2c8
+ .text.uart_init
+                0x0000b178      0x2c8 ./Libraries/src/UART.o
+                0x0000b178                uart_init
+
+.text.uart_enable
+                0x0000b440       0xc8
+ .text.uart_enable
+                0x0000b440       0xc8 ./Libraries/src/UART.o
+                0x0000b440                uart_enable
+
+.text.uart_disable
+                0x0000b508       0xd8
+ .text.uart_disable
+                0x0000b508       0xd8 ./Libraries/src/UART.o
+                0x0000b508                uart_disable
+
+.text.get_char  0x0000b5e0       0x7c
+ .text.get_char
+                0x0000b5e0       0x7c ./Libraries/src/UART.o
+                0x0000b5e0                get_char
+
+.text.put_char  0x0000b65c       0x1c
+ .text.put_char
+                0x0000b65c       0x1c ./Libraries/src/UART.o
+                0x0000b65c                put_char
+
+.iplt           0x0000b678        0x0
+ .iplt          0x00000000        0x0 ./Libraries/src/UART.o
+
+.text.initSendCB
+                0x0000b678       0x74
+ .text.initSendCB
+                0x0000b678       0x74 ./Libraries/src/cb.o
+
+.text.initRecvCB
+                0x0000b6ec       0x74
+ .text.initRecvCB
+                0x0000b6ec       0x74 ./Libraries/src/cb.o
+
+.text.initCB    0x0000b760       0x1c
+ .text.initCB   0x0000b760       0x1c ./Libraries/src/cb.o
+                0x0000b760                initCB
+
+.text.putSendCB
+                0x0000b77c       0xf8
+ .text.putSendCB
+                0x0000b77c       0xf8 ./Libraries/src/cb.o
+                0x0000b77c                putSendCB
+
+.text.getSendCB
+                0x0000b874       0xf8
+ .text.getSendCB
+                0x0000b874       0xf8 ./Libraries/src/cb.o
+                0x0000b874                getSendCB
+
+.text.putRecvCB
+                0x0000b96c       0xf8
+ .text.putRecvCB
+                0x0000b96c       0xf8 ./Libraries/src/cb.o
+                0x0000b96c                putRecvCB
+
+.text.getRecvCB
+                0x0000ba64       0xf8
+ .text.getRecvCB
+                0x0000ba64       0xf8 ./Libraries/src/cb.o
+                0x0000ba64                getRecvCB
+
+.text.SystemInit
+                0x0000bb5c      0x288
+ .text.SystemInit
+                0x0000bb5c      0x288 ./Libraries/src/init.o
+                0x0000bb5c                SystemInit
+
+.text.ISRDummyHandler
+                0x0000bde4       0x20
+ .text.ISRDummyHandler
+                0x0000bde4       0x20 ./Libraries/src/irq.o
+                0x0000bde4                ISRDummyHandler
+
+.text.init_VIC  0x0000be04       0xb0
+ .text.init_VIC
+                0x0000be04       0xb0 ./Libraries/src/irq.o
+                0x0000be04                init_VIC
+
+.text.install_irq
+                0x0000beb4       0xc0
+ .text.install_irq
+                0x0000beb4       0xc0 ./Libraries/src/irq.o
+                0x0000beb4                install_irq
+
+.text._close    0x0000bf74       0x24
+ .text._close   0x0000bf74       0x24 ./Libraries/src/libnosys_gnu.o
+                0x0000bf74                _close
+
+.text._execve   0x0000bf98       0x3c
+ .text._execve  0x0000bf98       0x3c ./Libraries/src/libnosys_gnu.o
+                0x0000bf98                _execve
+
+.text._exit     0x0000bfd4       0x1c
+ .text._exit    0x0000bfd4       0x1c ./Libraries/src/libnosys_gnu.o
+                0x0000bfd4                _exit
+
+.text._fork     0x0000bff0       0x2c
+ .text._fork    0x0000bff0       0x2c ./Libraries/src/libnosys_gnu.o
+                0x0000bff0                _fork
+
+.text._fstat    0x0000c01c       0x34
+ .text._fstat   0x0000c01c       0x34 ./Libraries/src/libnosys_gnu.o
+                0x0000c01c                _fstat
+
+.text._getpid   0x0000c050       0x1c
+ .text._getpid  0x0000c050       0x1c ./Libraries/src/libnosys_gnu.o
+                0x0000c050                _getpid
+
+.text._kill     0x0000c06c       0x38
+ .text._kill    0x0000c06c       0x38 ./Libraries/src/libnosys_gnu.o
+                0x0000c06c                _kill
+
+.text.isatty    0x0000c0a4       0x24
+ .text.isatty   0x0000c0a4       0x24 ./Libraries/src/libnosys_gnu.o
+                0x0000c0a4                isatty
+
+.text._isatty   0x0000c0c8       0x24
+ .text._isatty  0x0000c0c8       0x24 ./Libraries/src/libnosys_gnu.o
+                0x0000c0c8                _isatty
+
+.text._link     0x0000c0ec       0x38
+ .text._link    0x0000c0ec       0x38 ./Libraries/src/libnosys_gnu.o
+                0x0000c0ec                _link
+
+.text._lseek    0x0000c124       0x2c
+ .text._lseek   0x0000c124       0x2c ./Libraries/src/libnosys_gnu.o
+                0x0000c124                _lseek
+
+.text._open     0x0000c150       0x2c
+ .text._open    0x0000c150       0x2c ./Libraries/src/libnosys_gnu.o
+                0x0000c150                _open
+
+.text._read     0x0000c17c       0x2c
+ .text._read    0x0000c17c       0x2c ./Libraries/src/libnosys_gnu.o
+                0x0000c17c                _read
+
+.text._sbrk     0x0000c1a8       0x80
+ .text._sbrk    0x0000c1a8       0x80 ./Libraries/src/libnosys_gnu.o
+                0x0000c1a8                _sbrk
+
+.text._stat     0x0000c228       0x34
+ .text._stat    0x0000c228       0x34 ./Libraries/src/libnosys_gnu.o
+                0x0000c228                _stat
+
+.text._times    0x0000c25c       0x24
+ .text._times   0x0000c25c       0x24 ./Libraries/src/libnosys_gnu.o
+                0x0000c25c                _times
+
+.text._unlink   0x0000c280       0x34
+ .text._unlink  0x0000c280       0x34 ./Libraries/src/libnosys_gnu.o
+                0x0000c280                _unlink
+
+.text._wait     0x0000c2b4       0x34
+ .text._wait    0x0000c2b4       0x34 ./Libraries/src/libnosys_gnu.o
+                0x0000c2b4                _wait
+
+.text._write    0x0000c2e8       0x2c
+ .text._write   0x0000c2e8       0x2c ./Libraries/src/libnosys_gnu.o
+                0x0000c2e8                _write
+
+.text.setPortPinDir
+                0x0000c314       0x80
+ .text.setPortPinDir
+                0x0000c314       0x80 ./Libraries/src/lpc2478_lib.o
+                0x0000c314                setPortPinDir
+
+.text.clrPortPin
+                0x0000c394       0x80
+ .text.clrPortPin
+                0x0000c394       0x80 ./Libraries/src/lpc2478_lib.o
+                0x0000c394                clrPortPin
+
+.text.setPortPin
+                0x0000c414       0x80
+ .text.setPortPin
+                0x0000c414       0x80 ./Libraries/src/lpc2478_lib.o
+                0x0000c414                setPortPin
+
+.text.delayMs   0x0000c494       0xc8
+ .text.delayMs  0x0000c494       0xc8 ./Libraries/src/lpc2478_lib.o
+                0x0000c494                delayMs
+
+.text.main      0x0000c55c       0x40
+ .text.main     0x0000c55c       0x40 ./main.o
+                0x0000c55c                main
+
+.ARM.extab      0x0000c59c        0x0
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+ .ARM.extab     0x0000c59c        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divdi3.o)
+ .ARM.extab     0x0000c59c        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivdi3.o)
+                0x0000c59c                PROVIDE (__exidx_start, .)
+
+.ARM.exidx      0x0000c59c        0x8
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+ .ARM.exidx     0x0000c59c        0x8 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divdi3.o)
+ .ARM.exidx     0x0000c5a4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivdi3.o)
+                                  0x8 (size before relaxing)
+                0x0000c5a4                PROVIDE (__exidx_end, .)
+                0x0000c5a4                __end_of_text__ = .
+
+.rel.dyn        0x0000c5a4        0x0
+ .rel.iplt      0x00000000        0x0 ./Libraries/src/UART.o
+
+.data           0x40000000      0x8c0 load address 0x0000c5a8
+                0x40000000                __data_beg__ = .
+                0x0000c5a4                __data_beg_src__ = __end_of_text__
+ *(.data)
+ .data          0x40000000        0x0 ./Libraries/src/UART.o
+ .data          0x40000000        0x0 ./Libraries/src/boot.o
+ .data          0x40000000        0x0 ./Libraries/src/cb.o
+ .data          0x40000000        0x0 ./Libraries/src/init.o
+ .data          0x40000000        0x0 ./Libraries/src/irq.o
+ .data          0x40000000        0x0 ./Libraries/src/libnosys_gnu.o
+ .data          0x40000000        0x0 ./Libraries/src/lpc2478_lib.o
+ .data          0x40000000        0x0 ./main.o
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivsi3.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divsi3.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_dvmd_tls.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_addsubdf3.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_cmpdf2.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_truncdfsf2.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_addsubsf3.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_muldivsf3.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_fixunssfsi.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-printf.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reent.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wsetup.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fflush.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-freer.o)
+ .data          0x40000000        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fwalk.o)
+ .data          0x40000000      0x430 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-impure.o)
+                0x40000000                _impure_ptr
+ .data          0x40000430       0x7c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-locale.o)
+                0x40000450                __mb_cur_max
+ .data          0x400004ac        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-makebuf.o)
+ .data          0x400004ac      0x410 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mallocr.o)
+                0x400004ac                __malloc_av_
+                0x400008b4                __malloc_sbrk_base
+                0x400008b8                __malloc_trim_threshold
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memchr.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memcpy.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memset.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mlock.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mprec.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-s_fpclassify.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-sbrkr.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strcmp.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strlen.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfiprintf.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-writer.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-callocr.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-closer.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fclose.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fputwc.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fstatr.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fvwrite.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-isattyr.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-lseekr.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memmove.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-readr.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reallocr.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wbuf.o)
+ .data          0x400008bc        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wcrtomb.o)
+ .data          0x400008bc        0x4 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wctomb_r.o)
+                0x400008bc                __wctomb
+ .data          0x400008c0        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_muldivdf3.o)
+ .data          0x400008c0        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_fixdfsi.o)
+ .data          0x400008c0        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_aeabi_uldivmod.o)
+ .data          0x400008c0        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(bpabi.o)
+ .data          0x400008c0        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divdi3.o)
+ .data          0x400008c0        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivdi3.o)
+ .data          0x400008c0        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_clzsi2.o)
+                0x400008c0                __data_end__ = .
+
+.igot.plt       0x400008c0        0x0 load address 0x0000ce68
+ .igot.plt      0x00000000        0x0 ./Libraries/src/UART.o
+
+.data.environ   0x400008c0        0x4 load address 0x0000ce68
+ .data.environ  0x400008c0        0x4 ./Libraries/src/libnosys_gnu.o
+                0x400008c0                environ
+
+.bss            0x400008c4       0x70 load address 0x0000ce6c
+                0x400008c4                __bss_beg__ = .
+ *(.bss)
+ .bss           0x400008c4        0x0 ./Libraries/src/UART.o
+ .bss           0x400008c4        0x0 ./Libraries/src/boot.o
+ .bss           0x400008c4        0x0 ./Libraries/src/cb.o
+ .bss           0x400008c4        0x0 ./Libraries/src/init.o
+ .bss           0x400008c4        0x0 ./Libraries/src/irq.o
+ .bss           0x400008c4        0x0 ./Libraries/src/libnosys_gnu.o
+ .bss           0x400008c4        0x0 ./Libraries/src/lpc2478_lib.o
+ .bss           0x400008c4        0x0 ./main.o
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivsi3.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divsi3.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_dvmd_tls.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_addsubdf3.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_cmpdf2.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_truncdfsf2.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_addsubsf3.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_muldivsf3.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_fixunssfsi.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-printf.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reent.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wsetup.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fflush.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-freer.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fwalk.o)
+ .bss           0x400008c4        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-impure.o)
+ .bss           0x400008c4        0xc /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-locale.o)
+                0x400008c4                _PathLocale
+                0x400008c8                __mlocale_changed
+                0x400008cc                __nlocale_changed
+ .bss           0x400008d0        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-makebuf.o)
+ .bss           0x400008d0       0x34 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mallocr.o)
+                0x400008d0                __malloc_top_pad
+                0x400008d4                __malloc_current_mallinfo
+                0x400008fc                __malloc_max_sbrked_mem
+                0x40000900                __malloc_max_total_mem
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memchr.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memcpy.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memset.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mlock.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mprec.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-s_fpclassify.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-sbrkr.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strcmp.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strlen.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfiprintf.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-writer.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-callocr.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-closer.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fclose.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fputwc.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fstatr.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fvwrite.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-isattyr.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-lseekr.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memmove.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-readr.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reallocr.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wbuf.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wcrtomb.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wctomb_r.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_muldivdf3.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_fixdfsi.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_aeabi_uldivmod.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(bpabi.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divdi3.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivdi3.o)
+ .bss           0x40000904        0x0 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_clzsi2.o)
+ COMMON         0x40000904       0x2c ./Libraries/src/cb.o
+                0x40000904                SendCB_Empty
+                0x40000908                SendCB_Array
+                0x40000918                RecvCB_Empty
+                0x40000919                RecvCB_Full
+                0x4000091a                SendCB_In
+                0x4000091b                RecvCB_Out
+                0x4000091c                SendCB_Out
+                0x4000091d                RecvCB_In
+                0x4000091e                SendCB_Full
+                0x40000920                RecvCB_Array
+ COMMON         0x40000930        0x4 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reent.o)
+                0x40000930                errno
+
+.bss.__env      0x40000934        0x4 load address 0x0000ce6c
+ .bss.__env     0x40000934        0x4 ./Libraries/src/libnosys_gnu.o
+                0x40000934                __env
+
+.bss.heap_end.4311
+                0x40000938        0x4 load address 0x0000ce6c
+ .bss.heap_end.4311
+                0x40000938        0x4 ./Libraries/src/libnosys_gnu.o
+                0x4000093c                . = ALIGN (0x4)
+                0x4000093c                _bss_end__ = .
+                0x4000093c                __bss_end__ = .
+                0x4000093c                __end__ = .
+                0x4000093c                PROVIDE (__HEAP_START, __end__)
+
+.usbram         0x7fd00000        0x0
+                0x7fd00000                __usbram_beg__ = .
+ *(.dmaram)
+                0x7fd00000                __usbram_end__ = .
+
+.ethram         0x7fe00000        0x0
+                0x7fe00000                __ethram_beg__ = .
+ *(.ethram)
+                0x7fe00000                __ethram_end__ = .
+                0x7fe00000                . = ALIGN (0x4)
+                0x7fe00000                _end = .
+                0x7fe00000                PROVIDE (end, .)
+OUTPUT(LPC2478_Template.elf elf32-littlearm)
+
+.debug_info     0x00000000     0x121b
+ .debug_info    0x00000000      0x598 ./Libraries/src/UART.o
+ .debug_info    0x00000598       0x69 ./Libraries/src/boot.o
+ .debug_info    0x00000601      0x26b ./Libraries/src/cb.o
+ .debug_info    0x0000086c       0x76 ./Libraries/src/init.o
+ .debug_info    0x000008e2      0x113 ./Libraries/src/irq.o
+ .debug_info    0x000009f5      0x6d2 ./Libraries/src/libnosys_gnu.o
+ .debug_info    0x000010c7      0x106 ./Libraries/src/lpc2478_lib.o
+ .debug_info    0x000011cd       0x4e ./main.o
+
+.debug_abbrev   0x00000000      0x58b
+ .debug_abbrev  0x00000000      0x207 ./Libraries/src/UART.o
+ .debug_abbrev  0x00000207       0x12 ./Libraries/src/boot.o
+ .debug_abbrev  0x00000219       0xcd ./Libraries/src/cb.o
+ .debug_abbrev  0x000002e6       0x56 ./Libraries/src/init.o
+ .debug_abbrev  0x0000033c       0xa5 ./Libraries/src/irq.o
+ .debug_abbrev  0x000003e1      0x118 ./Libraries/src/libnosys_gnu.o
+ .debug_abbrev  0x000004f9       0x58 ./Libraries/src/lpc2478_lib.o
+ .debug_abbrev  0x00000551       0x3a ./main.o
+
+.debug_loc      0x00000000      0x790
+ .debug_loc     0x00000000      0x18c ./Libraries/src/UART.o
+ .debug_loc     0x0000018c      0x134 ./Libraries/src/cb.o
+ .debug_loc     0x000002c0       0x2c ./Libraries/src/init.o
+ .debug_loc     0x000002ec       0x84 ./Libraries/src/irq.o
+ .debug_loc     0x00000370      0x344 ./Libraries/src/libnosys_gnu.o
+ .debug_loc     0x000006b4       0xb0 ./Libraries/src/lpc2478_lib.o
+ .debug_loc     0x00000764       0x2c ./main.o
+
+.debug_aranges  0x00000000      0x230
+ .debug_aranges
+                0x00000000       0x60 ./Libraries/src/UART.o
+ .debug_aranges
+                0x00000060       0x28 ./Libraries/src/boot.o
+ .debug_aranges
+                0x00000088       0x50 ./Libraries/src/cb.o
+ .debug_aranges
+                0x000000d8       0x20 ./Libraries/src/init.o
+ .debug_aranges
+                0x000000f8       0x30 ./Libraries/src/irq.o
+ .debug_aranges
+                0x00000128       0xb0 ./Libraries/src/libnosys_gnu.o
+ .debug_aranges
+                0x000001d8       0x38 ./Libraries/src/lpc2478_lib.o
+ .debug_aranges
+                0x00000210       0x20 ./main.o
+
+.debug_ranges   0x00000000      0x1b8
+ .debug_ranges  0x00000000       0x50 ./Libraries/src/UART.o
+ .debug_ranges  0x00000050       0x20 ./Libraries/src/boot.o
+ .debug_ranges  0x00000070       0x40 ./Libraries/src/cb.o
+ .debug_ranges  0x000000b0       0x10 ./Libraries/src/init.o
+ .debug_ranges  0x000000c0       0x20 ./Libraries/src/irq.o
+ .debug_ranges  0x000000e0       0xa0 ./Libraries/src/libnosys_gnu.o
+ .debug_ranges  0x00000180       0x28 ./Libraries/src/lpc2478_lib.o
+ .debug_ranges  0x000001a8       0x10 ./main.o
+
+.debug_line     0x00000000      0xc99
+ .debug_line    0x00000000      0x2d1 ./Libraries/src/UART.o
+ .debug_line    0x000002d1       0x94 ./Libraries/src/boot.o
+ .debug_line    0x00000365      0x1fa ./Libraries/src/cb.o
+ .debug_line    0x0000055f       0xd5 ./Libraries/src/init.o
+ .debug_line    0x00000634       0xde ./Libraries/src/irq.o
+ .debug_line    0x00000712      0x3fb ./Libraries/src/libnosys_gnu.o
+ .debug_line    0x00000b0d       0xee ./Libraries/src/lpc2478_lib.o
+ .debug_line    0x00000bfb       0x9e ./main.o
+
+.debug_macinfo  0x00000000    0x5c316
+ .debug_macinfo
+                0x00000000    0x12302 ./Libraries/src/UART.o
+ .debug_macinfo
+                0x00012302    0x1204b ./Libraries/src/cb.o
+ .debug_macinfo
+                0x0002434d    0x1041d ./Libraries/src/init.o
+ .debug_macinfo
+                0x0003476a    0x106c5 ./Libraries/src/irq.o
+ .debug_macinfo
+                0x00044e2f     0x4ee0 ./Libraries/src/libnosys_gnu.o
+ .debug_macinfo
+                0x00049d0f    0x10412 ./Libraries/src/lpc2478_lib.o
+ .debug_macinfo
+                0x0005a121     0x21f5 ./main.o
+
+.debug_str      0x00000000      0x6a1
+ .debug_str     0x00000000      0x2e2 ./Libraries/src/UART.o
+                                0x32b (size before relaxing)
+ .debug_str     0x000002e2       0xd1 ./Libraries/src/cb.o
+                                0x193 (size before relaxing)
+ .debug_str     0x000003b3       0x31 ./Libraries/src/init.o
+                                 0x74 (size before relaxing)
+ .debug_str     0x000003e4       0x6c ./Libraries/src/irq.o
+                                 0xe2 (size before relaxing)
+ .debug_str     0x00000450      0x1e8 ./Libraries/src/libnosys_gnu.o
+                                0x2de (size before relaxing)
+ .debug_str     0x00000638       0x5a ./Libraries/src/lpc2478_lib.o
+                                 0xa8 (size before relaxing)
+ .debug_str     0x00000692        0xf ./main.o
+                                 0x45 (size before relaxing)
+
+.comment        0x00000000       0x30
+ .comment       0x00000000       0x30 ./Libraries/src/UART.o
+                                 0x31 (size before relaxing)
+ .comment       0x00000000       0x31 ./Libraries/src/cb.o
+ .comment       0x00000000       0x31 ./Libraries/src/init.o
+ .comment       0x00000000       0x31 ./Libraries/src/irq.o
+ .comment       0x00000000       0x31 ./Libraries/src/libnosys_gnu.o
+ .comment       0x00000000       0x31 ./Libraries/src/lpc2478_lib.o
+ .comment       0x00000000       0x31 ./main.o
+
+.ARM.attributes
+                0x00000000       0x32
+ .ARM.attributes
+                0x00000000       0x34 ./Libraries/src/UART.o
+ .ARM.attributes
+                0x00000034       0x24 ./Libraries/src/boot.o
+ .ARM.attributes
+                0x00000058       0x34 ./Libraries/src/cb.o
+ .ARM.attributes
+                0x0000008c       0x34 ./Libraries/src/init.o
+ .ARM.attributes
+                0x000000c0       0x34 ./Libraries/src/irq.o
+ .ARM.attributes
+                0x000000f4       0x34 ./Libraries/src/libnosys_gnu.o
+ .ARM.attributes
+                0x00000128       0x34 ./Libraries/src/lpc2478_lib.o
+ .ARM.attributes
+                0x0000015c       0x34 ./main.o
+ .ARM.attributes
+                0x00000190       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x000001aa       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x000001c4       0x18 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x000001dc       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_addsubdf3.o)
+ .ARM.attributes
+                0x000001f6       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_cmpdf2.o)
+ .ARM.attributes
+                0x00000210       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_truncdfsf2.o)
+ .ARM.attributes
+                0x0000022a       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_addsubsf3.o)
+ .ARM.attributes
+                0x00000244       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_muldivsf3.o)
+ .ARM.attributes
+                0x0000025e       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_fixunssfsi.o)
+ .ARM.attributes
+                0x00000278       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-printf.o)
+ .ARM.attributes
+                0x000002aa       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reent.o)
+ .ARM.attributes
+                0x000002dc       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o)
+ .ARM.attributes
+                0x0000030e       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wsetup.o)
+ .ARM.attributes
+                0x00000340       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o)
+ .ARM.attributes
+                0x00000372       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fflush.o)
+ .ARM.attributes
+                0x000003a4       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o)
+ .ARM.attributes
+                0x000003d6       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-freer.o)
+ .ARM.attributes
+                0x00000408       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fwalk.o)
+ .ARM.attributes
+                0x0000043a       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-impure.o)
+ .ARM.attributes
+                0x0000046c       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-locale.o)
+ .ARM.attributes
+                0x0000049e       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-makebuf.o)
+ .ARM.attributes
+                0x000004d0       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mallocr.o)
+ .ARM.attributes
+                0x00000502       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memchr.o)
+ .ARM.attributes
+                0x00000534       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memcpy.o)
+ .ARM.attributes
+                0x00000566       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memset.o)
+ .ARM.attributes
+                0x00000598       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mlock.o)
+ .ARM.attributes
+                0x000005ca       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mprec.o)
+ .ARM.attributes
+                0x000005fc       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-s_fpclassify.o)
+ .ARM.attributes
+                0x0000062e       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-sbrkr.o)
+ .ARM.attributes
+                0x00000660       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o)
+ .ARM.attributes
+                0x00000692       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strcmp.o)
+ .ARM.attributes
+                0x000006c4       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x000006f6       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfiprintf.o)
+ .ARM.attributes
+                0x00000728       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-writer.o)
+ .ARM.attributes
+                0x0000075a       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-callocr.o)
+ .ARM.attributes
+                0x0000078c       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-closer.o)
+ .ARM.attributes
+                0x000007be       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fclose.o)
+ .ARM.attributes
+                0x000007f0       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fputwc.o)
+ .ARM.attributes
+                0x00000822       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fstatr.o)
+ .ARM.attributes
+                0x00000854       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fvwrite.o)
+ .ARM.attributes
+                0x00000886       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-isattyr.o)
+ .ARM.attributes
+                0x000008b8       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-lseekr.o)
+ .ARM.attributes
+                0x000008ea       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memmove.o)
+ .ARM.attributes
+                0x0000091c       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-readr.o)
+ .ARM.attributes
+                0x0000094e       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reallocr.o)
+ .ARM.attributes
+                0x00000980       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wbuf.o)
+ .ARM.attributes
+                0x000009b2       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wcrtomb.o)
+ .ARM.attributes
+                0x000009e4       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wctomb_r.o)
+ .ARM.attributes
+                0x00000a16       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_muldivdf3.o)
+ .ARM.attributes
+                0x00000a30       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_arm_fixdfsi.o)
+ .ARM.attributes
+                0x00000a4a       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_aeabi_uldivmod.o)
+ .ARM.attributes
+                0x00000a64       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(bpabi.o)
+ .ARM.attributes
+                0x00000a96       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divdi3.o)
+ .ARM.attributes
+                0x00000ac8       0x32 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivdi3.o)
+ .ARM.attributes
+                0x00000afa       0x1a /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_clzsi2.o)
+
+.debug_frame    0x00000000     0x12bc
+ .debug_frame   0x00000000      0x118 ./Libraries/src/UART.o
+ .debug_frame   0x00000118       0xd8 ./Libraries/src/cb.o
+ .debug_frame   0x000001f0       0x2c ./Libraries/src/init.o
+ .debug_frame   0x0000021c       0x68 ./Libraries/src/irq.o
+ .debug_frame   0x00000284      0x224 ./Libraries/src/libnosys_gnu.o
+ .debug_frame   0x000004a8       0x80 ./Libraries/src/lpc2478_lib.o
+ .debug_frame   0x00000528       0x30 ./main.o
+ .debug_frame   0x00000558       0x20 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000578       0x20 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divsi3.o)
+ .debug_frame   0x00000598       0x58 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-printf.o)
+ .debug_frame   0x000005f0       0x68 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reent.o)
+ .debug_frame   0x00000658       0x58 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfprintf.o)
+ .debug_frame   0x000006b0       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wsetup.o)
+ .debug_frame   0x000006dc       0x64 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-dtoa.o)
+ .debug_frame   0x00000740       0x48 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fflush.o)
+ .debug_frame   0x00000788      0x134 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-findfp.o)
+ .debug_frame   0x000008bc       0x50 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-freer.o)
+ .debug_frame   0x0000090c       0x54 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fwalk.o)
+ .debug_frame   0x00000960       0x98 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-locale.o)
+ .debug_frame   0x000009f8       0x30 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-makebuf.o)
+ .debug_frame   0x00000a28       0x38 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mallocr.o)
+ .debug_frame   0x00000a60       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memchr.o)
+ .debug_frame   0x00000a8c       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memcpy.o)
+ .debug_frame   0x00000ab8       0x28 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memset.o)
+ .debug_frame   0x00000ae0       0x30 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mlock.o)
+ .debug_frame   0x00000b10      0x214 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-mprec.o)
+ .debug_frame   0x00000d24       0x20 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-s_fpclassify.o)
+ .debug_frame   0x00000d44       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-sbrkr.o)
+ .debug_frame   0x00000d70       0x88 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-stdio.o)
+ .debug_frame   0x00000df8       0x30 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strcmp.o)
+ .debug_frame   0x00000e28       0x20 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-strlen.o)
+ .debug_frame   0x00000e48       0x7c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-vfiprintf.o)
+ .debug_frame   0x00000ec4       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-writer.o)
+ .debug_frame   0x00000ef0       0x28 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-callocr.o)
+ .debug_frame   0x00000f18       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-closer.o)
+ .debug_frame   0x00000f44       0x3c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fclose.o)
+ .debug_frame   0x00000f80       0x50 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fputwc.o)
+ .debug_frame   0x00000fd0       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fstatr.o)
+ .debug_frame   0x00000ffc       0x38 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-fvwrite.o)
+ .debug_frame   0x00001034       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-isattyr.o)
+ .debug_frame   0x00001060       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-lseekr.o)
+ .debug_frame   0x0000108c       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-memmove.o)
+ .debug_frame   0x000010b8       0x2c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-readr.o)
+ .debug_frame   0x000010e4       0x38 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-reallocr.o)
+ .debug_frame   0x0000111c       0x3c /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wbuf.o)
+ .debug_frame   0x00001158       0x58 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wcrtomb.o)
+ .debug_frame   0x000011b0       0x44 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/../../../../arm-none-eabi/lib/libc.a(lib_a-wctomb_r.o)
+ .debug_frame   0x000011f4       0x58 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(bpabi.o)
+ .debug_frame   0x0000124c       0x38 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_divdi3.o)
+ .debug_frame   0x00001284       0x38 /home/bglatz/bin/codesourcery/bin/../lib/gcc/arm-none-eabi/4.6.3/libgcc.a(_udivdi3.o)

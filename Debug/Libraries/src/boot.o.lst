@@ -1,0 +1,222 @@
+   1              	# 1 "../Libraries/src/boot.asm"
+   1              		/* Sample initialization file */
+   1              	...
+   0              	
+   0              	
+   2              	
+   3              		.extern main
+   4              		.extern exit
+   5              	
+   6              		.text
+   7              		.code 32
+   8              	
+   9              	
+  10              		.align  0
+  11              	
+  12              		.extern __bss_beg__
+  13              		.extern __bss_end__
+  14              		.extern __stack_end__
+  15              		.extern __data_beg__
+  16              		.extern __data_end__
+  17              		.extern __data+beg_src__
+  18              	
+  19              		.global start
+  20              		.global endless_loop
+  21              	
+  22              		/* Stack Sizes */
+  23              	    .set  UND_STACK_SIZE, 0x00000004
+  24              	    .set  ABT_STACK_SIZE, 0x00000004
+  25              	    .set  FIQ_STACK_SIZE, 0x00000004
+  26              	    .set  IRQ_STACK_SIZE, 0X00000100
+  27              	    .set  SVC_STACK_SIZE, 0x00000100
+  28              	
+  29              		/* Standard definitions of Mode bits and Interrupt (I & F) flags in PSRs */
+  30              	    .set  MODE_USR, 0x10            /* User Mode */
+  31              	    .set  MODE_FIQ, 0x11            /* FIQ Mode */
+  32              	    .set  MODE_IRQ, 0x12            /* IRQ Mode */
+  33              	    .set  MODE_SVC, 0x13            /* Supervisor Mode */
+  34              	    .set  MODE_ABT, 0x17            /* Abort Mode */
+  35              	    .set  MODE_UND, 0x1B            /* Undefined Mode */
+  36              	    .set  MODE_SYS, 0x1F            /* System Mode */
+  37              	
+  38              	    .equ  I_BIT, 0x80               /* when I bit is set, IRQ is disabled */
+  39              	    .equ  F_BIT, 0x40               /* when F bit is set, FIQ is disabled */
+  40              	
+  41              	
+  42              	start:
+  43              	_start:
+  44              	_mainCRTStartup:
+  45              	
+  46              		/* Setup a stack for each mode - note that this only sets up a usable stack
+  47              		for system/user, SWI and IRQ modes.   Also each mode is setup with
+  48              		interrupts initially disabled. */
+  49 0000 D0009FE5 	    ldr   r0, .LC6
+  50 0004 DBF021E3 	    msr   CPSR_c, #MODE_UND|I_BIT|F_BIT /* Undefined Instruction Mode */
+  51 0008 00D0A0E1 	    mov   sp, r0
+  52 000c 040040E2 	    sub   r0, r0, #UND_STACK_SIZE
+  53 0010 D7F021E3 	    msr   CPSR_c, #MODE_ABT|I_BIT|F_BIT /* Abort Mode */
+  54 0014 00D0A0E1 	    mov   sp, r0
+  55 0018 040040E2 	    sub   r0, r0, #ABT_STACK_SIZE
+  56 001c D1F021E3 	    msr   CPSR_c, #MODE_FIQ|I_BIT|F_BIT /* FIQ Mode */
+  57 0020 00D0A0E1 	    mov   sp, r0
+  58 0024 040040E2 	    sub   r0, r0, #FIQ_STACK_SIZE
+  59 0028 D2F021E3 	    msr   CPSR_c, #MODE_IRQ|I_BIT|F_BIT /* IRQ Mode */
+  60 002c 00D0A0E1 	    mov   sp, r0
+  61 0030 010C40E2 	    sub   r0, r0, #IRQ_STACK_SIZE
+  62 0034 D3F021E3 	    msr   CPSR_c, #MODE_SVC|I_BIT|F_BIT /* Supervisor Mode */
+  63 0038 00D0A0E1 	    mov   sp, r0
+  64 003c 010C40E2 	    sub   r0, r0, #SVC_STACK_SIZE
+  65 0040 DFF021E3 	    msr   CPSR_c, #MODE_SYS|I_BIT|F_BIT /* System Mode */
+  66 0044 00D0A0E1 	    mov   sp, r0
+  67              	
+  68              		/* We want to start in supervisor mode.  Operation will switch to system
+  69              		mode when the first task starts. */
+  70              	/* pamo exchanged
+  71              		msr   CPSR_c, #MODE_SYS //|F_BIT|I_BIT*/
+  72              	
+  73 0048 13F021E3 		msr	  CPSR_c, #MODE_SVC	/* enable interrupts */
+  74              	/* end pamo exchanged*/
+  75              	
+  76              		/* Clear BSS. */
+  77              	
+  78 004c 0010A0E3 		mov     a2, #0			/* Fill value */
+  79 0050 01B0A0E1 		mov		fp, a2			/* Null frame pointer */
+  80 0054 0170A0E1 		mov		r7, a2			/* Null frame pointer for Thumb */
+  81              	
+  82 0058 64109FE5 		ldr		r1, .LC1		/* Start of memory block */
+  83 005c 64309FE5 		ldr		r3, .LC2		/* End of memory block */
+  84 0060 013053E0 		subs	r3, r3, r1      /* Length of block */
+  85 0064 0300000A 		beq		.end_clear_loop
+  86 0068 0020A0E3 		mov		r2, #0
+  87              	
+  88              	.clear_loop:
+  89 006c 0120C1E4 		strb	r2, [r1], #1
+  90 0070 013053E2 		subs	r3, r3, #1
+  91 0074 FCFFFFCA 		bgt		.clear_loop
+  92              	
+  93              	.end_clear_loop:
+  94              	
+  95              		/* Initialise data. */
+  96              	
+  97 0078 4C109FE5 		ldr		r1, .LC3			/* Start of memory block in RAM */
+  98 007c 4C209FE5 		ldr		r2, .LC4			/* Start of memory block in program code*/
+  99 0080 045002E2 		and		r5, r2, #4
+ 100 0084 005055E2 		subs	r5, r5, #0
+ 101 0088 0000000A 		beq		.cont_calc
+ 102 008c 042082E2 		add		r2, r2, #4
+ 103              	
+ 104              	.cont_calc:
+ 105 0090 012042E0 		sub		r2, r2, r1
+ 106 0094 38309FE5 		ldr		r3, .LC5			/* size of memory block */
+ 107 0098 013053E0 		subs	r3, r3, r1			/* Length of block */ /* !!! DATA ABORT || DAC failed !!! */
+ 108 009c 0300000A 		beq		.end_set_loop
+ 109              	
+ 110              	.set_loop:
+ 111 00a0 0140D2E4 		ldrb	r4, [r2], #1
+ 112 00a4 0140C1E4 		strb	r4, [r1], #1
+ 113 00a8 013053E2 		subs	r3, r3, #1
+ 114 00ac FBFFFFCA 		bgt		.set_loop
+ 115              	
+ 116              	.end_set_loop:
+ 117              	
+ 118 00b0 0000A0E3 		mov		r0, #0          /* no arguments  */
+ 119 00b4 0010A0E3 		mov		r1, #0          /* no argv either */
+ 120              	
+ 121 00b8 FEFFFFEB 		bl		SystemInit
+ 122              	
+ 123 00bc FEFFFFEB 		bl		main
+ 124              	
+ 125              	endless_loop:
+ 126 00c0 FEFFFFEA 		b               endless_loop
+ 127              	
+ 128              	
+ 129              		.align 0
+ 130              	
+ 131              		.LC1:
+ 132 00c4 00000000 		.word   __bss_beg__
+ 133              		.LC2:
+ 134 00c8 00000000 		.word   __bss_end__
+ 135              		.LC3:
+ 136 00cc 00000000 		.word   __data_beg__
+ 137              		.LC4:
+ 138 00d0 00000000 		.word   __data_beg_src__
+ 139              		.LC5:
+ 140 00d4 00000000 		.word   __data_end__
+ 141              		.LC6:
+ 142 00d8 00000000 		.word   __stack_end__
+ 143              	
+ 144              		/* Setup vector table.  Note that undf, pabt, dabt, fiq just execute
+ 145              		a null loop. */
+ 146              	
+ 147              	.section .startup,"ax"
+ 148              	         .code 32
+ 149              	         .align 0
+ 150              	
+ 151 0000 FEFFFFEA 		b     _start						/* reset - _start			*/
+ 152 0004 14F09FE5 		ldr   pc, _undf						/* undefined - _undf		*/
+ 153 0008 14F09FE5 		ldr   pc, _swi						/* SWI - _swi				*/
+ 154 000c 14F09FE5 		ldr   pc, _pabt						/* program abort - _pabt	*/
+ 155 0010 14F09FE5 		ldr   pc, _dabt						/* data abort - _dabt		*/
+ 156 0014 0000A0E1 		nop									/* reserved					*/
+ 157 0018 20F11FE5 		ldr   pc, [pc,#-0x120]				/* IRQ - read the VIC		*/
+ 158 001c 0CF09FE5 		ldr   pc, _fiq						/* FIQ - _fiq				*/
+ 159              	
+ 160 0020 34000000 	_undf:  .word __undf                    /* undefined				*/
+ 161 0024 24000000 	_swi:   .word _swi	//vPortYieldProcessor       /* SWI						*/
+ 162 0028 38000000 	_pabt:  .word __pabt                    /* program abort			*/
+ 163 002c 3C000000 	_dabt:  .word __dabt                    /* data abort				*/
+ 164 0030 40000000 	_fiq:   .word __fiq                     /* FIQ						*/
+ 165              	
+ 166 0034 FEFFFFEA 	__undf: b     .                         /* undefined				*/
+ 167 0038 FEFFFFEA 	__pabt: b     .                         /* program abort			*/
+ 168 003c FEFFFFEA 	__dabt: b     .                         /* data abort				*/
+ 169 0040 FEFFFFEA 	__fiq:  b     .                         /* FIQ						*/
+DEFINED SYMBOLS
+../Libraries/src/boot.asm:10     .text:00000000 $a
+../Libraries/src/boot.asm:42     .text:00000000 start
+../Libraries/src/boot.asm:125    .text:000000c0 endless_loop
+../Libraries/src/boot.asm:23     *ABS*:00000004 UND_STACK_SIZE
+../Libraries/src/boot.asm:24     *ABS*:00000004 ABT_STACK_SIZE
+../Libraries/src/boot.asm:25     *ABS*:00000004 FIQ_STACK_SIZE
+../Libraries/src/boot.asm:26     *ABS*:00000100 IRQ_STACK_SIZE
+../Libraries/src/boot.asm:27     *ABS*:00000100 SVC_STACK_SIZE
+../Libraries/src/boot.asm:30     *ABS*:00000010 MODE_USR
+../Libraries/src/boot.asm:31     *ABS*:00000011 MODE_FIQ
+../Libraries/src/boot.asm:32     *ABS*:00000012 MODE_IRQ
+../Libraries/src/boot.asm:33     *ABS*:00000013 MODE_SVC
+../Libraries/src/boot.asm:34     *ABS*:00000017 MODE_ABT
+../Libraries/src/boot.asm:35     *ABS*:0000001b MODE_UND
+../Libraries/src/boot.asm:36     *ABS*:0000001f MODE_SYS
+../Libraries/src/boot.asm:38     *ABS*:00000080 I_BIT
+../Libraries/src/boot.asm:39     *ABS*:00000040 F_BIT
+../Libraries/src/boot.asm:43     .text:00000000 _start
+../Libraries/src/boot.asm:44     .text:00000000 _mainCRTStartup
+../Libraries/src/boot.asm:93     .text:00000078 .end_clear_loop
+../Libraries/src/boot.asm:88     .text:0000006c .clear_loop
+../Libraries/src/boot.asm:104    .text:00000090 .cont_calc
+../Libraries/src/boot.asm:116    .text:000000b0 .end_set_loop
+../Libraries/src/boot.asm:110    .text:000000a0 .set_loop
+../Libraries/src/boot.asm:132    .text:000000c4 $d
+../Libraries/src/boot.asm:149    .startup:00000000 $a
+../Libraries/src/boot.asm:160    .startup:00000020 _undf
+../Libraries/src/boot.asm:161    .startup:00000024 _swi
+../Libraries/src/boot.asm:162    .startup:00000028 _pabt
+../Libraries/src/boot.asm:163    .startup:0000002c _dabt
+../Libraries/src/boot.asm:164    .startup:00000030 _fiq
+../Libraries/src/boot.asm:160    .startup:00000020 $d
+../Libraries/src/boot.asm:166    .startup:00000034 __undf
+../Libraries/src/boot.asm:167    .startup:00000038 __pabt
+../Libraries/src/boot.asm:168    .startup:0000003c __dabt
+../Libraries/src/boot.asm:169    .startup:00000040 __fiq
+../Libraries/src/boot.asm:166    .startup:00000034 $a
+                   .debug_aranges:0000000c $d
+
+UNDEFINED SYMBOLS
+SystemInit
+main
+__bss_beg__
+__bss_end__
+__data_beg__
+__data_beg_src__
+__data_end__
+__stack_end__

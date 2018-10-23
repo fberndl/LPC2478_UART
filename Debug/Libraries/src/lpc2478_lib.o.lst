@@ -1,0 +1,360 @@
+   1              		.cpu arm7tdmi-s
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"lpc2478_lib.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  17              		.global	setPortPinDir
+  19              	setPortPinDir:
+  20              	.LFB0:
+  21              		.file 1 "../Libraries/src/lpc2478_lib.c"
+   1:../Libraries/src/lpc2478_lib.c **** #include "lpc246x.h"
+   2:../Libraries/src/lpc2478_lib.c **** #include "lpc2478_lib.h"
+   3:../Libraries/src/lpc2478_lib.c **** 
+   4:../Libraries/src/lpc2478_lib.c **** void setPortPinDir(char port, char pin)
+   5:../Libraries/src/lpc2478_lib.c **** {
+  22              		.loc 1 5 0
+  23              		.cfi_startproc
+  24              		@ Function supports interworking.
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 1, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 04B02DE5 		str	fp, [sp, #-4]!
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 4
+  31              		.cfi_offset 11, -4
+  32 0004 00B08DE2 		add	fp, sp, #0
+  33              	.LCFI1:
+  34              		.cfi_def_cfa_register 11
+  35 0008 0CD04DE2 		sub	sp, sp, #12
+  36 000c 0020A0E1 		mov	r2, r0
+  37 0010 0130A0E1 		mov	r3, r1
+  38 0014 05204BE5 		strb	r2, [fp, #-5]
+  39 0018 06304BE5 		strb	r3, [fp, #-6]
+   6:../Libraries/src/lpc2478_lib.c **** 	switch(port){
+  40              		.loc 1 6 0
+  41 001c 05305BE5 		ldrb	r3, [fp, #-5]	@ zero_extendqisi2
+  42 0020 020053E3 		cmp	r3, #2
+  43 0024 0400000A 		beq	.L4
+  44 0028 030053E3 		cmp	r3, #3
+  45 002c 0A00000A 		beq	.L8
+  46 0030 010053E3 		cmp	r3, #1
+  47 0034 0A00000A 		beq	.L9
+  48 0038 050000EA 		b	.L7
+  49              	.L4:
+   7:../Libraries/src/lpc2478_lib.c **** 		case 1: /* configure pin of Port 1 */
+   8:../Libraries/src/lpc2478_lib.c **** 				break;
+   9:../Libraries/src/lpc2478_lib.c **** 		case 2: FIO2DIR = (1<<pin);
+  50              		.loc 1 9 0
+  51 003c 30309FE5 		ldr	r3, .L10
+  52 0040 06205BE5 		ldrb	r2, [fp, #-6]	@ zero_extendqisi2
+  53 0044 0110A0E3 		mov	r1, #1
+  54 0048 1122A0E1 		mov	r2, r1, asl r2
+  55 004c 002083E5 		str	r2, [r3, #0]
+  10:../Libraries/src/lpc2478_lib.c **** 				break;
+  56              		.loc 1 10 0
+  57 0050 040000EA 		b	.L1
+  58              	.L7:
+  11:../Libraries/src/lpc2478_lib.c **** 		case 3: /* configure pin of Port 3 */
+  12:../Libraries/src/lpc2478_lib.c **** 				break;
+  13:../Libraries/src/lpc2478_lib.c **** 		default:
+  14:../Libraries/src/lpc2478_lib.c **** 				break;
+  59              		.loc 1 14 0
+  60 0054 0000A0E1 		mov	r0, r0	@ nop
+  61 0058 020000EA 		b	.L1
+  62              	.L8:
+  12:../Libraries/src/lpc2478_lib.c **** 				break;
+  63              		.loc 1 12 0
+  64 005c 0000A0E1 		mov	r0, r0	@ nop
+  65 0060 000000EA 		b	.L1
+  66              	.L9:
+   8:../Libraries/src/lpc2478_lib.c **** 				break;
+  67              		.loc 1 8 0
+  68 0064 0000A0E1 		mov	r0, r0	@ nop
+  69              	.L1:
+  15:../Libraries/src/lpc2478_lib.c **** 	}
+  16:../Libraries/src/lpc2478_lib.c **** }
+  70              		.loc 1 16 0
+  71 0068 00D08BE2 		add	sp, fp, #0
+  72 006c 04B09DE4 		ldmfd	sp!, {fp}
+  73 0070 1EFF2FE1 		bx	lr
+  74              	.L11:
+  75              		.align	2
+  76              	.L10:
+  77 0074 40C0FF3F 		.word	1073725504
+  78              		.cfi_endproc
+  79              	.LFE0:
+  81              		.align	2
+  82              		.global	clrPortPin
+  84              	clrPortPin:
+  85              	.LFB1:
+  17:../Libraries/src/lpc2478_lib.c **** 
+  18:../Libraries/src/lpc2478_lib.c **** void clrPortPin(char port, char pin)
+  19:../Libraries/src/lpc2478_lib.c **** {
+  86              		.loc 1 19 0
+  87              		.cfi_startproc
+  88              		@ Function supports interworking.
+  89              		@ args = 0, pretend = 0, frame = 8
+  90              		@ frame_needed = 1, uses_anonymous_args = 0
+  91              		@ link register save eliminated.
+  92 0078 04B02DE5 		str	fp, [sp, #-4]!
+  93              	.LCFI2:
+  94              		.cfi_def_cfa_offset 4
+  95              		.cfi_offset 11, -4
+  96 007c 00B08DE2 		add	fp, sp, #0
+  97              	.LCFI3:
+  98              		.cfi_def_cfa_register 11
+  99 0080 0CD04DE2 		sub	sp, sp, #12
+ 100 0084 0020A0E1 		mov	r2, r0
+ 101 0088 0130A0E1 		mov	r3, r1
+ 102 008c 05204BE5 		strb	r2, [fp, #-5]
+ 103 0090 06304BE5 		strb	r3, [fp, #-6]
+  20:../Libraries/src/lpc2478_lib.c **** 	switch(port){
+ 104              		.loc 1 20 0
+ 105 0094 05305BE5 		ldrb	r3, [fp, #-5]	@ zero_extendqisi2
+ 106 0098 020053E3 		cmp	r3, #2
+ 107 009c 0400000A 		beq	.L15
+ 108 00a0 030053E3 		cmp	r3, #3
+ 109 00a4 0A00000A 		beq	.L19
+ 110 00a8 010053E3 		cmp	r3, #1
+ 111 00ac 0A00000A 		beq	.L20
+ 112 00b0 050000EA 		b	.L18
+ 113              	.L15:
+  21:../Libraries/src/lpc2478_lib.c **** 		case 1: /* configure pin of Port 1 */
+  22:../Libraries/src/lpc2478_lib.c **** 				break;
+  23:../Libraries/src/lpc2478_lib.c **** 		case 2: FIO2CLR = (1<<pin);
+ 114              		.loc 1 23 0
+ 115 00b4 30309FE5 		ldr	r3, .L21
+ 116 00b8 06205BE5 		ldrb	r2, [fp, #-6]	@ zero_extendqisi2
+ 117 00bc 0110A0E3 		mov	r1, #1
+ 118 00c0 1122A0E1 		mov	r2, r1, asl r2
+ 119 00c4 002083E5 		str	r2, [r3, #0]
+  24:../Libraries/src/lpc2478_lib.c **** 				break;
+ 120              		.loc 1 24 0
+ 121 00c8 040000EA 		b	.L12
+ 122              	.L18:
+  25:../Libraries/src/lpc2478_lib.c **** 		case 3: /* configure pin of Port 3 */
+  26:../Libraries/src/lpc2478_lib.c **** 				break;
+  27:../Libraries/src/lpc2478_lib.c **** 		default:
+  28:../Libraries/src/lpc2478_lib.c **** 				break;
+ 123              		.loc 1 28 0
+ 124 00cc 0000A0E1 		mov	r0, r0	@ nop
+ 125 00d0 020000EA 		b	.L12
+ 126              	.L19:
+  26:../Libraries/src/lpc2478_lib.c **** 				break;
+ 127              		.loc 1 26 0
+ 128 00d4 0000A0E1 		mov	r0, r0	@ nop
+ 129 00d8 000000EA 		b	.L12
+ 130              	.L20:
+  22:../Libraries/src/lpc2478_lib.c **** 				break;
+ 131              		.loc 1 22 0
+ 132 00dc 0000A0E1 		mov	r0, r0	@ nop
+ 133              	.L12:
+  29:../Libraries/src/lpc2478_lib.c **** 	}
+  30:../Libraries/src/lpc2478_lib.c **** }
+ 134              		.loc 1 30 0
+ 135 00e0 00D08BE2 		add	sp, fp, #0
+ 136 00e4 04B09DE4 		ldmfd	sp!, {fp}
+ 137 00e8 1EFF2FE1 		bx	lr
+ 138              	.L22:
+ 139              		.align	2
+ 140              	.L21:
+ 141 00ec 5CC0FF3F 		.word	1073725532
+ 142              		.cfi_endproc
+ 143              	.LFE1:
+ 145              		.align	2
+ 146              		.global	setPortPin
+ 148              	setPortPin:
+ 149              	.LFB2:
+  31:../Libraries/src/lpc2478_lib.c **** 
+  32:../Libraries/src/lpc2478_lib.c **** void setPortPin(char port, char pin)
+  33:../Libraries/src/lpc2478_lib.c **** {
+ 150              		.loc 1 33 0
+ 151              		.cfi_startproc
+ 152              		@ Function supports interworking.
+ 153              		@ args = 0, pretend = 0, frame = 8
+ 154              		@ frame_needed = 1, uses_anonymous_args = 0
+ 155              		@ link register save eliminated.
+ 156 00f0 04B02DE5 		str	fp, [sp, #-4]!
+ 157              	.LCFI4:
+ 158              		.cfi_def_cfa_offset 4
+ 159              		.cfi_offset 11, -4
+ 160 00f4 00B08DE2 		add	fp, sp, #0
+ 161              	.LCFI5:
+ 162              		.cfi_def_cfa_register 11
+ 163 00f8 0CD04DE2 		sub	sp, sp, #12
+ 164 00fc 0020A0E1 		mov	r2, r0
+ 165 0100 0130A0E1 		mov	r3, r1
+ 166 0104 05204BE5 		strb	r2, [fp, #-5]
+ 167 0108 06304BE5 		strb	r3, [fp, #-6]
+  34:../Libraries/src/lpc2478_lib.c **** 	switch(port){
+ 168              		.loc 1 34 0
+ 169 010c 05305BE5 		ldrb	r3, [fp, #-5]	@ zero_extendqisi2
+ 170 0110 020053E3 		cmp	r3, #2
+ 171 0114 0400000A 		beq	.L26
+ 172 0118 030053E3 		cmp	r3, #3
+ 173 011c 0A00000A 		beq	.L30
+ 174 0120 010053E3 		cmp	r3, #1
+ 175 0124 0A00000A 		beq	.L31
+ 176 0128 050000EA 		b	.L29
+ 177              	.L26:
+  35:../Libraries/src/lpc2478_lib.c **** 		case 1: /* configure pin of Port 1 */
+  36:../Libraries/src/lpc2478_lib.c **** 				break;
+  37:../Libraries/src/lpc2478_lib.c **** 		case 2: FIO2SET = (1<<pin);
+ 178              		.loc 1 37 0
+ 179 012c 30309FE5 		ldr	r3, .L32
+ 180 0130 06205BE5 		ldrb	r2, [fp, #-6]	@ zero_extendqisi2
+ 181 0134 0110A0E3 		mov	r1, #1
+ 182 0138 1122A0E1 		mov	r2, r1, asl r2
+ 183 013c 002083E5 		str	r2, [r3, #0]
+  38:../Libraries/src/lpc2478_lib.c **** 				break;
+ 184              		.loc 1 38 0
+ 185 0140 040000EA 		b	.L23
+ 186              	.L29:
+  39:../Libraries/src/lpc2478_lib.c **** 		case 3: /* configure pin of Port 3 */
+  40:../Libraries/src/lpc2478_lib.c **** 				break;
+  41:../Libraries/src/lpc2478_lib.c **** 		default:
+  42:../Libraries/src/lpc2478_lib.c **** 				break;
+ 187              		.loc 1 42 0
+ 188 0144 0000A0E1 		mov	r0, r0	@ nop
+ 189 0148 020000EA 		b	.L23
+ 190              	.L30:
+  40:../Libraries/src/lpc2478_lib.c **** 				break;
+ 191              		.loc 1 40 0
+ 192 014c 0000A0E1 		mov	r0, r0	@ nop
+ 193 0150 000000EA 		b	.L23
+ 194              	.L31:
+  36:../Libraries/src/lpc2478_lib.c **** 				break;
+ 195              		.loc 1 36 0
+ 196 0154 0000A0E1 		mov	r0, r0	@ nop
+ 197              	.L23:
+  43:../Libraries/src/lpc2478_lib.c **** 	}
+  44:../Libraries/src/lpc2478_lib.c **** }
+ 198              		.loc 1 44 0
+ 199 0158 00D08BE2 		add	sp, fp, #0
+ 200 015c 04B09DE4 		ldmfd	sp!, {fp}
+ 201 0160 1EFF2FE1 		bx	lr
+ 202              	.L33:
+ 203              		.align	2
+ 204              	.L32:
+ 205 0164 58C0FF3F 		.word	1073725528
+ 206              		.cfi_endproc
+ 207              	.LFE2:
+ 209              		.align	2
+ 210              		.global	delayMs
+ 212              	delayMs:
+ 213              	.LFB3:
+  45:../Libraries/src/lpc2478_lib.c **** 
+  46:../Libraries/src/lpc2478_lib.c **** void delayMs(unsigned short delayInMs)
+  47:../Libraries/src/lpc2478_lib.c **** {
+ 214              		.loc 1 47 0
+ 215              		.cfi_startproc
+ 216              		@ Function supports interworking.
+ 217              		@ args = 0, pretend = 0, frame = 8
+ 218              		@ frame_needed = 1, uses_anonymous_args = 0
+ 219              		@ link register save eliminated.
+ 220 0168 04B02DE5 		str	fp, [sp, #-4]!
+ 221              	.LCFI6:
+ 222              		.cfi_def_cfa_offset 4
+ 223              		.cfi_offset 11, -4
+ 224 016c 00B08DE2 		add	fp, sp, #0
+ 225              	.LCFI7:
+ 226              		.cfi_def_cfa_register 11
+ 227 0170 0CD04DE2 		sub	sp, sp, #12
+ 228 0174 0030A0E1 		mov	r3, r0
+ 229 0178 B6304BE1 		strh	r3, [fp, #-6]	@ movhi
+  48:../Libraries/src/lpc2478_lib.c **** 	T1TCR = 0x02;							/* stop and reset timer  */
+ 230              		.loc 1 48 0
+ 231 017c 90309FE5 		ldr	r3, .L36
+ 232 0180 0220A0E3 		mov	r2, #2
+ 233 0184 002083E5 		str	r2, [r3, #0]
+  49:../Libraries/src/lpc2478_lib.c **** 	T1PR = 0x00;							/* set prescaler to zero */
+ 234              		.loc 1 49 0
+ 235 0188 88309FE5 		ldr	r3, .L36+4
+ 236 018c 0020A0E3 		mov	r2, #0
+ 237 0190 002083E5 		str	r2, [r3, #0]
+  50:../Libraries/src/lpc2478_lib.c **** 	T1MR0 = delayInMs * (25000000 / 1000);	/* calculate Timer Match Register Value */
+ 238              		.loc 1 50 0
+ 239 0194 80109FE5 		ldr	r1, .L36+8
+ 240 0198 B6205BE1 		ldrh	r2, [fp, #-6]
+ 241 019c 0230A0E1 		mov	r3, r2
+ 242 01a0 8332A0E1 		mov	r3, r3, asl #5
+ 243 01a4 033062E0 		rsb	r3, r2, r3
+ 244 01a8 0331A0E1 		mov	r3, r3, asl #2
+ 245 01ac 023083E0 		add	r3, r3, r2
+ 246 01b0 0321A0E1 		mov	r2, r3, asl #2
+ 247 01b4 023083E0 		add	r3, r3, r2
+ 248 01b8 0321A0E1 		mov	r2, r3, asl #2
+ 249 01bc 023083E0 		add	r3, r3, r2
+ 250 01c0 8331A0E1 		mov	r3, r3, asl #3
+ 251 01c4 003081E5 		str	r3, [r1, #0]
+  51:../Libraries/src/lpc2478_lib.c **** 	T1IR = 0xFF;							/* reset all interrupt flags */
+ 252              		.loc 1 51 0
+ 253 01c8 50309FE5 		ldr	r3, .L36+12
+ 254 01cc FF20A0E3 		mov	r2, #255
+ 255 01d0 002083E5 		str	r2, [r3, #0]
+  52:../Libraries/src/lpc2478_lib.c **** 	T1MCR = 0x04;							/* stop timer on match */
+ 256              		.loc 1 52 0
+ 257 01d4 48309FE5 		ldr	r3, .L36+16
+ 258 01d8 0420A0E3 		mov	r2, #4
+ 259 01dc 002083E5 		str	r2, [r3, #0]
+  53:../Libraries/src/lpc2478_lib.c **** 	T1TCR = 0x01;							/* start timer */
+ 260              		.loc 1 53 0
+ 261 01e0 2C309FE5 		ldr	r3, .L36
+ 262 01e4 0120A0E3 		mov	r2, #1
+ 263 01e8 002083E5 		str	r2, [r3, #0]
+  54:../Libraries/src/lpc2478_lib.c **** 
+  55:../Libraries/src/lpc2478_lib.c **** 	while(T1TCR & 0x01);					/* wait until delay time has elapsed */
+ 264              		.loc 1 55 0
+ 265 01ec 0000A0E1 		mov	r0, r0	@ nop
+ 266              	.L35:
+ 267              		.loc 1 55 0 is_stmt 0 discriminator 1
+ 268 01f0 1C309FE5 		ldr	r3, .L36
+ 269 01f4 003093E5 		ldr	r3, [r3, #0]
+ 270 01f8 013003E2 		and	r3, r3, #1
+ 271 01fc FF3003E2 		and	r3, r3, #255
+ 272 0200 000053E3 		cmp	r3, #0
+ 273 0204 F9FFFF1A 		bne	.L35
+  56:../Libraries/src/lpc2478_lib.c **** }
+ 274              		.loc 1 56 0 is_stmt 1
+ 275 0208 00D08BE2 		add	sp, fp, #0
+ 276 020c 04B09DE4 		ldmfd	sp!, {fp}
+ 277 0210 1EFF2FE1 		bx	lr
+ 278              	.L37:
+ 279              		.align	2
+ 280              	.L36:
+ 281 0214 048000E0 		.word	-536838140
+ 282 0218 0C8000E0 		.word	-536838132
+ 283 021c 188000E0 		.word	-536838120
+ 284 0220 008000E0 		.word	-536838144
+ 285 0224 148000E0 		.word	-536838124
+ 286              		.cfi_endproc
+ 287              	.LFE3:
+ 289              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 lpc2478_lib.c
+     /tmp/ccFyhyR9.s:16     .text:00000000 $a
+     /tmp/ccFyhyR9.s:19     .text:00000000 setPortPinDir
+     /tmp/ccFyhyR9.s:77     .text:00000074 $d
+     /tmp/ccFyhyR9.s:81     .text:00000078 $a
+     /tmp/ccFyhyR9.s:84     .text:00000078 clrPortPin
+     /tmp/ccFyhyR9.s:141    .text:000000ec $d
+     /tmp/ccFyhyR9.s:145    .text:000000f0 $a
+     /tmp/ccFyhyR9.s:148    .text:000000f0 setPortPin
+     /tmp/ccFyhyR9.s:205    .text:00000164 $d
+     /tmp/ccFyhyR9.s:209    .text:00000168 $a
+     /tmp/ccFyhyR9.s:212    .text:00000168 delayMs
+     /tmp/ccFyhyR9.s:281    .text:00000214 $d
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

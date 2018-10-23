@@ -1,0 +1,421 @@
+   1              		.cpu arm7tdmi-s
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"main.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.comm	UART_STAT,176,4
+  17              		.align	2
+  18              		.global	interrupt_routine
+  20              	interrupt_routine:
+  21              	.LFB0:
+  22              		.file 1 "../main.c"
+   1:../main.c     **** #include <stdio.h>
+   2:../main.c     **** 
+   3:../main.c     **** #include "init.h"
+   4:../main.c     **** #include "lpc2478_lib.h"
+   5:../main.c     **** #include "UART.h"
+   6:../main.c     **** #include "irq.h"
+   7:../main.c     **** 
+   8:../main.c     **** /**
+   9:../main.c     ****  * @brief User Interrupt Routine
+  10:../main.c     ****  *
+  11:../main.c     ****  * This function is called when a interrupt occurs
+  12:../main.c     ****  */
+  13:../main.c     **** void interrupt_routine()
+  14:../main.c     **** {
+  23              		.loc 1 14 0
+  24              		.cfi_startproc
+  25              		@ Function supports interworking.
+  26              		@ args = 0, pretend = 0, frame = 0
+  27              		@ frame_needed = 1, uses_anonymous_args = 0
+  28              		@ link register save eliminated.
+  29 0000 04B02DE5 		str	fp, [sp, #-4]!
+  30              	.LCFI0:
+  31              		.cfi_def_cfa_offset 4
+  32              		.cfi_offset 11, -4
+  33 0004 00B08DE2 		add	fp, sp, #0
+  34              	.LCFI1:
+  35              		.cfi_def_cfa_register 11
+  15:../main.c     **** 	/* do something here */
+  16:../main.c     **** 	/* user code */
+  17:../main.c     **** }
+  36              		.loc 1 17 0
+  37 0008 00D08BE2 		add	sp, fp, #0
+  38 000c 04B09DE4 		ldmfd	sp!, {fp}
+  39 0010 1EFF2FE1 		bx	lr
+  40              		.cfi_endproc
+  41              	.LFE0:
+  43              		.section	.rodata
+  44              		.align	2
+  45              	.LC1:
+  46 0000 55415254 		.ascii	"UART Treiber - BERNDL / GLATZ\012\000"
+  46      20547265 
+  46      69626572 
+  46      202D2042 
+  46      45524E44 
+  47 001f 00       		.align	2
+  48              	.LC2:
+  49 0020 46756E6B 		.ascii	"Funktioniert! Heureka! Das sind 43 Zeichen\012\000"
+  49      74696F6E 
+  49      69657274 
+  49      21204865 
+  49      7572656B 
+  50              		.align	2
+  51              	.LC3:
+  52 004c 4563686F 		.ascii	"Echo test:\012Enter 10 characters\012\000"
+  52      20746573 
+  52      743A0A45 
+  52      6E746572 
+  52      20313020 
+  53              		.align	2
+  54              	.LC4:
+  55 006c 200A00   		.ascii	" \012\000"
+  56 006f 00       		.align	2
+  57              	.LC5:
+  58 0070 52656365 		.ascii	"Receive - send string test:\012Enter 4 characters\012"
+  58      69766520 
+  58      2D207365 
+  58      6E642073 
+  58      7472696E 
+  59 009f 00       		.ascii	"\000"
+  60              		.align	2
+  61              	.LC6:
+  62 00a0 52656365 		.ascii	"Receive - send buffer test:\012Enter 5 characters\012"
+  62      69766520 
+  62      2D207365 
+  62      6E642062 
+  62      75666665 
+  63 00cf 00       		.ascii	"\000"
+  64              		.align	2
+  65              	.LC7:
+  66 00d0 52656365 		.ascii	"Receive - send long string test:\012Enter 19 charac"
+  66      69766520 
+  66      2D207365 
+  66      6E64206C 
+  66      6F6E6720 
+  67 0100 74657273 		.ascii	"ters\012\000"
+  67      0A00
+  68 0106 0000     		.align	2
+  69              	.LC0:
+  70 0108 45       		.byte	69
+  71 0109 69       		.byte	105
+  72 010a 6E       		.byte	110
+  73 010b 20       		.byte	32
+  74 010c 6C       		.byte	108
+  75 010d 61       		.byte	97
+  76 010e 6E       		.byte	110
+  77 010f 67       		.byte	103
+  78 0110 65       		.byte	101
+  79 0111 72       		.byte	114
+  80 0112 20       		.byte	32
+  81 0113 54       		.byte	84
+  82 0114 65       		.byte	101
+  83 0115 78       		.byte	120
+  84 0116 74       		.byte	116
+  85 0117 21       		.byte	33
+  86 0118 21       		.byte	33
+  87 0119 00       		.byte	0
+  88 011a 0000     		.text
+  89              		.align	2
+  90              		.global	main
+  92              	main:
+  93              	.LFB1:
+  18:../main.c     **** 
+  19:../main.c     **** /**
+  20:../main.c     ****  * @brief main function
+  21:../main.c     ****  */
+  22:../main.c     **** int main(void)
+  23:../main.c     **** {
+  94              		.loc 1 23 0
+  95              		.cfi_startproc
+  96              		@ Function supports interworking.
+  97              		@ args = 0, pretend = 0, frame = 56
+  98              		@ frame_needed = 1, uses_anonymous_args = 0
+  99 0014 00482DE9 		stmfd	sp!, {fp, lr}
+ 100              	.LCFI2:
+ 101              		.cfi_def_cfa_offset 8
+ 102              		.cfi_offset 14, -4
+ 103              		.cfi_offset 11, -8
+ 104 0018 04B08DE2 		add	fp, sp, #4
+ 105              	.LCFI3:
+ 106              		.cfi_def_cfa 11, 4
+ 107 001c 38D04DE2 		sub	sp, sp, #56
+  24:../main.c     **** 	UART_CFG_T cfg;
+  25:../main.c     **** 	uint8_t recBytes = 0;
+ 108              		.loc 1 25 0
+ 109 0020 0030A0E3 		mov	r3, #0
+ 110 0024 05304BE5 		strb	r3, [fp, #-5]
+  26:../main.c     **** 	uint8_t text[18] = { 'E','i','n',' ','l','a','n','g','e','r',' ','T','e','x','t', '!', '!','\0' };
+ 111              		.loc 1 26 0
+ 112 0028 D8319FE5 		ldr	r3, .L8
+ 113 002c 24104BE2 		sub	r1, fp, #36
+ 114 0030 0320A0E1 		mov	r2, r3
+ 115 0034 1230A0E3 		mov	r3, #18
+ 116 0038 0100A0E1 		mov	r0, r1
+ 117 003c 0210A0E1 		mov	r1, r2
+ 118 0040 0320A0E1 		mov	r2, r3
+ 119 0044 FEFFFFEB 		bl	memcpy
+  27:../main.c     **** 	char string[20];
+  28:../main.c     **** 
+  29:../main.c     **** 	(void)SystemInit();
+ 120              		.loc 1 29 0
+ 121 0048 FEFFFFEB 		bl	SystemInit
+  30:../main.c     **** 
+  31:../main.c     **** 	setPortPinDir(2, 10);
+ 122              		.loc 1 31 0
+ 123 004c 0200A0E3 		mov	r0, #2
+ 124 0050 0A10A0E3 		mov	r1, #10
+ 125 0054 FEFFFFEB 		bl	setPortPinDir
+  32:../main.c     **** 
+  33:../main.c     **** 	/* init vic */
+  34:../main.c     **** 	init_VIC();
+ 126              		.loc 1 34 0
+ 127 0058 FEFFFFEB 		bl	init_VIC
+  35:../main.c     **** 
+  36:../main.c     **** 	/* UART-Configuration */
+  37:../main.c     **** 	cfg.Baud_rate = 115200;
+ 128              		.loc 1 37 0
+ 129 005c A8319FE5 		ldr	r3, .L8+4
+ 130 0060 10300BE5 		str	r3, [fp, #-16]
+  38:../main.c     **** 	cfg.Databits = UART_DATABIT_8;
+ 131              		.loc 1 38 0
+ 132 0064 0330A0E3 		mov	r3, #3
+ 133 0068 0B304BE5 		strb	r3, [fp, #-11]
+  39:../main.c     **** 	cfg.Parity = UART_PARITY_NONE;
+ 134              		.loc 1 39 0
+ 135 006c 0030A0E3 		mov	r3, #0
+ 136 0070 0C304BE5 		strb	r3, [fp, #-12]
+  40:../main.c     **** 	cfg.Stopbits = UART_STOPBIT_1;
+ 137              		.loc 1 40 0
+ 138 0074 0030A0E3 		mov	r3, #0
+ 139 0078 0A304BE5 		strb	r3, [fp, #-10]
+  41:../main.c     **** 	cfg.Buffer = UART_SW_BUF;
+ 140              		.loc 1 41 0
+ 141 007c 0130A0E3 		mov	r3, #1
+ 142 0080 09304BE5 		strb	r3, [fp, #-9]
+  42:../main.c     **** 	if(uart_init(LPC_UART0, &cfg, interrupt_routine)!=EOK)
+ 143              		.loc 1 42 0
+ 144 0084 84319FE5 		ldr	r3, .L8+8
+ 145 0088 10204BE2 		sub	r2, fp, #16
+ 146 008c 80019FE5 		ldr	r0, .L8+12
+ 147 0090 0210A0E1 		mov	r1, r2
+ 148 0094 0320A0E1 		mov	r2, r3
+ 149 0098 FEFFFFEB 		bl	uart_init
+ 150 009c 0030A0E1 		mov	r3, r0
+ 151 00a0 000053E3 		cmp	r3, #0
+ 152 00a4 0000000A 		beq	.L3
+ 153              	.L4:
+  43:../main.c     **** 	{
+  44:../main.c     **** 		/* Something went wrong at UART initialization */
+  45:../main.c     **** 		for(;;);
+ 154              		.loc 1 45 0 discriminator 1
+ 155 00a8 FEFFFFEA 		b	.L4
+ 156              	.L3:
+  46:../main.c     **** 	}
+  47:../main.c     **** 	uart_enable(LPC_UART0, (PIN_TX_ENABLE|PIN_RX_ENABLE));
+ 157              		.loc 1 47 0
+ 158 00ac 60019FE5 		ldr	r0, .L8+12
+ 159 00b0 0310A0E3 		mov	r1, #3
+ 160 00b4 FEFFFFEB 		bl	uart_enable
+  48:../main.c     **** 
+  49:../main.c     **** 	/* send some test strings */
+  50:../main.c     **** 	(void)send_string(LPC_UART0, "UART Treiber - BERNDL / GLATZ\n");
+ 161              		.loc 1 50 0
+ 162 00b8 54019FE5 		ldr	r0, .L8+12
+ 163 00bc 54119FE5 		ldr	r1, .L8+16
+ 164 00c0 FEFFFFEB 		bl	send_string
+  51:../main.c     **** 	(void)send_string(LPC_UART0, "Funktioniert! Heureka! Das sind 43 Zeichen\n");
+ 165              		.loc 1 51 0
+ 166 00c4 48019FE5 		ldr	r0, .L8+12
+ 167 00c8 4C119FE5 		ldr	r1, .L8+20
+ 168 00cc FEFFFFEB 		bl	send_string
+  52:../main.c     **** 	(void)send_buf(LPC_UART0, text, 5);
+ 169              		.loc 1 52 0
+ 170 00d0 24304BE2 		sub	r3, fp, #36
+ 171 00d4 38019FE5 		ldr	r0, .L8+12
+ 172 00d8 0310A0E1 		mov	r1, r3
+ 173 00dc 0520A0E3 		mov	r2, #5
+ 174 00e0 FEFFFFEB 		bl	send_buf
+  53:../main.c     **** 	put_char(LPC_UART0, '\n');
+ 175              		.loc 1 53 0
+ 176 00e4 28019FE5 		ldr	r0, .L8+12
+ 177 00e8 0A10A0E3 		mov	r1, #10
+ 178 00ec FEFFFFEB 		bl	put_char
+  54:../main.c     **** 	(void)send_buf(LPC_UART0, text, 18);
+ 179              		.loc 1 54 0
+ 180 00f0 24304BE2 		sub	r3, fp, #36
+ 181 00f4 18019FE5 		ldr	r0, .L8+12
+ 182 00f8 0310A0E1 		mov	r1, r3
+ 183 00fc 1220A0E3 		mov	r2, #18
+ 184 0100 FEFFFFEB 		bl	send_buf
+  55:../main.c     **** 	put_char(LPC_UART0, '\n');
+ 185              		.loc 1 55 0
+ 186 0104 08019FE5 		ldr	r0, .L8+12
+ 187 0108 0A10A0E3 		mov	r1, #10
+ 188 010c FEFFFFEB 		bl	put_char
+ 189              	.L7:
+  56:../main.c     **** 
+  57:../main.c     **** 	for(;;)
+  58:../main.c     **** 	{
+  59:../main.c     **** 		/* put_char get_char test */
+  60:../main.c     **** 		(void)send_string(LPC_UART0, "Echo test:\nEnter 10 characters\n");
+ 190              		.loc 1 60 0
+ 191 0110 FC009FE5 		ldr	r0, .L8+12
+ 192 0114 04119FE5 		ldr	r1, .L8+24
+ 193 0118 FEFFFFEB 		bl	send_string
+  61:../main.c     **** 		while(recBytes<10)
+ 194              		.loc 1 61 0
+ 195 011c 080000EA 		b	.L5
+ 196              	.L6:
+  62:../main.c     **** 		{
+  63:../main.c     **** 			(void)put_char(LPC_UART0, get_char(LPC_UART0));
+ 197              		.loc 1 63 0
+ 198 0120 EC009FE5 		ldr	r0, .L8+12
+ 199 0124 FEFFFFEB 		bl	get_char
+ 200 0128 0030A0E1 		mov	r3, r0
+ 201 012c E0009FE5 		ldr	r0, .L8+12
+ 202 0130 0310A0E1 		mov	r1, r3
+ 203 0134 FEFFFFEB 		bl	put_char
+  64:../main.c     **** 			recBytes++;
+ 204              		.loc 1 64 0
+ 205 0138 05305BE5 		ldrb	r3, [fp, #-5]
+ 206 013c 013083E2 		add	r3, r3, #1
+ 207 0140 05304BE5 		strb	r3, [fp, #-5]
+ 208              	.L5:
+  61:../main.c     **** 		while(recBytes<10)
+ 209              		.loc 1 61 0 discriminator 1
+ 210 0144 05305BE5 		ldrb	r3, [fp, #-5]	@ zero_extendqisi2
+ 211 0148 090053E3 		cmp	r3, #9
+ 212 014c F3FFFF9A 		bls	.L6
+  65:../main.c     **** 		}
+  66:../main.c     **** 		(void)send_string(LPC_UART0, " \n");
+ 213              		.loc 1 66 0
+ 214 0150 BC009FE5 		ldr	r0, .L8+12
+ 215 0154 C8109FE5 		ldr	r1, .L8+28
+ 216 0158 FEFFFFEB 		bl	send_string
+  67:../main.c     **** 
+  68:../main.c     **** 		/* send receive string tests */
+  69:../main.c     **** 		(void)send_string(LPC_UART0, "Receive - send string test:\nEnter 4 characters\n");
+ 217              		.loc 1 69 0
+ 218 015c B0009FE5 		ldr	r0, .L8+12
+ 219 0160 C0109FE5 		ldr	r1, .L8+32
+ 220 0164 FEFFFFEB 		bl	send_string
+  70:../main.c     **** 		(void)recv_string(LPC_UART0, string, 5);
+ 221              		.loc 1 70 0
+ 222 0168 38304BE2 		sub	r3, fp, #56
+ 223 016c A0009FE5 		ldr	r0, .L8+12
+ 224 0170 0310A0E1 		mov	r1, r3
+ 225 0174 0520A0E3 		mov	r2, #5
+ 226 0178 FEFFFFEB 		bl	recv_string
+  71:../main.c     **** 		(void)send_string(LPC_UART0, string);
+ 227              		.loc 1 71 0
+ 228 017c 38304BE2 		sub	r3, fp, #56
+ 229 0180 8C009FE5 		ldr	r0, .L8+12
+ 230 0184 0310A0E1 		mov	r1, r3
+ 231 0188 FEFFFFEB 		bl	send_string
+  72:../main.c     **** 
+  73:../main.c     **** 		/* send receive buffer tests */
+  74:../main.c     **** 		(void)send_string(LPC_UART0, "Receive - send buffer test:\nEnter 5 characters\n");
+ 232              		.loc 1 74 0
+ 233 018c 80009FE5 		ldr	r0, .L8+12
+ 234 0190 94109FE5 		ldr	r1, .L8+36
+ 235 0194 FEFFFFEB 		bl	send_string
+  75:../main.c     **** 		(void)recv_buf(LPC_UART0, text, 5);
+ 236              		.loc 1 75 0
+ 237 0198 24304BE2 		sub	r3, fp, #36
+ 238 019c 70009FE5 		ldr	r0, .L8+12
+ 239 01a0 0310A0E1 		mov	r1, r3
+ 240 01a4 0520A0E3 		mov	r2, #5
+ 241 01a8 FEFFFFEB 		bl	recv_buf
+  76:../main.c     **** 		(void)send_buf(LPC_UART0, text, 4);
+ 242              		.loc 1 76 0
+ 243 01ac 24304BE2 		sub	r3, fp, #36
+ 244 01b0 5C009FE5 		ldr	r0, .L8+12
+ 245 01b4 0310A0E1 		mov	r1, r3
+ 246 01b8 0420A0E3 		mov	r2, #4
+ 247 01bc FEFFFFEB 		bl	send_buf
+  77:../main.c     **** 		(void)send_string(LPC_UART0, " \n");
+ 248              		.loc 1 77 0
+ 249 01c0 4C009FE5 		ldr	r0, .L8+12
+ 250 01c4 58109FE5 		ldr	r1, .L8+28
+ 251 01c8 FEFFFFEB 		bl	send_string
+  78:../main.c     **** 
+  79:../main.c     **** 		/* send receive string tests */
+  80:../main.c     **** 		(void)send_string(LPC_UART0, "Receive - send long string test:\nEnter 19 characters\n");
+ 252              		.loc 1 80 0
+ 253 01cc 40009FE5 		ldr	r0, .L8+12
+ 254 01d0 58109FE5 		ldr	r1, .L8+40
+ 255 01d4 FEFFFFEB 		bl	send_string
+  81:../main.c     **** 		(void)recv_string(LPC_UART0, string, 20);
+ 256              		.loc 1 81 0
+ 257 01d8 38304BE2 		sub	r3, fp, #56
+ 258 01dc 30009FE5 		ldr	r0, .L8+12
+ 259 01e0 0310A0E1 		mov	r1, r3
+ 260 01e4 1420A0E3 		mov	r2, #20
+ 261 01e8 FEFFFFEB 		bl	recv_string
+  82:../main.c     **** 		(void)send_string(LPC_UART0, string);
+ 262              		.loc 1 82 0
+ 263 01ec 38304BE2 		sub	r3, fp, #56
+ 264 01f0 1C009FE5 		ldr	r0, .L8+12
+ 265 01f4 0310A0E1 		mov	r1, r3
+ 266 01f8 FEFFFFEB 		bl	send_string
+  83:../main.c     **** 
+  84:../main.c     **** 		recBytes = 0;
+ 267              		.loc 1 84 0
+ 268 01fc 0030A0E3 		mov	r3, #0
+ 269 0200 05304BE5 		strb	r3, [fp, #-5]
+  85:../main.c     **** 	}
+ 270              		.loc 1 85 0
+ 271 0204 C1FFFFEA 		b	.L7
+ 272              	.L9:
+ 273              		.align	2
+ 274              	.L8:
+ 275 0208 08010000 		.word	.LC0
+ 276 020c 00C20100 		.word	115200
+ 277 0210 00000000 		.word	interrupt_routine
+ 278 0214 00C000E0 		.word	-536821760
+ 279 0218 00000000 		.word	.LC1
+ 280 021c 20000000 		.word	.LC2
+ 281 0220 4C000000 		.word	.LC3
+ 282 0224 6C000000 		.word	.LC4
+ 283 0228 70000000 		.word	.LC5
+ 284 022c A0000000 		.word	.LC6
+ 285 0230 D0000000 		.word	.LC7
+ 286              		.cfi_endproc
+ 287              	.LFE1:
+ 289              	.Letext0:
+ 290              		.file 2 "/home/es/CodeSourcery/Sourcery_CodeBench_Lite_for_ARM_EABI/bin/../lib/gcc/arm-none-eabi/4
+ 291              		.file 3 "/home/es/Desktop/LPC2478_UART/Libraries/inc/UART.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+                            *COM*:000000b0 UART_STAT
+     /tmp/cc4C6hYg.s:17     .text:00000000 $a
+     /tmp/cc4C6hYg.s:20     .text:00000000 interrupt_routine
+     /tmp/cc4C6hYg.s:44     .rodata:00000000 $d
+     /tmp/cc4C6hYg.s:92     .text:00000014 main
+     /tmp/cc4C6hYg.s:275    .text:00000208 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+memcpy
+SystemInit
+setPortPinDir
+init_VIC
+uart_init
+uart_enable
+send_string
+send_buf
+put_char
+get_char
+recv_string
+recv_buf

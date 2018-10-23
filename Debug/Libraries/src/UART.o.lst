@@ -1,0 +1,3913 @@
+   1              		.cpu arm7tdmi-s
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"UART.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.comm	UART_STAT,176,4
+  17              		.global	FRLut
+  18              		.section	.rodata
+  19              		.align	2
+  22              	FRLut:
+  23 0000 0000803F 		.word	1065353216
+  24 0004 7593883F 		.word	1065915253
+  25 0008 8716893F 		.word	1065948807
+  26 000c 23DB893F 		.word	1065999139
+  27 0010 BE9F8A3F 		.word	1066049470
+  28 0014 E3A58B3F 		.word	1066116579
+  29 0018 CDCC8C3F 		.word	1066192077
+  30 001c 3F358E3F 		.word	1066284351
+  31 0020 0000903F 		.word	1066401792
+  32 0024 2506913F 		.word	1066468901
+  33 0028 D34D923F 		.word	1066552787
+  34 002c 46B6933F 		.word	1066645062
+  35 0030 4260953F 		.word	1066754114
+  36 0034 C74B973F 		.word	1066879943
+  37 0038 9A99993F 		.word	1067030938
+  38 003c 5A649B3F 		.word	1067148378
+  39 0040 7F6A9C3F 		.word	1067215487
+  40 0044 68919D3F 		.word	1067290984
+  41 0048 0000A03F 		.word	1067450368
+  42 004c 0E2DA23F 		.word	1067592974
+  43 0050 AAF1A23F 		.word	1067643306
+  44 0054 A69BA43F 		.word	1067752358
+  45 0058 6666A63F 		.word	1067869798
+  46 005c 8B6CA73F 		.word	1067936907
+  47 0060 BE9FAA3F 		.word	1068146622
+  48 0064 2DB2AD3F 		.word	1068347949
+  49 0068 8D97AE3F 		.word	1068406669
+  50 006c 0000B03F 		.word	1068498944
+  51 0070 AE47B13F 		.word	1068582830
+  52 0074 3333B33F 		.word	1068708659
+  53 0078 4260B53F 		.word	1068851266
+  54 007c 79E9B63F 		.word	1068951929
+  55 0080 FED4B83F 		.word	1069077758
+  56 0084 713DBA3F 		.word	1069170033
+  57 0088 D122BB3F 		.word	1069228753
+  58 008c A8C6BB3F 		.word	1069270696
+  59 0090 0000C03F 		.word	1069547520
+  60 0094 5839C43F 		.word	1069824344
+  61 0098 2FDDC43F 		.word	1069866287
+  62 009c 8FC2C53F 		.word	1069925007
+  63 00a0 022BC73F 		.word	1070017282
+  64 00a4 8716C93F 		.word	1070143111
+  65 00a8 BE9FCA3F 		.word	1070243774
+  66 00ac CDCCCC3F 		.word	1070386381
+  67 00b0 52B8CE3F 		.word	1070512210
+  68 00b4 0000D03F 		.word	1070596096
+  69 00b8 7368D13F 		.word	1070688371
+  70 00bc D34DD23F 		.word	1070747091
+  71 00c0 4260D53F 		.word	1070948418
+  72 00c4 7593D83F 		.word	1071158133
+  73 00c8 9A99D93F 		.word	1071225242
+  74 00cc 5A64DB3F 		.word	1071342682
+  75 00d0 560EDD3F 		.word	1071451734
+  76 00d4 F2D2DD3F 		.word	1071502066
+  77 00d8 0000E03F 		.word	1071644672
+  78 00dc 986EE23F 		.word	1071804056
+  79 00e0 8195E33F 		.word	1071879553
+  80 00e4 A69BE43F 		.word	1071946662
+  81 00e8 6666E63F 		.word	1072064102
+  82 00ec 39B4E83F 		.word	1072215097
+  83 00f0 BE9FEA3F 		.word	1072340926
+  84 00f4 BA49EC3F 		.word	1072449978
+  85 00f8 2DB2ED3F 		.word	1072542253
+  86 00fc DBF9EE3F 		.word	1072626139
+  87 0100 0000F03F 		.word	1072693248
+  88 0104 C1CAF13F 		.word	1072810689
+  89 0108 3333F33F 		.word	1072902963
+  90 010c 1D5AF43F 		.word	1072978461
+  91 0110 4260F53F 		.word	1073045570
+  92 0114 DD24F63F 		.word	1073095901
+  93 0118 79E9F63F 		.word	1073146233
+  94 011c 8B6CF73F 		.word	1073179787
+  95              		.global	DIVADDVALLut
+  96              		.align	2
+  99              	DIVADDVALLut:
+ 100 0120 00000000 		.word	0
+ 101 0124 0000803F 		.word	1065353216
+ 102 0128 0000803F 		.word	1065353216
+ 103 012c 0000803F 		.word	1065353216
+ 104 0130 0000803F 		.word	1065353216
+ 105 0134 0000803F 		.word	1065353216
+ 106 0138 0000803F 		.word	1065353216
+ 107 013c 0000803F 		.word	1065353216
+ 108 0140 0000803F 		.word	1065353216
+ 109 0144 00000040 		.word	1073741824
+ 110 0148 0000803F 		.word	1065353216
+ 111 014c 00000040 		.word	1073741824
+ 112 0150 0000803F 		.word	1065353216
+ 113 0154 00000040 		.word	1073741824
+ 114 0158 0000803F 		.word	1065353216
+ 115 015c 00004040 		.word	1077936128
+ 116 0160 00000040 		.word	1073741824
+ 117 0164 00004040 		.word	1077936128
+ 118 0168 0000803F 		.word	1065353216
+ 119 016c 00008040 		.word	1082130432
+ 120 0170 00004040 		.word	1077936128
+ 121 0174 00000040 		.word	1073741824
+ 122 0178 00004040 		.word	1077936128
+ 123 017c 00008040 		.word	1082130432
+ 124 0180 0000803F 		.word	1065353216
+ 125 0184 0000A040 		.word	1084227584
+ 126 0188 00008040 		.word	1082130432
+ 127 018c 00004040 		.word	1077936128
+ 128 0190 0000A040 		.word	1084227584
+ 129 0194 00000040 		.word	1073741824
+ 130 0198 0000A040 		.word	1084227584
+ 131 019c 00004040 		.word	1077936128
+ 132 01a0 00008040 		.word	1082130432
+ 133 01a4 0000A040 		.word	1084227584
+ 134 01a8 0000C040 		.word	1086324736
+ 135 01ac 0000E040 		.word	1088421888
+ 136 01b0 0000803F 		.word	1065353216
+ 137 01b4 00000041 		.word	1090519040
+ 138 01b8 0000E040 		.word	1088421888
+ 139 01bc 0000C040 		.word	1086324736
+ 140 01c0 0000A040 		.word	1084227584
+ 141 01c4 00008040 		.word	1082130432
+ 142 01c8 0000E040 		.word	1088421888
+ 143 01cc 00004040 		.word	1077936128
+ 144 01d0 00000041 		.word	1090519040
+ 145 01d4 0000A040 		.word	1084227584
+ 146 01d8 0000E040 		.word	1088421888
+ 147 01dc 00001041 		.word	1091567616
+ 148 01e0 00000040 		.word	1073741824
+ 149 01e4 00001041 		.word	1091567616
+ 150 01e8 0000E040 		.word	1088421888
+ 151 01ec 0000A040 		.word	1084227584
+ 152 01f0 00000041 		.word	1090519040
+ 153 01f4 00003041 		.word	1093664768
+ 154 01f8 00004040 		.word	1077936128
+ 155 01fc 00002041 		.word	1092616192
+ 156 0200 0000E040 		.word	1088421888
+ 157 0204 00003041 		.word	1093664768
+ 158 0208 00008040 		.word	1082130432
+ 159 020c 00001041 		.word	1091567616
+ 160 0210 0000A040 		.word	1084227584
+ 161 0214 00003041 		.word	1093664768
+ 162 0218 0000C040 		.word	1086324736
+ 163 021c 00005041 		.word	1095761920
+ 164 0220 0000E040 		.word	1088421888
+ 165 0224 00000041 		.word	1090519040
+ 166 0228 00001041 		.word	1091567616
+ 167 022c 00002041 		.word	1092616192
+ 168 0230 00003041 		.word	1093664768
+ 169 0234 00004041 		.word	1094713344
+ 170 0238 00005041 		.word	1095761920
+ 171 023c 00006041 		.word	1096810496
+ 172              		.global	MULVALLut
+ 173              		.align	2
+ 176              	MULVALLut:
+ 177 0240 0000803F 		.word	1065353216
+ 178 0244 00007041 		.word	1097859072
+ 179 0248 00006041 		.word	1096810496
+ 180 024c 00005041 		.word	1095761920
+ 181 0250 00004041 		.word	1094713344
+ 182 0254 00003041 		.word	1093664768
+ 183 0258 00002041 		.word	1092616192
+ 184 025c 00001041 		.word	1091567616
+ 185 0260 00000041 		.word	1090519040
+ 186 0264 00007041 		.word	1097859072
+ 187 0268 0000E040 		.word	1088421888
+ 188 026c 00005041 		.word	1095761920
+ 189 0270 0000C040 		.word	1086324736
+ 190 0274 00003041 		.word	1093664768
+ 191 0278 0000A040 		.word	1084227584
+ 192 027c 00006041 		.word	1096810496
+ 193 0280 00001041 		.word	1091567616
+ 194 0284 00005041 		.word	1095761920
+ 195 0288 00008040 		.word	1082130432
+ 196 028c 00007041 		.word	1097859072
+ 197 0290 00003041 		.word	1093664768
+ 198 0294 0000E040 		.word	1088421888
+ 199 0298 00002041 		.word	1092616192
+ 200 029c 00005041 		.word	1095761920
+ 201 02a0 00004040 		.word	1077936128
+ 202 02a4 00006041 		.word	1096810496
+ 203 02a8 00003041 		.word	1093664768
+ 204 02ac 00000041 		.word	1090519040
+ 205 02b0 00005041 		.word	1095761920
+ 206 02b4 0000A040 		.word	1084227584
+ 207 02b8 00004041 		.word	1094713344
+ 208 02bc 0000E040 		.word	1088421888
+ 209 02c0 00001041 		.word	1091567616
+ 210 02c4 00003041 		.word	1093664768
+ 211 02c8 00005041 		.word	1095761920
+ 212 02cc 00007041 		.word	1097859072
+ 213 02d0 00000040 		.word	1073741824
+ 214 02d4 00007041 		.word	1097859072
+ 215 02d8 00005041 		.word	1095761920
+ 216 02dc 00003041 		.word	1093664768
+ 217 02e0 00001041 		.word	1091567616
+ 218 02e4 0000E040 		.word	1088421888
+ 219 02e8 00004041 		.word	1094713344
+ 220 02ec 0000A040 		.word	1084227584
+ 221 02f0 00005041 		.word	1095761920
+ 222 02f4 00000041 		.word	1090519040
+ 223 02f8 00003041 		.word	1093664768
+ 224 02fc 00006041 		.word	1096810496
+ 225 0300 00004040 		.word	1077936128
+ 226 0304 00005041 		.word	1095761920
+ 227 0308 00002041 		.word	1092616192
+ 228 030c 0000E040 		.word	1088421888
+ 229 0310 00003041 		.word	1093664768
+ 230 0314 00007041 		.word	1097859072
+ 231 0318 00008040 		.word	1082130432
+ 232 031c 00005041 		.word	1095761920
+ 233 0320 00001041 		.word	1091567616
+ 234 0324 00006041 		.word	1096810496
+ 235 0328 0000A040 		.word	1084227584
+ 236 032c 00003041 		.word	1093664768
+ 237 0330 0000C040 		.word	1086324736
+ 238 0334 00005041 		.word	1095761920
+ 239 0338 0000E040 		.word	1088421888
+ 240 033c 00007041 		.word	1097859072
+ 241 0340 00000041 		.word	1090519040
+ 242 0344 00001041 		.word	1091567616
+ 243 0348 00002041 		.word	1092616192
+ 244 034c 00003041 		.word	1093664768
+ 245 0350 00004041 		.word	1094713344
+ 246 0354 00005041 		.word	1095761920
+ 247 0358 00006041 		.word	1096810496
+ 248 035c 00007041 		.word	1097859072
+ 249              		.text
+ 250              		.align	2
+ 251              		.global	UART0Handler
+ 253              	UART0Handler:
+ 254              	.LFB0:
+ 255              		.file 1 "../Libraries/src/UART.c"
+   1:../Libraries/src/UART.c **** /*
+   2:../Libraries/src/UART.c ****  * UART.c
+   3:../Libraries/src/UART.c ****  *
+   4:../Libraries/src/UART.c ****  *  Created on: Dec 20, 2013
+   5:../Libraries/src/UART.c ****  *      Author: Floran Berndl; Bernd Glatz;
+   6:../Libraries/src/UART.c ****  */
+   7:../Libraries/src/UART.c **** #include <stdio.h>
+   8:../Libraries/src/UART.c **** 
+   9:../Libraries/src/UART.c **** #include "UART.h"
+  10:../Libraries/src/UART.c **** #include "cb.h"
+  11:../Libraries/src/UART.c **** #include "irq.h"
+  12:../Libraries/src/UART.c **** 
+  13:../Libraries/src/UART.c **** /* DEBUG FLAG */
+  14:../Libraries/src/UART.c **** /*#define DEBUG */
+  15:../Libraries/src/UART.c **** 
+  16:../Libraries/src/UART.c **** /* Fractional UART LUTs */
+  17:../Libraries/src/UART.c **** #define BR_LUT_SIZE 72
+  18:../Libraries/src/UART.c **** 
+  19:../Libraries/src/UART.c **** /*Tables for looking up fractional baud rate values.*/
+  20:../Libraries/src/UART.c **** const float FRLut[BR_LUT_SIZE] = {
+  21:../Libraries/src/UART.c **** 	1.000, 1.067, 1.071, 1.077, 1.083, 1.091, 1.100, 1.111, 1.125, 1.133, 1.143, 1.154, 1.167, 1.182, 
+  22:../Libraries/src/UART.c **** 	1.250, 1.267, 1.273, 1.286, 1.300, 1.308, 1.333, 1.357, 1.364, 1.375, 1.385, 1.400, 1.417, 1.429, 
+  23:../Libraries/src/UART.c **** 	1.500, 1.533, 1.538, 1.545, 1.556, 1.571, 1.583, 1.600, 1.615, 1.625, 1.636, 1.643, 1.667, 1.692, 
+  24:../Libraries/src/UART.c **** 	1.750, 1.769, 1.778, 1.786, 1.800, 1.818, 1.833, 1.846, 1.857, 1.867, 1.875, 1.889, 1.900, 1.909, 
+  25:../Libraries/src/UART.c **** 
+  26:../Libraries/src/UART.c **** const float DIVADDVALLut[BR_LUT_SIZE] = {
+  27:../Libraries/src/UART.c **** 	0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 2.0, 1.0, 2.0, 1.0, 3.0, 2.0, 3.0,
+  28:../Libraries/src/UART.c **** 	1.0, 4.0, 3.0, 2.0, 3.0, 4.0, 1.0, 5.0, 4.0, 3.0, 5.0, 2.0, 5.0, 3.0, 4.0, 5.0, 6.0, 7.0,
+  29:../Libraries/src/UART.c **** 	1.0, 8.0, 7.0, 6.0, 5.0, 4.0, 7.0, 3.0, 8.0, 5.0, 7.0, 9.0, 2.0, 9.0, 7.0, 5.0, 8.0, 11.0,
+  30:../Libraries/src/UART.c **** 	3.0, 10.0, 7.0, 11.0, 4.0, 9.0, 5.0, 11.0, 6.0, 13.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0 
+  31:../Libraries/src/UART.c **** 
+  32:../Libraries/src/UART.c **** const float MULVALLut[BR_LUT_SIZE] = {
+  33:../Libraries/src/UART.c **** 	1.0, 15.0, 14.0, 13.0, 12.0, 11.0, 10.0, 9.0, 8.0, 15.0, 7.0, 13.0, 6.0, 11.0, 5.0, 14.0, 9.0, 13.
+  34:../Libraries/src/UART.c **** 	4.0, 15.0, 11.0, 7.0, 10.0, 13.0, 3.0, 14.0, 11.0, 8.0, 13.0, 5.0, 12.0, 7.0, 9.0, 11.0, 13.0, 15.
+  35:../Libraries/src/UART.c **** 	2.0, 15.0, 13.0, 11.0, 9.0, 7.0, 12.0, 5.0, 13.0, 8.0, 11.0, 14.0, 3.0, 13.0, 10.0, 7.0, 11.0, 15.
+  36:../Libraries/src/UART.c **** 	4.0, 13.0, 9.0, 14.0, 5.0, 11.0, 6.0, 13.0, 7.0, 15.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.
+  37:../Libraries/src/UART.c **** 
+  38:../Libraries/src/UART.c **** /**
+  39:../Libraries/src/UART.c ****  * @brief 		Interrupt handler for UART0
+  40:../Libraries/src/UART.c ****  *
+  41:../Libraries/src/UART.c ****  * This function is called if an interrupt for UART0 occurs
+  42:../Libraries/src/UART.c ****  */
+  43:../Libraries/src/UART.c **** void UART0Handler(void)
+  44:../Libraries/src/UART.c **** {
+ 256              		.loc 1 44 0
+ 257              		.cfi_startproc
+ 258              		@ Interrupt Service Routine.
+ 259              		@ args = 0, pretend = 0, frame = 0
+ 260              		@ frame_needed = 1, uses_anonymous_args = 0
+ 261 0000 04E04EE2 		sub	lr, lr, #4
+ 262 0004 1F582DE9 		stmfd	sp!, {r0, r1, r2, r3, r4, fp, ip, lr}
+ 263              	.LCFI0:
+ 264              		.cfi_def_cfa_offset 32
+ 265              		.cfi_offset 14, -4
+ 266              		.cfi_offset 12, -8
+ 267              		.cfi_offset 11, -12
+ 268              		.cfi_offset 4, -16
+ 269              		.cfi_offset 3, -20
+ 270              		.cfi_offset 2, -24
+ 271              		.cfi_offset 1, -28
+ 272              		.cfi_offset 0, -32
+ 273 0008 1CB08DE2 		add	fp, sp, #28
+ 274              	.LCFI1:
+ 275              		.cfi_def_cfa 11, 4
+  45:../Libraries/src/UART.c **** 	UART_STAT[0].callback_UART();
+ 276              		.loc 1 45 0
+ 277 000c 54309FE5 		ldr	r3, .L3
+ 278 0010 283093E5 		ldr	r3, [r3, #40]
+ 279 0014 0FE0A0E1 		mov	lr, pc
+ 280 0018 13FF2FE1 		bx	r3
+  46:../Libraries/src/UART.c **** 	if(LPC_UART0->REG3.IIR == 0x4) /* Receive Data Available */
+ 281              		.loc 1 46 0
+ 282 001c 48309FE5 		ldr	r3, .L3+4
+ 283 0020 B830D3E1 		ldrh	r3, [r3, #8]	@ movhi
+ 284 0024 0338A0E1 		mov	r3, r3, asl #16
+ 285 0028 2338A0E1 		mov	r3, r3, lsr #16
+ 286 002c 040053E3 		cmp	r3, #4
+ 287 0030 0500001A 		bne	.L2
+  47:../Libraries/src/UART.c **** 	{
+  48:../Libraries/src/UART.c **** 		if(putRecvCB(LPC_UART0, LPC_UART0->REG1.RBR)!=EOK)
+ 288              		.loc 1 48 0
+ 289 0034 30309FE5 		ldr	r3, .L3+4
+ 290 0038 0030D3E5 		ldrb	r3, [r3, #0]
+ 291 003c FF3003E2 		and	r3, r3, #255
+ 292 0040 24009FE5 		ldr	r0, .L3+4
+ 293 0044 0310A0E1 		mov	r1, r3
+ 294 0048 FEFFFFEB 		bl	putRecvCB
+ 295              	.L2:
+  49:../Libraries/src/UART.c **** 		{
+  50:../Libraries/src/UART.c **** 			/* get too much characters -
+  51:../Libraries/src/UART.c **** 			 * some characters maybe lost */
+  52:../Libraries/src/UART.c **** 		}
+  53:../Libraries/src/UART.c **** 	}
+  54:../Libraries/src/UART.c **** 	if(LPC_UART0->REG3.IIR == 0x02) /* THRE */
+ 296              		.loc 1 54 0
+ 297 004c 18309FE5 		ldr	r3, .L3+4
+ 298 0050 B830D3E1 		ldrh	r3, [r3, #8]	@ movhi
+  55:../Libraries/src/UART.c **** 	{
+  56:../Libraries/src/UART.c **** 		/* THRE Interrupt */
+  57:../Libraries/src/UART.c **** 	}
+  58:../Libraries/src/UART.c **** 	VICVectAddr = 0;		/* Acknowledge Interrupt */
+ 299              		.loc 1 58 0
+ 300 0054 FF30E0E3 		mvn	r3, #255
+ 301 0058 0020A0E3 		mov	r2, #0
+ 302 005c 002083E5 		str	r2, [r3, #0]
+  59:../Libraries/src/UART.c **** }
+ 303              		.loc 1 59 0
+ 304 0060 1CD04BE2 		sub	sp, fp, #28
+ 305 0064 1F98FDE8 		ldmfd	sp!, {r0, r1, r2, r3, r4, fp, ip, pc}^
+ 306              	.L4:
+ 307              		.align	2
+ 308              	.L3:
+ 309 0068 00000000 		.word	UART_STAT
+ 310 006c 00C000E0 		.word	-536821760
+ 311              		.cfi_endproc
+ 312              	.LFE0:
+ 314              		.align	2
+ 315              		.global	UART1Handler
+ 317              	UART1Handler:
+ 318              	.LFB1:
+  60:../Libraries/src/UART.c **** 
+  61:../Libraries/src/UART.c **** /**
+  62:../Libraries/src/UART.c ****  * @brief 		Interrupt handler for UART1
+  63:../Libraries/src/UART.c ****  *
+  64:../Libraries/src/UART.c ****  * This function is called if an interrupt for UART1 occurs
+  65:../Libraries/src/UART.c ****  */
+  66:../Libraries/src/UART.c **** void UART1Handler()
+  67:../Libraries/src/UART.c **** {
+ 319              		.loc 1 67 0
+ 320              		.cfi_startproc
+ 321              		@ Interrupt Service Routine.
+ 322              		@ args = 0, pretend = 0, frame = 0
+ 323              		@ frame_needed = 1, uses_anonymous_args = 0
+ 324 0070 04E04EE2 		sub	lr, lr, #4
+ 325 0074 1F582DE9 		stmfd	sp!, {r0, r1, r2, r3, r4, fp, ip, lr}
+ 326              	.LCFI2:
+ 327              		.cfi_def_cfa_offset 32
+ 328              		.cfi_offset 14, -4
+ 329              		.cfi_offset 12, -8
+ 330              		.cfi_offset 11, -12
+ 331              		.cfi_offset 4, -16
+ 332              		.cfi_offset 3, -20
+ 333              		.cfi_offset 2, -24
+ 334              		.cfi_offset 1, -28
+ 335              		.cfi_offset 0, -32
+ 336 0078 1CB08DE2 		add	fp, sp, #28
+ 337              	.LCFI3:
+ 338              		.cfi_def_cfa 11, 4
+  68:../Libraries/src/UART.c **** 	UART_STAT[1].callback_UART();
+ 339              		.loc 1 68 0
+ 340 007c 54309FE5 		ldr	r3, .L7
+ 341 0080 543093E5 		ldr	r3, [r3, #84]
+ 342 0084 0FE0A0E1 		mov	lr, pc
+ 343 0088 13FF2FE1 		bx	r3
+  69:../Libraries/src/UART.c **** 	if(LPC_UART1->REG3.IIR == 0x4) /* Receive Data Available */
+ 344              		.loc 1 69 0
+ 345 008c 48309FE5 		ldr	r3, .L7+4
+ 346 0090 B830D3E1 		ldrh	r3, [r3, #8]	@ movhi
+ 347 0094 0338A0E1 		mov	r3, r3, asl #16
+ 348 0098 2338A0E1 		mov	r3, r3, lsr #16
+ 349 009c 040053E3 		cmp	r3, #4
+ 350 00a0 0500001A 		bne	.L6
+  70:../Libraries/src/UART.c **** 	{
+  71:../Libraries/src/UART.c **** 		if(putRecvCB(LPC_UART1, LPC_UART1->REG1.RBR)!=EOK)
+ 351              		.loc 1 71 0
+ 352 00a4 30309FE5 		ldr	r3, .L7+4
+ 353 00a8 0030D3E5 		ldrb	r3, [r3, #0]
+ 354 00ac FF3003E2 		and	r3, r3, #255
+ 355 00b0 24009FE5 		ldr	r0, .L7+4
+ 356 00b4 0310A0E1 		mov	r1, r3
+ 357 00b8 FEFFFFEB 		bl	putRecvCB
+ 358              	.L6:
+  72:../Libraries/src/UART.c **** 		{
+  73:../Libraries/src/UART.c **** 			/* get too much characters -
+  74:../Libraries/src/UART.c **** 			 * some characters maybe lost */
+  75:../Libraries/src/UART.c **** 		}
+  76:../Libraries/src/UART.c **** 	}
+  77:../Libraries/src/UART.c **** 	if(LPC_UART1->REG3.IIR == 0x02) /* THRE */
+ 359              		.loc 1 77 0
+ 360 00bc 18309FE5 		ldr	r3, .L7+4
+ 361 00c0 B830D3E1 		ldrh	r3, [r3, #8]	@ movhi
+  78:../Libraries/src/UART.c **** 	{
+  79:../Libraries/src/UART.c **** 		/* THRE Interrupt */
+  80:../Libraries/src/UART.c **** 	}
+  81:../Libraries/src/UART.c **** 	VICVectAddr = 0;		/* Acknowledge Interrupt */
+ 362              		.loc 1 81 0
+ 363 00c4 FF30E0E3 		mvn	r3, #255
+ 364 00c8 0020A0E3 		mov	r2, #0
+ 365 00cc 002083E5 		str	r2, [r3, #0]
+  82:../Libraries/src/UART.c **** }
+ 366              		.loc 1 82 0
+ 367 00d0 1CD04BE2 		sub	sp, fp, #28
+ 368 00d4 1F98FDE8 		ldmfd	sp!, {r0, r1, r2, r3, r4, fp, ip, pc}^
+ 369              	.L8:
+ 370              		.align	2
+ 371              	.L7:
+ 372 00d8 00000000 		.word	UART_STAT
+ 373 00dc 000001E0 		.word	-536805376
+ 374              		.cfi_endproc
+ 375              	.LFE1:
+ 377              		.align	2
+ 378              		.global	UART2Handler
+ 380              	UART2Handler:
+ 381              	.LFB2:
+  83:../Libraries/src/UART.c **** 
+  84:../Libraries/src/UART.c **** /**
+  85:../Libraries/src/UART.c ****  * @brief 		Interrupt handler for UART2
+  86:../Libraries/src/UART.c ****  *
+  87:../Libraries/src/UART.c ****  * This function is called if an interrupt for UART2 occurs
+  88:../Libraries/src/UART.c ****  */
+  89:../Libraries/src/UART.c **** void UART2Handler()
+  90:../Libraries/src/UART.c **** {
+ 382              		.loc 1 90 0
+ 383              		.cfi_startproc
+ 384              		@ Interrupt Service Routine.
+ 385              		@ args = 0, pretend = 0, frame = 0
+ 386              		@ frame_needed = 1, uses_anonymous_args = 0
+ 387 00e0 04E04EE2 		sub	lr, lr, #4
+ 388 00e4 1F582DE9 		stmfd	sp!, {r0, r1, r2, r3, r4, fp, ip, lr}
+ 389              	.LCFI4:
+ 390              		.cfi_def_cfa_offset 32
+ 391              		.cfi_offset 14, -4
+ 392              		.cfi_offset 12, -8
+ 393              		.cfi_offset 11, -12
+ 394              		.cfi_offset 4, -16
+ 395              		.cfi_offset 3, -20
+ 396              		.cfi_offset 2, -24
+ 397              		.cfi_offset 1, -28
+ 398              		.cfi_offset 0, -32
+ 399 00e8 1CB08DE2 		add	fp, sp, #28
+ 400              	.LCFI5:
+ 401              		.cfi_def_cfa 11, 4
+  91:../Libraries/src/UART.c **** 	UART_STAT[2].callback_UART();
+ 402              		.loc 1 91 0
+ 403 00ec 54309FE5 		ldr	r3, .L11
+ 404 00f0 803093E5 		ldr	r3, [r3, #128]
+ 405 00f4 0FE0A0E1 		mov	lr, pc
+ 406 00f8 13FF2FE1 		bx	r3
+  92:../Libraries/src/UART.c **** 	if(LPC_UART2->REG3.IIR == 0x4) /* Receive Data Available */
+ 407              		.loc 1 92 0
+ 408 00fc 48309FE5 		ldr	r3, .L11+4
+ 409 0100 B830D3E1 		ldrh	r3, [r3, #8]	@ movhi
+ 410 0104 0338A0E1 		mov	r3, r3, asl #16
+ 411 0108 2338A0E1 		mov	r3, r3, lsr #16
+ 412 010c 040053E3 		cmp	r3, #4
+ 413 0110 0500001A 		bne	.L10
+  93:../Libraries/src/UART.c **** 	{
+  94:../Libraries/src/UART.c **** 		if(putRecvCB(LPC_UART2, LPC_UART2->REG1.RBR)!=EOK)
+ 414              		.loc 1 94 0
+ 415 0114 30309FE5 		ldr	r3, .L11+4
+ 416 0118 0030D3E5 		ldrb	r3, [r3, #0]
+ 417 011c FF3003E2 		and	r3, r3, #255
+ 418 0120 24009FE5 		ldr	r0, .L11+4
+ 419 0124 0310A0E1 		mov	r1, r3
+ 420 0128 FEFFFFEB 		bl	putRecvCB
+ 421              	.L10:
+  95:../Libraries/src/UART.c **** 		{
+  96:../Libraries/src/UART.c **** 			/* get too much characters -
+  97:../Libraries/src/UART.c **** 			 * some characters maybe lost */
+  98:../Libraries/src/UART.c **** 		}
+  99:../Libraries/src/UART.c **** 	}
+ 100:../Libraries/src/UART.c **** 	if(LPC_UART2->REG3.IIR == 0x02) /* THRE */
+ 422              		.loc 1 100 0
+ 423 012c 18309FE5 		ldr	r3, .L11+4
+ 424 0130 B830D3E1 		ldrh	r3, [r3, #8]	@ movhi
+ 101:../Libraries/src/UART.c **** 	{
+ 102:../Libraries/src/UART.c **** 		/* THRE Interrupt */
+ 103:../Libraries/src/UART.c **** 	}
+ 104:../Libraries/src/UART.c **** 	VICVectAddr = 0;		/* Acknowledge Interrupt */
+ 425              		.loc 1 104 0
+ 426 0134 FF30E0E3 		mvn	r3, #255
+ 427 0138 0020A0E3 		mov	r2, #0
+ 428 013c 002083E5 		str	r2, [r3, #0]
+ 105:../Libraries/src/UART.c **** }
+ 429              		.loc 1 105 0
+ 430 0140 1CD04BE2 		sub	sp, fp, #28
+ 431 0144 1F98FDE8 		ldmfd	sp!, {r0, r1, r2, r3, r4, fp, ip, pc}^
+ 432              	.L12:
+ 433              		.align	2
+ 434              	.L11:
+ 435 0148 00000000 		.word	UART_STAT
+ 436 014c 008007E0 		.word	-536379392
+ 437              		.cfi_endproc
+ 438              	.LFE2:
+ 440              		.align	2
+ 441              		.global	UART3Handler
+ 443              	UART3Handler:
+ 444              	.LFB3:
+ 106:../Libraries/src/UART.c **** 
+ 107:../Libraries/src/UART.c **** /**
+ 108:../Libraries/src/UART.c ****  * @brief		Interrupt handler for UART3
+ 109:../Libraries/src/UART.c ****  *
+ 110:../Libraries/src/UART.c ****  * This function is called if an interrupt for UART3 occurs
+ 111:../Libraries/src/UART.c ****  */
+ 112:../Libraries/src/UART.c **** void UART3Handler()
+ 113:../Libraries/src/UART.c **** {
+ 445              		.loc 1 113 0
+ 446              		.cfi_startproc
+ 447              		@ Interrupt Service Routine.
+ 448              		@ args = 0, pretend = 0, frame = 0
+ 449              		@ frame_needed = 1, uses_anonymous_args = 0
+ 450 0150 04E04EE2 		sub	lr, lr, #4
+ 451 0154 1F582DE9 		stmfd	sp!, {r0, r1, r2, r3, r4, fp, ip, lr}
+ 452              	.LCFI6:
+ 453              		.cfi_def_cfa_offset 32
+ 454              		.cfi_offset 14, -4
+ 455              		.cfi_offset 12, -8
+ 456              		.cfi_offset 11, -12
+ 457              		.cfi_offset 4, -16
+ 458              		.cfi_offset 3, -20
+ 459              		.cfi_offset 2, -24
+ 460              		.cfi_offset 1, -28
+ 461              		.cfi_offset 0, -32
+ 462 0158 1CB08DE2 		add	fp, sp, #28
+ 463              	.LCFI7:
+ 464              		.cfi_def_cfa 11, 4
+ 114:../Libraries/src/UART.c **** 	UART_STAT[3].callback_UART();
+ 465              		.loc 1 114 0
+ 466 015c 54309FE5 		ldr	r3, .L15
+ 467 0160 AC3093E5 		ldr	r3, [r3, #172]
+ 468 0164 0FE0A0E1 		mov	lr, pc
+ 469 0168 13FF2FE1 		bx	r3
+ 115:../Libraries/src/UART.c **** 	if(LPC_UART3->REG3.IIR == 0x4) /* Receive Data Available */
+ 470              		.loc 1 115 0
+ 471 016c 48309FE5 		ldr	r3, .L15+4
+ 472 0170 B830D3E1 		ldrh	r3, [r3, #8]	@ movhi
+ 473 0174 0338A0E1 		mov	r3, r3, asl #16
+ 474 0178 2338A0E1 		mov	r3, r3, lsr #16
+ 475 017c 040053E3 		cmp	r3, #4
+ 476 0180 0500001A 		bne	.L14
+ 116:../Libraries/src/UART.c **** 	{
+ 117:../Libraries/src/UART.c **** 		if(putRecvCB(LPC_UART3, LPC_UART3->REG1.RBR)!=EOK)
+ 477              		.loc 1 117 0
+ 478 0184 30309FE5 		ldr	r3, .L15+4
+ 479 0188 0030D3E5 		ldrb	r3, [r3, #0]
+ 480 018c FF3003E2 		and	r3, r3, #255
+ 481 0190 24009FE5 		ldr	r0, .L15+4
+ 482 0194 0310A0E1 		mov	r1, r3
+ 483 0198 FEFFFFEB 		bl	putRecvCB
+ 484              	.L14:
+ 118:../Libraries/src/UART.c **** 		{
+ 119:../Libraries/src/UART.c **** 			/* get too much characters -
+ 120:../Libraries/src/UART.c **** 			 * some characters maybe lost */
+ 121:../Libraries/src/UART.c **** 		}
+ 122:../Libraries/src/UART.c **** 	}
+ 123:../Libraries/src/UART.c **** 	if(LPC_UART3->REG3.IIR == 0x02) /* THRE */
+ 485              		.loc 1 123 0
+ 486 019c 18309FE5 		ldr	r3, .L15+4
+ 487 01a0 B830D3E1 		ldrh	r3, [r3, #8]	@ movhi
+ 124:../Libraries/src/UART.c **** 	{
+ 125:../Libraries/src/UART.c **** 		/* THRE Interrupt */
+ 126:../Libraries/src/UART.c **** 	}
+ 127:../Libraries/src/UART.c **** 	VICVectAddr = 0;		/* Acknowledge Interrupt */
+ 488              		.loc 1 127 0
+ 489 01a4 FF30E0E3 		mvn	r3, #255
+ 490 01a8 0020A0E3 		mov	r2, #0
+ 491 01ac 002083E5 		str	r2, [r3, #0]
+ 128:../Libraries/src/UART.c **** }
+ 492              		.loc 1 128 0
+ 493 01b0 1CD04BE2 		sub	sp, fp, #28
+ 494 01b4 1F98FDE8 		ldmfd	sp!, {r0, r1, r2, r3, r4, fp, ip, pc}^
+ 495              	.L16:
+ 496              		.align	2
+ 497              	.L15:
+ 498 01b8 00000000 		.word	UART_STAT
+ 499 01bc 00C007E0 		.word	-536363008
+ 500              		.cfi_endproc
+ 501              	.LFE3:
+ 503              		.align	2
+ 505              	uart_enable_power:
+ 506              	.LFB4:
+ 129:../Libraries/src/UART.c **** 
+ 130:../Libraries/src/UART.c **** /**
+ 131:../Libraries/src/UART.c ****  * @brief		Setup power for specific device
+ 132:../Libraries/src/UART.c ****  *
+ 133:../Libraries/src/UART.c ****  * This function set/enables the power for the specific
+ 134:../Libraries/src/UART.c ****  * UART device
+ 135:../Libraries/src/UART.c ****  *
+ 136:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 137:../Libraries/src/UART.c ****  * 					- LPC_UART0: UART0 peripheral
+ 138:../Libraries/src/UART.c ****  * 					- LPC_UART1: UART1 peripheral
+ 139:../Libraries/src/UART.c ****  * 					- LPC_UART2: UART2 peripheral
+ 140:../Libraries/src/UART.c ****  * 					- LPC_UART3: UART3 peripheral
+ 141:../Libraries/src/UART.c ****  * @return		None
+ 142:../Libraries/src/UART.c ****  */
+ 143:../Libraries/src/UART.c **** static void uart_enable_power(UART_T *dev)
+ 144:../Libraries/src/UART.c **** {
+ 507              		.loc 1 144 0
+ 508              		.cfi_startproc
+ 509              		@ Function supports interworking.
+ 510              		@ args = 0, pretend = 0, frame = 8
+ 511              		@ frame_needed = 1, uses_anonymous_args = 0
+ 512              		@ link register save eliminated.
+ 513 01c0 04B02DE5 		str	fp, [sp, #-4]!
+ 514              	.LCFI8:
+ 515              		.cfi_def_cfa_offset 4
+ 516              		.cfi_offset 11, -4
+ 517 01c4 00B08DE2 		add	fp, sp, #0
+ 518              	.LCFI9:
+ 519              		.cfi_def_cfa_register 11
+ 520 01c8 0CD04DE2 		sub	sp, sp, #12
+ 521 01cc 08000BE5 		str	r0, [fp, #-8]
+ 145:../Libraries/src/UART.c **** 	/* Set up power for UART module */
+ 146:../Libraries/src/UART.c **** 	if(dev == LPC_UART0)
+ 522              		.loc 1 146 0
+ 523 01d0 08201BE5 		ldr	r2, [fp, #-8]
+ 524 01d4 90309FE5 		ldr	r3, .L22
+ 525 01d8 030052E1 		cmp	r2, r3
+ 526 01dc 0400001A 		bne	.L18
+ 147:../Libraries/src/UART.c **** 	{
+ 148:../Libraries/src/UART.c **** 		/* Power */
+ 149:../Libraries/src/UART.c **** 		PCONP |= PCUART0;
+ 527              		.loc 1 149 0
+ 528 01e0 88309FE5 		ldr	r3, .L22+4
+ 529 01e4 84209FE5 		ldr	r2, .L22+4
+ 530 01e8 002092E5 		ldr	r2, [r2, #0]
+ 531 01ec 082082E3 		orr	r2, r2, #8
+ 532 01f0 002083E5 		str	r2, [r3, #0]
+ 533              	.L18:
+ 150:../Libraries/src/UART.c **** 	}
+ 151:../Libraries/src/UART.c **** 	if(dev == LPC_UART1)
+ 534              		.loc 1 151 0
+ 535 01f4 08201BE5 		ldr	r2, [fp, #-8]
+ 536 01f8 74309FE5 		ldr	r3, .L22+8
+ 537 01fc 030052E1 		cmp	r2, r3
+ 538 0200 0400001A 		bne	.L19
+ 152:../Libraries/src/UART.c **** 	{
+ 153:../Libraries/src/UART.c **** 		/* Power */
+ 154:../Libraries/src/UART.c **** 		PCONP |= PCUART1;
+ 539              		.loc 1 154 0
+ 540 0204 64309FE5 		ldr	r3, .L22+4
+ 541 0208 60209FE5 		ldr	r2, .L22+4
+ 542 020c 002092E5 		ldr	r2, [r2, #0]
+ 543 0210 102082E3 		orr	r2, r2, #16
+ 544 0214 002083E5 		str	r2, [r3, #0]
+ 545              	.L19:
+ 155:../Libraries/src/UART.c **** 	}
+ 156:../Libraries/src/UART.c **** 	if(dev == LPC_UART2)
+ 546              		.loc 1 156 0
+ 547 0218 08201BE5 		ldr	r2, [fp, #-8]
+ 548 021c 54309FE5 		ldr	r3, .L22+12
+ 549 0220 030052E1 		cmp	r2, r3
+ 550 0224 0400001A 		bne	.L20
+ 157:../Libraries/src/UART.c **** 	{
+ 158:../Libraries/src/UART.c **** 		/* Power */
+ 159:../Libraries/src/UART.c **** 		PCONP |= PCUART2;
+ 551              		.loc 1 159 0
+ 552 0228 40309FE5 		ldr	r3, .L22+4
+ 553 022c 3C209FE5 		ldr	r2, .L22+4
+ 554 0230 002092E5 		ldr	r2, [r2, #0]
+ 555 0234 012482E3 		orr	r2, r2, #16777216
+ 556 0238 002083E5 		str	r2, [r3, #0]
+ 557              	.L20:
+ 160:../Libraries/src/UART.c **** 	}
+ 161:../Libraries/src/UART.c **** 	if(dev == LPC_UART3)
+ 558              		.loc 1 161 0
+ 559 023c 08201BE5 		ldr	r2, [fp, #-8]
+ 560 0240 34309FE5 		ldr	r3, .L22+16
+ 561 0244 030052E1 		cmp	r2, r3
+ 562 0248 0400001A 		bne	.L17
+ 162:../Libraries/src/UART.c **** 	{
+ 163:../Libraries/src/UART.c **** 		/* Power */
+ 164:../Libraries/src/UART.c **** 		PCONP |= PCUART3;
+ 563              		.loc 1 164 0
+ 564 024c 1C309FE5 		ldr	r3, .L22+4
+ 565 0250 18209FE5 		ldr	r2, .L22+4
+ 566 0254 002092E5 		ldr	r2, [r2, #0]
+ 567 0258 022482E3 		orr	r2, r2, #33554432
+ 568 025c 002083E5 		str	r2, [r3, #0]
+ 569              	.L17:
+ 165:../Libraries/src/UART.c **** 	}
+ 166:../Libraries/src/UART.c **** }
+ 570              		.loc 1 166 0
+ 571 0260 00D08BE2 		add	sp, fp, #0
+ 572 0264 04B09DE4 		ldmfd	sp!, {fp}
+ 573 0268 1EFF2FE1 		bx	lr
+ 574              	.L23:
+ 575              		.align	2
+ 576              	.L22:
+ 577 026c 00C000E0 		.word	-536821760
+ 578 0270 C4C01FE0 		.word	-534789948
+ 579 0274 000001E0 		.word	-536805376
+ 580 0278 008007E0 		.word	-536379392
+ 581 027c 00C007E0 		.word	-536363008
+ 582              		.cfi_endproc
+ 583              	.LFE4:
+ 585              		.align	2
+ 587              	uart_set_clock:
+ 588              	.LFB5:
+ 167:../Libraries/src/UART.c **** 
+ 168:../Libraries/src/UART.c **** /**
+ 169:../Libraries/src/UART.c ****  * @brief		Setup clock for specific device
+ 170:../Libraries/src/UART.c ****  *
+ 171:../Libraries/src/UART.c ****  * This function set/enables the clock for the specific
+ 172:../Libraries/src/UART.c ****  * UART device
+ 173:../Libraries/src/UART.c ****  *
+ 174:../Libraries/src/UART.c ****  * @param[in]	dev	- UART peripheral selected, should be:
+ 175:../Libraries/src/UART.c ****  * 					- LPC_UART0: UART0 peripheral
+ 176:../Libraries/src/UART.c ****  * 					- LPC_UART1: UART1 peripheral
+ 177:../Libraries/src/UART.c ****  * 					- LPC_UART2: UART2 peripheral
+ 178:../Libraries/src/UART.c ****  * 					- LPC_UART3: UART3 peripheral
+ 179:../Libraries/src/UART.c ****  * @param[in]	divisor - Divisor for the Core Clock
+ 180:../Libraries/src/UART.c ****  * @return		None
+ 181:../Libraries/src/UART.c ****  */
+ 182:../Libraries/src/UART.c **** static void uart_set_clock(UART_T *dev, uint8_t divisor)
+ 183:../Libraries/src/UART.c **** {
+ 589              		.loc 1 183 0
+ 590              		.cfi_startproc
+ 591              		@ Function supports interworking.
+ 592              		@ args = 0, pretend = 0, frame = 16
+ 593              		@ frame_needed = 1, uses_anonymous_args = 0
+ 594              		@ link register save eliminated.
+ 595 0280 04B02DE5 		str	fp, [sp, #-4]!
+ 596              	.LCFI10:
+ 597              		.cfi_def_cfa_offset 4
+ 598              		.cfi_offset 11, -4
+ 599 0284 00B08DE2 		add	fp, sp, #0
+ 600              	.LCFI11:
+ 601              		.cfi_def_cfa_register 11
+ 602 0288 14D04DE2 		sub	sp, sp, #20
+ 603 028c 10000BE5 		str	r0, [fp, #-16]
+ 604 0290 0130A0E1 		mov	r3, r1
+ 605 0294 11304BE5 		strb	r3, [fp, #-17]
+ 184:../Libraries/src/UART.c **** 	uint8_t uClk;
+ 185:../Libraries/src/UART.c **** 
+ 186:../Libraries/src/UART.c **** 	switch (divisor)
+ 606              		.loc 1 186 0
+ 607 0298 11305BE5 		ldrb	r3, [fp, #-17]	@ zero_extendqisi2
+ 608 029c 013043E2 		sub	r3, r3, #1
+ 609 02a0 070053E3 		cmp	r3, #7
+ 610 02a4 03F19F97 		ldrls	pc, [pc, r3, asl #2]
+ 611 02a8 130000EA 		b	.L25
+ 612              	.L30:
+ 613 02ac CC020000 		.word	.L26
+ 614 02b0 D8020000 		.word	.L27
+ 615 02b4 FC020000 		.word	.L25
+ 616 02b8 E4020000 		.word	.L28
+ 617 02bc FC020000 		.word	.L25
+ 618 02c0 FC020000 		.word	.L25
+ 619 02c4 FC020000 		.word	.L25
+ 620 02c8 F0020000 		.word	.L29
+ 621              	.L26:
+ 187:../Libraries/src/UART.c **** 	{
+ 188:../Libraries/src/UART.c **** 	case 1:
+ 189:../Libraries/src/UART.c **** 		uClk = 0x01;
+ 622              		.loc 1 189 0
+ 623 02cc 0130A0E3 		mov	r3, #1
+ 624 02d0 05304BE5 		strb	r3, [fp, #-5]
+ 190:../Libraries/src/UART.c **** 		break;
+ 625              		.loc 1 190 0
+ 626 02d4 0B0000EA 		b	.L31
+ 627              	.L27:
+ 191:../Libraries/src/UART.c **** 	case 2:
+ 192:../Libraries/src/UART.c **** 		uClk = 0x02;
+ 628              		.loc 1 192 0
+ 629 02d8 0230A0E3 		mov	r3, #2
+ 630 02dc 05304BE5 		strb	r3, [fp, #-5]
+ 193:../Libraries/src/UART.c **** 		break;
+ 631              		.loc 1 193 0
+ 632 02e0 080000EA 		b	.L31
+ 633              	.L28:
+ 194:../Libraries/src/UART.c **** 	case 4:
+ 195:../Libraries/src/UART.c **** 		uClk = 0x00;
+ 634              		.loc 1 195 0
+ 635 02e4 0030A0E3 		mov	r3, #0
+ 636 02e8 05304BE5 		strb	r3, [fp, #-5]
+ 196:../Libraries/src/UART.c **** 		break;
+ 637              		.loc 1 196 0
+ 638 02ec 050000EA 		b	.L31
+ 639              	.L29:
+ 197:../Libraries/src/UART.c **** 	case 8:
+ 198:../Libraries/src/UART.c **** 		uClk = 0x03;
+ 640              		.loc 1 198 0
+ 641 02f0 0330A0E3 		mov	r3, #3
+ 642 02f4 05304BE5 		strb	r3, [fp, #-5]
+ 199:../Libraries/src/UART.c **** 		break;
+ 643              		.loc 1 199 0
+ 644 02f8 020000EA 		b	.L31
+ 645              	.L25:
+ 200:../Libraries/src/UART.c **** 	default:
+ 201:../Libraries/src/UART.c **** 		uClk = 0x01;
+ 646              		.loc 1 201 0
+ 647 02fc 0130A0E3 		mov	r3, #1
+ 648 0300 05304BE5 		strb	r3, [fp, #-5]
+ 202:../Libraries/src/UART.c **** 		break;
+ 649              		.loc 1 202 0
+ 650 0304 0000A0E1 		mov	r0, r0	@ nop
+ 651              	.L31:
+ 203:../Libraries/src/UART.c **** 	}
+ 204:../Libraries/src/UART.c **** 
+ 205:../Libraries/src/UART.c **** 	/* Set up clock UART module */
+ 206:../Libraries/src/UART.c **** 	if(dev == LPC_UART0)
+ 652              		.loc 1 206 0
+ 653 0308 10201BE5 		ldr	r2, [fp, #-16]
+ 654 030c 00319FE5 		ldr	r3, .L36
+ 655 0310 030052E1 		cmp	r2, r3
+ 656 0314 0B00001A 		bne	.L32
+ 207:../Libraries/src/UART.c **** 	{
+ 208:../Libraries/src/UART.c **** 		/* Clock */
+ 209:../Libraries/src/UART.c **** 		PCLKSEL0 &= ~((uint32_t)(3<< PCLK_UART0));
+ 657              		.loc 1 209 0
+ 658 0318 F8309FE5 		ldr	r3, .L36+4
+ 659 031c F4209FE5 		ldr	r2, .L36+4
+ 660 0320 002092E5 		ldr	r2, [r2, #0]
+ 661 0324 C020C2E3 		bic	r2, r2, #192
+ 662 0328 002083E5 		str	r2, [r3, #0]
+ 210:../Libraries/src/UART.c **** 		PCLKSEL0 |= ((uint32_t)(uClk << PCLK_UART0));
+ 663              		.loc 1 210 0
+ 664 032c E4309FE5 		ldr	r3, .L36+4
+ 665 0330 E0209FE5 		ldr	r2, .L36+4
+ 666 0334 001092E5 		ldr	r1, [r2, #0]
+ 667 0338 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+ 668 033c 0223A0E1 		mov	r2, r2, asl #6
+ 669 0340 022081E1 		orr	r2, r1, r2
+ 670 0344 002083E5 		str	r2, [r3, #0]
+ 671              	.L32:
+ 211:../Libraries/src/UART.c **** 	}
+ 212:../Libraries/src/UART.c **** 	if(dev == LPC_UART1)
+ 672              		.loc 1 212 0
+ 673 0348 10201BE5 		ldr	r2, [fp, #-16]
+ 674 034c C8309FE5 		ldr	r3, .L36+8
+ 675 0350 030052E1 		cmp	r2, r3
+ 676 0354 0B00001A 		bne	.L33
+ 213:../Libraries/src/UART.c **** 	{
+ 214:../Libraries/src/UART.c **** 		/* Clock */
+ 215:../Libraries/src/UART.c **** 		PCLKSEL0 &= ~((uint32_t)(3<< PCLK_UART1));
+ 677              		.loc 1 215 0
+ 678 0358 B8309FE5 		ldr	r3, .L36+4
+ 679 035c B4209FE5 		ldr	r2, .L36+4
+ 680 0360 002092E5 		ldr	r2, [r2, #0]
+ 681 0364 032CC2E3 		bic	r2, r2, #768
+ 682 0368 002083E5 		str	r2, [r3, #0]
+ 216:../Libraries/src/UART.c **** 		PCLKSEL0 |= ((uint32_t)(uClk << PCLK_UART1));
+ 683              		.loc 1 216 0
+ 684 036c A4309FE5 		ldr	r3, .L36+4
+ 685 0370 A0209FE5 		ldr	r2, .L36+4
+ 686 0374 001092E5 		ldr	r1, [r2, #0]
+ 687 0378 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+ 688 037c 0224A0E1 		mov	r2, r2, asl #8
+ 689 0380 022081E1 		orr	r2, r1, r2
+ 690 0384 002083E5 		str	r2, [r3, #0]
+ 691              	.L33:
+ 217:../Libraries/src/UART.c **** 	}
+ 218:../Libraries/src/UART.c **** 	if(dev == LPC_UART2)
+ 692              		.loc 1 218 0
+ 693 0388 10201BE5 		ldr	r2, [fp, #-16]
+ 694 038c 8C309FE5 		ldr	r3, .L36+12
+ 695 0390 030052E1 		cmp	r2, r3
+ 696 0394 0B00001A 		bne	.L34
+ 219:../Libraries/src/UART.c **** 	{
+ 220:../Libraries/src/UART.c **** 		/* Clock */
+ 221:../Libraries/src/UART.c **** 		PCLKSEL1 &= ~((uint32_t)(3<< PCLK_UART2));
+ 697              		.loc 1 221 0
+ 698 0398 84309FE5 		ldr	r3, .L36+16
+ 699 039c 80209FE5 		ldr	r2, .L36+16
+ 700 03a0 002092E5 		ldr	r2, [r2, #0]
+ 701 03a4 0328C2E3 		bic	r2, r2, #196608
+ 702 03a8 002083E5 		str	r2, [r3, #0]
+ 222:../Libraries/src/UART.c **** 		PCLKSEL1 |= ((uint32_t)(uClk << PCLK_UART2));
+ 703              		.loc 1 222 0
+ 704 03ac 70309FE5 		ldr	r3, .L36+16
+ 705 03b0 6C209FE5 		ldr	r2, .L36+16
+ 706 03b4 001092E5 		ldr	r1, [r2, #0]
+ 707 03b8 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+ 708 03bc 0228A0E1 		mov	r2, r2, asl #16
+ 709 03c0 022081E1 		orr	r2, r1, r2
+ 710 03c4 002083E5 		str	r2, [r3, #0]
+ 711              	.L34:
+ 223:../Libraries/src/UART.c **** 	}
+ 224:../Libraries/src/UART.c **** 	if(dev == LPC_UART3)
+ 712              		.loc 1 224 0
+ 713 03c8 10201BE5 		ldr	r2, [fp, #-16]
+ 714 03cc 54309FE5 		ldr	r3, .L36+20
+ 715 03d0 030052E1 		cmp	r2, r3
+ 716 03d4 0B00001A 		bne	.L24
+ 225:../Libraries/src/UART.c **** 	{
+ 226:../Libraries/src/UART.c **** 		/* Clock */
+ 227:../Libraries/src/UART.c **** 		PCLKSEL1 &= ~((uint32_t)(3<< PCLK_UART3));
+ 717              		.loc 1 227 0
+ 718 03d8 44309FE5 		ldr	r3, .L36+16
+ 719 03dc 40209FE5 		ldr	r2, .L36+16
+ 720 03e0 002092E5 		ldr	r2, [r2, #0]
+ 721 03e4 0327C2E3 		bic	r2, r2, #786432
+ 722 03e8 002083E5 		str	r2, [r3, #0]
+ 228:../Libraries/src/UART.c **** 		PCLKSEL1 |= ((uint32_t)(uClk << PCLK_UART3));
+ 723              		.loc 1 228 0
+ 724 03ec 30309FE5 		ldr	r3, .L36+16
+ 725 03f0 2C209FE5 		ldr	r2, .L36+16
+ 726 03f4 001092E5 		ldr	r1, [r2, #0]
+ 727 03f8 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+ 728 03fc 0229A0E1 		mov	r2, r2, asl #18
+ 729 0400 022081E1 		orr	r2, r1, r2
+ 730 0404 002083E5 		str	r2, [r3, #0]
+ 731              	.L24:
+ 229:../Libraries/src/UART.c **** 	}
+ 230:../Libraries/src/UART.c **** }
+ 732              		.loc 1 230 0
+ 733 0408 00D08BE2 		add	sp, fp, #0
+ 734 040c 04B09DE4 		ldmfd	sp!, {fp}
+ 735 0410 1EFF2FE1 		bx	lr
+ 736              	.L37:
+ 737              		.align	2
+ 738              	.L36:
+ 739 0414 00C000E0 		.word	-536821760
+ 740 0418 A8C11FE0 		.word	-534789720
+ 741 041c 000001E0 		.word	-536805376
+ 742 0420 008007E0 		.word	-536379392
+ 743 0424 ACC11FE0 		.word	-534789716
+ 744 0428 00C007E0 		.word	-536363008
+ 745              		.cfi_endproc
+ 746              	.LFE5:
+ 748              		.global	__aeabi_f2d
+ 749              		.global	__aeabi_dcmplt
+ 750              		.global	__aeabi_dsub
+ 751              		.global	__aeabi_d2f
+ 752              		.global	__aeabi_fcmpeq
+ 753              		.global	__aeabi_fcmpgt
+ 754              		.align	2
+ 756              	getFRval:
+ 757              	.LFB6:
+ 231:../Libraries/src/UART.c **** 
+ 232:../Libraries/src/UART.c **** /*
+ 233:../Libraries/src/UART.c ****  * @brief		Calculate divaddval and mulval for dractional divider
+ 234:../Libraries/src/UART.c ****  *
+ 235:../Libraries/src/UART.c ****  * Get the fraction values (mulVal and divAddVal) for
+ 236:../Libraries/src/UART.c ****  * the given FRest value from Look up tables. Look through
+ 237:../Libraries/src/UART.c ****  * the FR LUT and find the entry which have the smallest
+ 238:../Libraries/src/UART.c ****  * difference between the FRest value and the lookup
+ 239:../Libraries/src/UART.c ****  * table value.
+ 240:../Libraries/src/UART.c ****  *
+ 241:../Libraries/src/UART.c ****  * @param[in]	FRest 		- estimated fractional rest,
+ 242:../Libraries/src/UART.c ****  * 							  calculated from DLest
+ 243:../Libraries/src/UART.c ****  * @param[in]	divaddval	- found register value in LUT
+ 244:../Libraries/src/UART.c ****  * @param[in]	mulval		- found register value in LUT
+ 245:../Libraries/src/UART.c ****  *
+ 246:../Libraries/src/UART.c ****  * @return		EOK if useful values are found in LUT
+ 247:../Libraries/src/UART.c ****  * 				EINTERNAL if no useful value is stored in LUT
+ 248:../Libraries/src/UART.c ****  */
+ 249:../Libraries/src/UART.c **** static int getFRval(double FRest, float *divaddval, float *mulval) {
+ 758              		.loc 1 249 0
+ 759              		.cfi_startproc
+ 760              		@ Function supports interworking.
+ 761              		@ args = 0, pretend = 0, frame = 32
+ 762              		@ frame_needed = 1, uses_anonymous_args = 0
+ 763 042c 30482DE9 		stmfd	sp!, {r4, r5, fp, lr}
+ 764              	.LCFI12:
+ 765              		.cfi_def_cfa_offset 16
+ 766              		.cfi_offset 14, -4
+ 767              		.cfi_offset 11, -8
+ 768              		.cfi_offset 5, -12
+ 769              		.cfi_offset 4, -16
+ 770 0430 0CB08DE2 		add	fp, sp, #12
+ 771              	.LCFI13:
+ 772              		.cfi_def_cfa 11, 4
+ 773 0434 20D04DE2 		sub	sp, sp, #32
+ 774 0438 24000BE5 		str	r0, [fp, #-36]
+ 775 043c 20100BE5 		str	r1, [fp, #-32]
+ 776 0440 28200BE5 		str	r2, [fp, #-40]
+ 777 0444 2C300BE5 		str	r3, [fp, #-44]
+ 250:../Libraries/src/UART.c **** 	float lastdiff = -1;
+ 778              		.loc 1 250 0
+ 779 0448 B8319FE5 		ldr	r3, .L49	@ float
+ 780 044c 10300BE5 		str	r3, [fp, #-16]	@ float
+ 251:../Libraries/src/UART.c **** 	float thisdiff;
+ 252:../Libraries/src/UART.c **** 	int index;
+ 253:../Libraries/src/UART.c **** 
+ 254:../Libraries/src/UART.c **** 	for (index = 0; index<BR_LUT_SIZE; index++)
+ 781              		.loc 1 254 0
+ 782 0450 0030A0E3 		mov	r3, #0
+ 783 0454 18300BE5 		str	r3, [fp, #-24]
+ 784 0458 620000EA 		b	.L39
+ 785              	.L47:
+ 255:../Libraries/src/UART.c **** 	{
+ 256:../Libraries/src/UART.c **** 		/*Difference between LUT and estimated value*/
+ 257:../Libraries/src/UART.c **** 		if (FRest > FRLut[index])
+ 786              		.loc 1 257 0
+ 787 045c A8319FE5 		ldr	r3, .L49+4
+ 788 0460 18201BE5 		ldr	r2, [fp, #-24]
+ 789 0464 023193E7 		ldr	r3, [r3, r2, asl #2]	@ float
+ 790 0468 0300A0E1 		mov	r0, r3
+ 791 046c FEFFFFEB 		bl	__aeabi_f2d
+ 792 0470 0030A0E1 		mov	r3, r0
+ 793 0474 0140A0E1 		mov	r4, r1
+ 794 0478 0120A0E3 		mov	r2, #1
+ 795 047c 0250A0E1 		mov	r5, r2
+ 796 0480 0300A0E1 		mov	r0, r3
+ 797 0484 0410A0E1 		mov	r1, r4
+ 798 0488 24304BE2 		sub	r3, fp, #36
+ 799 048c 0C0093E8 		ldmia	r3, {r2-r3}
+ 800 0490 FEFFFFEB 		bl	__aeabi_dcmplt
+ 801 0494 0030A0E1 		mov	r3, r0
+ 802 0498 000053E3 		cmp	r3, #0
+ 803 049c 0100001A 		bne	.L40
+ 804 04a0 0030A0E3 		mov	r3, #0
+ 805 04a4 0350A0E1 		mov	r5, r3
+ 806              	.L40:
+ 807 04a8 FF3005E2 		and	r3, r5, #255
+ 808 04ac 000053E3 		cmp	r3, #0
+ 809 04b0 1300000A 		beq	.L41
+ 258:../Libraries/src/UART.c **** 		{
+ 259:../Libraries/src/UART.c **** 			thisdiff = FRest - FRLut[index];
+ 810              		.loc 1 259 0
+ 811 04b4 50319FE5 		ldr	r3, .L49+4
+ 812 04b8 18201BE5 		ldr	r2, [fp, #-24]
+ 813 04bc 023193E7 		ldr	r3, [r3, r2, asl #2]	@ float
+ 814 04c0 0300A0E1 		mov	r0, r3
+ 815 04c4 FEFFFFEB 		bl	__aeabi_f2d
+ 816 04c8 0030A0E1 		mov	r3, r0
+ 817 04cc 0140A0E1 		mov	r4, r1
+ 818 04d0 24104BE2 		sub	r1, fp, #36
+ 819 04d4 030091E8 		ldmia	r1, {r0-r1}
+ 820 04d8 0320A0E1 		mov	r2, r3
+ 821 04dc 0430A0E1 		mov	r3, r4
+ 822 04e0 FEFFFFEB 		bl	__aeabi_dsub
+ 823 04e4 0030A0E1 		mov	r3, r0
+ 824 04e8 0140A0E1 		mov	r4, r1
+ 825 04ec 0300A0E1 		mov	r0, r3
+ 826 04f0 0410A0E1 		mov	r1, r4
+ 827 04f4 FEFFFFEB 		bl	__aeabi_d2f
+ 828 04f8 0030A0E1 		mov	r3, r0
+ 829 04fc 14300BE5 		str	r3, [fp, #-20]	@ float
+ 830 0500 120000EA 		b	.L42
+ 831              	.L41:
+ 260:../Libraries/src/UART.c **** 		}
+ 261:../Libraries/src/UART.c **** 		else
+ 262:../Libraries/src/UART.c **** 		{
+ 263:../Libraries/src/UART.c **** 			thisdiff = FRLut[index] - FRest;
+ 832              		.loc 1 263 0
+ 833 0504 00319FE5 		ldr	r3, .L49+4
+ 834 0508 18201BE5 		ldr	r2, [fp, #-24]
+ 835 050c 023193E7 		ldr	r3, [r3, r2, asl #2]	@ float
+ 836 0510 0300A0E1 		mov	r0, r3
+ 837 0514 FEFFFFEB 		bl	__aeabi_f2d
+ 838 0518 0030A0E1 		mov	r3, r0
+ 839 051c 0140A0E1 		mov	r4, r1
+ 840 0520 0300A0E1 		mov	r0, r3
+ 841 0524 0410A0E1 		mov	r1, r4
+ 842 0528 24304BE2 		sub	r3, fp, #36
+ 843 052c 0C0093E8 		ldmia	r3, {r2-r3}
+ 844 0530 FEFFFFEB 		bl	__aeabi_dsub
+ 845 0534 0030A0E1 		mov	r3, r0
+ 846 0538 0140A0E1 		mov	r4, r1
+ 847 053c 0300A0E1 		mov	r0, r3
+ 848 0540 0410A0E1 		mov	r1, r4
+ 849 0544 FEFFFFEB 		bl	__aeabi_d2f
+ 850 0548 0030A0E1 		mov	r3, r0
+ 851 054c 14300BE5 		str	r3, [fp, #-20]	@ float
+ 852              	.L42:
+ 264:../Libraries/src/UART.c **** 		}
+ 265:../Libraries/src/UART.c **** 
+ 266:../Libraries/src/UART.c **** 		/*If the difference is bigger than the last time,
+ 267:../Libraries/src/UART.c **** 		* the lastvalue is the nearest one:
+ 268:../Libraries/src/UART.c **** 		* e.g.FRest = 1.075
+ 269:../Libraries/src/UART.c **** 		* index=0 FR=1.000 thisdiff=0.75  lastdiff=-1
+ 270:../Libraries/src/UART.c **** 		* index=1 FR=1.067 thisdiff=0.008 lastdiff=0.75
+ 271:../Libraries/src/UART.c **** 		* index=2 FR=1.071 thisdiff=0.004 lastdiff=0.008
+ 272:../Libraries/src/UART.c **** 		* index=3 FR=1.077 thisdiff=0.002 lastdiff=0.004
+ 273:../Libraries/src/UART.c **** 		* index=4 FR=1.083 thisdiff=0.008 lastdiff=0.002
+ 274:../Libraries/src/UART.c **** 		*
+ 275:../Libraries/src/UART.c **** 		*/
+ 276:../Libraries/src/UART.c **** 		if (lastdiff != -1 && thisdiff > lastdiff)
+ 853              		.loc 1 276 0
+ 854 0550 10001BE5 		ldr	r0, [fp, #-16]	@ float
+ 855 0554 AC109FE5 		ldr	r1, .L49	@ float
+ 856 0558 FEFFFFEB 		bl	__aeabi_fcmpeq
+ 857 055c 0030A0E1 		mov	r3, r0
+ 858 0560 000053E3 		cmp	r3, #0
+ 859 0564 1A00001A 		bne	.L43
+ 860              	.L48:
+ 861              		.loc 1 276 0 is_stmt 0 discriminator 1
+ 862 0568 0130A0E3 		mov	r3, #1
+ 863 056c 0340A0E1 		mov	r4, r3
+ 864 0570 14001BE5 		ldr	r0, [fp, #-20]	@ float
+ 865 0574 10101BE5 		ldr	r1, [fp, #-16]	@ float
+ 866 0578 FEFFFFEB 		bl	__aeabi_fcmpgt
+ 867 057c 0030A0E1 		mov	r3, r0
+ 868 0580 000053E3 		cmp	r3, #0
+ 869 0584 0100001A 		bne	.L45
+ 870 0588 0030A0E3 		mov	r3, #0
+ 871 058c 0340A0E1 		mov	r4, r3
+ 872              	.L45:
+ 873 0590 FF3004E2 		and	r3, r4, #255
+ 874 0594 000053E3 		cmp	r3, #0
+ 875 0598 0D00000A 		beq	.L43
+ 277:../Libraries/src/UART.c **** 		{
+ 278:../Libraries/src/UART.c **** 			/* return fractional calc values */
+ 279:../Libraries/src/UART.c **** 			*divaddval = DIVADDVALLut[index - 1];
+ 876              		.loc 1 279 0 is_stmt 1
+ 877 059c 18301BE5 		ldr	r3, [fp, #-24]
+ 878 05a0 012043E2 		sub	r2, r3, #1
+ 879 05a4 64309FE5 		ldr	r3, .L49+8
+ 880 05a8 022193E7 		ldr	r2, [r3, r2, asl #2]	@ float
+ 881 05ac 28301BE5 		ldr	r3, [fp, #-40]
+ 882 05b0 002083E5 		str	r2, [r3, #0]	@ float
+ 280:../Libraries/src/UART.c **** 			*mulval = MULVALLut[index - 1];
+ 883              		.loc 1 280 0
+ 884 05b4 18301BE5 		ldr	r3, [fp, #-24]
+ 885 05b8 012043E2 		sub	r2, r3, #1
+ 886 05bc 50309FE5 		ldr	r3, .L49+12
+ 887 05c0 022193E7 		ldr	r2, [r3, r2, asl #2]	@ float
+ 888 05c4 2C301BE5 		ldr	r3, [fp, #-44]
+ 889 05c8 002083E5 		str	r2, [r3, #0]	@ float
+ 281:../Libraries/src/UART.c **** 			return EOK;
+ 890              		.loc 1 281 0
+ 891 05cc 0030A0E3 		mov	r3, #0
+ 892 05d0 080000EA 		b	.L46
+ 893              	.L43:
+ 282:../Libraries/src/UART.c **** 		}
+ 283:../Libraries/src/UART.c **** 		lastdiff = thisdiff;
+ 894              		.loc 1 283 0
+ 895 05d4 14301BE5 		ldr	r3, [fp, #-20]	@ float
+ 896 05d8 10300BE5 		str	r3, [fp, #-16]	@ float
+ 254:../Libraries/src/UART.c **** 	for (index = 0; index<BR_LUT_SIZE; index++)
+ 897              		.loc 1 254 0
+ 898 05dc 18301BE5 		ldr	r3, [fp, #-24]
+ 899 05e0 013083E2 		add	r3, r3, #1
+ 900 05e4 18300BE5 		str	r3, [fp, #-24]
+ 901              	.L39:
+ 254:../Libraries/src/UART.c **** 	for (index = 0; index<BR_LUT_SIZE; index++)
+ 902              		.loc 1 254 0 is_stmt 0 discriminator 1
+ 903 05e8 18301BE5 		ldr	r3, [fp, #-24]
+ 904 05ec 470053E3 		cmp	r3, #71
+ 905 05f0 99FFFFDA 		ble	.L47
+ 284:../Libraries/src/UART.c **** 	}
+ 285:../Libraries/src/UART.c **** 	return EINTERNAL;
+ 906              		.loc 1 285 0 is_stmt 1
+ 907 05f4 0030E0E3 		mvn	r3, #0
+ 908              	.L46:
+ 286:../Libraries/src/UART.c **** }
+ 909              		.loc 1 286 0
+ 910 05f8 0300A0E1 		mov	r0, r3
+ 911 05fc 0CD04BE2 		sub	sp, fp, #12
+ 912 0600 3048BDE8 		ldmfd	sp!, {r4, r5, fp, lr}
+ 913 0604 1EFF2FE1 		bx	lr
+ 914              	.L50:
+ 915              		.align	2
+ 916              	.L49:
+ 917 0608 000080BF 		.word	-1082130432
+ 918 060c 00000000 		.word	FRLut
+ 919 0610 00000000 		.word	DIVADDVALLut
+ 920 0614 00000000 		.word	MULVALLut
+ 921              		.cfi_endproc
+ 922              	.LFE6:
+ 924              		.global	__aeabi_idiv
+ 925              		.global	__aeabi_uidivmod
+ 926              		.global	__aeabi_ui2f
+ 927              		.global	__aeabi_fdiv
+ 928              		.global	__aeabi_f2uiz
+ 929              		.global	__aeabi_fmul
+ 930              		.global	__aeabi_dcmpgt
+ 931              		.global	__aeabi_i2d
+ 932              		.global	__aeabi_dadd
+ 933              		.align	2
+ 935              	uart_set_divisors:
+ 936              	.LFB7:
+ 287:../Libraries/src/UART.c **** 
+ 288:../Libraries/src/UART.c **** /**
+ 289:../Libraries/src/UART.c ****  * @brief		Calculate different values for fractional divider
+ 290:../Libraries/src/UART.c ****  * 				and prescaler for a specific baudrate for UART module
+ 291:../Libraries/src/UART.c ****  *
+ 292:../Libraries/src/UART.c ****  * 	This function calculate with the algorithm from the
+ 293:../Libraries/src/UART.c ****  * 	datasheet p.440 the best values for divaddval, mulval,
+ 294:../Libraries/src/UART.c ****  * 	dlm and dll. Due to the algorithm, the Baudrate has an max
+ 295:../Libraries/src/UART.c ****  * 	accuracy of 1.1%
+ 296:../Libraries/src/UART.c ****  *
+ 297:../Libraries/src/UART.c ****  * @param[in]	dev	- UART peripheral selected, should be:
+ 298:../Libraries/src/UART.c ****  * 					- LPC_UART0: UART0 peripheral
+ 299:../Libraries/src/UART.c ****  * 					- LPC_UART1: UART1 peripheral
+ 300:../Libraries/src/UART.c ****  * 					- LPC_UART2: UART2 peripheral
+ 301:../Libraries/src/UART.c ****  * 					- LPC_UART3: UART3 peripheral
+ 302:../Libraries/src/UART.c ****  * @param[in]	baudrate - specific baudrate, given from user
+ 303:../Libraries/src/UART.c ****  *
+ 304:../Libraries/src/UART.c ****  * @return		EOK if successful
+ 305:../Libraries/src/UART.c ****  * 				EINTERNAL if not successful
+ 306:../Libraries/src/UART.c ****  */
+ 307:../Libraries/src/UART.c **** static int32_t uart_set_divisors(UART_T *dev, uint32_t baudrate, uint8_t udivisor)
+ 308:../Libraries/src/UART.c **** {
+ 937              		.loc 1 308 0
+ 938              		.cfi_startproc
+ 939              		@ Function supports interworking.
+ 940              		@ args = 0, pretend = 0, frame = 40
+ 941              		@ frame_needed = 1, uses_anonymous_args = 0
+ 942 0618 30482DE9 		stmfd	sp!, {r4, r5, fp, lr}
+ 943              	.LCFI14:
+ 944              		.cfi_def_cfa_offset 16
+ 945              		.cfi_offset 14, -4
+ 946              		.cfi_offset 11, -8
+ 947              		.cfi_offset 5, -12
+ 948              		.cfi_offset 4, -16
+ 949 061c 0CB08DE2 		add	fp, sp, #12
+ 950              	.LCFI15:
+ 951              		.cfi_def_cfa 11, 4
+ 952 0620 28D04DE2 		sub	sp, sp, #40
+ 953 0624 28000BE5 		str	r0, [fp, #-40]
+ 954 0628 2C100BE5 		str	r1, [fp, #-44]
+ 955 062c 0230A0E1 		mov	r3, r2
+ 956 0630 2D304BE5 		strb	r3, [fp, #-45]
+ 309:../Libraries/src/UART.c **** 	uint32_t PCLK;
+ 310:../Libraries/src/UART.c **** 	uint16_t DLest;
+ 311:../Libraries/src/UART.c **** #ifdef DEBUG
+ 312:../Libraries/src/UART.c **** 	uint16_t uartBaudRate;
+ 313:../Libraries/src/UART.c **** #endif
+ 314:../Libraries/src/UART.c **** 	float  divaddval, mulval;
+ 315:../Libraries/src/UART.c **** 	uint8_t dlm=0, dll=0;
+ 957              		.loc 1 315 0
+ 958 0634 0030A0E3 		mov	r3, #0
+ 959 0638 0F304BE5 		strb	r3, [fp, #-15]
+ 960 063c 0030A0E3 		mov	r3, #0
+ 961 0640 10304BE5 		strb	r3, [fp, #-16]
+ 316:../Libraries/src/UART.c **** 	uint8_t	 cnt;
+ 317:../Libraries/src/UART.c **** 
+ 318:../Libraries/src/UART.c **** 	/* calculate peripheral clock */
+ 319:../Libraries/src/UART.c **** 	PCLK = CLK_HZ / udivisor;
+ 962              		.loc 1 319 0
+ 963 0644 2D305BE5 		ldrb	r3, [fp, #-45]	@ zero_extendqisi2
+ 964 0648 60039FE5 		ldr	r0, .L63+16
+ 965 064c 0310A0E1 		mov	r1, r3
+ 966 0650 FEFFFFEB 		bl	__aeabi_idiv
+ 967 0654 0030A0E1 		mov	r3, r0
+ 968 0658 1C300BE5 		str	r3, [fp, #-28]
+ 320:../Libraries/src/UART.c **** 
+ 321:../Libraries/src/UART.c **** 	/* check if result of DLest calculation
+ 322:../Libraries/src/UART.c **** 	 *  is an integer, then DIVADDVAL = 0, MULVAL = 1 */
+ 323:../Libraries/src/UART.c **** 	if( ( PCLK % ( 16 * baudrate ) ) == 0)
+ 969              		.loc 1 323 0
+ 970 065c 2C301BE5 		ldr	r3, [fp, #-44]
+ 971 0660 0332A0E1 		mov	r3, r3, asl #4
+ 972 0664 1C201BE5 		ldr	r2, [fp, #-28]
+ 973 0668 0200A0E1 		mov	r0, r2
+ 974 066c 0310A0E1 		mov	r1, r3
+ 975 0670 FEFFFFEB 		bl	__aeabi_uidivmod
+ 976 0674 0130A0E1 		mov	r3, r1
+ 977 0678 000053E3 		cmp	r3, #0
+ 978 067c 1B00001A 		bne	.L52
+ 324:../Libraries/src/UART.c **** 	{
+ 325:../Libraries/src/UART.c **** 		divaddval = 0;
+ 979              		.loc 1 325 0
+ 980 0680 2C339FE5 		ldr	r3, .L63+20	@ float
+ 981 0684 20300BE5 		str	r3, [fp, #-32]	@ float
+ 326:../Libraries/src/UART.c **** 		mulval = 1;
+ 982              		.loc 1 326 0
+ 983 0688 28339FE5 		ldr	r3, .L63+24	@ float
+ 984 068c 24300BE5 		str	r3, [fp, #-36]	@ float
+ 327:../Libraries/src/UART.c **** 		DLest = (uint32_t)(PCLK / (float)(16 * baudrate));
+ 985              		.loc 1 327 0
+ 986 0690 1C001BE5 		ldr	r0, [fp, #-28]
+ 987 0694 FEFFFFEB 		bl	__aeabi_ui2f
+ 988 0698 0040A0E1 		mov	r4, r0
+ 989 069c 2C301BE5 		ldr	r3, [fp, #-44]
+ 990 06a0 0332A0E1 		mov	r3, r3, asl #4
+ 991 06a4 0300A0E1 		mov	r0, r3
+ 992 06a8 FEFFFFEB 		bl	__aeabi_ui2f
+ 993 06ac 0030A0E1 		mov	r3, r0
+ 994 06b0 0400A0E1 		mov	r0, r4
+ 995 06b4 0310A0E1 		mov	r1, r3
+ 996 06b8 FEFFFFEB 		bl	__aeabi_fdiv
+ 997 06bc 0030A0E1 		mov	r3, r0
+ 998 06c0 0300A0E1 		mov	r0, r3
+ 999 06c4 FEFFFFEB 		bl	__aeabi_f2uiz
+ 1000 06c8 0030A0E1 		mov	r3, r0
+ 1001 06cc BE304BE1 		strh	r3, [fp, #-14]	@ movhi
+ 328:../Libraries/src/UART.c **** 		dlm = DLest / 256;
+ 1002              		.loc 1 328 0
+ 1003 06d0 BE305BE1 		ldrh	r3, [fp, #-14]
+ 1004 06d4 2334A0E1 		mov	r3, r3, lsr #8
+ 1005 06d8 0338A0E1 		mov	r3, r3, asl #16
+ 1006 06dc 2338A0E1 		mov	r3, r3, lsr #16
+ 1007 06e0 0F304BE5 		strb	r3, [fp, #-15]
+ 329:../Libraries/src/UART.c **** 		dll = DLest % 256;
+ 1008              		.loc 1 329 0
+ 1009 06e4 BE305BE1 		ldrh	r3, [fp, #-14]	@ movhi
+ 1010 06e8 10304BE5 		strb	r3, [fp, #-16]
+ 1011 06ec 830000EA 		b	.L53
+ 1012              	.L52:
+ 1013              	.LBB2:
+ 330:../Libraries/src/UART.c **** 	}
+ 331:../Libraries/src/UART.c **** 	else
+ 332:../Libraries/src/UART.c **** 	{
+ 333:../Libraries/src/UART.c **** 		float FRest = 1.5;
+ 1014              		.loc 1 333 0
+ 1015 06f0 C4329FE5 		ldr	r3, .L63+28	@ float
+ 1016 06f4 18300BE5 		str	r3, [fp, #-24]	@ float
+ 334:../Libraries/src/UART.c **** 
+ 335:../Libraries/src/UART.c **** 		for(cnt = 0; cnt < 9; cnt++)
+ 1017              		.loc 1 335 0
+ 1018 06f8 0030A0E3 		mov	r3, #0
+ 1019 06fc 11304BE5 		strb	r3, [fp, #-17]
+ 1020 0700 650000EA 		b	.L54
+ 1021              	.L61:
+ 336:../Libraries/src/UART.c **** 		{
+ 337:../Libraries/src/UART.c **** 			/* calculate DLest */
+ 338:../Libraries/src/UART.c **** 			DLest = (uint32_t)(PCLK / (float)(16 * baudrate * FRest));
+ 1022              		.loc 1 338 0
+ 1023 0704 1C001BE5 		ldr	r0, [fp, #-28]
+ 1024 0708 FEFFFFEB 		bl	__aeabi_ui2f
+ 1025 070c 0040A0E1 		mov	r4, r0
+ 1026 0710 2C301BE5 		ldr	r3, [fp, #-44]
+ 1027 0714 0332A0E1 		mov	r3, r3, asl #4
+ 1028 0718 0300A0E1 		mov	r0, r3
+ 1029 071c FEFFFFEB 		bl	__aeabi_ui2f
+ 1030 0720 0030A0E1 		mov	r3, r0
+ 1031 0724 0300A0E1 		mov	r0, r3
+ 1032 0728 18101BE5 		ldr	r1, [fp, #-24]	@ float
+ 1033 072c FEFFFFEB 		bl	__aeabi_fmul
+ 1034 0730 0030A0E1 		mov	r3, r0
+ 1035 0734 0400A0E1 		mov	r0, r4
+ 1036 0738 0310A0E1 		mov	r1, r3
+ 1037 073c FEFFFFEB 		bl	__aeabi_fdiv
+ 1038 0740 0030A0E1 		mov	r3, r0
+ 1039 0744 0300A0E1 		mov	r0, r3
+ 1040 0748 FEFFFFEB 		bl	__aeabi_f2uiz
+ 1041 074c 0030A0E1 		mov	r3, r0
+ 1042 0750 BE304BE1 		strh	r3, [fp, #-14]	@ movhi
+ 339:../Libraries/src/UART.c **** 			FRest = (float)((float)PCLK / (float)(16 * baudrate * DLest));
+ 1043              		.loc 1 339 0
+ 1044 0754 1C001BE5 		ldr	r0, [fp, #-28]
+ 1045 0758 FEFFFFEB 		bl	__aeabi_ui2f
+ 1046 075c 0040A0E1 		mov	r4, r0
+ 1047 0760 BE305BE1 		ldrh	r3, [fp, #-14]
+ 1048 0764 2C201BE5 		ldr	r2, [fp, #-44]
+ 1049 0768 920303E0 		mul	r3, r2, r3
+ 1050 076c 0332A0E1 		mov	r3, r3, asl #4
+ 1051 0770 0300A0E1 		mov	r0, r3
+ 1052 0774 FEFFFFEB 		bl	__aeabi_ui2f
+ 1053 0778 0030A0E1 		mov	r3, r0
+ 1054 077c 0400A0E1 		mov	r0, r4
+ 1055 0780 0310A0E1 		mov	r1, r3
+ 1056 0784 FEFFFFEB 		bl	__aeabi_fdiv
+ 1057 0788 0030A0E1 		mov	r3, r0
+ 1058 078c 18300BE5 		str	r3, [fp, #-24]	@ float
+ 340:../Libraries/src/UART.c **** 
+ 341:../Libraries/src/UART.c **** 			/* if FRest is out of range */
+ 342:../Libraries/src/UART.c **** 			if( (FRest>1.9) || (FRest<1.1) )
+ 1059              		.loc 1 342 0
+ 1060 0790 18001BE5 		ldr	r0, [fp, #-24]	@ float
+ 1061 0794 FEFFFFEB 		bl	__aeabi_f2d
+ 1062 0798 0030A0E1 		mov	r3, r0
+ 1063 079c 0140A0E1 		mov	r4, r1
+ 1064 07a0 0120A0E3 		mov	r2, #1
+ 1065 07a4 0250A0E1 		mov	r5, r2
+ 1066 07a8 0300A0E1 		mov	r0, r3
+ 1067 07ac 0410A0E1 		mov	r1, r4
+ 1068 07b0 7A3F8FE2 		adr	r3, .L63
+ 1069 07b4 0C0093E8 		ldmia	r3, {r2-r3}
+ 1070 07b8 FEFFFFEB 		bl	__aeabi_dcmpgt
+ 1071 07bc 0030A0E1 		mov	r3, r0
+ 1072 07c0 000053E3 		cmp	r3, #0
+ 1073 07c4 0100001A 		bne	.L55
+ 1074 07c8 0030A0E3 		mov	r3, #0
+ 1075 07cc 0350A0E1 		mov	r5, r3
+ 1076              	.L55:
+ 1077 07d0 FF3005E2 		and	r3, r5, #255
+ 1078 07d4 000053E3 		cmp	r3, #0
+ 1079 07d8 1200001A 		bne	.L56
+ 1080              		.loc 1 342 0 is_stmt 0 discriminator 1
+ 1081 07dc 18001BE5 		ldr	r0, [fp, #-24]	@ float
+ 1082 07e0 FEFFFFEB 		bl	__aeabi_f2d
+ 1083 07e4 0030A0E1 		mov	r3, r0
+ 1084 07e8 0140A0E1 		mov	r4, r1
+ 1085 07ec 0120A0E3 		mov	r2, #1
+ 1086 07f0 0250A0E1 		mov	r5, r2
+ 1087 07f4 0300A0E1 		mov	r0, r3
+ 1088 07f8 0410A0E1 		mov	r1, r4
+ 1089 07fc 693F8FE2 		adr	r3, .L63+8
+ 1090 0800 0C0093E8 		ldmia	r3, {r2-r3}
+ 1091 0804 FEFFFFEB 		bl	__aeabi_dcmplt
+ 1092 0808 0030A0E1 		mov	r3, r0
+ 1093 080c 000053E3 		cmp	r3, #0
+ 1094 0810 0100001A 		bne	.L57
+ 1095 0814 0030A0E3 		mov	r3, #0
+ 1096 0818 0350A0E1 		mov	r5, r3
+ 1097              	.L57:
+ 1098 081c FF3005E2 		and	r3, r5, #255
+ 1099 0820 000053E3 		cmp	r3, #0
+ 1100 0824 1F00000A 		beq	.L58
+ 1101              	.L56:
+ 343:../Libraries/src/UART.c **** 			{
+ 344:../Libraries/src/UART.c **** 				/* choose another FRest from 1.1 to 1.9 */
+ 345:../Libraries/src/UART.c **** 				FRest = 1.1 + (cnt / 10);
+ 1102              		.loc 1 345 0 is_stmt 1
+ 1103 0828 11205BE5 		ldrb	r2, [fp, #-17]	@ zero_extendqisi2
+ 1104 082c 8C319FE5 		ldr	r3, .L63+32
+ 1105 0830 921383E0 		umull	r1, r3, r2, r3
+ 1106 0834 A331A0E1 		mov	r3, r3, lsr #3
+ 1107 0838 FF3003E2 		and	r3, r3, #255
+ 1108 083c 0300A0E1 		mov	r0, r3
+ 1109 0840 FEFFFFEB 		bl	__aeabi_i2d
+ 1110 0844 0030A0E1 		mov	r3, r0
+ 1111 0848 0140A0E1 		mov	r4, r1
+ 1112 084c 0300A0E1 		mov	r0, r3
+ 1113 0850 0410A0E1 		mov	r1, r4
+ 1114 0854 533F8FE2 		adr	r3, .L63+8
+ 1115 0858 0C0093E8 		ldmia	r3, {r2-r3}
+ 1116 085c FEFFFFEB 		bl	__aeabi_dadd
+ 1117 0860 0030A0E1 		mov	r3, r0
+ 1118 0864 0140A0E1 		mov	r4, r1
+ 1119 0868 0300A0E1 		mov	r0, r3
+ 1120 086c 0410A0E1 		mov	r1, r4
+ 1121 0870 FEFFFFEB 		bl	__aeabi_d2f
+ 1122 0874 0030A0E1 		mov	r3, r0
+ 1123 0878 18300BE5 		str	r3, [fp, #-24]	@ float
+ 346:../Libraries/src/UART.c **** 				/* if FRest above 1.9, then end with an error */
+ 347:../Libraries/src/UART.c **** 				if(cnt == 9)
+ 1124              		.loc 1 347 0
+ 1125 087c 11305BE5 		ldrb	r3, [fp, #-17]	@ zero_extendqisi2
+ 1126 0880 090053E3 		cmp	r3, #9
+ 1127 0884 0100001A 		bne	.L59
+ 348:../Libraries/src/UART.c **** 				{
+ 349:../Libraries/src/UART.c **** 					/* cannot find correct values */
+ 350:../Libraries/src/UART.c **** 					return ECALCBAUD;
+ 1128              		.loc 1 350 0
+ 1129 0888 0230E0E3 		mvn	r3, #2
+ 1130 088c 3F0000EA 		b	.L60
+ 1131              	.L59:
+ 335:../Libraries/src/UART.c **** 		for(cnt = 0; cnt < 9; cnt++)
+ 1132              		.loc 1 335 0
+ 1133 0890 11305BE5 		ldrb	r3, [fp, #-17]
+ 1134 0894 013083E2 		add	r3, r3, #1
+ 1135 0898 11304BE5 		strb	r3, [fp, #-17]
+ 1136              	.L54:
+ 335:../Libraries/src/UART.c **** 		for(cnt = 0; cnt < 9; cnt++)
+ 1137              		.loc 1 335 0 is_stmt 0 discriminator 1
+ 1138 089c 11305BE5 		ldrb	r3, [fp, #-17]	@ zero_extendqisi2
+ 1139 08a0 080053E3 		cmp	r3, #8
+ 1140 08a4 96FFFF9A 		bls	.L61
+ 1141              	.L58:
+ 351:../Libraries/src/UART.c **** 				}
+ 352:../Libraries/src/UART.c **** 			}
+ 353:../Libraries/src/UART.c **** 			else
+ 354:../Libraries/src/UART.c **** 			{
+ 355:../Libraries/src/UART.c **** 				/* value found, end for-loop */
+ 356:../Libraries/src/UART.c **** 				break;
+ 357:../Libraries/src/UART.c **** 			}
+ 358:../Libraries/src/UART.c **** 		}
+ 359:../Libraries/src/UART.c **** 
+ 360:../Libraries/src/UART.c **** 		/* found FRest ,lookup Table from Datasheet p.440*/
+ 361:../Libraries/src/UART.c **** 		if(getFRval(FRest, &divaddval, &mulval)!=EOK)
+ 1142              		.loc 1 361 0 is_stmt 1
+ 1143 08a8 18001BE5 		ldr	r0, [fp, #-24]	@ float
+ 1144 08ac FEFFFFEB 		bl	__aeabi_f2d
+ 1145 08b0 0030A0E1 		mov	r3, r0
+ 1146 08b4 0140A0E1 		mov	r4, r1
+ 1147 08b8 20204BE2 		sub	r2, fp, #32
+ 1148 08bc 24C04BE2 		sub	ip, fp, #36
+ 1149 08c0 0300A0E1 		mov	r0, r3
+ 1150 08c4 0410A0E1 		mov	r1, r4
+ 1151 08c8 0C30A0E1 		mov	r3, ip
+ 1152 08cc D6FEFFEB 		bl	getFRval
+ 1153 08d0 0030A0E1 		mov	r3, r0
+ 1154 08d4 000053E3 		cmp	r3, #0
+ 1155 08d8 0100000A 		beq	.L62
+ 362:../Libraries/src/UART.c **** 		{
+ 363:../Libraries/src/UART.c **** 			return EINTERNAL;
+ 1156              		.loc 1 363 0
+ 1157 08dc 0030E0E3 		mvn	r3, #0
+ 1158 08e0 2A0000EA 		b	.L60
+ 1159              	.L62:
+ 364:../Libraries/src/UART.c **** 		}
+ 365:../Libraries/src/UART.c **** 
+ 366:../Libraries/src/UART.c **** #ifdef DEBUG
+ 367:../Libraries/src/UART.c **** 		/*Calc actual baud rate achieved*/
+ 368:../Libraries/src/UART.c **** 		uartBaudRate = (uint16_t)(PCLK/ (16 * DLest*(1 + (divaddval / mulval))));
+ 369:../Libraries/src/UART.c **** #endif
+ 370:../Libraries/src/UART.c **** 
+ 371:../Libraries/src/UART.c **** 		/* DLM = DLest[15:8] and DLL = DLest[7:0] */
+ 372:../Libraries/src/UART.c **** 		dlm = (DLest & 0xFF00) >> 8;
+ 1160              		.loc 1 372 0
+ 1161 08e4 BE305BE1 		ldrh	r3, [fp, #-14]
+ 1162 08e8 2334A0E1 		mov	r3, r3, lsr #8
+ 1163 08ec 0338A0E1 		mov	r3, r3, asl #16
+ 1164 08f0 2338A0E1 		mov	r3, r3, lsr #16
+ 1165 08f4 0F304BE5 		strb	r3, [fp, #-15]
+ 373:../Libraries/src/UART.c **** 		dll = (DLest & 0x00FF);
+ 1166              		.loc 1 373 0
+ 1167 08f8 BE305BE1 		ldrh	r3, [fp, #-14]	@ movhi
+ 1168 08fc 10304BE5 		strb	r3, [fp, #-16]
+ 1169              	.L53:
+ 1170              	.LBE2:
+ 374:../Libraries/src/UART.c **** 	}
+ 375:../Libraries/src/UART.c **** 
+ 376:../Libraries/src/UART.c **** 	/* Set up fractional UART module */
+ 377:../Libraries/src/UART.c **** 	dev->LCR = UART_LCR_DLAB_EN; /*Enable access to DLM,DLL and FDR*/
+ 1171              		.loc 1 377 0
+ 1172 0900 28301BE5 		ldr	r3, [fp, #-40]
+ 1173 0904 7F20E0E3 		mvn	r2, #127
+ 1174 0908 0C20C3E5 		strb	r2, [r3, #12]
+ 378:../Libraries/src/UART.c ****     dev->REG2.DLM = dlm;
+ 1175              		.loc 1 378 0
+ 1176 090c 28301BE5 		ldr	r3, [fp, #-40]
+ 1177 0910 0F205BE5 		ldrb	r2, [fp, #-15]
+ 1178 0914 0420C3E5 		strb	r2, [r3, #4]
+ 379:../Libraries/src/UART.c **** 	dev->REG1.DLL = dll;
+ 1179              		.loc 1 379 0
+ 1180 0918 28301BE5 		ldr	r3, [fp, #-40]
+ 1181 091c 10205BE5 		ldrb	r2, [fp, #-16]
+ 1182 0920 0020C3E5 		strb	r2, [r3, #0]
+ 380:../Libraries/src/UART.c **** 	dev->FDR = (((uint8_t)mulval) << 4) | (uint8_t)divaddval;
+ 1183              		.loc 1 380 0
+ 1184 0924 24301BE5 		ldr	r3, [fp, #-36]	@ float
+ 1185 0928 0300A0E1 		mov	r0, r3
+ 1186 092c FEFFFFEB 		bl	__aeabi_f2uiz
+ 1187 0930 0030A0E1 		mov	r3, r0
+ 1188 0934 FF3003E2 		and	r3, r3, #255
+ 1189 0938 0332A0E1 		mov	r3, r3, asl #4
+ 1190 093c FF4003E2 		and	r4, r3, #255
+ 1191 0940 20301BE5 		ldr	r3, [fp, #-32]	@ float
+ 1192 0944 0300A0E1 		mov	r0, r3
+ 1193 0948 FEFFFFEB 		bl	__aeabi_f2uiz
+ 1194 094c 0030A0E1 		mov	r3, r0
+ 1195 0950 FF3003E2 		and	r3, r3, #255
+ 1196 0954 FF3003E2 		and	r3, r3, #255
+ 1197 0958 0420A0E1 		mov	r2, r4
+ 1198 095c 033082E1 		orr	r3, r2, r3
+ 1199 0960 FF3003E2 		and	r3, r3, #255
+ 1200 0964 FF2003E2 		and	r2, r3, #255
+ 1201 0968 28301BE5 		ldr	r3, [fp, #-40]
+ 1202 096c 2820C3E5 		strb	r2, [r3, #40]
+ 381:../Libraries/src/UART.c **** 	dev->LCR &= ~UART_LCR_DLAB_EN; /*DLAB = 0*/
+ 1203              		.loc 1 381 0
+ 1204 0970 28301BE5 		ldr	r3, [fp, #-40]
+ 1205 0974 0C30D3E5 		ldrb	r3, [r3, #12]
+ 1206 0978 FF3003E2 		and	r3, r3, #255
+ 1207 097c 7F3003E2 		and	r3, r3, #127
+ 1208 0980 FF2003E2 		and	r2, r3, #255
+ 1209 0984 28301BE5 		ldr	r3, [fp, #-40]
+ 1210 0988 0C20C3E5 		strb	r2, [r3, #12]
+ 382:../Libraries/src/UART.c **** 
+ 383:../Libraries/src/UART.c **** 	return EOK;
+ 1211              		.loc 1 383 0
+ 1212 098c 0030A0E3 		mov	r3, #0
+ 1213              	.L60:
+ 384:../Libraries/src/UART.c **** }
+ 1214              		.loc 1 384 0
+ 1215 0990 0300A0E1 		mov	r0, r3
+ 1216 0994 0CD04BE2 		sub	sp, fp, #12
+ 1217 0998 3048BDE8 		ldmfd	sp!, {r4, r5, fp, lr}
+ 1218 099c 1EFF2FE1 		bx	lr
+ 1219              	.L64:
+ 1220              		.align	3
+ 1221              	.L63:
+ 1222 09a0 66666666 		.word	1717986918
+ 1223 09a4 6666FE3F 		.word	1073636966
+ 1224 09a8 9A999999 		.word	-1717986918
+ 1225 09ac 9999F13F 		.word	1072798105
+ 1226 09b0 006CDC02 		.word	48000000
+ 1227 09b4 00000000 		.word	0
+ 1228 09b8 0000803F 		.word	1065353216
+ 1229 09bc 0000C03F 		.word	1069547520
+ 1230 09c0 CDCCCCCC 		.word	-858993459
+ 1231              		.cfi_endproc
+ 1232              	.LFE7:
+ 1234              		.align	2
+ 1236              	uart_installIrq:
+ 1237              	.LFB8:
+ 385:../Libraries/src/UART.c **** 
+ 386:../Libraries/src/UART.c **** static int32_t uart_installIrq(UART_T *dev, void(*callback)(void))
+ 387:../Libraries/src/UART.c **** {
+ 1238              		.loc 1 387 0
+ 1239              		.cfi_startproc
+ 1240              		@ Function supports interworking.
+ 1241              		@ args = 0, pretend = 0, frame = 8
+ 1242              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1243 09c4 00482DE9 		stmfd	sp!, {fp, lr}
+ 1244              	.LCFI16:
+ 1245              		.cfi_def_cfa_offset 8
+ 1246              		.cfi_offset 14, -4
+ 1247              		.cfi_offset 11, -8
+ 1248 09c8 04B08DE2 		add	fp, sp, #4
+ 1249              	.LCFI17:
+ 1250              		.cfi_def_cfa 11, 4
+ 1251 09cc 08D04DE2 		sub	sp, sp, #8
+ 1252 09d0 08000BE5 		str	r0, [fp, #-8]
+ 1253 09d4 0C100BE5 		str	r1, [fp, #-12]
+ 388:../Libraries/src/UART.c **** 	if(dev == LPC_UART0)
+ 1254              		.loc 1 388 0
+ 1255 09d8 08201BE5 		ldr	r2, [fp, #-8]
+ 1256 09dc 08319FE5 		ldr	r3, .L75
+ 1257 09e0 030052E1 		cmp	r2, r3
+ 1258 09e4 0B00001A 		bne	.L66
+ 389:../Libraries/src/UART.c **** 		{
+ 390:../Libraries/src/UART.c **** 			if ( install_irq( UART0_INT, UART0Handler, 5  ) == FALSE )
+ 1259              		.loc 1 390 0
+ 1260 09e8 0600A0E3 		mov	r0, #6
+ 1261 09ec FC109FE5 		ldr	r1, .L75+4
+ 1262 09f0 0520A0E3 		mov	r2, #5
+ 1263 09f4 FEFFFFEB 		bl	install_irq
+ 1264 09f8 0030A0E1 		mov	r3, r0
+ 1265 09fc 000053E3 		cmp	r3, #0
+ 1266 0a00 0100001A 		bne	.L67
+ 391:../Libraries/src/UART.c **** 			{
+ 392:../Libraries/src/UART.c **** 				return EINTERNAL;
+ 1267              		.loc 1 392 0
+ 1268 0a04 0030E0E3 		mvn	r3, #0
+ 1269 0a08 330000EA 		b	.L68
+ 1270              	.L67:
+ 393:../Libraries/src/UART.c **** 			}
+ 394:../Libraries/src/UART.c **** 			UART_STAT[0].callback_UART = callback;
+ 1271              		.loc 1 394 0
+ 1272 0a0c E0309FE5 		ldr	r3, .L75+8
+ 1273 0a10 0C201BE5 		ldr	r2, [fp, #-12]
+ 1274 0a14 282083E5 		str	r2, [r3, #40]
+ 1275              	.L66:
+ 395:../Libraries/src/UART.c **** 		}
+ 396:../Libraries/src/UART.c **** 		if(dev == LPC_UART1)
+ 1276              		.loc 1 396 0
+ 1277 0a18 08201BE5 		ldr	r2, [fp, #-8]
+ 1278 0a1c D4309FE5 		ldr	r3, .L75+12
+ 1279 0a20 030052E1 		cmp	r2, r3
+ 1280 0a24 0B00001A 		bne	.L69
+ 397:../Libraries/src/UART.c **** 		{
+ 398:../Libraries/src/UART.c **** 			if ( install_irq( UART1_INT, UART1Handler, 3  ) == FALSE )
+ 1281              		.loc 1 398 0
+ 1282 0a28 0700A0E3 		mov	r0, #7
+ 1283 0a2c C8109FE5 		ldr	r1, .L75+16
+ 1284 0a30 0320A0E3 		mov	r2, #3
+ 1285 0a34 FEFFFFEB 		bl	install_irq
+ 1286 0a38 0030A0E1 		mov	r3, r0
+ 1287 0a3c 000053E3 		cmp	r3, #0
+ 1288 0a40 0100001A 		bne	.L70
+ 399:../Libraries/src/UART.c **** 			{
+ 400:../Libraries/src/UART.c **** 				return EINTERNAL;
+ 1289              		.loc 1 400 0
+ 1290 0a44 0030E0E3 		mvn	r3, #0
+ 1291 0a48 230000EA 		b	.L68
+ 1292              	.L70:
+ 401:../Libraries/src/UART.c **** 			}
+ 402:../Libraries/src/UART.c **** 			UART_STAT[1].callback_UART = callback;
+ 1293              		.loc 1 402 0
+ 1294 0a4c A0309FE5 		ldr	r3, .L75+8
+ 1295 0a50 0C201BE5 		ldr	r2, [fp, #-12]
+ 1296 0a54 542083E5 		str	r2, [r3, #84]
+ 1297              	.L69:
+ 403:../Libraries/src/UART.c **** 		}
+ 404:../Libraries/src/UART.c **** 		if(dev == LPC_UART2)
+ 1298              		.loc 1 404 0
+ 1299 0a58 08201BE5 		ldr	r2, [fp, #-8]
+ 1300 0a5c 9C309FE5 		ldr	r3, .L75+20
+ 1301 0a60 030052E1 		cmp	r2, r3
+ 1302 0a64 0B00001A 		bne	.L71
+ 405:../Libraries/src/UART.c **** 		{
+ 406:../Libraries/src/UART.c **** 			if ( install_irq( UART2_INT, UART2Handler, 4  ) == FALSE )
+ 1303              		.loc 1 406 0
+ 1304 0a68 1C00A0E3 		mov	r0, #28
+ 1305 0a6c 90109FE5 		ldr	r1, .L75+24
+ 1306 0a70 0420A0E3 		mov	r2, #4
+ 1307 0a74 FEFFFFEB 		bl	install_irq
+ 1308 0a78 0030A0E1 		mov	r3, r0
+ 1309 0a7c 000053E3 		cmp	r3, #0
+ 1310 0a80 0100001A 		bne	.L72
+ 407:../Libraries/src/UART.c **** 			{
+ 408:../Libraries/src/UART.c **** 				return EINTERNAL;
+ 1311              		.loc 1 408 0
+ 1312 0a84 0030E0E3 		mvn	r3, #0
+ 1313 0a88 130000EA 		b	.L68
+ 1314              	.L72:
+ 409:../Libraries/src/UART.c **** 			}
+ 410:../Libraries/src/UART.c **** 			UART_STAT[2].callback_UART = callback;
+ 1315              		.loc 1 410 0
+ 1316 0a8c 60309FE5 		ldr	r3, .L75+8
+ 1317 0a90 0C201BE5 		ldr	r2, [fp, #-12]
+ 1318 0a94 802083E5 		str	r2, [r3, #128]
+ 1319              	.L71:
+ 411:../Libraries/src/UART.c **** 		}
+ 412:../Libraries/src/UART.c **** 		if(dev == LPC_UART3)
+ 1320              		.loc 1 412 0
+ 1321 0a98 08201BE5 		ldr	r2, [fp, #-8]
+ 1322 0a9c 64309FE5 		ldr	r3, .L75+28
+ 1323 0aa0 030052E1 		cmp	r2, r3
+ 1324 0aa4 0B00001A 		bne	.L73
+ 413:../Libraries/src/UART.c **** 		{
+ 414:../Libraries/src/UART.c **** 			if ( install_irq( UART3_INT, UART3Handler, HIGHEST_PRIORITY  ) == FALSE )
+ 1325              		.loc 1 414 0
+ 1326 0aa8 1D00A0E3 		mov	r0, #29
+ 1327 0aac 58109FE5 		ldr	r1, .L75+32
+ 1328 0ab0 0120A0E3 		mov	r2, #1
+ 1329 0ab4 FEFFFFEB 		bl	install_irq
+ 1330 0ab8 0030A0E1 		mov	r3, r0
+ 1331 0abc 000053E3 		cmp	r3, #0
+ 1332 0ac0 0100001A 		bne	.L74
+ 415:../Libraries/src/UART.c **** 			{
+ 416:../Libraries/src/UART.c **** 				return EINTERNAL;
+ 1333              		.loc 1 416 0
+ 1334 0ac4 0030E0E3 		mvn	r3, #0
+ 1335 0ac8 030000EA 		b	.L68
+ 1336              	.L74:
+ 417:../Libraries/src/UART.c **** 			}
+ 418:../Libraries/src/UART.c **** 			UART_STAT[3].callback_UART = callback;
+ 1337              		.loc 1 418 0
+ 1338 0acc 20309FE5 		ldr	r3, .L75+8
+ 1339 0ad0 0C201BE5 		ldr	r2, [fp, #-12]
+ 1340 0ad4 AC2083E5 		str	r2, [r3, #172]
+ 1341              	.L73:
+ 419:../Libraries/src/UART.c **** 		}
+ 420:../Libraries/src/UART.c **** 
+ 421:../Libraries/src/UART.c **** 		return EOK;
+ 1342              		.loc 1 421 0
+ 1343 0ad8 0030A0E3 		mov	r3, #0
+ 1344              	.L68:
+ 422:../Libraries/src/UART.c **** }
+ 1345              		.loc 1 422 0
+ 1346 0adc 0300A0E1 		mov	r0, r3
+ 1347 0ae0 04D04BE2 		sub	sp, fp, #4
+ 1348 0ae4 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 1349 0ae8 1EFF2FE1 		bx	lr
+ 1350              	.L76:
+ 1351              		.align	2
+ 1352              	.L75:
+ 1353 0aec 00C000E0 		.word	-536821760
+ 1354 0af0 00000000 		.word	UART0Handler
+ 1355 0af4 00000000 		.word	UART_STAT
+ 1356 0af8 000001E0 		.word	-536805376
+ 1357 0afc 00000000 		.word	UART1Handler
+ 1358 0b00 008007E0 		.word	-536379392
+ 1359 0b04 00000000 		.word	UART2Handler
+ 1360 0b08 00C007E0 		.word	-536363008
+ 1361 0b0c 00000000 		.word	UART3Handler
+ 1362              		.cfi_endproc
+ 1363              	.LFE8:
+ 1365              		.align	2
+ 1366              		.global	uart_init
+ 1368              	uart_init:
+ 1369              	.LFB9:
+ 423:../Libraries/src/UART.c **** 
+ 424:../Libraries/src/UART.c **** /**
+ 425:../Libraries/src/UART.c ****  * @brief		Initializes the dev UART peripheral according to the specified
+ 426:../Libraries/src/UART.c ****  *               parameters in the UART_cfg struct.
+ 427:../Libraries/src/UART.c ****  *
+ 428:../Libraries/src/UART.c ****  * This function initializes a given Uart peripheral
+ 429:../Libraries/src/UART.c ****  * according to the specified parameters in the cfg struct
+ 430:../Libraries/src/UART.c ****  * and calculate the best possible baudrate.
+ 431:../Libraries/src/UART.c ****  *
+ 432:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 433:../Libraries/src/UART.c ****  *   			- LPC_UART0: UART0 peripheral
+ 434:../Libraries/src/UART.c ****  * 				- LPC_UART1: UART1 peripheral
+ 435:../Libraries/src/UART.c ****  * 				- LPC_UART2: UART2 peripheral
+ 436:../Libraries/src/UART.c ****  * 				- LPC_UART3: UART3 peripheral
+ 437:../Libraries/src/UART.c ****  * @param[in]	UART_CFG Pointer to a UART_CFG_Type structure
+ 438:../Libraries/src/UART.c ****  *                    that contains the configuration information for the
+ 439:../Libraries/src/UART.c ****  *                    specified UART peripheral.
+ 440:../Libraries/src/UART.c ****  *
+ 441:../Libraries/src/UART.c ****  * @return		EOK if successful
+ 442:../Libraries/src/UART.c ****  * 				EINTERNAL if not successful
+ 443:../Libraries/src/UART.c ****  */
+ 444:../Libraries/src/UART.c **** int32_t uart_init(UART_T *dev, UART_CFG_T *cfg, void(*callback)(void))
+ 445:../Libraries/src/UART.c **** {
+ 1370              		.loc 1 445 0
+ 1371              		.cfi_startproc
+ 1372              		@ Function supports interworking.
+ 1373              		@ args = 0, pretend = 0, frame = 24
+ 1374              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1375 0b10 00482DE9 		stmfd	sp!, {fp, lr}
+ 1376              	.LCFI18:
+ 1377              		.cfi_def_cfa_offset 8
+ 1378              		.cfi_offset 14, -4
+ 1379              		.cfi_offset 11, -8
+ 1380 0b14 04B08DE2 		add	fp, sp, #4
+ 1381              	.LCFI19:
+ 1382              		.cfi_def_cfa 11, 4
+ 1383 0b18 18D04DE2 		sub	sp, sp, #24
+ 1384 0b1c 10000BE5 		str	r0, [fp, #-16]
+ 1385 0b20 14100BE5 		str	r1, [fp, #-20]
+ 1386 0b24 18200BE5 		str	r2, [fp, #-24]
+ 446:../Libraries/src/UART.c **** 	uint32_t tmp;
+ 447:../Libraries/src/UART.c **** 	uint8_t divisor = 1;
+ 1387              		.loc 1 447 0
+ 1388 0b28 0130A0E3 		mov	r3, #1
+ 1389 0b2c 09304BE5 		strb	r3, [fp, #-9]
+ 448:../Libraries/src/UART.c **** 
+ 449:../Libraries/src/UART.c **** 	/* Check input parameter */
+ 450:../Libraries/src/UART.c **** 	if(PARAM_UARTx(dev)==EPARAM)
+ 1390              		.loc 1 450 0
+ 1391 0b30 10201BE5 		ldr	r2, [fp, #-16]
+ 1392 0b34 50329FE5 		ldr	r3, .L105
+ 1393 0b38 030052E1 		cmp	r2, r3
+ 1394 0b3c 0D00000A 		beq	.L78
+ 1395              		.loc 1 450 0 is_stmt 0 discriminator 1
+ 1396 0b40 10201BE5 		ldr	r2, [fp, #-16]
+ 1397 0b44 44329FE5 		ldr	r3, .L105+4
+ 1398 0b48 030052E1 		cmp	r2, r3
+ 1399 0b4c 0900000A 		beq	.L78
+ 1400 0b50 10201BE5 		ldr	r2, [fp, #-16]
+ 1401 0b54 38329FE5 		ldr	r3, .L105+8
+ 1402 0b58 030052E1 		cmp	r2, r3
+ 1403 0b5c 0500000A 		beq	.L78
+ 1404              		.loc 1 450 0 discriminator 2
+ 1405 0b60 10201BE5 		ldr	r2, [fp, #-16]
+ 1406 0b64 2C329FE5 		ldr	r3, .L105+12
+ 1407 0b68 030052E1 		cmp	r2, r3
+ 1408 0b6c 0100000A 		beq	.L78
+ 451:../Libraries/src/UART.c **** 	{
+ 452:../Libraries/src/UART.c **** 		return EPARAM;
+ 1409              		.loc 1 452 0 is_stmt 1
+ 1410 0b70 0130E0E3 		mvn	r3, #1
+ 1411 0b74 800000EA 		b	.L79
+ 1412              	.L78:
+ 453:../Libraries/src/UART.c **** 	}
+ 454:../Libraries/src/UART.c **** 
+ 455:../Libraries/src/UART.c **** 	/* set up power */
+ 456:../Libraries/src/UART.c **** 	uart_enable_power(dev);
+ 1413              		.loc 1 456 0
+ 1414 0b78 10001BE5 		ldr	r0, [fp, #-16]
+ 1415 0b7c 8FFDFFEB 		bl	uart_enable_power
+ 457:../Libraries/src/UART.c **** 
+ 458:../Libraries/src/UART.c **** 	/* set up clock */
+ 459:../Libraries/src/UART.c **** 	uart_set_clock(dev, divisor);
+ 1416              		.loc 1 459 0
+ 1417 0b80 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1418 0b84 10001BE5 		ldr	r0, [fp, #-16]
+ 1419 0b88 0310A0E1 		mov	r1, r3
+ 1420 0b8c BBFDFFEB 		bl	uart_set_clock
+ 460:../Libraries/src/UART.c **** 
+ 461:../Libraries/src/UART.c **** 	/* set all unused registers to 0 when the specific
+ 462:../Libraries/src/UART.c **** 	 * module is used, otherwise -> don't touch
+ 463:../Libraries/src/UART.c **** 	 */
+ 464:../Libraries/src/UART.c **** 	if(dev == LPC_UART1)
+ 1421              		.loc 1 464 0
+ 1422 0b90 10201BE5 		ldr	r2, [fp, #-16]
+ 1423 0b94 F4319FE5 		ldr	r3, .L105+4
+ 1424 0b98 030052E1 		cmp	r2, r3
+ 1425 0b9c 0200001A 		bne	.L80
+ 465:../Libraries/src/UART.c **** 	{
+ 466:../Libraries/src/UART.c **** 		dev->MCR = 0;
+ 1426              		.loc 1 466 0
+ 1427 0ba0 10301BE5 		ldr	r3, [fp, #-16]
+ 1428 0ba4 0020A0E3 		mov	r2, #0
+ 1429 0ba8 1020C3E5 		strb	r2, [r3, #16]
+ 1430              	.L80:
+ 467:../Libraries/src/UART.c **** 	}
+ 468:../Libraries/src/UART.c **** 	if(dev == LPC_UART3)
+ 1431              		.loc 1 468 0
+ 1432 0bac 10201BE5 		ldr	r2, [fp, #-16]
+ 1433 0bb0 E0319FE5 		ldr	r3, .L105+12
+ 1434 0bb4 030052E1 		cmp	r2, r3
+ 1435 0bb8 0200001A 		bne	.L81
+ 469:../Libraries/src/UART.c **** 	{
+ 470:../Libraries/src/UART.c **** 		dev->ICR = 0;
+ 1436              		.loc 1 470 0
+ 1437 0bbc 10301BE5 		ldr	r3, [fp, #-16]
+ 1438 0bc0 0020A0E3 		mov	r2, #0
+ 1439 0bc4 2420C3E5 		strb	r2, [r3, #36]
+ 1440              	.L81:
+ 471:../Libraries/src/UART.c **** 	}
+ 472:../Libraries/src/UART.c **** 
+ 473:../Libraries/src/UART.c **** 	/* calculate accurate values for best baudrate */
+ 474:../Libraries/src/UART.c **** 	if(uart_set_divisors(dev, cfg->Baud_rate, divisor)!=EOK)
+ 1441              		.loc 1 474 0
+ 1442 0bc8 14301BE5 		ldr	r3, [fp, #-20]
+ 1443 0bcc 002093E5 		ldr	r2, [r3, #0]
+ 1444 0bd0 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1445 0bd4 10001BE5 		ldr	r0, [fp, #-16]
+ 1446 0bd8 0210A0E1 		mov	r1, r2
+ 1447 0bdc 0320A0E1 		mov	r2, r3
+ 1448 0be0 8CFEFFEB 		bl	uart_set_divisors
+ 1449 0be4 0030A0E1 		mov	r3, r0
+ 1450 0be8 000053E3 		cmp	r3, #0
+ 1451 0bec 0100000A 		beq	.L82
+ 475:../Libraries/src/UART.c **** 	{
+ 476:../Libraries/src/UART.c **** 		return EINTERNAL;
+ 1452              		.loc 1 476 0
+ 1453 0bf0 0030E0E3 		mvn	r3, #0
+ 1454 0bf4 600000EA 		b	.L79
+ 1455              	.L82:
+ 477:../Libraries/src/UART.c **** 	}
+ 478:../Libraries/src/UART.c **** 
+ 479:../Libraries/src/UART.c **** 	tmp = (dev->LCR & (UART_LCR_DLAB_EN | UART_LCR_BREAK_EN)) & UART_LCR_BITMASK;
+ 1456              		.loc 1 479 0
+ 1457 0bf8 10301BE5 		ldr	r3, [fp, #-16]
+ 1458 0bfc 0C30D3E5 		ldrb	r3, [r3, #12]
+ 1459 0c00 FF3003E2 		and	r3, r3, #255
+ 1460 0c04 C03003E2 		and	r3, r3, #192
+ 1461 0c08 08300BE5 		str	r3, [fp, #-8]
+ 480:../Libraries/src/UART.c **** 
+ 481:../Libraries/src/UART.c **** 	/* set Databits */
+ 482:../Libraries/src/UART.c **** 	switch (cfg->Databits){
+ 1462              		.loc 1 482 0
+ 1463 0c0c 14301BE5 		ldr	r3, [fp, #-20]
+ 1464 0c10 0530D3E5 		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 1465 0c14 010053E3 		cmp	r3, #1
+ 1466 0c18 0400000A 		beq	.L85
+ 1467 0c1c 020053E3 		cmp	r3, #2
+ 1468 0c20 0600000A 		beq	.L86
+ 1469 0c24 000053E3 		cmp	r3, #0
+ 1470 0c28 0C00000A 		beq	.L103
+ 1471 0c2c 070000EA 		b	.L101
+ 1472              	.L85:
+ 483:../Libraries/src/UART.c **** 	case UART_DATABIT_5:
+ 484:../Libraries/src/UART.c **** 		tmp |= UART_LCR_WLEN5;
+ 485:../Libraries/src/UART.c **** 		break;
+ 486:../Libraries/src/UART.c **** 	case UART_DATABIT_6:
+ 487:../Libraries/src/UART.c **** 		tmp |= UART_LCR_WLEN6;
+ 1473              		.loc 1 487 0
+ 1474 0c30 08301BE5 		ldr	r3, [fp, #-8]
+ 1475 0c34 013083E3 		orr	r3, r3, #1
+ 1476 0c38 08300BE5 		str	r3, [fp, #-8]
+ 488:../Libraries/src/UART.c **** 		break;
+ 1477              		.loc 1 488 0
+ 1478 0c3c 080000EA 		b	.L87
+ 1479              	.L86:
+ 489:../Libraries/src/UART.c **** 	case UART_DATABIT_7:
+ 490:../Libraries/src/UART.c **** 		tmp |= UART_LCR_WLEN7;
+ 1480              		.loc 1 490 0
+ 1481 0c40 08301BE5 		ldr	r3, [fp, #-8]
+ 1482 0c44 023083E3 		orr	r3, r3, #2
+ 1483 0c48 08300BE5 		str	r3, [fp, #-8]
+ 491:../Libraries/src/UART.c **** 		break;
+ 1484              		.loc 1 491 0
+ 1485 0c4c 040000EA 		b	.L87
+ 1486              	.L101:
+ 492:../Libraries/src/UART.c **** 	case UART_DATABIT_8:
+ 493:../Libraries/src/UART.c **** 	default:
+ 494:../Libraries/src/UART.c **** 		tmp |= UART_LCR_WLEN8;
+ 1487              		.loc 1 494 0
+ 1488 0c50 08301BE5 		ldr	r3, [fp, #-8]
+ 1489 0c54 033083E3 		orr	r3, r3, #3
+ 1490 0c58 08300BE5 		str	r3, [fp, #-8]
+ 495:../Libraries/src/UART.c **** 		break;
+ 1491              		.loc 1 495 0
+ 1492 0c5c 000000EA 		b	.L87
+ 1493              	.L103:
+ 485:../Libraries/src/UART.c **** 		break;
+ 1494              		.loc 1 485 0
+ 1495 0c60 0000A0E1 		mov	r0, r0	@ nop
+ 1496              	.L87:
+ 496:../Libraries/src/UART.c **** 	}
+ 497:../Libraries/src/UART.c **** 
+ 498:../Libraries/src/UART.c **** 	/* set Parity mode */
+ 499:../Libraries/src/UART.c **** 	if (cfg->Parity == UART_PARITY_NONE)
+ 1497              		.loc 1 499 0
+ 1498 0c64 14301BE5 		ldr	r3, [fp, #-20]
+ 1499 0c68 0430D3E5 		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1500 0c6c 000053E3 		cmp	r3, #0
+ 1501 0c70 1900000A 		beq	.L88
+ 500:../Libraries/src/UART.c **** 	{
+ 501:../Libraries/src/UART.c **** 		/* Do nothing... */
+ 502:../Libraries/src/UART.c **** 	}
+ 503:../Libraries/src/UART.c **** 	else
+ 504:../Libraries/src/UART.c **** 	{
+ 505:../Libraries/src/UART.c **** 		tmp |= UART_LCR_PARITY_EN;
+ 1502              		.loc 1 505 0
+ 1503 0c74 08301BE5 		ldr	r3, [fp, #-8]
+ 1504 0c78 083083E3 		orr	r3, r3, #8
+ 1505 0c7c 08300BE5 		str	r3, [fp, #-8]
+ 506:../Libraries/src/UART.c **** 		switch (cfg->Parity)
+ 1506              		.loc 1 506 0
+ 1507 0c80 14301BE5 		ldr	r3, [fp, #-20]
+ 1508 0c84 0430D3E5 		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1509 0c88 013043E2 		sub	r3, r3, #1
+ 1510 0c8c 030053E3 		cmp	r3, #3
+ 1511 0c90 03F19F97 		ldrls	pc, [pc, r3, asl #2]
+ 1512 0c94 0F0000EA 		b	.L104
+ 1513              	.L94:
+ 1514 0c98 D80C0000 		.word	.L104
+ 1515 0c9c A80C0000 		.word	.L91
+ 1516 0ca0 B80C0000 		.word	.L92
+ 1517 0ca4 C80C0000 		.word	.L93
+ 1518              	.L91:
+ 507:../Libraries/src/UART.c **** 		{
+ 508:../Libraries/src/UART.c **** 		case UART_PARITY_ODD:
+ 509:../Libraries/src/UART.c **** 			tmp |= UART_LCR_PARITY_ODD;
+ 510:../Libraries/src/UART.c **** 			break;
+ 511:../Libraries/src/UART.c **** 
+ 512:../Libraries/src/UART.c **** 		case UART_PARITY_EVEN:
+ 513:../Libraries/src/UART.c **** 			tmp |= UART_LCR_PARITY_EVEN;
+ 1519              		.loc 1 513 0
+ 1520 0ca8 08301BE5 		ldr	r3, [fp, #-8]
+ 1521 0cac 103083E3 		orr	r3, r3, #16
+ 1522 0cb0 08300BE5 		str	r3, [fp, #-8]
+ 514:../Libraries/src/UART.c **** 			break;
+ 1523              		.loc 1 514 0
+ 1524 0cb4 080000EA 		b	.L88
+ 1525              	.L92:
+ 515:../Libraries/src/UART.c **** 
+ 516:../Libraries/src/UART.c **** 		case UART_PARITY_SP1:
+ 517:../Libraries/src/UART.c **** 			tmp |= UART_LCR_PARITY_F_1;
+ 1526              		.loc 1 517 0
+ 1527 0cb8 08301BE5 		ldr	r3, [fp, #-8]
+ 1528 0cbc 203083E3 		orr	r3, r3, #32
+ 1529 0cc0 08300BE5 		str	r3, [fp, #-8]
+ 518:../Libraries/src/UART.c **** 			break;
+ 1530              		.loc 1 518 0
+ 1531 0cc4 040000EA 		b	.L88
+ 1532              	.L93:
+ 519:../Libraries/src/UART.c **** 
+ 520:../Libraries/src/UART.c **** 		case UART_PARITY_SP0:
+ 521:../Libraries/src/UART.c **** 			tmp |= UART_LCR_PARITY_F_0;
+ 1533              		.loc 1 521 0
+ 1534 0cc8 08301BE5 		ldr	r3, [fp, #-8]
+ 1535 0ccc 303083E3 		orr	r3, r3, #48
+ 1536 0cd0 08300BE5 		str	r3, [fp, #-8]
+ 522:../Libraries/src/UART.c **** 			break;
+ 1537              		.loc 1 522 0
+ 1538 0cd4 000000EA 		b	.L88
+ 1539              	.L104:
+ 523:../Libraries/src/UART.c **** 		default:
+ 524:../Libraries/src/UART.c **** 			break;
+ 1540              		.loc 1 524 0
+ 1541 0cd8 0000A0E1 		mov	r0, r0	@ nop
+ 1542              	.L88:
+ 525:../Libraries/src/UART.c **** 		}
+ 526:../Libraries/src/UART.c **** 	}
+ 527:../Libraries/src/UART.c **** 
+ 528:../Libraries/src/UART.c **** 	/* set stop bits */
+ 529:../Libraries/src/UART.c **** 	switch (cfg->Stopbits){
+ 1543              		.loc 1 529 0
+ 1544 0cdc 14301BE5 		ldr	r3, [fp, #-20]
+ 1545 0ce0 0630D3E5 		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 1546 0ce4 010053E3 		cmp	r3, #1
+ 1547 0ce8 0300001A 		bne	.L102
+ 1548              	.L96:
+ 530:../Libraries/src/UART.c **** 	case UART_STOPBIT_2:
+ 531:../Libraries/src/UART.c **** 		tmp |= UART_LCR_STOPBIT_SEL;
+ 1549              		.loc 1 531 0
+ 1550 0cec 08301BE5 		ldr	r3, [fp, #-8]
+ 1551 0cf0 043083E3 		orr	r3, r3, #4
+ 1552 0cf4 08300BE5 		str	r3, [fp, #-8]
+ 532:../Libraries/src/UART.c **** 		break;
+ 1553              		.loc 1 532 0
+ 1554 0cf8 000000EA 		b	.L97
+ 1555              	.L102:
+ 533:../Libraries/src/UART.c **** 	case UART_STOPBIT_1:
+ 534:../Libraries/src/UART.c **** 	default:
+ 535:../Libraries/src/UART.c **** 		/* Do no thing... */
+ 536:../Libraries/src/UART.c **** 		break;
+ 1556              		.loc 1 536 0
+ 1557 0cfc 0000A0E1 		mov	r0, r0	@ nop
+ 1558              	.L97:
+ 537:../Libraries/src/UART.c **** 	}
+ 538:../Libraries/src/UART.c **** 
+ 539:../Libraries/src/UART.c **** 	/* write back to LCR, configure FIFO and disable Tx */
+ 540:../Libraries/src/UART.c **** 	dev->LCR = (uint8_t)(tmp & UART_LCR_BITMASK);
+ 1559              		.loc 1 540 0
+ 1560 0d00 08301BE5 		ldr	r3, [fp, #-8]
+ 1561 0d04 FF2003E2 		and	r2, r3, #255
+ 1562 0d08 10301BE5 		ldr	r3, [fp, #-16]
+ 1563 0d0c 0C20C3E5 		strb	r2, [r3, #12]
+ 541:../Libraries/src/UART.c **** 
+ 542:../Libraries/src/UART.c **** 	/* check wich buffer should be used */
+ 543:../Libraries/src/UART.c **** 	if(cfg->Buffer==UART_SW_BUF)	/* Software buffer when selected */
+ 1564              		.loc 1 543 0
+ 1565 0d10 14301BE5 		ldr	r3, [fp, #-20]
+ 1566 0d14 0730D3E5 		ldrb	r3, [r3, #7]	@ zero_extendqisi2
+ 1567 0d18 010053E3 		cmp	r3, #1
+ 1568 0d1c 0500001A 		bne	.L98
+ 544:../Libraries/src/UART.c **** 	{
+ 545:../Libraries/src/UART.c **** 		initCB(dev);
+ 1569              		.loc 1 545 0
+ 1570 0d20 10001BE5 		ldr	r0, [fp, #-16]
+ 1571 0d24 FEFFFFEB 		bl	initCB
+ 546:../Libraries/src/UART.c **** 		dev->REG3.FCR = 0x00;
+ 1572              		.loc 1 546 0
+ 1573 0d28 10301BE5 		ldr	r3, [fp, #-16]
+ 1574 0d2c 0020A0E3 		mov	r2, #0
+ 1575 0d30 0820C3E5 		strb	r2, [r3, #8]
+ 1576 0d34 020000EA 		b	.L99
+ 1577              	.L98:
+ 547:../Libraries/src/UART.c **** 	}
+ 548:../Libraries/src/UART.c **** 	else 	/* otherwise always hardware buffer are used */
+ 549:../Libraries/src/UART.c **** 	{
+ 550:../Libraries/src/UART.c **** 		/* Enable and reset TX and RX FIFO. */
+ 551:../Libraries/src/UART.c **** 		dev->REG3.FCR = 0x07;
+ 1578              		.loc 1 551 0
+ 1579 0d38 10301BE5 		ldr	r3, [fp, #-16]
+ 1580 0d3c 0720A0E3 		mov	r2, #7
+ 1581 0d40 0820C3E5 		strb	r2, [r3, #8]
+ 1582              	.L99:
+ 552:../Libraries/src/UART.c **** 	}
+ 553:../Libraries/src/UART.c **** 
+ 554:../Libraries/src/UART.c **** 	/* install irq routine */
+ 555:../Libraries/src/UART.c **** 	if(uart_installIrq(dev, callback)!=EOK)
+ 1583              		.loc 1 555 0
+ 1584 0d44 10001BE5 		ldr	r0, [fp, #-16]
+ 1585 0d48 18101BE5 		ldr	r1, [fp, #-24]
+ 1586 0d4c 1CFFFFEB 		bl	uart_installIrq
+ 1587 0d50 0030A0E1 		mov	r3, r0
+ 1588 0d54 000053E3 		cmp	r3, #0
+ 1589 0d58 0100000A 		beq	.L100
+ 556:../Libraries/src/UART.c **** 	{
+ 557:../Libraries/src/UART.c **** 		return EINTERNAL;
+ 1590              		.loc 1 557 0
+ 1591 0d5c 0030E0E3 		mvn	r3, #0
+ 1592 0d60 050000EA 		b	.L79
+ 1593              	.L100:
+ 558:../Libraries/src/UART.c **** 	}
+ 559:../Libraries/src/UART.c **** 
+ 560:../Libraries/src/UART.c **** 	/*  enable IRQs: Receive Data Available and THR Empty Interrupt */
+ 561:../Libraries/src/UART.c **** 	dev->REG2.IER = (UART_IER_RBRINT_EN|UART_IER_THREINT_EN);
+ 1594              		.loc 1 561 0
+ 1595 0d64 10301BE5 		ldr	r3, [fp, #-16]
+ 1596 0d68 B420D3E1 		ldrh	r2, [r3, #4]	@ movhi
+ 1597 0d6c 0020A0E3 		mov	r2, #0
+ 1598 0d70 032082E3 		orr	r2, r2, #3
+ 1599 0d74 B420C3E1 		strh	r2, [r3, #4]	@ movhi
+ 562:../Libraries/src/UART.c **** 
+ 563:../Libraries/src/UART.c **** 	return EOK;
+ 1600              		.loc 1 563 0
+ 1601 0d78 0030A0E3 		mov	r3, #0
+ 1602              	.L79:
+ 564:../Libraries/src/UART.c **** }
+ 1603              		.loc 1 564 0
+ 1604 0d7c 0300A0E1 		mov	r0, r3
+ 1605 0d80 04D04BE2 		sub	sp, fp, #4
+ 1606 0d84 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 1607 0d88 1EFF2FE1 		bx	lr
+ 1608              	.L106:
+ 1609              		.align	2
+ 1610              	.L105:
+ 1611 0d8c 00C000E0 		.word	-536821760
+ 1612 0d90 000001E0 		.word	-536805376
+ 1613 0d94 008007E0 		.word	-536379392
+ 1614 0d98 00C007E0 		.word	-536363008
+ 1615              		.cfi_endproc
+ 1616              	.LFE9:
+ 1618              		.align	2
+ 1619              		.global	uart_enable
+ 1621              	uart_enable:
+ 1622              	.LFB10:
+ 565:../Libraries/src/UART.c **** 
+ 566:../Libraries/src/UART.c **** /**
+ 567:../Libraries/src/UART.c ****  * @brief		Enable specific UART Pins
+ 568:../Libraries/src/UART.c ****  *
+ 569:../Libraries/src/UART.c ****  * This function enables specific UART pins with the right function
+ 570:../Libraries/src/UART.c ****  *
+ 571:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 572:../Libraries/src/UART.c ****  * 					- LPC_UART0: UART0 peripheral
+ 573:../Libraries/src/UART.c ****  * 					- LPC_UART1: UART1 peripheral
+ 574:../Libraries/src/UART.c ****  * 					- LPC_UART2: UART2 peripheral
+ 575:../Libraries/src/UART.c ****  * 					- LPC_UART3: UART3 peripheral
+ 576:../Libraries/src/UART.c ****  * @param[in]	flag LSB is for TX enable and one left of LSB is for
+ 577:../Libraries/src/UART.c ****  * 					RX enable
+ 578:../Libraries/src/UART.c ****  *
+ 579:../Libraries/src/UART.c ****  * @return		None
+ 580:../Libraries/src/UART.c ****  */
+ 581:../Libraries/src/UART.c **** void uart_enable(UART_T *dev, uint8_t flag)
+ 582:../Libraries/src/UART.c **** {
+ 1623              		.loc 1 582 0
+ 1624              		.cfi_startproc
+ 1625              		@ Function supports interworking.
+ 1626              		@ args = 0, pretend = 0, frame = 8
+ 1627              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1628              		@ link register save eliminated.
+ 1629 0d9c 04B02DE5 		str	fp, [sp, #-4]!
+ 1630              	.LCFI20:
+ 1631              		.cfi_def_cfa_offset 4
+ 1632              		.cfi_offset 11, -4
+ 1633 0da0 00B08DE2 		add	fp, sp, #0
+ 1634              	.LCFI21:
+ 1635              		.cfi_def_cfa_register 11
+ 1636 0da4 0CD04DE2 		sub	sp, sp, #12
+ 1637 0da8 08000BE5 		str	r0, [fp, #-8]
+ 1638 0dac 0130A0E1 		mov	r3, r1
+ 1639 0db0 09304BE5 		strb	r3, [fp, #-9]
+ 583:../Libraries/src/UART.c **** 	if(dev == LPC_UART0)
+ 1640              		.loc 1 583 0
+ 1641 0db4 08201BE5 		ldr	r2, [fp, #-8]
+ 1642 0db8 E0319FE5 		ldr	r3, .L116
+ 1643 0dbc 030052E1 		cmp	r2, r3
+ 1644 0dc0 1900001A 		bne	.L108
+ 584:../Libraries/src/UART.c **** 	{
+ 585:../Libraries/src/UART.c **** 		if(flag && PIN_RX_ENABLE)
+ 1645              		.loc 1 585 0
+ 1646 0dc4 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1647 0dc8 000053E3 		cmp	r3, #0
+ 1648 0dcc 0900000A 		beq	.L109
+ 586:../Libraries/src/UART.c **** 		{
+ 587:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_RX_UART0));
+ 1649              		.loc 1 587 0
+ 1650 0dd0 CC319FE5 		ldr	r3, .L116+4
+ 1651 0dd4 C8219FE5 		ldr	r2, .L116+4
+ 1652 0dd8 002092E5 		ldr	r2, [r2, #0]
+ 1653 0ddc C020C2E3 		bic	r2, r2, #192
+ 1654 0de0 002083E5 		str	r2, [r3, #0]
+ 588:../Libraries/src/UART.c **** 			PINSEL0 |= ((uint32_t)(PIN_FUNC_SEL_1<<PIN_RX_UART0));
+ 1655              		.loc 1 588 0
+ 1656 0de4 B8319FE5 		ldr	r3, .L116+4
+ 1657 0de8 B4219FE5 		ldr	r2, .L116+4
+ 1658 0dec 002092E5 		ldr	r2, [r2, #0]
+ 1659 0df0 402082E3 		orr	r2, r2, #64
+ 1660 0df4 002083E5 		str	r2, [r3, #0]
+ 1661              	.L109:
+ 589:../Libraries/src/UART.c **** 		}
+ 590:../Libraries/src/UART.c **** 		if(flag && PIN_TX_ENABLE)
+ 1662              		.loc 1 590 0
+ 1663 0df8 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1664 0dfc 000053E3 		cmp	r3, #0
+ 1665 0e00 0900000A 		beq	.L108
+ 591:../Libraries/src/UART.c **** 		{
+ 592:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_TX_UART0));
+ 1666              		.loc 1 592 0
+ 1667 0e04 98319FE5 		ldr	r3, .L116+4
+ 1668 0e08 94219FE5 		ldr	r2, .L116+4
+ 1669 0e0c 002092E5 		ldr	r2, [r2, #0]
+ 1670 0e10 3020C2E3 		bic	r2, r2, #48
+ 1671 0e14 002083E5 		str	r2, [r3, #0]
+ 593:../Libraries/src/UART.c **** 			PINSEL0 |= ((uint32_t)(PIN_FUNC_SEL_1<<PIN_TX_UART0));
+ 1672              		.loc 1 593 0
+ 1673 0e18 84319FE5 		ldr	r3, .L116+4
+ 1674 0e1c 80219FE5 		ldr	r2, .L116+4
+ 1675 0e20 002092E5 		ldr	r2, [r2, #0]
+ 1676 0e24 102082E3 		orr	r2, r2, #16
+ 1677 0e28 002083E5 		str	r2, [r3, #0]
+ 1678              	.L108:
+ 594:../Libraries/src/UART.c **** 		}
+ 595:../Libraries/src/UART.c **** 	}
+ 596:../Libraries/src/UART.c **** 	if(dev == LPC_UART1)
+ 1679              		.loc 1 596 0
+ 1680 0e2c 08201BE5 		ldr	r2, [fp, #-8]
+ 1681 0e30 70319FE5 		ldr	r3, .L116+8
+ 1682 0e34 030052E1 		cmp	r2, r3
+ 1683 0e38 1900001A 		bne	.L110
+ 597:../Libraries/src/UART.c **** 	{
+ 598:../Libraries/src/UART.c **** 		if(flag && PIN_RX_ENABLE)
+ 1684              		.loc 1 598 0
+ 1685 0e3c 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1686 0e40 000053E3 		cmp	r3, #0
+ 1687 0e44 0900000A 		beq	.L111
+ 599:../Libraries/src/UART.c **** 		{
+ 600:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_RX_UART1));
+ 1688              		.loc 1 600 0
+ 1689 0e48 54319FE5 		ldr	r3, .L116+4
+ 1690 0e4c 50219FE5 		ldr	r2, .L116+4
+ 1691 0e50 002092E5 		ldr	r2, [r2, #0]
+ 1692 0e54 0320C2E3 		bic	r2, r2, #3
+ 1693 0e58 002083E5 		str	r2, [r3, #0]
+ 601:../Libraries/src/UART.c **** 			PINSEL0 |= ((uint32_t)(PIN_FUNC_SEL_1<<PIN_RX_UART1));
+ 1694              		.loc 1 601 0
+ 1695 0e5c 40319FE5 		ldr	r3, .L116+4
+ 1696 0e60 3C219FE5 		ldr	r2, .L116+4
+ 1697 0e64 002092E5 		ldr	r2, [r2, #0]
+ 1698 0e68 012082E3 		orr	r2, r2, #1
+ 1699 0e6c 002083E5 		str	r2, [r3, #0]
+ 1700              	.L111:
+ 602:../Libraries/src/UART.c **** 		}
+ 603:../Libraries/src/UART.c **** 		if(flag && PIN_TX_ENABLE)
+ 1701              		.loc 1 603 0
+ 1702 0e70 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1703 0e74 000053E3 		cmp	r3, #0
+ 1704 0e78 0900000A 		beq	.L110
+ 604:../Libraries/src/UART.c **** 		{
+ 605:../Libraries/src/UART.c **** 			PINSEL1 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_TX_UART1));
+ 1705              		.loc 1 605 0
+ 1706 0e7c 28319FE5 		ldr	r3, .L116+12
+ 1707 0e80 24219FE5 		ldr	r2, .L116+12
+ 1708 0e84 002092E5 		ldr	r2, [r2, #0]
+ 1709 0e88 0321C2E3 		bic	r2, r2, #-1073741824
+ 1710 0e8c 002083E5 		str	r2, [r3, #0]
+ 606:../Libraries/src/UART.c **** 			PINSEL1 |= ((uint32_t)(PIN_FUNC_SEL_1<<PIN_TX_UART1));
+ 1711              		.loc 1 606 0
+ 1712 0e90 14319FE5 		ldr	r3, .L116+12
+ 1713 0e94 10219FE5 		ldr	r2, .L116+12
+ 1714 0e98 002092E5 		ldr	r2, [r2, #0]
+ 1715 0e9c 012182E3 		orr	r2, r2, #1073741824
+ 1716 0ea0 002083E5 		str	r2, [r3, #0]
+ 1717              	.L110:
+ 607:../Libraries/src/UART.c **** 		}
+ 608:../Libraries/src/UART.c **** 	}
+ 609:../Libraries/src/UART.c **** 	if(dev == LPC_UART2)
+ 1718              		.loc 1 609 0
+ 1719 0ea4 08201BE5 		ldr	r2, [fp, #-8]
+ 1720 0ea8 00319FE5 		ldr	r3, .L116+16
+ 1721 0eac 030052E1 		cmp	r2, r3
+ 1722 0eb0 1900001A 		bne	.L112
+ 610:../Libraries/src/UART.c **** 	{
+ 611:../Libraries/src/UART.c **** 		if(flag && PIN_RX_ENABLE)
+ 1723              		.loc 1 611 0
+ 1724 0eb4 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1725 0eb8 000053E3 		cmp	r3, #0
+ 1726 0ebc 0900000A 		beq	.L113
+ 612:../Libraries/src/UART.c **** 		{
+ 613:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_RX_UART2));
+ 1727              		.loc 1 613 0
+ 1728 0ec0 DC309FE5 		ldr	r3, .L116+4
+ 1729 0ec4 D8209FE5 		ldr	r2, .L116+4
+ 1730 0ec8 002092E5 		ldr	r2, [r2, #0]
+ 1731 0ecc 0325C2E3 		bic	r2, r2, #12582912
+ 1732 0ed0 002083E5 		str	r2, [r3, #0]
+ 614:../Libraries/src/UART.c **** 			PINSEL0 |= ((uint32_t)(PIN_FUNC_SEL_1<<PIN_RX_UART2));
+ 1733              		.loc 1 614 0
+ 1734 0ed4 C8309FE5 		ldr	r3, .L116+4
+ 1735 0ed8 C4209FE5 		ldr	r2, .L116+4
+ 1736 0edc 002092E5 		ldr	r2, [r2, #0]
+ 1737 0ee0 012582E3 		orr	r2, r2, #4194304
+ 1738 0ee4 002083E5 		str	r2, [r3, #0]
+ 1739              	.L113:
+ 615:../Libraries/src/UART.c **** 		}
+ 616:../Libraries/src/UART.c **** 		if(flag && PIN_TX_ENABLE)
+ 1740              		.loc 1 616 0
+ 1741 0ee8 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1742 0eec 000053E3 		cmp	r3, #0
+ 1743 0ef0 0900000A 		beq	.L112
+ 617:../Libraries/src/UART.c **** 		{
+ 618:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_TX_UART2));
+ 1744              		.loc 1 618 0
+ 1745 0ef4 A8309FE5 		ldr	r3, .L116+4
+ 1746 0ef8 A4209FE5 		ldr	r2, .L116+4
+ 1747 0efc 002092E5 		ldr	r2, [r2, #0]
+ 1748 0f00 0326C2E3 		bic	r2, r2, #3145728
+ 1749 0f04 002083E5 		str	r2, [r3, #0]
+ 619:../Libraries/src/UART.c **** 			PINSEL0 |= ((uint32_t)(PIN_FUNC_SEL_1<<PIN_TX_UART2));
+ 1750              		.loc 1 619 0
+ 1751 0f08 94309FE5 		ldr	r3, .L116+4
+ 1752 0f0c 90209FE5 		ldr	r2, .L116+4
+ 1753 0f10 002092E5 		ldr	r2, [r2, #0]
+ 1754 0f14 012682E3 		orr	r2, r2, #1048576
+ 1755 0f18 002083E5 		str	r2, [r3, #0]
+ 1756              	.L112:
+ 620:../Libraries/src/UART.c **** 		}
+ 621:../Libraries/src/UART.c **** 	}
+ 622:../Libraries/src/UART.c **** 	if(dev == LPC_UART3)
+ 1757              		.loc 1 622 0
+ 1758 0f1c 08201BE5 		ldr	r2, [fp, #-8]
+ 1759 0f20 8C309FE5 		ldr	r3, .L116+20
+ 1760 0f24 030052E1 		cmp	r2, r3
+ 1761 0f28 1900001A 		bne	.L107
+ 623:../Libraries/src/UART.c **** 	{
+ 624:../Libraries/src/UART.c **** 		if(flag && PIN_RX_ENABLE)
+ 1762              		.loc 1 624 0
+ 1763 0f2c 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1764 0f30 000053E3 		cmp	r3, #0
+ 1765 0f34 0900000A 		beq	.L115
+ 625:../Libraries/src/UART.c **** 		{
+ 626:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_RX_UART3));
+ 1766              		.loc 1 626 0
+ 1767 0f38 64309FE5 		ldr	r3, .L116+4
+ 1768 0f3c 60209FE5 		ldr	r2, .L116+4
+ 1769 0f40 002092E5 		ldr	r2, [r2, #0]
+ 1770 0f44 0C20C2E3 		bic	r2, r2, #12
+ 1771 0f48 002083E5 		str	r2, [r3, #0]
+ 627:../Libraries/src/UART.c **** 			PINSEL0 |= ((uint32_t)(PIN_FUNC_SEL_2<<PIN_RX_UART3));
+ 1772              		.loc 1 627 0
+ 1773 0f4c 50309FE5 		ldr	r3, .L116+4
+ 1774 0f50 4C209FE5 		ldr	r2, .L116+4
+ 1775 0f54 002092E5 		ldr	r2, [r2, #0]
+ 1776 0f58 082082E3 		orr	r2, r2, #8
+ 1777 0f5c 002083E5 		str	r2, [r3, #0]
+ 1778              	.L115:
+ 628:../Libraries/src/UART.c **** 		}
+ 629:../Libraries/src/UART.c **** 		if(flag && PIN_TX_ENABLE)
+ 1779              		.loc 1 629 0
+ 1780 0f60 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1781 0f64 000053E3 		cmp	r3, #0
+ 1782 0f68 0900000A 		beq	.L107
+ 630:../Libraries/src/UART.c **** 		{
+ 631:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_TX_UART3));
+ 1783              		.loc 1 631 0
+ 1784 0f6c 30309FE5 		ldr	r3, .L116+4
+ 1785 0f70 2C209FE5 		ldr	r2, .L116+4
+ 1786 0f74 002092E5 		ldr	r2, [r2, #0]
+ 1787 0f78 0320C2E3 		bic	r2, r2, #3
+ 1788 0f7c 002083E5 		str	r2, [r3, #0]
+ 632:../Libraries/src/UART.c **** 			PINSEL0 |= ((uint32_t)(PIN_FUNC_SEL_2<<PIN_TX_UART3));
+ 1789              		.loc 1 632 0
+ 1790 0f80 1C309FE5 		ldr	r3, .L116+4
+ 1791 0f84 18209FE5 		ldr	r2, .L116+4
+ 1792 0f88 002092E5 		ldr	r2, [r2, #0]
+ 1793 0f8c 022082E3 		orr	r2, r2, #2
+ 1794 0f90 002083E5 		str	r2, [r3, #0]
+ 1795              	.L107:
+ 633:../Libraries/src/UART.c **** 		}
+ 634:../Libraries/src/UART.c **** 	}
+ 635:../Libraries/src/UART.c **** }
+ 1796              		.loc 1 635 0
+ 1797 0f94 00D08BE2 		add	sp, fp, #0
+ 1798 0f98 04B09DE4 		ldmfd	sp!, {fp}
+ 1799 0f9c 1EFF2FE1 		bx	lr
+ 1800              	.L117:
+ 1801              		.align	2
+ 1802              	.L116:
+ 1803 0fa0 00C000E0 		.word	-536821760
+ 1804 0fa4 00C002E0 		.word	-536690688
+ 1805 0fa8 000001E0 		.word	-536805376
+ 1806 0fac 04C002E0 		.word	-536690684
+ 1807 0fb0 008007E0 		.word	-536379392
+ 1808 0fb4 00C007E0 		.word	-536363008
+ 1809              		.cfi_endproc
+ 1810              	.LFE10:
+ 1812              		.align	2
+ 1813              		.global	uart_disable
+ 1815              	uart_disable:
+ 1816              	.LFB11:
+ 636:../Libraries/src/UART.c **** 
+ 637:../Libraries/src/UART.c **** /**
+ 638:../Libraries/src/UART.c ****  * @brief		Disable specific UART Pins
+ 639:../Libraries/src/UART.c ****  *
+ 640:../Libraries/src/UART.c ****  * Set specific UART RX TX Pin to GPIOs.
+ 641:../Libraries/src/UART.c ****  *
+ 642:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 643:../Libraries/src/UART.c ****  * 					- LPC_UART0: UART0 peripheral
+ 644:../Libraries/src/UART.c ****  * 					- LPC_UART1: UART1 peripheral
+ 645:../Libraries/src/UART.c ****  * 					- LPC_UART2: UART2 peripheral
+ 646:../Libraries/src/UART.c ****  * 					- LPC_UART3: UART3 peripheral
+ 647:../Libraries/src/UART.c ****  * @param[in]	flag 0x03 and 0x04 are used to separate disable and
+ 648:../Libraries/src/UART.c ****  * 					enable flags.
+ 649:../Libraries/src/UART.c ****  *
+ 650:../Libraries/src/UART.c ****  * @return		None
+ 651:../Libraries/src/UART.c ****  */
+ 652:../Libraries/src/UART.c **** void uart_disable(UART_T *dev, uint8_t flag)
+ 653:../Libraries/src/UART.c **** {
+ 1817              		.loc 1 653 0
+ 1818              		.cfi_startproc
+ 1819              		@ Function supports interworking.
+ 1820              		@ args = 0, pretend = 0, frame = 8
+ 1821              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1822              		@ link register save eliminated.
+ 1823 0fb8 04B02DE5 		str	fp, [sp, #-4]!
+ 1824              	.LCFI22:
+ 1825              		.cfi_def_cfa_offset 4
+ 1826              		.cfi_offset 11, -4
+ 1827 0fbc 00B08DE2 		add	fp, sp, #0
+ 1828              	.LCFI23:
+ 1829              		.cfi_def_cfa_register 11
+ 1830 0fc0 0CD04DE2 		sub	sp, sp, #12
+ 1831 0fc4 08000BE5 		str	r0, [fp, #-8]
+ 1832 0fc8 0130A0E1 		mov	r3, r1
+ 1833 0fcc 09304BE5 		strb	r3, [fp, #-9]
+ 654:../Libraries/src/UART.c **** 	if(dev == LPC_UART0)
+ 1834              		.loc 1 654 0
+ 1835 0fd0 08201BE5 		ldr	r2, [fp, #-8]
+ 1836 0fd4 40319FE5 		ldr	r3, .L127
+ 1837 0fd8 030052E1 		cmp	r2, r3
+ 1838 0fdc 0F00001A 		bne	.L119
+ 655:../Libraries/src/UART.c **** 	{
+ 656:../Libraries/src/UART.c **** 		if(flag && PIN_RX_DISABLE)
+ 1839              		.loc 1 656 0
+ 1840 0fe0 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1841 0fe4 000053E3 		cmp	r3, #0
+ 1842 0fe8 0400000A 		beq	.L120
+ 657:../Libraries/src/UART.c **** 		{
+ 658:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_RX_UART0));
+ 1843              		.loc 1 658 0
+ 1844 0fec 2C319FE5 		ldr	r3, .L127+4
+ 1845 0ff0 28219FE5 		ldr	r2, .L127+4
+ 1846 0ff4 002092E5 		ldr	r2, [r2, #0]
+ 1847 0ff8 C020C2E3 		bic	r2, r2, #192
+ 1848 0ffc 002083E5 		str	r2, [r3, #0]
+ 1849              	.L120:
+ 659:../Libraries/src/UART.c **** 		}
+ 660:../Libraries/src/UART.c **** 		if(flag && PIN_TX_DISABLE)
+ 1850              		.loc 1 660 0
+ 1851 1000 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1852 1004 000053E3 		cmp	r3, #0
+ 1853 1008 0400000A 		beq	.L119
+ 661:../Libraries/src/UART.c **** 		{
+ 662:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_TX_UART0));
+ 1854              		.loc 1 662 0
+ 1855 100c 0C319FE5 		ldr	r3, .L127+4
+ 1856 1010 08219FE5 		ldr	r2, .L127+4
+ 1857 1014 002092E5 		ldr	r2, [r2, #0]
+ 1858 1018 3020C2E3 		bic	r2, r2, #48
+ 1859 101c 002083E5 		str	r2, [r3, #0]
+ 1860              	.L119:
+ 663:../Libraries/src/UART.c **** 		}
+ 664:../Libraries/src/UART.c **** 	}
+ 665:../Libraries/src/UART.c **** 	if(dev == LPC_UART1)
+ 1861              		.loc 1 665 0
+ 1862 1020 08201BE5 		ldr	r2, [fp, #-8]
+ 1863 1024 F8309FE5 		ldr	r3, .L127+8
+ 1864 1028 030052E1 		cmp	r2, r3
+ 1865 102c 0F00001A 		bne	.L121
+ 666:../Libraries/src/UART.c **** 	{
+ 667:../Libraries/src/UART.c **** 		if(flag && PIN_RX_DISABLE)
+ 1866              		.loc 1 667 0
+ 1867 1030 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1868 1034 000053E3 		cmp	r3, #0
+ 1869 1038 0400000A 		beq	.L122
+ 668:../Libraries/src/UART.c **** 		{
+ 669:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_RX_UART1));
+ 1870              		.loc 1 669 0
+ 1871 103c DC309FE5 		ldr	r3, .L127+4
+ 1872 1040 D8209FE5 		ldr	r2, .L127+4
+ 1873 1044 002092E5 		ldr	r2, [r2, #0]
+ 1874 1048 0320C2E3 		bic	r2, r2, #3
+ 1875 104c 002083E5 		str	r2, [r3, #0]
+ 1876              	.L122:
+ 670:../Libraries/src/UART.c **** 		}
+ 671:../Libraries/src/UART.c **** 		if(flag && PIN_TX_DISABLE)
+ 1877              		.loc 1 671 0
+ 1878 1050 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1879 1054 000053E3 		cmp	r3, #0
+ 1880 1058 0400000A 		beq	.L121
+ 672:../Libraries/src/UART.c **** 		{
+ 673:../Libraries/src/UART.c **** 			PINSEL1 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_TX_UART1));
+ 1881              		.loc 1 673 0
+ 1882 105c C4309FE5 		ldr	r3, .L127+12
+ 1883 1060 C0209FE5 		ldr	r2, .L127+12
+ 1884 1064 002092E5 		ldr	r2, [r2, #0]
+ 1885 1068 0321C2E3 		bic	r2, r2, #-1073741824
+ 1886 106c 002083E5 		str	r2, [r3, #0]
+ 1887              	.L121:
+ 674:../Libraries/src/UART.c **** 		}
+ 675:../Libraries/src/UART.c **** 	}
+ 676:../Libraries/src/UART.c **** 	if(dev == LPC_UART2)
+ 1888              		.loc 1 676 0
+ 1889 1070 08201BE5 		ldr	r2, [fp, #-8]
+ 1890 1074 B0309FE5 		ldr	r3, .L127+16
+ 1891 1078 030052E1 		cmp	r2, r3
+ 1892 107c 0F00001A 		bne	.L123
+ 677:../Libraries/src/UART.c **** 	{
+ 678:../Libraries/src/UART.c **** 		if(flag && PIN_RX_DISABLE)
+ 1893              		.loc 1 678 0
+ 1894 1080 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1895 1084 000053E3 		cmp	r3, #0
+ 1896 1088 0400000A 		beq	.L124
+ 679:../Libraries/src/UART.c **** 		{
+ 680:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_RX_UART2));
+ 1897              		.loc 1 680 0
+ 1898 108c 8C309FE5 		ldr	r3, .L127+4
+ 1899 1090 88209FE5 		ldr	r2, .L127+4
+ 1900 1094 002092E5 		ldr	r2, [r2, #0]
+ 1901 1098 0325C2E3 		bic	r2, r2, #12582912
+ 1902 109c 002083E5 		str	r2, [r3, #0]
+ 1903              	.L124:
+ 681:../Libraries/src/UART.c **** 		}
+ 682:../Libraries/src/UART.c **** 		if(flag && PIN_TX_DISABLE)
+ 1904              		.loc 1 682 0
+ 1905 10a0 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1906 10a4 000053E3 		cmp	r3, #0
+ 1907 10a8 0400000A 		beq	.L123
+ 683:../Libraries/src/UART.c **** 		{
+ 684:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_TX_UART2));
+ 1908              		.loc 1 684 0
+ 1909 10ac 6C309FE5 		ldr	r3, .L127+4
+ 1910 10b0 68209FE5 		ldr	r2, .L127+4
+ 1911 10b4 002092E5 		ldr	r2, [r2, #0]
+ 1912 10b8 0326C2E3 		bic	r2, r2, #3145728
+ 1913 10bc 002083E5 		str	r2, [r3, #0]
+ 1914              	.L123:
+ 685:../Libraries/src/UART.c **** 		}
+ 686:../Libraries/src/UART.c **** 	}
+ 687:../Libraries/src/UART.c **** 	if(dev == LPC_UART3)
+ 1915              		.loc 1 687 0
+ 1916 10c0 08201BE5 		ldr	r2, [fp, #-8]
+ 1917 10c4 64309FE5 		ldr	r3, .L127+20
+ 1918 10c8 030052E1 		cmp	r2, r3
+ 1919 10cc 0F00001A 		bne	.L118
+ 688:../Libraries/src/UART.c **** 	{
+ 689:../Libraries/src/UART.c **** 		if(flag && PIN_RX_DISABLE)
+ 1920              		.loc 1 689 0
+ 1921 10d0 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1922 10d4 000053E3 		cmp	r3, #0
+ 1923 10d8 0400000A 		beq	.L126
+ 690:../Libraries/src/UART.c **** 		{
+ 691:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_RX_UART3));
+ 1924              		.loc 1 691 0
+ 1925 10dc 3C309FE5 		ldr	r3, .L127+4
+ 1926 10e0 38209FE5 		ldr	r2, .L127+4
+ 1927 10e4 002092E5 		ldr	r2, [r2, #0]
+ 1928 10e8 0C20C2E3 		bic	r2, r2, #12
+ 1929 10ec 002083E5 		str	r2, [r3, #0]
+ 1930              	.L126:
+ 692:../Libraries/src/UART.c **** 		}
+ 693:../Libraries/src/UART.c **** 		if(flag && PIN_TX_DISABLE)
+ 1931              		.loc 1 693 0
+ 1932 10f0 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 1933 10f4 000053E3 		cmp	r3, #0
+ 1934 10f8 0400000A 		beq	.L118
+ 694:../Libraries/src/UART.c **** 		{
+ 695:../Libraries/src/UART.c **** 			PINSEL0 &= ~((uint32_t)(PIN_FUNC_MASK<<PIN_TX_UART3));
+ 1935              		.loc 1 695 0
+ 1936 10fc 1C309FE5 		ldr	r3, .L127+4
+ 1937 1100 18209FE5 		ldr	r2, .L127+4
+ 1938 1104 002092E5 		ldr	r2, [r2, #0]
+ 1939 1108 0320C2E3 		bic	r2, r2, #3
+ 1940 110c 002083E5 		str	r2, [r3, #0]
+ 1941              	.L118:
+ 696:../Libraries/src/UART.c **** 		}
+ 697:../Libraries/src/UART.c **** 	}
+ 698:../Libraries/src/UART.c **** }
+ 1942              		.loc 1 698 0
+ 1943 1110 00D08BE2 		add	sp, fp, #0
+ 1944 1114 04B09DE4 		ldmfd	sp!, {fp}
+ 1945 1118 1EFF2FE1 		bx	lr
+ 1946              	.L128:
+ 1947              		.align	2
+ 1948              	.L127:
+ 1949 111c 00C000E0 		.word	-536821760
+ 1950 1120 00C002E0 		.word	-536690688
+ 1951 1124 000001E0 		.word	-536805376
+ 1952 1128 04C002E0 		.word	-536690684
+ 1953 112c 008007E0 		.word	-536379392
+ 1954 1130 00C007E0 		.word	-536363008
+ 1955              		.cfi_endproc
+ 1956              	.LFE11:
+ 1958              		.align	2
+ 1959              		.global	get_char
+ 1961              	get_char:
+ 1962              	.LFB12:
+ 699:../Libraries/src/UART.c **** 
+ 700:../Libraries/src/UART.c **** /**
+ 701:../Libraries/src/UART.c ****  * @brief		Receive a single data from UART peripheral
+ 702:../Libraries/src/UART.c ****  *
+ 703:../Libraries/src/UART.c ****  * This function waits until a character arrive in the RecvCB buffer.
+ 704:../Libraries/src/UART.c ****  * If a character arrives, this character will returned.
+ 705:../Libraries/src/UART.c ****  * This function only works with SW Buffers.
+ 706:../Libraries/src/UART.c ****  *
+ 707:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 708:../Libraries/src/UART.c ****  *  			- LPC_UART0: UART0 peripheral
+ 709:../Libraries/src/UART.c ****  * 				- LPC_UART1: UART1 peripheral
+ 710:../Libraries/src/UART.c ****  * 				- LPC_UART2: UART2 peripheral
+ 711:../Libraries/src/UART.c ****  * 				- LPC_UART3: UART3 peripheral
+ 712:../Libraries/src/UART.c ****  * @return 		Data received
+ 713:../Libraries/src/UART.c ****  */
+ 714:../Libraries/src/UART.c **** uint8_t get_char(UART_T *dev)
+ 715:../Libraries/src/UART.c **** {
+ 1963              		.loc 1 715 0
+ 1964              		.cfi_startproc
+ 1965              		@ Function supports interworking.
+ 1966              		@ args = 0, pretend = 0, frame = 16
+ 1967              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1968 1134 00482DE9 		stmfd	sp!, {fp, lr}
+ 1969              	.LCFI24:
+ 1970              		.cfi_def_cfa_offset 8
+ 1971              		.cfi_offset 14, -4
+ 1972              		.cfi_offset 11, -8
+ 1973 1138 04B08DE2 		add	fp, sp, #4
+ 1974              	.LCFI25:
+ 1975              		.cfi_def_cfa 11, 4
+ 1976 113c 10D04DE2 		sub	sp, sp, #16
+ 1977 1140 10000BE5 		str	r0, [fp, #-16]
+ 716:../Libraries/src/UART.c **** 	unsigned char ret;
+ 717:../Libraries/src/UART.c **** 	uint8_t udev;
+ 718:../Libraries/src/UART.c **** 
+ 719:../Libraries/src/UART.c **** 	udev = uart_getDevInInt(dev);	/* get device number */
+ 1978              		.loc 1 719 0
+ 1979 1144 10001BE5 		ldr	r0, [fp, #-16]
+ 1980 1148 FEFFFFEB 		bl	uart_getDevInInt
+ 1981 114c 0030A0E1 		mov	r3, r0
+ 1982 1150 05304BE5 		strb	r3, [fp, #-5]
+ 720:../Libraries/src/UART.c **** 	if(udev >= 4)					/* error */
+ 1983              		.loc 1 720 0
+ 1984 1154 05305BE5 		ldrb	r3, [fp, #-5]	@ zero_extendqisi2
+ 1985 1158 030053E3 		cmp	r3, #3
+ 1986 115c 0100009A 		bls	.L134
+ 721:../Libraries/src/UART.c **** 	{
+ 722:../Libraries/src/UART.c **** 		/* ERROR, *dev is wrong */
+ 723:../Libraries/src/UART.c **** 		return EINTERNAL;
+ 1987              		.loc 1 723 0
+ 1988 1160 FF30A0E3 		mov	r3, #255
+ 1989 1164 190000EA 		b	.L131
+ 1990              	.L134:
+ 724:../Libraries/src/UART.c **** 	}
+ 725:../Libraries/src/UART.c **** 
+ 726:../Libraries/src/UART.c **** 	while (UART_STAT[udev].recv.RecvCB_Empty == TRUE); /* Nothing received so just block */
+ 1991              		.loc 1 726 0
+ 1992 1168 0000A0E1 		mov	r0, r0	@ nop
+ 1993              	.L132:
+ 1994              		.loc 1 726 0 is_stmt 0 discriminator 1
+ 1995 116c 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+ 1996 1170 68009FE5 		ldr	r0, .L135
+ 1997 1174 2010A0E3 		mov	r1, #32
+ 1998 1178 0230A0E1 		mov	r3, r2
+ 1999 117c 0331A0E1 		mov	r3, r3, asl #2
+ 2000 1180 023083E0 		add	r3, r3, r2
+ 2001 1184 8330A0E1 		mov	r3, r3, asl #1
+ 2002 1188 023083E0 		add	r3, r3, r2
+ 2003 118c 0331A0E1 		mov	r3, r3, asl #2
+ 2004 1190 033080E0 		add	r3, r0, r3
+ 2005 1194 013083E0 		add	r3, r3, r1
+ 2006 1198 0730D3E5 		ldrb	r3, [r3, #7]
+ 2007 119c FF3003E2 		and	r3, r3, #255
+ 2008 11a0 010053E3 		cmp	r3, #1
+ 2009 11a4 F0FFFF0A 		beq	.L132
+ 727:../Libraries/src/UART.c **** 
+ 728:../Libraries/src/UART.c **** 	if(getRecvCB(dev, &ret)!=EOK)
+ 2010              		.loc 1 728 0 is_stmt 1
+ 2011 11a8 06304BE2 		sub	r3, fp, #6
+ 2012 11ac 10001BE5 		ldr	r0, [fp, #-16]
+ 2013 11b0 0310A0E1 		mov	r1, r3
+ 2014 11b4 FEFFFFEB 		bl	getRecvCB
+ 2015 11b8 0030A0E1 		mov	r3, r0
+ 2016 11bc 000053E3 		cmp	r3, #0
+ 2017 11c0 0100000A 		beq	.L133
+ 729:../Libraries/src/UART.c **** 	{
+ 730:../Libraries/src/UART.c **** 		/* empty */
+ 731:../Libraries/src/UART.c **** 		return EINTERNAL;
+ 2018              		.loc 1 731 0
+ 2019 11c4 FF30A0E3 		mov	r3, #255
+ 2020 11c8 000000EA 		b	.L131
+ 2021              	.L133:
+ 732:../Libraries/src/UART.c **** 	}
+ 733:../Libraries/src/UART.c **** 
+ 734:../Libraries/src/UART.c **** 	return ret;
+ 2022              		.loc 1 734 0
+ 2023 11cc 06305BE5 		ldrb	r3, [fp, #-6]	@ zero_extendqisi2
+ 2024              	.L131:
+ 735:../Libraries/src/UART.c **** }
+ 2025              		.loc 1 735 0
+ 2026 11d0 0300A0E1 		mov	r0, r3
+ 2027 11d4 04D04BE2 		sub	sp, fp, #4
+ 2028 11d8 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 2029 11dc 1EFF2FE1 		bx	lr
+ 2030              	.L136:
+ 2031              		.align	2
+ 2032              	.L135:
+ 2033 11e0 00000000 		.word	UART_STAT
+ 2034              		.cfi_endproc
+ 2035              	.LFE12:
+ 2037              		.align	2
+ 2039              	uart_startTransmit:
+ 2040              	.LFB13:
+ 736:../Libraries/src/UART.c **** 
+ 737:../Libraries/src/UART.c **** /**
+ 738:../Libraries/src/UART.c ****  * @brief		Start sending via UART
+ 739:../Libraries/src/UART.c ****  *
+ 740:../Libraries/src/UART.c ****  * This function start sending character via UART. Therefore
+ 741:../Libraries/src/UART.c ****  * this function gets a character from the SendCB and write them
+ 742:../Libraries/src/UART.c ****  * into THR register.
+ 743:../Libraries/src/UART.c ****  * This function only works with SW Buffers.
+ 744:../Libraries/src/UART.c ****  *
+ 745:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 746:../Libraries/src/UART.c ****  *  			- LPC_UART0: UART0 peripheral
+ 747:../Libraries/src/UART.c ****  * 				- LPC_UART1: UART1 peripheral
+ 748:../Libraries/src/UART.c ****  * 				- LPC_UART2: UART2 peripheral
+ 749:../Libraries/src/UART.c ****  * 				- LPC_UART3: UART3 peripheral
+ 750:../Libraries/src/UART.c ****  * @return 		None
+ 751:../Libraries/src/UART.c ****  */
+ 752:../Libraries/src/UART.c **** static void uart_startTransmit(UART_T *dev)
+ 753:../Libraries/src/UART.c **** {
+ 2041              		.loc 1 753 0
+ 2042              		.cfi_startproc
+ 2043              		@ Function supports interworking.
+ 2044              		@ args = 0, pretend = 0, frame = 16
+ 2045              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2046 11e4 00482DE9 		stmfd	sp!, {fp, lr}
+ 2047              	.LCFI26:
+ 2048              		.cfi_def_cfa_offset 8
+ 2049              		.cfi_offset 14, -4
+ 2050              		.cfi_offset 11, -8
+ 2051 11e8 04B08DE2 		add	fp, sp, #4
+ 2052              	.LCFI27:
+ 2053              		.cfi_def_cfa 11, 4
+ 2054 11ec 10D04DE2 		sub	sp, sp, #16
+ 2055 11f0 10000BE5 		str	r0, [fp, #-16]
+ 754:../Libraries/src/UART.c **** 	unsigned char i;
+ 755:../Libraries/src/UART.c **** 
+ 756:../Libraries/src/UART.c **** 	if(getSendCB(dev, &i)==EOK)
+ 2056              		.loc 1 756 0
+ 2057 11f4 05304BE2 		sub	r3, fp, #5
+ 2058 11f8 10001BE5 		ldr	r0, [fp, #-16]
+ 2059 11fc 0310A0E1 		mov	r1, r3
+ 2060 1200 FEFFFFEB 		bl	getSendCB
+ 2061 1204 0030A0E1 		mov	r3, r0
+ 2062 1208 000053E3 		cmp	r3, #0
+ 2063 120c 0200001A 		bne	.L137
+ 757:../Libraries/src/UART.c **** 	{
+ 758:../Libraries/src/UART.c **** 		dev->REG1.THR = i;
+ 2064              		.loc 1 758 0
+ 2065 1210 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+ 2066 1214 10301BE5 		ldr	r3, [fp, #-16]
+ 2067 1218 0020C3E5 		strb	r2, [r3, #0]
+ 2068              	.L137:
+ 759:../Libraries/src/UART.c **** 	}
+ 760:../Libraries/src/UART.c **** }
+ 2069              		.loc 1 760 0
+ 2070 121c 04D04BE2 		sub	sp, fp, #4
+ 2071 1220 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 2072 1224 1EFF2FE1 		bx	lr
+ 2073              		.cfi_endproc
+ 2074              	.LFE13:
+ 2076              		.align	2
+ 2077              		.global	put_char
+ 2079              	put_char:
+ 2080              	.LFB14:
+ 761:../Libraries/src/UART.c **** 
+ 762:../Libraries/src/UART.c **** /**
+ 763:../Libraries/src/UART.c ****  * @brief		Transmit a single data through SendCB and furthermore
+ 764:../Libraries/src/UART.c ****  * 				to UART peripheral
+ 765:../Libraries/src/UART.c ****  *
+ 766:../Libraries/src/UART.c ****  * This function put a single byte into the Send Buffer and start
+ 767:../Libraries/src/UART.c ****  * transmitting them.
+ 768:../Libraries/src/UART.c ****  * This function only works with SW Buffers.
+ 769:../Libraries/src/UART.c ****  *
+ 770:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 771:../Libraries/src/UART.c ****  *   			- LPC_UART0: UART0 peripheral
+ 772:../Libraries/src/UART.c ****  * 				- LPC_UART1: UART1 peripheral
+ 773:../Libraries/src/UART.c ****  * 				- LPC_UART2: UART2 peripheral
+ 774:../Libraries/src/UART.c ****  * 				- LPC_UART3: UART3 peripheral
+ 775:../Libraries/src/UART.c ****  * @param[in]	c	Data to transmit (must be 8-bit long)
+ 776:../Libraries/src/UART.c ****  * @return 		None
+ 777:../Libraries/src/UART.c ****  */
+ 778:../Libraries/src/UART.c **** void put_char(UART_T *dev, unsigned char c)
+ 779:../Libraries/src/UART.c **** {
+ 2081              		.loc 1 779 0
+ 2082              		.cfi_startproc
+ 2083              		@ Function supports interworking.
+ 2084              		@ args = 0, pretend = 0, frame = 8
+ 2085              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2086 1228 00482DE9 		stmfd	sp!, {fp, lr}
+ 2087              	.LCFI28:
+ 2088              		.cfi_def_cfa_offset 8
+ 2089              		.cfi_offset 14, -4
+ 2090              		.cfi_offset 11, -8
+ 2091 122c 04B08DE2 		add	fp, sp, #4
+ 2092              	.LCFI29:
+ 2093              		.cfi_def_cfa 11, 4
+ 2094 1230 08D04DE2 		sub	sp, sp, #8
+ 2095 1234 08000BE5 		str	r0, [fp, #-8]
+ 2096 1238 0130A0E1 		mov	r3, r1
+ 2097 123c 09304BE5 		strb	r3, [fp, #-9]
+ 780:../Libraries/src/UART.c **** 	if(putSendCB(dev, c)==EOK)
+ 2098              		.loc 1 780 0
+ 2099 1240 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 2100 1244 08001BE5 		ldr	r0, [fp, #-8]
+ 2101 1248 0310A0E1 		mov	r1, r3
+ 2102 124c FEFFFFEB 		bl	putSendCB
+ 2103 1250 0030A0E1 		mov	r3, r0
+ 2104 1254 000053E3 		cmp	r3, #0
+ 2105 1258 0100001A 		bne	.L139
+ 781:../Libraries/src/UART.c **** 	{
+ 782:../Libraries/src/UART.c **** 		uart_startTransmit(dev);
+ 2106              		.loc 1 782 0
+ 2107 125c 08001BE5 		ldr	r0, [fp, #-8]
+ 2108 1260 DFFFFFEB 		bl	uart_startTransmit
+ 2109              	.L139:
+ 783:../Libraries/src/UART.c **** 	}
+ 784:../Libraries/src/UART.c **** }
+ 2110              		.loc 1 784 0
+ 2111 1264 04D04BE2 		sub	sp, fp, #4
+ 2112 1268 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 2113 126c 1EFF2FE1 		bx	lr
+ 2114              		.cfi_endproc
+ 2115              	.LFE14:
+ 2117              		.align	2
+ 2118              		.global	send_string
+ 2120              	send_string:
+ 2121              	.LFB15:
+ 785:../Libraries/src/UART.c **** 
+ 786:../Libraries/src/UART.c **** /**
+ 787:../Libraries/src/UART.c ****  * @brief		Transmit a strings through SendCB and furthermore
+ 788:../Libraries/src/UART.c ****  * 				to UART peripheral
+ 789:../Libraries/src/UART.c ****  *
+ 790:../Libraries/src/UART.c ****  * This function sends a string via UART peripheral.
+ 791:../Libraries/src/UART.c ****  * Therefore the data is stored in SendCb buffer. If more than
+ 792:../Libraries/src/UART.c ****  * CB_SIZE elements should be sent, this function blocks until
+ 793:../Libraries/src/UART.c ****  * the first CB_SIZE elements are sent.
+ 794:../Libraries/src/UART.c ****  * This function only works with SW Buffers.
+ 795:../Libraries/src/UART.c ****  *
+ 796:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 797:../Libraries/src/UART.c ****  *   			- LPC_UART0: UART0 peripheral
+ 798:../Libraries/src/UART.c ****  * 				- LPC_UART1: UART1 peripheral
+ 799:../Libraries/src/UART.c ****  * 				- LPC_UART2: UART2 peripheral
+ 800:../Libraries/src/UART.c ****  * 				- LPC_UART3: UART3 peripheral
+ 801:../Libraries/src/UART.c ****  * @param[in]	str		String to transmit
+ 802:../Libraries/src/UART.c ****  * @return 		EOK if nothing gone wrong
+ 803:../Libraries/src/UART.c ****  */
+ 804:../Libraries/src/UART.c **** int32_t send_string(UART_T *dev, char *str)
+ 805:../Libraries/src/UART.c **** {
+ 2122              		.loc 1 805 0
+ 2123              		.cfi_startproc
+ 2124              		@ Function supports interworking.
+ 2125              		@ args = 0, pretend = 0, frame = 16
+ 2126              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2127 1270 00482DE9 		stmfd	sp!, {fp, lr}
+ 2128              	.LCFI30:
+ 2129              		.cfi_def_cfa_offset 8
+ 2130              		.cfi_offset 14, -4
+ 2131              		.cfi_offset 11, -8
+ 2132 1274 04B08DE2 		add	fp, sp, #4
+ 2133              	.LCFI31:
+ 2134              		.cfi_def_cfa 11, 4
+ 2135 1278 10D04DE2 		sub	sp, sp, #16
+ 2136 127c 10000BE5 		str	r0, [fp, #-16]
+ 2137 1280 14100BE5 		str	r1, [fp, #-20]
+ 806:../Libraries/src/UART.c **** 	uint32_t bSent = 0;
+ 2138              		.loc 1 806 0
+ 2139 1284 0030A0E3 		mov	r3, #0
+ 2140 1288 08300BE5 		str	r3, [fp, #-8]
+ 807:../Libraries/src/UART.c **** 	uint8_t udev;
+ 808:../Libraries/src/UART.c **** 
+ 809:../Libraries/src/UART.c **** 	udev = uart_getDevInInt(dev);	/* get device number */
+ 2141              		.loc 1 809 0
+ 2142 128c 10001BE5 		ldr	r0, [fp, #-16]
+ 2143 1290 FEFFFFEB 		bl	uart_getDevInInt
+ 2144 1294 0030A0E1 		mov	r3, r0
+ 2145 1298 09304BE5 		strb	r3, [fp, #-9]
+ 810:../Libraries/src/UART.c **** 	if(udev >= 4)					/* error */
+ 2146              		.loc 1 810 0
+ 2147 129c 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 2148 12a0 030053E3 		cmp	r3, #3
+ 2149 12a4 0100009A 		bls	.L150
+ 811:../Libraries/src/UART.c **** 	{
+ 812:../Libraries/src/UART.c **** 		/* ERROR, *dev is wrong */
+ 813:../Libraries/src/UART.c **** 		return EINTERNAL;
+ 2150              		.loc 1 813 0
+ 2151 12a8 0030E0E3 		mvn	r3, #0
+ 2152 12ac 3C0000EA 		b	.L143
+ 2153              	.L150:
+ 814:../Libraries/src/UART.c **** 	}
+ 815:../Libraries/src/UART.c **** 
+ 816:../Libraries/src/UART.c **** 	/* wait for THR empty */
+ 817:../Libraries/src/UART.c **** 	while(!(dev->LSR & UART_LSR_THRE));
+ 2154              		.loc 1 817 0
+ 2155 12b0 0000A0E1 		mov	r0, r0	@ nop
+ 2156              	.L144:
+ 2157              		.loc 1 817 0 is_stmt 0 discriminator 1
+ 2158 12b4 10301BE5 		ldr	r3, [fp, #-16]
+ 2159 12b8 1430D3E5 		ldrb	r3, [r3, #20]
+ 2160 12bc FF3003E2 		and	r3, r3, #255
+ 2161 12c0 203003E2 		and	r3, r3, #32
+ 2162 12c4 000053E3 		cmp	r3, #0
+ 2163 12c8 F9FFFF0A 		beq	.L144
+ 818:../Libraries/src/UART.c **** 
+ 819:../Libraries/src/UART.c **** 	while(*str) {
+ 2164              		.loc 1 819 0 is_stmt 1
+ 2165 12cc 150000EA 		b	.L145
+ 2166              	.L147:
+ 820:../Libraries/src/UART.c **** 		put_char(dev, *str);
+ 2167              		.loc 1 820 0
+ 2168 12d0 14301BE5 		ldr	r3, [fp, #-20]
+ 2169 12d4 0030D3E5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 2170 12d8 10001BE5 		ldr	r0, [fp, #-16]
+ 2171 12dc 0310A0E1 		mov	r1, r3
+ 2172 12e0 FEFFFFEB 		bl	put_char
+ 821:../Libraries/src/UART.c **** 		str++;
+ 2173              		.loc 1 821 0
+ 2174 12e4 14301BE5 		ldr	r3, [fp, #-20]
+ 2175 12e8 013083E2 		add	r3, r3, #1
+ 2176 12ec 14300BE5 		str	r3, [fp, #-20]
+ 822:../Libraries/src/UART.c **** 		bSent++;
+ 2177              		.loc 1 822 0
+ 2178 12f0 08301BE5 		ldr	r3, [fp, #-8]
+ 2179 12f4 013083E2 		add	r3, r3, #1
+ 2180 12f8 08300BE5 		str	r3, [fp, #-8]
+ 823:../Libraries/src/UART.c **** 		/* if buffer is full, wait for emptiing the buffer and
+ 824:../Libraries/src/UART.c **** 		 * resume writting string into buffer
+ 825:../Libraries/src/UART.c **** 		 */
+ 826:../Libraries/src/UART.c **** 		if(((bSent) % CB_SIZE)==0)
+ 2181              		.loc 1 826 0
+ 2182 12fc 08301BE5 		ldr	r3, [fp, #-8]
+ 2183 1300 0F3003E2 		and	r3, r3, #15
+ 2184 1304 000053E3 		cmp	r3, #0
+ 2185 1308 0600001A 		bne	.L145
+ 827:../Libraries/src/UART.c **** 		{
+ 828:../Libraries/src/UART.c **** 			/* wait for THR empty */
+ 829:../Libraries/src/UART.c **** 			while(!(dev->LSR & UART_LSR_THRE));
+ 2186              		.loc 1 829 0
+ 2187 130c 0000A0E1 		mov	r0, r0	@ nop
+ 2188              	.L146:
+ 2189              		.loc 1 829 0 is_stmt 0 discriminator 1
+ 2190 1310 10301BE5 		ldr	r3, [fp, #-16]
+ 2191 1314 1430D3E5 		ldrb	r3, [r3, #20]
+ 2192 1318 FF3003E2 		and	r3, r3, #255
+ 2193 131c 203003E2 		and	r3, r3, #32
+ 2194 1320 000053E3 		cmp	r3, #0
+ 2195 1324 F9FFFF0A 		beq	.L146
+ 2196              	.L145:
+ 819:../Libraries/src/UART.c **** 	while(*str) {
+ 2197              		.loc 1 819 0 is_stmt 1 discriminator 1
+ 2198 1328 14301BE5 		ldr	r3, [fp, #-20]
+ 2199 132c 0030D3E5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 2200 1330 000053E3 		cmp	r3, #0
+ 2201 1334 E5FFFF1A 		bne	.L147
+ 830:../Libraries/src/UART.c **** 		}
+ 831:../Libraries/src/UART.c **** 	}
+ 832:../Libraries/src/UART.c **** 
+ 833:../Libraries/src/UART.c **** 	/* if string does not end with next line character */
+ 834:../Libraries/src/UART.c **** 	if(*(--str)!='\n')
+ 2202              		.loc 1 834 0
+ 2203 1338 14301BE5 		ldr	r3, [fp, #-20]
+ 2204 133c 013043E2 		sub	r3, r3, #1
+ 2205 1340 14300BE5 		str	r3, [fp, #-20]
+ 2206 1344 14301BE5 		ldr	r3, [fp, #-20]
+ 2207 1348 0030D3E5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 2208 134c 0A0053E3 		cmp	r3, #10
+ 2209 1350 0200000A 		beq	.L151
+ 835:../Libraries/src/UART.c **** 	{
+ 836:../Libraries/src/UART.c **** 		put_char(dev, '\n');
+ 2210              		.loc 1 836 0
+ 2211 1354 10001BE5 		ldr	r0, [fp, #-16]
+ 2212 1358 0A10A0E3 		mov	r1, #10
+ 2213 135c FEFFFFEB 		bl	put_char
+ 2214              	.L151:
+ 837:../Libraries/src/UART.c **** 	}
+ 838:../Libraries/src/UART.c **** 
+ 839:../Libraries/src/UART.c **** 	while(UART_STAT[udev].send.SendCB_Empty==FALSE);
+ 2215              		.loc 1 839 0
+ 2216 1360 0000A0E1 		mov	r0, r0	@ nop
+ 2217              	.L149:
+ 2218              		.loc 1 839 0 is_stmt 0 discriminator 1
+ 2219 1364 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 2220 1368 44009FE5 		ldr	r0, .L152
+ 2221 136c 1010A0E3 		mov	r1, #16
+ 2222 1370 0230A0E1 		mov	r3, r2
+ 2223 1374 0331A0E1 		mov	r3, r3, asl #2
+ 2224 1378 023083E0 		add	r3, r3, r2
+ 2225 137c 8330A0E1 		mov	r3, r3, asl #1
+ 2226 1380 023083E0 		add	r3, r3, r2
+ 2227 1384 0331A0E1 		mov	r3, r3, asl #2
+ 2228 1388 033080E0 		add	r3, r0, r3
+ 2229 138c 013083E0 		add	r3, r3, r1
+ 2230 1390 0330D3E5 		ldrb	r3, [r3, #3]
+ 2231 1394 FF3003E2 		and	r3, r3, #255
+ 2232 1398 000053E3 		cmp	r3, #0
+ 2233 139c F0FFFF0A 		beq	.L149
+ 840:../Libraries/src/UART.c **** 
+ 841:../Libraries/src/UART.c **** 	return EOK;
+ 2234              		.loc 1 841 0 is_stmt 1
+ 2235 13a0 0030A0E3 		mov	r3, #0
+ 2236              	.L143:
+ 842:../Libraries/src/UART.c **** }
+ 2237              		.loc 1 842 0
+ 2238 13a4 0300A0E1 		mov	r0, r3
+ 2239 13a8 04D04BE2 		sub	sp, fp, #4
+ 2240 13ac 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 2241 13b0 1EFF2FE1 		bx	lr
+ 2242              	.L153:
+ 2243              		.align	2
+ 2244              	.L152:
+ 2245 13b4 00000000 		.word	UART_STAT
+ 2246              		.cfi_endproc
+ 2247              	.LFE15:
+ 2249              		.align	2
+ 2250              		.global	send_buf
+ 2252              	send_buf:
+ 2253              	.LFB16:
+ 843:../Libraries/src/UART.c **** 
+ 844:../Libraries/src/UART.c **** /**
+ 845:../Libraries/src/UART.c ****  * @brief		Transmit a buffer with specific length
+ 846:../Libraries/src/UART.c ****  * 				through SendCB and furthermore to UART peripheral
+ 847:../Libraries/src/UART.c ****  *
+ 848:../Libraries/src/UART.c ****  * This function sends len bytes from buf via UART peripheral.
+ 849:../Libraries/src/UART.c ****  * Therefore the data is stored in SendCb buffer. If more than
+ 850:../Libraries/src/UART.c ****  * CB_SIZE elements should be sent, this function blocks until
+ 851:../Libraries/src/UART.c ****  * the first CB_SIZE elements are sent.
+ 852:../Libraries/src/UART.c ****  * This function only works with SW Buffers.
+ 853:../Libraries/src/UART.c ****  *
+ 854:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 855:../Libraries/src/UART.c ****  *   			- LPC_UART0: UART0 peripheral
+ 856:../Libraries/src/UART.c ****  * 				- LPC_UART1: UART1 peripheral
+ 857:../Libraries/src/UART.c ****  * 				- LPC_UART2: UART2 peripheral
+ 858:../Libraries/src/UART.c ****  * 				- LPC_UART3: UART3 peripheral
+ 859:../Libraries/src/UART.c ****  * @param[in]	buf		Pointer to Buffer
+ 860:../Libraries/src/UART.c ****  * 				len		Number of Bytes to send
+ 861:../Libraries/src/UART.c ****  * @return 		EOK if nothing gone wrong
+ 862:../Libraries/src/UART.c ****  */
+ 863:../Libraries/src/UART.c **** int32_t send_buf(UART_T *dev, uint8_t *buf, uint32_t len)
+ 864:../Libraries/src/UART.c **** {
+ 2254              		.loc 1 864 0
+ 2255              		.cfi_startproc
+ 2256              		@ Function supports interworking.
+ 2257              		@ args = 0, pretend = 0, frame = 32
+ 2258              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2259 13b8 00482DE9 		stmfd	sp!, {fp, lr}
+ 2260              	.LCFI32:
+ 2261              		.cfi_def_cfa_offset 8
+ 2262              		.cfi_offset 14, -4
+ 2263              		.cfi_offset 11, -8
+ 2264 13bc 04B08DE2 		add	fp, sp, #4
+ 2265              	.LCFI33:
+ 2266              		.cfi_def_cfa 11, 4
+ 2267 13c0 20D04DE2 		sub	sp, sp, #32
+ 2268 13c4 18000BE5 		str	r0, [fp, #-24]
+ 2269 13c8 1C100BE5 		str	r1, [fp, #-28]
+ 2270 13cc 20200BE5 		str	r2, [fp, #-32]
+ 865:../Libraries/src/UART.c **** 	uint32_t bToSend, bSent;
+ 866:../Libraries/src/UART.c **** 	uint8_t udev;
+ 867:../Libraries/src/UART.c **** 
+ 868:../Libraries/src/UART.c **** 	udev = uart_getDevInInt(dev);	/* get device number */
+ 2271              		.loc 1 868 0
+ 2272 13d0 18001BE5 		ldr	r0, [fp, #-24]
+ 2273 13d4 FEFFFFEB 		bl	uart_getDevInInt
+ 2274 13d8 0030A0E1 		mov	r3, r0
+ 2275 13dc 0D304BE5 		strb	r3, [fp, #-13]
+ 869:../Libraries/src/UART.c **** 	if(udev >= 4)					/* error */
+ 2276              		.loc 1 869 0
+ 2277 13e0 0D305BE5 		ldrb	r3, [fp, #-13]	@ zero_extendqisi2
+ 2278 13e4 030053E3 		cmp	r3, #3
+ 2279 13e8 0100009A 		bls	.L162
+ 870:../Libraries/src/UART.c **** 	{
+ 871:../Libraries/src/UART.c **** 		/* ERROR, *dev is wrong */
+ 872:../Libraries/src/UART.c **** 		return EINTERNAL;
+ 2280              		.loc 1 872 0
+ 2281 13ec 0030E0E3 		mvn	r3, #0
+ 2282 13f0 380000EA 		b	.L156
+ 2283              	.L162:
+ 873:../Libraries/src/UART.c **** 	}
+ 874:../Libraries/src/UART.c **** 
+ 875:../Libraries/src/UART.c **** 	/* wait for THR empty */
+ 876:../Libraries/src/UART.c **** 	while(!(dev->LSR & UART_LSR_THRE));
+ 2284              		.loc 1 876 0
+ 2285 13f4 0000A0E1 		mov	r0, r0	@ nop
+ 2286              	.L157:
+ 2287              		.loc 1 876 0 is_stmt 0 discriminator 1
+ 2288 13f8 18301BE5 		ldr	r3, [fp, #-24]
+ 2289 13fc 1430D3E5 		ldrb	r3, [r3, #20]
+ 2290 1400 FF3003E2 		and	r3, r3, #255
+ 2291 1404 203003E2 		and	r3, r3, #32
+ 2292 1408 000053E3 		cmp	r3, #0
+ 2293 140c F9FFFF0A 		beq	.L157
+ 877:../Libraries/src/UART.c **** 
+ 878:../Libraries/src/UART.c **** 	bToSend = len;
+ 2294              		.loc 1 878 0 is_stmt 1
+ 2295 1410 20301BE5 		ldr	r3, [fp, #-32]
+ 2296 1414 08300BE5 		str	r3, [fp, #-8]
+ 879:../Libraries/src/UART.c **** 	bSent = 0;
+ 2297              		.loc 1 879 0
+ 2298 1418 0030A0E3 		mov	r3, #0
+ 2299 141c 0C300BE5 		str	r3, [fp, #-12]
+ 880:../Libraries/src/UART.c **** 	while(bToSend) {
+ 2300              		.loc 1 880 0
+ 2301 1420 180000EA 		b	.L158
+ 2302              	.L160:
+ 881:../Libraries/src/UART.c **** 		put_char(dev, (*buf++));
+ 2303              		.loc 1 881 0
+ 2304 1424 1C301BE5 		ldr	r3, [fp, #-28]
+ 2305 1428 0030D3E5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 2306 142c 1C201BE5 		ldr	r2, [fp, #-28]
+ 2307 1430 012082E2 		add	r2, r2, #1
+ 2308 1434 1C200BE5 		str	r2, [fp, #-28]
+ 2309 1438 18001BE5 		ldr	r0, [fp, #-24]
+ 2310 143c 0310A0E1 		mov	r1, r3
+ 2311 1440 FEFFFFEB 		bl	put_char
+ 882:../Libraries/src/UART.c **** 		bSent++;
+ 2312              		.loc 1 882 0
+ 2313 1444 0C301BE5 		ldr	r3, [fp, #-12]
+ 2314 1448 013083E2 		add	r3, r3, #1
+ 2315 144c 0C300BE5 		str	r3, [fp, #-12]
+ 883:../Libraries/src/UART.c **** 		bToSend--;
+ 2316              		.loc 1 883 0
+ 2317 1450 08301BE5 		ldr	r3, [fp, #-8]
+ 2318 1454 013043E2 		sub	r3, r3, #1
+ 2319 1458 08300BE5 		str	r3, [fp, #-8]
+ 884:../Libraries/src/UART.c **** 
+ 885:../Libraries/src/UART.c **** 		if(((bSent) % CB_SIZE)==0)
+ 2320              		.loc 1 885 0
+ 2321 145c 0C301BE5 		ldr	r3, [fp, #-12]
+ 2322 1460 0F3003E2 		and	r3, r3, #15
+ 2323 1464 000053E3 		cmp	r3, #0
+ 2324 1468 0600001A 		bne	.L158
+ 886:../Libraries/src/UART.c **** 		{
+ 887:../Libraries/src/UART.c **** 			/* wait for THR empty */
+ 888:../Libraries/src/UART.c **** 			while(!(dev->LSR & UART_LSR_THRE));
+ 2325              		.loc 1 888 0
+ 2326 146c 0000A0E1 		mov	r0, r0	@ nop
+ 2327              	.L159:
+ 2328              		.loc 1 888 0 is_stmt 0 discriminator 1
+ 2329 1470 18301BE5 		ldr	r3, [fp, #-24]
+ 2330 1474 1430D3E5 		ldrb	r3, [r3, #20]
+ 2331 1478 FF3003E2 		and	r3, r3, #255
+ 2332 147c 203003E2 		and	r3, r3, #32
+ 2333 1480 000053E3 		cmp	r3, #0
+ 2334 1484 F9FFFF0A 		beq	.L159
+ 2335              	.L158:
+ 880:../Libraries/src/UART.c **** 	while(bToSend) {
+ 2336              		.loc 1 880 0 is_stmt 1 discriminator 1
+ 2337 1488 08301BE5 		ldr	r3, [fp, #-8]
+ 2338 148c 000053E3 		cmp	r3, #0
+ 2339 1490 E3FFFF1A 		bne	.L160
+ 889:../Libraries/src/UART.c **** 		}
+ 890:../Libraries/src/UART.c **** 	}
+ 891:../Libraries/src/UART.c **** 
+ 892:../Libraries/src/UART.c **** 	while(UART_STAT[udev].send.SendCB_Empty==FALSE);
+ 2340              		.loc 1 892 0
+ 2341 1494 0000A0E1 		mov	r0, r0	@ nop
+ 2342              	.L161:
+ 2343              		.loc 1 892 0 is_stmt 0 discriminator 1
+ 2344 1498 0D205BE5 		ldrb	r2, [fp, #-13]	@ zero_extendqisi2
+ 2345 149c 44009FE5 		ldr	r0, .L163
+ 2346 14a0 1010A0E3 		mov	r1, #16
+ 2347 14a4 0230A0E1 		mov	r3, r2
+ 2348 14a8 0331A0E1 		mov	r3, r3, asl #2
+ 2349 14ac 023083E0 		add	r3, r3, r2
+ 2350 14b0 8330A0E1 		mov	r3, r3, asl #1
+ 2351 14b4 023083E0 		add	r3, r3, r2
+ 2352 14b8 0331A0E1 		mov	r3, r3, asl #2
+ 2353 14bc 033080E0 		add	r3, r0, r3
+ 2354 14c0 013083E0 		add	r3, r3, r1
+ 2355 14c4 0330D3E5 		ldrb	r3, [r3, #3]
+ 2356 14c8 FF3003E2 		and	r3, r3, #255
+ 2357 14cc 000053E3 		cmp	r3, #0
+ 2358 14d0 F0FFFF0A 		beq	.L161
+ 893:../Libraries/src/UART.c **** 
+ 894:../Libraries/src/UART.c **** 	return EOK;
+ 2359              		.loc 1 894 0 is_stmt 1
+ 2360 14d4 0030A0E3 		mov	r3, #0
+ 2361              	.L156:
+ 895:../Libraries/src/UART.c **** }
+ 2362              		.loc 1 895 0
+ 2363 14d8 0300A0E1 		mov	r0, r3
+ 2364 14dc 04D04BE2 		sub	sp, fp, #4
+ 2365 14e0 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 2366 14e4 1EFF2FE1 		bx	lr
+ 2367              	.L164:
+ 2368              		.align	2
+ 2369              	.L163:
+ 2370 14e8 00000000 		.word	UART_STAT
+ 2371              		.cfi_endproc
+ 2372              	.LFE16:
+ 2374              		.align	2
+ 2375              		.global	recv_string
+ 2377              	recv_string:
+ 2378              	.LFB17:
+ 896:../Libraries/src/UART.c **** 
+ 897:../Libraries/src/UART.c **** /**
+ 898:../Libraries/src/UART.c ****  * @brief		Receive String via UART peripheral and
+ 899:../Libraries/src/UART.c ****  * 				write them into RecvCB
+ 900:../Libraries/src/UART.c ****  *
+ 901:../Libraries/src/UART.c ****  *  This function receives a String via UART peripheral
+ 902:../Libraries/src/UART.c ****  * 	and store each char in the Recv circular buffer. Furthermore
+ 903:../Libraries/src/UART.c ****  * 	this function is blocking -> wait until a len bytes arrives.
+ 904:../Libraries/src/UART.c ****  * 	This function automatically place a \n at the last position.
+ 905:../Libraries/src/UART.c ****  * 	This function only works with SW Buffers.
+ 906:../Libraries/src/UART.c ****  *
+ 907:../Libraries/src/UART.c ****  * @param[in]	dev	Selected UART peripheral used to send data,
+ 908:../Libraries/src/UART.c ****  * 				should be:
+ 909:../Libraries/src/UART.c ****  *   			- LPC_UART0: UART0 peripheral
+ 910:../Libraries/src/UART.c ****  * 				- LPC_UART1: UART1 peripheral
+ 911:../Libraries/src/UART.c ****  * 				- LPC_UART2: UART2 peripheral
+ 912:../Libraries/src/UART.c ****  * 				- LPC_UART3: UART3 peripheral
+ 913:../Libraries/src/UART.c ****  * @param[out]	str 	Pointer to String
+ 914:../Libraries/src/UART.c ****  * @param[in]	len 	Length of String including and \n at the end.
+ 915:../Libraries/src/UART.c ****  * @return 		EOK if nothing gone wrong
+ 916:../Libraries/src/UART.c ****  */
+ 917:../Libraries/src/UART.c **** int32_t recv_string(UART_T *dev, char *str, uint32_t len)
+ 918:../Libraries/src/UART.c **** {
+ 2379              		.loc 1 918 0
+ 2380              		.cfi_startproc
+ 2381              		@ Function supports interworking.
+ 2382              		@ args = 0, pretend = 0, frame = 24
+ 2383              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2384 14ec 00482DE9 		stmfd	sp!, {fp, lr}
+ 2385              	.LCFI34:
+ 2386              		.cfi_def_cfa_offset 8
+ 2387              		.cfi_offset 14, -4
+ 2388              		.cfi_offset 11, -8
+ 2389 14f0 04B08DE2 		add	fp, sp, #4
+ 2390              	.LCFI35:
+ 2391              		.cfi_def_cfa 11, 4
+ 2392 14f4 18D04DE2 		sub	sp, sp, #24
+ 2393 14f8 10000BE5 		str	r0, [fp, #-16]
+ 2394 14fc 14100BE5 		str	r1, [fp, #-20]
+ 2395 1500 18200BE5 		str	r2, [fp, #-24]
+ 919:../Libraries/src/UART.c **** 	uint32_t bToRecv;
+ 920:../Libraries/src/UART.c **** 
+ 921:../Libraries/src/UART.c **** 	bToRecv = len;
+ 2396              		.loc 1 921 0
+ 2397 1504 18301BE5 		ldr	r3, [fp, #-24]
+ 2398 1508 08300BE5 		str	r3, [fp, #-8]
+ 922:../Libraries/src/UART.c **** 
+ 923:../Libraries/src/UART.c **** 	while(bToRecv-1)
+ 2399              		.loc 1 923 0
+ 2400 150c 0B0000EA 		b	.L166
+ 2401              	.L167:
+ 924:../Libraries/src/UART.c **** 	{
+ 925:../Libraries/src/UART.c **** 		(*str++) = (char)get_char(dev);
+ 2402              		.loc 1 925 0
+ 2403 1510 10001BE5 		ldr	r0, [fp, #-16]
+ 2404 1514 FEFFFFEB 		bl	get_char
+ 2405 1518 0030A0E1 		mov	r3, r0
+ 2406 151c 0320A0E1 		mov	r2, r3
+ 2407 1520 14301BE5 		ldr	r3, [fp, #-20]
+ 2408 1524 0020C3E5 		strb	r2, [r3, #0]
+ 2409 1528 14301BE5 		ldr	r3, [fp, #-20]
+ 2410 152c 013083E2 		add	r3, r3, #1
+ 2411 1530 14300BE5 		str	r3, [fp, #-20]
+ 926:../Libraries/src/UART.c **** 		bToRecv--;
+ 2412              		.loc 1 926 0
+ 2413 1534 08301BE5 		ldr	r3, [fp, #-8]
+ 2414 1538 013043E2 		sub	r3, r3, #1
+ 2415 153c 08300BE5 		str	r3, [fp, #-8]
+ 2416              	.L166:
+ 923:../Libraries/src/UART.c **** 	while(bToRecv-1)
+ 2417              		.loc 1 923 0 discriminator 1
+ 2418 1540 08301BE5 		ldr	r3, [fp, #-8]
+ 2419 1544 010053E3 		cmp	r3, #1
+ 2420 1548 F0FFFF1A 		bne	.L167
+ 927:../Libraries/src/UART.c **** 	}
+ 928:../Libraries/src/UART.c **** 
+ 929:../Libraries/src/UART.c **** 	*str = '\0';
+ 2421              		.loc 1 929 0
+ 2422 154c 14301BE5 		ldr	r3, [fp, #-20]
+ 2423 1550 0020A0E3 		mov	r2, #0
+ 2424 1554 0020C3E5 		strb	r2, [r3, #0]
+ 930:../Libraries/src/UART.c **** 
+ 931:../Libraries/src/UART.c **** 	return EOK;
+ 2425              		.loc 1 931 0
+ 2426 1558 0030A0E3 		mov	r3, #0
+ 932:../Libraries/src/UART.c **** }
+ 2427              		.loc 1 932 0
+ 2428 155c 0300A0E1 		mov	r0, r3
+ 2429 1560 04D04BE2 		sub	sp, fp, #4
+ 2430 1564 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 2431 1568 1EFF2FE1 		bx	lr
+ 2432              		.cfi_endproc
+ 2433              	.LFE17:
+ 2435              		.align	2
+ 2436              		.global	recv_buf
+ 2438              	recv_buf:
+ 2439              	.LFB18:
+ 933:../Libraries/src/UART.c **** 
+ 934:../Libraries/src/UART.c **** /**
+ 935:../Libraries/src/UART.c ****  * @brief		Receive a block of data via UART peripheral and
+ 936:../Libraries/src/UART.c ****  * 				write them into RecvCB
+ 937:../Libraries/src/UART.c ****  *
+ 938:../Libraries/src/UART.c ****  * 	This function receives a block of data via UART peripheral
+ 939:../Libraries/src/UART.c ****  * 	and store each uint8_t in the Recv circular buffer. Furthermore
+ 940:../Libraries/src/UART.c ****  * 	this function is blocking -> wait until a len bytes arrives.
+ 941:../Libraries/src/UART.c ****  * 	This function only works with SW Buffers.
+ 942:../Libraries/src/UART.c ****  *
+ 943:../Libraries/src/UART.c ****  * @param[in]	dev	Selected UART peripheral used to send data,
+ 944:../Libraries/src/UART.c ****  * 				should be:
+ 945:../Libraries/src/UART.c ****  *   			- LPC_UART0: UART0 peripheral
+ 946:../Libraries/src/UART.c ****  * 				- LPC_UART1: UART1 peripheral
+ 947:../Libraries/src/UART.c ****  * 				- LPC_UART2: UART2 peripheral
+ 948:../Libraries/src/UART.c ****  * 				- LPC_UART3: UART3 peripheral
+ 949:../Libraries/src/UART.c ****  * @param[out]	buf 	Pointer to Received buffer
+ 950:../Libraries/src/UART.c ****  * @param[in]	len 	Length of Received buffer
+ 951:../Libraries/src/UART.c ****  * @return 		EOK if nothing gone wrong
+ 952:../Libraries/src/UART.c ****  */
+ 953:../Libraries/src/UART.c **** int32_t recv_buf(UART_T *dev, uint8_t *buf, uint32_t len)
+ 954:../Libraries/src/UART.c **** {
+ 2440              		.loc 1 954 0
+ 2441              		.cfi_startproc
+ 2442              		@ Function supports interworking.
+ 2443              		@ args = 0, pretend = 0, frame = 24
+ 2444              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2445 156c 00482DE9 		stmfd	sp!, {fp, lr}
+ 2446              	.LCFI36:
+ 2447              		.cfi_def_cfa_offset 8
+ 2448              		.cfi_offset 14, -4
+ 2449              		.cfi_offset 11, -8
+ 2450 1570 04B08DE2 		add	fp, sp, #4
+ 2451              	.LCFI37:
+ 2452              		.cfi_def_cfa 11, 4
+ 2453 1574 18D04DE2 		sub	sp, sp, #24
+ 2454 1578 10000BE5 		str	r0, [fp, #-16]
+ 2455 157c 14100BE5 		str	r1, [fp, #-20]
+ 2456 1580 18200BE5 		str	r2, [fp, #-24]
+ 955:../Libraries/src/UART.c **** 	uint32_t bToRecv;
+ 956:../Libraries/src/UART.c **** 
+ 957:../Libraries/src/UART.c **** 	bToRecv = len;
+ 2457              		.loc 1 957 0
+ 2458 1584 18301BE5 		ldr	r3, [fp, #-24]
+ 2459 1588 08300BE5 		str	r3, [fp, #-8]
+ 958:../Libraries/src/UART.c **** 
+ 959:../Libraries/src/UART.c **** 	while(bToRecv)
+ 2460              		.loc 1 959 0
+ 2461 158c 0B0000EA 		b	.L169
+ 2462              	.L170:
+ 960:../Libraries/src/UART.c **** 	{
+ 961:../Libraries/src/UART.c **** 		(*buf++) = get_char(dev);
+ 2463              		.loc 1 961 0
+ 2464 1590 10001BE5 		ldr	r0, [fp, #-16]
+ 2465 1594 FEFFFFEB 		bl	get_char
+ 2466 1598 0030A0E1 		mov	r3, r0
+ 2467 159c 0320A0E1 		mov	r2, r3
+ 2468 15a0 14301BE5 		ldr	r3, [fp, #-20]
+ 2469 15a4 0020C3E5 		strb	r2, [r3, #0]
+ 2470 15a8 14301BE5 		ldr	r3, [fp, #-20]
+ 2471 15ac 013083E2 		add	r3, r3, #1
+ 2472 15b0 14300BE5 		str	r3, [fp, #-20]
+ 962:../Libraries/src/UART.c **** 		bToRecv--;
+ 2473              		.loc 1 962 0
+ 2474 15b4 08301BE5 		ldr	r3, [fp, #-8]
+ 2475 15b8 013043E2 		sub	r3, r3, #1
+ 2476 15bc 08300BE5 		str	r3, [fp, #-8]
+ 2477              	.L169:
+ 959:../Libraries/src/UART.c **** 	while(bToRecv)
+ 2478              		.loc 1 959 0 discriminator 1
+ 2479 15c0 08301BE5 		ldr	r3, [fp, #-8]
+ 2480 15c4 000053E3 		cmp	r3, #0
+ 2481 15c8 F0FFFF1A 		bne	.L170
+ 963:../Libraries/src/UART.c **** 	}
+ 964:../Libraries/src/UART.c **** 
+ 965:../Libraries/src/UART.c **** 	return EOK;
+ 2482              		.loc 1 965 0
+ 2483 15cc 0030A0E3 		mov	r3, #0
+ 966:../Libraries/src/UART.c **** }
+ 2484              		.loc 1 966 0
+ 2485 15d0 0300A0E1 		mov	r0, r3
+ 2486 15d4 04D04BE2 		sub	sp, fp, #4
+ 2487 15d8 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 2488 15dc 1EFF2FE1 		bx	lr
+ 2489              		.cfi_endproc
+ 2490              	.LFE18:
+ 2492              		.align	2
+ 2493              		.global	uart_isready
+ 2495              	uart_isready:
+ 2496              	.LFB19:
+ 967:../Libraries/src/UART.c **** 
+ 968:../Libraries/src/UART.c **** /**
+ 969:../Libraries/src/UART.c ****  * @brief		Check if UART is ready
+ 970:../Libraries/src/UART.c ****  *
+ 971:../Libraries/src/UART.c ****  * This function checks, if a given UART is already
+ 972:../Libraries/src/UART.c ****  * sending something.
+ 973:../Libraries/src/UART.c ****  *
+ 974:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 975:../Libraries/src/UART.c ****  * 					- LPC_UART0: UART0 peripheral
+ 976:../Libraries/src/UART.c ****  * 					- LPC_UART1: UART1 peripheral
+ 977:../Libraries/src/UART.c ****  * 					- LPC_UART2: UART2 peripheral
+ 978:../Libraries/src/UART.c ****  * 					- LPC_UART3: UART3 peripheral
+ 979:../Libraries/src/UART.c ****  *
+ 980:../Libraries/src/UART.c ****  * @return		BUSY if the UART is sendig
+ 981:../Libraries/src/UART.c ****  * 				NOTBUSY if the UART is waiting
+ 982:../Libraries/src/UART.c ****  */
+ 983:../Libraries/src/UART.c **** int32_t uart_isready(UART_T *dev)
+ 984:../Libraries/src/UART.c **** {
+ 2497              		.loc 1 984 0
+ 2498              		.cfi_startproc
+ 2499              		@ Function supports interworking.
+ 2500              		@ args = 0, pretend = 0, frame = 8
+ 2501              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2502              		@ link register save eliminated.
+ 2503 15e0 04B02DE5 		str	fp, [sp, #-4]!
+ 2504              	.LCFI38:
+ 2505              		.cfi_def_cfa_offset 4
+ 2506              		.cfi_offset 11, -4
+ 2507 15e4 00B08DE2 		add	fp, sp, #0
+ 2508              	.LCFI39:
+ 2509              		.cfi_def_cfa_register 11
+ 2510 15e8 0CD04DE2 		sub	sp, sp, #12
+ 2511 15ec 08000BE5 		str	r0, [fp, #-8]
+ 985:../Libraries/src/UART.c **** 	if(dev->LSR & UART_LSR_TEMT)
+ 2512              		.loc 1 985 0
+ 2513 15f0 08301BE5 		ldr	r3, [fp, #-8]
+ 2514 15f4 1430D3E5 		ldrb	r3, [r3, #20]
+ 2515 15f8 FF3003E2 		and	r3, r3, #255
+ 2516 15fc 403003E2 		and	r3, r3, #64
+ 2517 1600 000053E3 		cmp	r3, #0
+ 2518 1604 0100000A 		beq	.L172
+ 986:../Libraries/src/UART.c **** 	{
+ 987:../Libraries/src/UART.c **** 		return NOTBUSY;
+ 2519              		.loc 1 987 0
+ 2520 1608 0130A0E3 		mov	r3, #1
+ 2521 160c 000000EA 		b	.L173
+ 2522              	.L172:
+ 988:../Libraries/src/UART.c **** 	}
+ 989:../Libraries/src/UART.c **** 	else
+ 990:../Libraries/src/UART.c **** 	{
+ 991:../Libraries/src/UART.c **** 		return BUSY;
+ 2523              		.loc 1 991 0
+ 2524 1610 0030A0E3 		mov	r3, #0
+ 2525              	.L173:
+ 992:../Libraries/src/UART.c **** 	}
+ 993:../Libraries/src/UART.c **** }
+ 2526              		.loc 1 993 0
+ 2527 1614 0300A0E1 		mov	r0, r3
+ 2528 1618 00D08BE2 		add	sp, fp, #0
+ 2529 161c 04B09DE4 		ldmfd	sp!, {fp}
+ 2530 1620 1EFF2FE1 		bx	lr
+ 2531              		.cfi_endproc
+ 2532              	.LFE19:
+ 2534              		.align	2
+ 2535              		.global	uart_sendchar
+ 2537              	uart_sendchar:
+ 2538              	.LFB20:
+ 994:../Libraries/src/UART.c **** 
+ 995:../Libraries/src/UART.c **** /**
+ 996:../Libraries/src/UART.c ****  * @brief		Send a character direct via UART
+ 997:../Libraries/src/UART.c ****  *
+ 998:../Libraries/src/UART.c ****  * This function sends a character without using a
+ 999:../Libraries/src/UART.c ****  * circual buffer. This function is blocking.
+1000:../Libraries/src/UART.c ****  * This function only works with HW Buffers.
+1001:../Libraries/src/UART.c ****  *
+1002:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+1003:../Libraries/src/UART.c ****  * 					- LPC_UART0: UART0 peripheral
+1004:../Libraries/src/UART.c ****  * 					- LPC_UART1: UART1 peripheral
+1005:../Libraries/src/UART.c ****  * 					- LPC_UART2: UART2 peripheral
+1006:../Libraries/src/UART.c ****  * 					- LPC_UART3: UART3 peripheral
+1007:../Libraries/src/UART.c ****  * @param[in]   c Character to send
+1008:../Libraries/src/UART.c ****  *
+1009:../Libraries/src/UART.c ****  * @return		None
+1010:../Libraries/src/UART.c ****  */
+1011:../Libraries/src/UART.c **** void uart_sendchar(UART_T *dev, char c)
+1012:../Libraries/src/UART.c **** {
+ 2539              		.loc 1 1012 0
+ 2540              		.cfi_startproc
+ 2541              		@ Function supports interworking.
+ 2542              		@ args = 0, pretend = 0, frame = 8
+ 2543              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2544              		@ link register save eliminated.
+ 2545 1624 04B02DE5 		str	fp, [sp, #-4]!
+ 2546              	.LCFI40:
+ 2547              		.cfi_def_cfa_offset 4
+ 2548              		.cfi_offset 11, -4
+ 2549 1628 00B08DE2 		add	fp, sp, #0
+ 2550              	.LCFI41:
+ 2551              		.cfi_def_cfa_register 11
+ 2552 162c 0CD04DE2 		sub	sp, sp, #12
+ 2553 1630 08000BE5 		str	r0, [fp, #-8]
+ 2554 1634 0130A0E1 		mov	r3, r1
+ 2555 1638 09304BE5 		strb	r3, [fp, #-9]
+1013:../Libraries/src/UART.c **** 	while (!(dev->LSR & UART_LSR_THRE)); /* Block until tx empty */
+ 2556              		.loc 1 1013 0
+ 2557 163c 0000A0E1 		mov	r0, r0	@ nop
+ 2558              	.L175:
+ 2559              		.loc 1 1013 0 is_stmt 0 discriminator 1
+ 2560 1640 08301BE5 		ldr	r3, [fp, #-8]
+ 2561 1644 1430D3E5 		ldrb	r3, [r3, #20]
+ 2562 1648 FF3003E2 		and	r3, r3, #255
+ 2563 164c 203003E2 		and	r3, r3, #32
+ 2564 1650 000053E3 		cmp	r3, #0
+ 2565 1654 F9FFFF0A 		beq	.L175
+1014:../Libraries/src/UART.c **** 	dev->REG1.THR = c;
+ 2566              		.loc 1 1014 0 is_stmt 1
+ 2567 1658 08301BE5 		ldr	r3, [fp, #-8]
+ 2568 165c 09205BE5 		ldrb	r2, [fp, #-9]
+ 2569 1660 0020C3E5 		strb	r2, [r3, #0]
+1015:../Libraries/src/UART.c **** }
+ 2570              		.loc 1 1015 0
+ 2571 1664 00D08BE2 		add	sp, fp, #0
+ 2572 1668 04B09DE4 		ldmfd	sp!, {fp}
+ 2573 166c 1EFF2FE1 		bx	lr
+ 2574              		.cfi_endproc
+ 2575              	.LFE20:
+ 2577              		.align	2
+ 2578              		.global	uart_getchar
+ 2580              	uart_getchar:
+ 2581              	.LFB21:
+1016:../Libraries/src/UART.c **** 
+1017:../Libraries/src/UART.c **** /**
+1018:../Libraries/src/UART.c ****  * @brief		Get a character direct via UART
+1019:../Libraries/src/UART.c ****  *
+1020:../Libraries/src/UART.c ****  * This function receive a character without using a
+1021:../Libraries/src/UART.c ****  * circual buffer. This function is blocking-> wait
+1022:../Libraries/src/UART.c ****  * until a character arrives. This function only
+1023:../Libraries/src/UART.c ****  * works with HW Buffers.
+1024:../Libraries/src/UART.c ****  *
+1025:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+1026:../Libraries/src/UART.c ****  * 					- LPC_UART0: UART0 peripheral
+1027:../Libraries/src/UART.c ****  * 					- LPC_UART1: UART1 peripheral
+1028:../Libraries/src/UART.c ****  * 					- LPC_UART2: UART2 peripheral
+1029:../Libraries/src/UART.c ****  * 					- LPC_UART3: UART3 peripheral
+1030:../Libraries/src/UART.c ****  *
+1031:../Libraries/src/UART.c ****  * @return		c	return the received character
+1032:../Libraries/src/UART.c ****  */
+1033:../Libraries/src/UART.c **** char uart_getchar(UART_T *dev)
+1034:../Libraries/src/UART.c **** {
+ 2582              		.loc 1 1034 0
+ 2583              		.cfi_startproc
+ 2584              		@ Function supports interworking.
+ 2585              		@ args = 0, pretend = 0, frame = 16
+ 2586              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2587              		@ link register save eliminated.
+ 2588 1670 04B02DE5 		str	fp, [sp, #-4]!
+ 2589              	.LCFI42:
+ 2590              		.cfi_def_cfa_offset 4
+ 2591              		.cfi_offset 11, -4
+ 2592 1674 00B08DE2 		add	fp, sp, #0
+ 2593              	.LCFI43:
+ 2594              		.cfi_def_cfa_register 11
+ 2595 1678 14D04DE2 		sub	sp, sp, #20
+ 2596 167c 10000BE5 		str	r0, [fp, #-16]
+1035:../Libraries/src/UART.c **** 	char c;
+1036:../Libraries/src/UART.c **** 	while ((dev->LSR & UART_LSR_RDR) == 0); /* Nothing received so just block */
+ 2597              		.loc 1 1036 0
+ 2598 1680 0000A0E1 		mov	r0, r0	@ nop
+ 2599              	.L177:
+ 2600              		.loc 1 1036 0 is_stmt 0 discriminator 1
+ 2601 1684 10301BE5 		ldr	r3, [fp, #-16]
+ 2602 1688 1430D3E5 		ldrb	r3, [r3, #20]
+ 2603 168c FF3003E2 		and	r3, r3, #255
+ 2604 1690 013003E2 		and	r3, r3, #1
+ 2605 1694 000053E3 		cmp	r3, #0
+ 2606 1698 F9FFFF0A 		beq	.L177
+1037:../Libraries/src/UART.c **** 	c = dev->REG1.RBR; /* Read Receiver buffer register */
+ 2607              		.loc 1 1037 0 is_stmt 1
+ 2608 169c 10301BE5 		ldr	r3, [fp, #-16]
+ 2609 16a0 0030D3E5 		ldrb	r3, [r3, #0]
+ 2610 16a4 05304BE5 		strb	r3, [fp, #-5]
+1038:../Libraries/src/UART.c **** 	return c;
+ 2611              		.loc 1 1038 0
+ 2612 16a8 05305BE5 		ldrb	r3, [fp, #-5]	@ zero_extendqisi2
+1039:../Libraries/src/UART.c **** }
+ 2613              		.loc 1 1039 0
+ 2614 16ac 0300A0E1 		mov	r0, r3
+ 2615 16b0 00D08BE2 		add	sp, fp, #0
+ 2616 16b4 04B09DE4 		ldmfd	sp!, {fp}
+ 2617 16b8 1EFF2FE1 		bx	lr
+ 2618              		.cfi_endproc
+ 2619              	.LFE21:
+ 2621              		.align	2
+ 2622              		.global	uart_puts
+ 2624              	uart_puts:
+ 2625              	.LFB22:
+1040:../Libraries/src/UART.c **** 
+1041:../Libraries/src/UART.c **** /**
+1042:../Libraries/src/UART.c ****  * @brief		Send a String direct via UART
+1043:../Libraries/src/UART.c ****  *
+1044:../Libraries/src/UART.c ****  * This function sends a string without using a
+1045:../Libraries/src/UART.c ****  * circual buffer. This function only works with HW Buffers.
+1046:../Libraries/src/UART.c ****  *
+1047:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+1048:../Libraries/src/UART.c ****  * 					- LPC_UART0: UART0 peripheral
+1049:../Libraries/src/UART.c ****  * 					- LPC_UART1: UART1 peripheral
+1050:../Libraries/src/UART.c ****  * 					- LPC_UART2: UART2 peripheral
+1051:../Libraries/src/UART.c ****  * 					- LPC_UART3: UART3 peripheral
+1052:../Libraries/src/UART.c ****  * @param[in]   s String to send
+1053:../Libraries/src/UART.c ****  *
+1054:../Libraries/src/UART.c ****  * @return		None
+1055:../Libraries/src/UART.c ****  */
+1056:../Libraries/src/UART.c **** void uart_puts(UART_T *dev, char *s)
+1057:../Libraries/src/UART.c **** {
+ 2626              		.loc 1 1057 0
+ 2627              		.cfi_startproc
+ 2628              		@ Function supports interworking.
+ 2629              		@ args = 0, pretend = 0, frame = 8
+ 2630              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2631 16bc 00482DE9 		stmfd	sp!, {fp, lr}
+ 2632              	.LCFI44:
+ 2633              		.cfi_def_cfa_offset 8
+ 2634              		.cfi_offset 14, -4
+ 2635              		.cfi_offset 11, -8
+ 2636 16c0 04B08DE2 		add	fp, sp, #4
+ 2637              	.LCFI45:
+ 2638              		.cfi_def_cfa 11, 4
+ 2639 16c4 08D04DE2 		sub	sp, sp, #8
+ 2640 16c8 08000BE5 		str	r0, [fp, #-8]
+ 2641 16cc 0C100BE5 		str	r1, [fp, #-12]
+1058:../Libraries/src/UART.c **** 	while(*s) {
+ 2642              		.loc 1 1058 0
+ 2643 16d0 070000EA 		b	.L179
+ 2644              	.L180:
+1059:../Libraries/src/UART.c **** 		uart_sendchar(dev, *s);
+ 2645              		.loc 1 1059 0
+ 2646 16d4 0C301BE5 		ldr	r3, [fp, #-12]
+ 2647 16d8 0030D3E5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 2648 16dc 08001BE5 		ldr	r0, [fp, #-8]
+ 2649 16e0 0310A0E1 		mov	r1, r3
+ 2650 16e4 FEFFFFEB 		bl	uart_sendchar
+1060:../Libraries/src/UART.c **** 		s++;
+ 2651              		.loc 1 1060 0
+ 2652 16e8 0C301BE5 		ldr	r3, [fp, #-12]
+ 2653 16ec 013083E2 		add	r3, r3, #1
+ 2654 16f0 0C300BE5 		str	r3, [fp, #-12]
+ 2655              	.L179:
+1058:../Libraries/src/UART.c **** 	while(*s) {
+ 2656              		.loc 1 1058 0 discriminator 1
+ 2657 16f4 0C301BE5 		ldr	r3, [fp, #-12]
+ 2658 16f8 0030D3E5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 2659 16fc 000053E3 		cmp	r3, #0
+ 2660 1700 F3FFFF1A 		bne	.L180
+1061:../Libraries/src/UART.c **** 	}
+1062:../Libraries/src/UART.c **** 
+1063:../Libraries/src/UART.c **** 	/* if string does not end with next line character */
+1064:../Libraries/src/UART.c **** 	if(*(--s)!='\n')
+ 2661              		.loc 1 1064 0
+ 2662 1704 0C301BE5 		ldr	r3, [fp, #-12]
+ 2663 1708 013043E2 		sub	r3, r3, #1
+ 2664 170c 0C300BE5 		str	r3, [fp, #-12]
+ 2665 1710 0C301BE5 		ldr	r3, [fp, #-12]
+ 2666 1714 0030D3E5 		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 2667 1718 0A0053E3 		cmp	r3, #10
+ 2668 171c 0200000A 		beq	.L178
+1065:../Libraries/src/UART.c **** 	{
+1066:../Libraries/src/UART.c **** 		uart_sendchar(dev, '\n');
+ 2669              		.loc 1 1066 0
+ 2670 1720 08001BE5 		ldr	r0, [fp, #-8]
+ 2671 1724 0A10A0E3 		mov	r1, #10
+ 2672 1728 FEFFFFEB 		bl	uart_sendchar
+ 2673              	.L178:
+1067:../Libraries/src/UART.c **** 	}
+1068:../Libraries/src/UART.c **** }
+ 2674              		.loc 1 1068 0
+ 2675 172c 04D04BE2 		sub	sp, fp, #4
+ 2676 1730 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 2677 1734 1EFF2FE1 		bx	lr
+ 2678              		.cfi_endproc
+ 2679              	.LFE22:
+ 2681              		.align	2
+ 2682              		.global	uart_getDevInInt
+ 2684              	uart_getDevInInt:
+ 2685              	.LFB23:
+1069:../Libraries/src/UART.c **** 
+1070:../Libraries/src/UART.c **** /**
+1071:../Libraries/src/UART.c ****  * @brief		Return the device number in integer
+1072:../Libraries/src/UART.c ****  *
+1073:../Libraries/src/UART.c ****  * This function returns the device number in an integer
+1074:../Libraries/src/UART.c ****  * format.
+1075:../Libraries/src/UART.c ****  *
+1076:../Libraries/src/UART.c ****  * @param[in]	dev	UART peripheral selected, should be:
+1077:../Libraries/src/UART.c ****  * 					- LPC_UART0: UART0 peripheral
+1078:../Libraries/src/UART.c ****  * 					- LPC_UART1: UART1 peripheral
+1079:../Libraries/src/UART.c ****  * 					- LPC_UART2: UART2 peripheral
+1080:../Libraries/src/UART.c ****  * 					- LPC_UART3: UART3 peripheral
+1081:../Libraries/src/UART.c ****  * @return		uint8_t 0 if LPC_UART0
+1082:../Libraries/src/UART.c ****  * 				uint8_t 1 if LPC_UART1
+1083:../Libraries/src/UART.c ****  * 				uint8_t 2 if LPC_UART2
+1084:../Libraries/src/UART.c ****  * 				uint8_t 3 if LPC_UART3
+1085:../Libraries/src/UART.c ****  */
+1086:../Libraries/src/UART.c **** uint8_t uart_getDevInInt(UART_T *dev)
+1087:../Libraries/src/UART.c **** {
+ 2686              		.loc 1 1087 0
+ 2687              		.cfi_startproc
+ 2688              		@ Function supports interworking.
+ 2689              		@ args = 0, pretend = 0, frame = 16
+ 2690              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2691              		@ link register save eliminated.
+ 2692 1738 04B02DE5 		str	fp, [sp, #-4]!
+ 2693              	.LCFI46:
+ 2694              		.cfi_def_cfa_offset 4
+ 2695              		.cfi_offset 11, -4
+ 2696 173c 00B08DE2 		add	fp, sp, #0
+ 2697              	.LCFI47:
+ 2698              		.cfi_def_cfa_register 11
+ 2699 1740 14D04DE2 		sub	sp, sp, #20
+ 2700 1744 10000BE5 		str	r0, [fp, #-16]
+1088:../Libraries/src/UART.c **** 	uint8_t ret = 255;
+ 2701              		.loc 1 1088 0
+ 2702 1748 0030E0E3 		mvn	r3, #0
+ 2703 174c 05304BE5 		strb	r3, [fp, #-5]
+1089:../Libraries/src/UART.c **** 	if(dev == LPC_UART0)
+ 2704              		.loc 1 1089 0
+ 2705 1750 10201BE5 		ldr	r2, [fp, #-16]
+ 2706 1754 74309FE5 		ldr	r3, .L187
+ 2707 1758 030052E1 		cmp	r2, r3
+ 2708 175c 0200001A 		bne	.L183
+1090:../Libraries/src/UART.c **** 	{
+1091:../Libraries/src/UART.c **** 		ret = 0;
+ 2709              		.loc 1 1091 0
+ 2710 1760 0030A0E3 		mov	r3, #0
+ 2711 1764 05304BE5 		strb	r3, [fp, #-5]
+ 2712 1768 130000EA 		b	.L184
+ 2713              	.L183:
+1092:../Libraries/src/UART.c **** 	} else if(dev == LPC_UART1)
+ 2714              		.loc 1 1092 0
+ 2715 176c 10201BE5 		ldr	r2, [fp, #-16]
+ 2716 1770 5C309FE5 		ldr	r3, .L187+4
+ 2717 1774 030052E1 		cmp	r2, r3
+ 2718 1778 0200001A 		bne	.L185
+1093:../Libraries/src/UART.c **** 	{
+1094:../Libraries/src/UART.c **** 		ret = 1;
+ 2719              		.loc 1 1094 0
+ 2720 177c 0130A0E3 		mov	r3, #1
+ 2721 1780 05304BE5 		strb	r3, [fp, #-5]
+ 2722 1784 0C0000EA 		b	.L184
+ 2723              	.L185:
+1095:../Libraries/src/UART.c **** 	} else if(dev == LPC_UART2)
+ 2724              		.loc 1 1095 0
+ 2725 1788 10201BE5 		ldr	r2, [fp, #-16]
+ 2726 178c 44309FE5 		ldr	r3, .L187+8
+ 2727 1790 030052E1 		cmp	r2, r3
+ 2728 1794 0200001A 		bne	.L186
+1096:../Libraries/src/UART.c **** 	{
+1097:../Libraries/src/UART.c **** 		ret = 2;
+ 2729              		.loc 1 1097 0
+ 2730 1798 0230A0E3 		mov	r3, #2
+ 2731 179c 05304BE5 		strb	r3, [fp, #-5]
+ 2732 17a0 050000EA 		b	.L184
+ 2733              	.L186:
+1098:../Libraries/src/UART.c **** 	} else if(dev == LPC_UART3)
+ 2734              		.loc 1 1098 0
+ 2735 17a4 10201BE5 		ldr	r2, [fp, #-16]
+ 2736 17a8 2C309FE5 		ldr	r3, .L187+12
+ 2737 17ac 030052E1 		cmp	r2, r3
+ 2738 17b0 0100001A 		bne	.L184
+1099:../Libraries/src/UART.c **** 	{
+1100:../Libraries/src/UART.c **** 		ret = 3;
+ 2739              		.loc 1 1100 0
+ 2740 17b4 0330A0E3 		mov	r3, #3
+ 2741 17b8 05304BE5 		strb	r3, [fp, #-5]
+ 2742              	.L184:
+1101:../Libraries/src/UART.c **** 	}
+1102:../Libraries/src/UART.c **** 
+1103:../Libraries/src/UART.c **** 	return ret;
+ 2743              		.loc 1 1103 0
+ 2744 17bc 05305BE5 		ldrb	r3, [fp, #-5]	@ zero_extendqisi2
+1104:../Libraries/src/UART.c **** }
+ 2745              		.loc 1 1104 0
+ 2746 17c0 0300A0E1 		mov	r0, r3
+ 2747 17c4 00D08BE2 		add	sp, fp, #0
+ 2748 17c8 04B09DE4 		ldmfd	sp!, {fp}
+ 2749 17cc 1EFF2FE1 		bx	lr
+ 2750              	.L188:
+ 2751              		.align	2
+ 2752              	.L187:
+ 2753 17d0 00C000E0 		.word	-536821760
+ 2754 17d4 000001E0 		.word	-536805376
+ 2755 17d8 008007E0 		.word	-536379392
+ 2756 17dc 00C007E0 		.word	-536363008
+ 2757              		.cfi_endproc
+ 2758              	.LFE23:
+ 2760              	.Letext0:
+ 2761              		.file 2 "/home/es/CodeSourcery/Sourcery_CodeBench_Lite_for_ARM_EABI/bin/../lib/gcc/arm-none-eabi/4
+ 2762              		.file 3 "/home/es/Desktop/LPC2478_UART/Libraries/inc/UART.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 UART.c
+                            *COM*:000000b0 UART_STAT
+     /tmp/ccHSkCPm.s:22     .rodata:00000000 FRLut
+     /tmp/ccHSkCPm.s:19     .rodata:00000000 $d
+     /tmp/ccHSkCPm.s:99     .rodata:00000120 DIVADDVALLut
+     /tmp/ccHSkCPm.s:176    .rodata:00000240 MULVALLut
+     /tmp/ccHSkCPm.s:250    .text:00000000 $a
+     /tmp/ccHSkCPm.s:253    .text:00000000 UART0Handler
+     /tmp/ccHSkCPm.s:309    .text:00000068 $d
+     /tmp/ccHSkCPm.s:314    .text:00000070 $a
+     /tmp/ccHSkCPm.s:317    .text:00000070 UART1Handler
+     /tmp/ccHSkCPm.s:372    .text:000000d8 $d
+     /tmp/ccHSkCPm.s:377    .text:000000e0 $a
+     /tmp/ccHSkCPm.s:380    .text:000000e0 UART2Handler
+     /tmp/ccHSkCPm.s:435    .text:00000148 $d
+     /tmp/ccHSkCPm.s:440    .text:00000150 $a
+     /tmp/ccHSkCPm.s:443    .text:00000150 UART3Handler
+     /tmp/ccHSkCPm.s:498    .text:000001b8 $d
+     /tmp/ccHSkCPm.s:503    .text:000001c0 $a
+     /tmp/ccHSkCPm.s:505    .text:000001c0 uart_enable_power
+     /tmp/ccHSkCPm.s:577    .text:0000026c $d
+     /tmp/ccHSkCPm.s:585    .text:00000280 $a
+     /tmp/ccHSkCPm.s:587    .text:00000280 uart_set_clock
+     /tmp/ccHSkCPm.s:613    .text:000002ac $d
+     /tmp/ccHSkCPm.s:623    .text:000002cc $a
+     /tmp/ccHSkCPm.s:739    .text:00000414 $d
+     /tmp/ccHSkCPm.s:754    .text:0000042c $a
+     /tmp/ccHSkCPm.s:756    .text:0000042c getFRval
+     /tmp/ccHSkCPm.s:917    .text:00000608 $d
+     /tmp/ccHSkCPm.s:933    .text:00000618 $a
+     /tmp/ccHSkCPm.s:935    .text:00000618 uart_set_divisors
+     /tmp/ccHSkCPm.s:1222   .text:000009a0 $d
+     /tmp/ccHSkCPm.s:1234   .text:000009c4 $a
+     /tmp/ccHSkCPm.s:1236   .text:000009c4 uart_installIrq
+     /tmp/ccHSkCPm.s:1353   .text:00000aec $d
+     /tmp/ccHSkCPm.s:1365   .text:00000b10 $a
+     /tmp/ccHSkCPm.s:1368   .text:00000b10 uart_init
+     /tmp/ccHSkCPm.s:1514   .text:00000c98 $d
+     /tmp/ccHSkCPm.s:1520   .text:00000ca8 $a
+     /tmp/ccHSkCPm.s:1611   .text:00000d8c $d
+     /tmp/ccHSkCPm.s:1618   .text:00000d9c $a
+     /tmp/ccHSkCPm.s:1621   .text:00000d9c uart_enable
+     /tmp/ccHSkCPm.s:1803   .text:00000fa0 $d
+     /tmp/ccHSkCPm.s:1812   .text:00000fb8 $a
+     /tmp/ccHSkCPm.s:1815   .text:00000fb8 uart_disable
+     /tmp/ccHSkCPm.s:1949   .text:0000111c $d
+     /tmp/ccHSkCPm.s:1958   .text:00001134 $a
+     /tmp/ccHSkCPm.s:1961   .text:00001134 get_char
+     /tmp/ccHSkCPm.s:2684   .text:00001738 uart_getDevInInt
+     /tmp/ccHSkCPm.s:2033   .text:000011e0 $d
+     /tmp/ccHSkCPm.s:2037   .text:000011e4 $a
+     /tmp/ccHSkCPm.s:2039   .text:000011e4 uart_startTransmit
+     /tmp/ccHSkCPm.s:2079   .text:00001228 put_char
+     /tmp/ccHSkCPm.s:2120   .text:00001270 send_string
+     /tmp/ccHSkCPm.s:2245   .text:000013b4 $d
+     /tmp/ccHSkCPm.s:2249   .text:000013b8 $a
+     /tmp/ccHSkCPm.s:2252   .text:000013b8 send_buf
+     /tmp/ccHSkCPm.s:2370   .text:000014e8 $d
+     /tmp/ccHSkCPm.s:2374   .text:000014ec $a
+     /tmp/ccHSkCPm.s:2377   .text:000014ec recv_string
+     /tmp/ccHSkCPm.s:2438   .text:0000156c recv_buf
+     /tmp/ccHSkCPm.s:2495   .text:000015e0 uart_isready
+     /tmp/ccHSkCPm.s:2537   .text:00001624 uart_sendchar
+     /tmp/ccHSkCPm.s:2580   .text:00001670 uart_getchar
+     /tmp/ccHSkCPm.s:2624   .text:000016bc uart_puts
+     /tmp/ccHSkCPm.s:2753   .text:000017d0 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+putRecvCB
+__aeabi_f2d
+__aeabi_dcmplt
+__aeabi_dsub
+__aeabi_d2f
+__aeabi_fcmpeq
+__aeabi_fcmpgt
+__aeabi_idiv
+__aeabi_uidivmod
+__aeabi_ui2f
+__aeabi_fdiv
+__aeabi_f2uiz
+__aeabi_fmul
+__aeabi_dcmpgt
+__aeabi_i2d
+__aeabi_dadd
+install_irq
+initCB
+getRecvCB
+getSendCB
+putSendCB

@@ -1,0 +1,1248 @@
+   1              		.cpu arm7tdmi-s
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"cb.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.comm	UART_STAT,176,4
+  17              		.align	2
+  19              	initSendCB:
+  20              	.LFB0:
+  21              		.file 1 "../Libraries/src/cb.c"
+   1:../Libraries/src/cb.c **** /*
+   2:../Libraries/src/cb.c ****  * cb.c
+   3:../Libraries/src/cb.c ****  *
+   4:../Libraries/src/cb.c ****  *  Created on: Jan 2, 2014
+   5:../Libraries/src/cb.c ****  *      Author: Floran Berndl; Bernd Glatz;
+   6:../Libraries/src/cb.c ****  */
+   7:../Libraries/src/cb.c **** 
+   8:../Libraries/src/cb.c **** #include "cb.h"
+   9:../Libraries/src/cb.c **** #include "UART.h"
+  10:../Libraries/src/cb.c **** 
+  11:../Libraries/src/cb.c **** /**
+  12:../Libraries/src/cb.c ****  * @brief		Initialize send circular buffer
+  13:../Libraries/src/cb.c ****  *
+  14:../Libraries/src/cb.c ****  * This function initializes the send circular buffer
+  15:../Libraries/src/cb.c ****  *
+  16:../Libraries/src/cb.c ****  * @param[in]	dev	UART peripheral selected, should be:
+  17:../Libraries/src/cb.c ****  * 					- LPC_UART0: UART0 peripheral
+  18:../Libraries/src/cb.c ****  * 					- LPC_UART1: UART1 peripheral
+  19:../Libraries/src/cb.c ****  * 					- LPC_UART2: UART2 peripheral
+  20:../Libraries/src/cb.c ****  * 					- LPC_UART3: UART3 peripheral
+  21:../Libraries/src/cb.c ****  *
+  22:../Libraries/src/cb.c ****  * @return		None
+  23:../Libraries/src/cb.c ****  */
+  24:../Libraries/src/cb.c **** static void initSendCB(uint8_t udev)
+  25:../Libraries/src/cb.c **** {
+  22              		.loc 1 25 0
+  23              		.cfi_startproc
+  24              		@ Function supports interworking.
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 1, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 04B02DE5 		str	fp, [sp, #-4]!
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 4
+  31              		.cfi_offset 11, -4
+  32 0004 00B08DE2 		add	fp, sp, #0
+  33              	.LCFI1:
+  34              		.cfi_def_cfa_register 11
+  35 0008 0CD04DE2 		sub	sp, sp, #12
+  36 000c 0030A0E1 		mov	r3, r0
+  37 0010 05304BE5 		strb	r3, [fp, #-5]
+  26:../Libraries/src/cb.c **** 	UART_STAT[udev].send.SendCB_Full  = FALSE;
+  38              		.loc 1 26 0
+  39 0014 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+  40 0018 D0009FE5 		ldr	r0, .L2
+  41 001c 1010A0E3 		mov	r1, #16
+  42 0020 0230A0E1 		mov	r3, r2
+  43 0024 0331A0E1 		mov	r3, r3, asl #2
+  44 0028 023083E0 		add	r3, r3, r2
+  45 002c 8330A0E1 		mov	r3, r3, asl #1
+  46 0030 023083E0 		add	r3, r3, r2
+  47 0034 0331A0E1 		mov	r3, r3, asl #2
+  48 0038 033080E0 		add	r3, r0, r3
+  49 003c 013083E0 		add	r3, r3, r1
+  50 0040 0020A0E3 		mov	r2, #0
+  51 0044 0220C3E5 		strb	r2, [r3, #2]
+  27:../Libraries/src/cb.c **** 	UART_STAT[udev].send.SendCB_Empty = TRUE;
+  52              		.loc 1 27 0
+  53 0048 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+  54 004c 9C009FE5 		ldr	r0, .L2
+  55 0050 1010A0E3 		mov	r1, #16
+  56 0054 0230A0E1 		mov	r3, r2
+  57 0058 0331A0E1 		mov	r3, r3, asl #2
+  58 005c 023083E0 		add	r3, r3, r2
+  59 0060 8330A0E1 		mov	r3, r3, asl #1
+  60 0064 023083E0 		add	r3, r3, r2
+  61 0068 0331A0E1 		mov	r3, r3, asl #2
+  62 006c 033080E0 		add	r3, r0, r3
+  63 0070 013083E0 		add	r3, r3, r1
+  64 0074 0120A0E3 		mov	r2, #1
+  65 0078 0320C3E5 		strb	r2, [r3, #3]
+  28:../Libraries/src/cb.c **** 	UART_STAT[udev].send.SendCB_In	 = 0;
+  66              		.loc 1 28 0
+  67 007c 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+  68 0080 68009FE5 		ldr	r0, .L2
+  69 0084 1010A0E3 		mov	r1, #16
+  70 0088 0230A0E1 		mov	r3, r2
+  71 008c 0331A0E1 		mov	r3, r3, asl #2
+  72 0090 023083E0 		add	r3, r3, r2
+  73 0094 8330A0E1 		mov	r3, r3, asl #1
+  74 0098 023083E0 		add	r3, r3, r2
+  75 009c 0331A0E1 		mov	r3, r3, asl #2
+  76 00a0 033080E0 		add	r3, r0, r3
+  77 00a4 013083E0 		add	r3, r3, r1
+  78 00a8 0020A0E3 		mov	r2, #0
+  79 00ac 0020C3E5 		strb	r2, [r3, #0]
+  29:../Libraries/src/cb.c **** 	UART_STAT[udev].send.SendCB_Out	 = 0;
+  80              		.loc 1 29 0
+  81 00b0 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+  82 00b4 34009FE5 		ldr	r0, .L2
+  83 00b8 1010A0E3 		mov	r1, #16
+  84 00bc 0230A0E1 		mov	r3, r2
+  85 00c0 0331A0E1 		mov	r3, r3, asl #2
+  86 00c4 023083E0 		add	r3, r3, r2
+  87 00c8 8330A0E1 		mov	r3, r3, asl #1
+  88 00cc 023083E0 		add	r3, r3, r2
+  89 00d0 0331A0E1 		mov	r3, r3, asl #2
+  90 00d4 033080E0 		add	r3, r0, r3
+  91 00d8 013083E0 		add	r3, r3, r1
+  92 00dc 0020A0E3 		mov	r2, #0
+  93 00e0 0120C3E5 		strb	r2, [r3, #1]
+  30:../Libraries/src/cb.c **** }
+  94              		.loc 1 30 0
+  95 00e4 00D08BE2 		add	sp, fp, #0
+  96 00e8 04B09DE4 		ldmfd	sp!, {fp}
+  97 00ec 1EFF2FE1 		bx	lr
+  98              	.L3:
+  99              		.align	2
+ 100              	.L2:
+ 101 00f0 00000000 		.word	UART_STAT
+ 102              		.cfi_endproc
+ 103              	.LFE0:
+ 105              		.align	2
+ 107              	initRecvCB:
+ 108              	.LFB1:
+  31:../Libraries/src/cb.c **** 
+  32:../Libraries/src/cb.c **** /**
+  33:../Libraries/src/cb.c ****  * @brief		Initialize receive circular buffer
+  34:../Libraries/src/cb.c ****  *
+  35:../Libraries/src/cb.c ****  * This function initializes the receive circular buffer
+  36:../Libraries/src/cb.c ****  *
+  37:../Libraries/src/cb.c ****  * @param[in]	dev	UART peripheral selected, should be:
+  38:../Libraries/src/cb.c ****  * 					- LPC_UART0: UART0 peripheral
+  39:../Libraries/src/cb.c ****  * 					- LPC_UART1: UART1 peripheral
+  40:../Libraries/src/cb.c ****  * 					- LPC_UART2: UART2 peripheral
+  41:../Libraries/src/cb.c ****  * 					- LPC_UART3: UART3 peripheral
+  42:../Libraries/src/cb.c ****  *
+  43:../Libraries/src/cb.c ****  * @return		None
+  44:../Libraries/src/cb.c ****  */
+  45:../Libraries/src/cb.c **** static void initRecvCB(uint8_t udev)
+  46:../Libraries/src/cb.c **** {
+ 109              		.loc 1 46 0
+ 110              		.cfi_startproc
+ 111              		@ Function supports interworking.
+ 112              		@ args = 0, pretend = 0, frame = 8
+ 113              		@ frame_needed = 1, uses_anonymous_args = 0
+ 114              		@ link register save eliminated.
+ 115 00f4 04B02DE5 		str	fp, [sp, #-4]!
+ 116              	.LCFI2:
+ 117              		.cfi_def_cfa_offset 4
+ 118              		.cfi_offset 11, -4
+ 119 00f8 00B08DE2 		add	fp, sp, #0
+ 120              	.LCFI3:
+ 121              		.cfi_def_cfa_register 11
+ 122 00fc 0CD04DE2 		sub	sp, sp, #12
+ 123 0100 0030A0E1 		mov	r3, r0
+ 124 0104 05304BE5 		strb	r3, [fp, #-5]
+  47:../Libraries/src/cb.c **** 	UART_STAT[udev].recv.RecvCB_Full  = FALSE;
+ 125              		.loc 1 47 0
+ 126 0108 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+ 127 010c D0009FE5 		ldr	r0, .L5
+ 128 0110 2010A0E3 		mov	r1, #32
+ 129 0114 0230A0E1 		mov	r3, r2
+ 130 0118 0331A0E1 		mov	r3, r3, asl #2
+ 131 011c 023083E0 		add	r3, r3, r2
+ 132 0120 8330A0E1 		mov	r3, r3, asl #1
+ 133 0124 023083E0 		add	r3, r3, r2
+ 134 0128 0331A0E1 		mov	r3, r3, asl #2
+ 135 012c 033080E0 		add	r3, r0, r3
+ 136 0130 013083E0 		add	r3, r3, r1
+ 137 0134 0020A0E3 		mov	r2, #0
+ 138 0138 0620C3E5 		strb	r2, [r3, #6]
+  48:../Libraries/src/cb.c **** 	UART_STAT[udev].recv.RecvCB_Empty = TRUE;
+ 139              		.loc 1 48 0
+ 140 013c 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+ 141 0140 9C009FE5 		ldr	r0, .L5
+ 142 0144 2010A0E3 		mov	r1, #32
+ 143 0148 0230A0E1 		mov	r3, r2
+ 144 014c 0331A0E1 		mov	r3, r3, asl #2
+ 145 0150 023083E0 		add	r3, r3, r2
+ 146 0154 8330A0E1 		mov	r3, r3, asl #1
+ 147 0158 023083E0 		add	r3, r3, r2
+ 148 015c 0331A0E1 		mov	r3, r3, asl #2
+ 149 0160 033080E0 		add	r3, r0, r3
+ 150 0164 013083E0 		add	r3, r3, r1
+ 151 0168 0120A0E3 		mov	r2, #1
+ 152 016c 0720C3E5 		strb	r2, [r3, #7]
+  49:../Libraries/src/cb.c **** 	UART_STAT[udev].recv.RecvCB_In	 = 0;
+ 153              		.loc 1 49 0
+ 154 0170 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+ 155 0174 68009FE5 		ldr	r0, .L5
+ 156 0178 2010A0E3 		mov	r1, #32
+ 157 017c 0230A0E1 		mov	r3, r2
+ 158 0180 0331A0E1 		mov	r3, r3, asl #2
+ 159 0184 023083E0 		add	r3, r3, r2
+ 160 0188 8330A0E1 		mov	r3, r3, asl #1
+ 161 018c 023083E0 		add	r3, r3, r2
+ 162 0190 0331A0E1 		mov	r3, r3, asl #2
+ 163 0194 033080E0 		add	r3, r0, r3
+ 164 0198 013083E0 		add	r3, r3, r1
+ 165 019c 0020A0E3 		mov	r2, #0
+ 166 01a0 0420C3E5 		strb	r2, [r3, #4]
+  50:../Libraries/src/cb.c **** 	UART_STAT[udev].recv.RecvCB_Out	 = 0;
+ 167              		.loc 1 50 0
+ 168 01a4 05205BE5 		ldrb	r2, [fp, #-5]	@ zero_extendqisi2
+ 169 01a8 34009FE5 		ldr	r0, .L5
+ 170 01ac 2010A0E3 		mov	r1, #32
+ 171 01b0 0230A0E1 		mov	r3, r2
+ 172 01b4 0331A0E1 		mov	r3, r3, asl #2
+ 173 01b8 023083E0 		add	r3, r3, r2
+ 174 01bc 8330A0E1 		mov	r3, r3, asl #1
+ 175 01c0 023083E0 		add	r3, r3, r2
+ 176 01c4 0331A0E1 		mov	r3, r3, asl #2
+ 177 01c8 033080E0 		add	r3, r0, r3
+ 178 01cc 013083E0 		add	r3, r3, r1
+ 179 01d0 0020A0E3 		mov	r2, #0
+ 180 01d4 0520C3E5 		strb	r2, [r3, #5]
+  51:../Libraries/src/cb.c **** }
+ 181              		.loc 1 51 0
+ 182 01d8 00D08BE2 		add	sp, fp, #0
+ 183 01dc 04B09DE4 		ldmfd	sp!, {fp}
+ 184 01e0 1EFF2FE1 		bx	lr
+ 185              	.L6:
+ 186              		.align	2
+ 187              	.L5:
+ 188 01e4 00000000 		.word	UART_STAT
+ 189              		.cfi_endproc
+ 190              	.LFE1:
+ 192              		.align	2
+ 193              		.global	initCB
+ 195              	initCB:
+ 196              	.LFB2:
+  52:../Libraries/src/cb.c **** 
+  53:../Libraries/src/cb.c **** /**
+  54:../Libraries/src/cb.c ****  * @brief		Initialize senda and receive circular buffer
+  55:../Libraries/src/cb.c ****  *
+  56:../Libraries/src/cb.c ****  * This function calls the initSendCb and initRecvCb functions
+  57:../Libraries/src/cb.c ****  * to initialze them.
+  58:../Libraries/src/cb.c ****  *
+  59:../Libraries/src/cb.c ****  * @param[in]	dev	UART peripheral selected, should be:
+  60:../Libraries/src/cb.c ****  * 					- LPC_UART0: UART0 peripheral
+  61:../Libraries/src/cb.c ****  * 					- LPC_UART1: UART1 peripheral
+  62:../Libraries/src/cb.c ****  * 					- LPC_UART2: UART2 peripheral
+  63:../Libraries/src/cb.c ****  * 					- LPC_UART3: UART3 peripheral
+  64:../Libraries/src/cb.c ****  *
+  65:../Libraries/src/cb.c ****  * @return		None
+  66:../Libraries/src/cb.c ****  */
+  67:../Libraries/src/cb.c **** void initCB(UART_T *dev)
+  68:../Libraries/src/cb.c **** {
+ 197              		.loc 1 68 0
+ 198              		.cfi_startproc
+ 199              		@ Function supports interworking.
+ 200              		@ args = 0, pretend = 0, frame = 16
+ 201              		@ frame_needed = 1, uses_anonymous_args = 0
+ 202 01e8 00482DE9 		stmfd	sp!, {fp, lr}
+ 203              	.LCFI4:
+ 204              		.cfi_def_cfa_offset 8
+ 205              		.cfi_offset 14, -4
+ 206              		.cfi_offset 11, -8
+ 207 01ec 04B08DE2 		add	fp, sp, #4
+ 208              	.LCFI5:
+ 209              		.cfi_def_cfa 11, 4
+ 210 01f0 10D04DE2 		sub	sp, sp, #16
+ 211 01f4 10000BE5 		str	r0, [fp, #-16]
+  69:../Libraries/src/cb.c **** 	uint8_t udev;
+  70:../Libraries/src/cb.c **** 
+  71:../Libraries/src/cb.c **** 	udev = uart_getDevInInt(dev);	/* get device number */
+ 212              		.loc 1 71 0
+ 213 01f8 10001BE5 		ldr	r0, [fp, #-16]
+ 214 01fc FEFFFFEB 		bl	uart_getDevInInt
+ 215 0200 0030A0E1 		mov	r3, r0
+ 216 0204 05304BE5 		strb	r3, [fp, #-5]
+  72:../Libraries/src/cb.c **** 	if(udev < 4)					/* between 0 and 3 */
+ 217              		.loc 1 72 0
+ 218 0208 05305BE5 		ldrb	r3, [fp, #-5]	@ zero_extendqisi2
+ 219 020c 030053E3 		cmp	r3, #3
+ 220 0210 0500008A 		bhi	.L7
+  73:../Libraries/src/cb.c **** 	{
+  74:../Libraries/src/cb.c **** 		initSendCB(udev);
+ 221              		.loc 1 74 0
+ 222 0214 05305BE5 		ldrb	r3, [fp, #-5]	@ zero_extendqisi2
+ 223 0218 0300A0E1 		mov	r0, r3
+ 224 021c 77FFFFEB 		bl	initSendCB
+  75:../Libraries/src/cb.c **** 		initRecvCB(udev);
+ 225              		.loc 1 75 0
+ 226 0220 05305BE5 		ldrb	r3, [fp, #-5]	@ zero_extendqisi2
+ 227 0224 0300A0E1 		mov	r0, r3
+ 228 0228 B1FFFFEB 		bl	initRecvCB
+ 229              	.L7:
+  76:../Libraries/src/cb.c **** 	}
+  77:../Libraries/src/cb.c **** }
+ 230              		.loc 1 77 0
+ 231 022c 04D04BE2 		sub	sp, fp, #4
+ 232 0230 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 233 0234 1EFF2FE1 		bx	lr
+ 234              		.cfi_endproc
+ 235              	.LFE2:
+ 237              		.align	2
+ 238              		.global	putSendCB
+ 240              	putSendCB:
+ 241              	.LFB3:
+  78:../Libraries/src/cb.c **** 
+  79:../Libraries/src/cb.c **** /**
+  80:../Libraries/src/cb.c ****  * @brief		Send character to outgoing circular buffers
+  81:../Libraries/src/cb.c ****  *
+  82:../Libraries/src/cb.c ****  * This function Put a character in the send circular buffer.
+  83:../Libraries/src/cb.c ****  *
+  84:../Libraries/src/cb.c ****  * @param[in]	dev	UART peripheral selected, should be:
+  85:../Libraries/src/cb.c ****  * 					- LPC_UART0: UART0 peripheral
+  86:../Libraries/src/cb.c ****  * 					- LPC_UART1: UART1 peripheral
+  87:../Libraries/src/cb.c ****  * 					- LPC_UART2: UART2 peripheral
+  88:../Libraries/src/cb.c ****  * 					- LPC_UART3: UART3 peripheral
+  89:../Libraries/src/cb.c ****  *
+  90:../Libraries/src/cb.c ****  * @return		EOK if successful otherwise ECB!
+  91:../Libraries/src/cb.c ****  */
+  92:../Libraries/src/cb.c **** int32_t putSendCB(UART_T *dev, unsigned char c)
+  93:../Libraries/src/cb.c **** {
+ 242              		.loc 1 93 0
+ 243              		.cfi_startproc
+ 244              		@ Function supports interworking.
+ 245              		@ args = 0, pretend = 0, frame = 16
+ 246              		@ frame_needed = 1, uses_anonymous_args = 0
+ 247 0238 00482DE9 		stmfd	sp!, {fp, lr}
+ 248              	.LCFI6:
+ 249              		.cfi_def_cfa_offset 8
+ 250              		.cfi_offset 14, -4
+ 251              		.cfi_offset 11, -8
+ 252 023c 04B08DE2 		add	fp, sp, #4
+ 253              	.LCFI7:
+ 254              		.cfi_def_cfa 11, 4
+ 255 0240 10D04DE2 		sub	sp, sp, #16
+ 256 0244 10000BE5 		str	r0, [fp, #-16]
+ 257 0248 0130A0E1 		mov	r3, r1
+ 258 024c 11304BE5 		strb	r3, [fp, #-17]
+  94:../Libraries/src/cb.c **** 	int32_t ret = ECB;
+ 259              		.loc 1 94 0
+ 260 0250 0330E0E3 		mvn	r3, #3
+ 261 0254 08300BE5 		str	r3, [fp, #-8]
+  95:../Libraries/src/cb.c **** 	uint8_t udev;
+  96:../Libraries/src/cb.c **** 
+  97:../Libraries/src/cb.c **** 	udev = uart_getDevInInt(dev);	/* get device number */
+ 262              		.loc 1 97 0
+ 263 0258 10001BE5 		ldr	r0, [fp, #-16]
+ 264 025c FEFFFFEB 		bl	uart_getDevInInt
+ 265 0260 0030A0E1 		mov	r3, r0
+ 266 0264 09304BE5 		strb	r3, [fp, #-9]
+  98:../Libraries/src/cb.c **** 	if(udev >= 4)					/* error */
+ 267              		.loc 1 98 0
+ 268 0268 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 269 026c 030053E3 		cmp	r3, #3
+ 270 0270 0100009A 		bls	.L10
+  99:../Libraries/src/cb.c **** 	{
+ 100:../Libraries/src/cb.c **** 		/* ERROR, *dev is wrong */
+ 101:../Libraries/src/cb.c **** 		return EINTERNAL;
+ 271              		.loc 1 101 0
+ 272 0274 0030E0E3 		mvn	r3, #0
+ 273 0278 820000EA 		b	.L11
+ 274              	.L10:
+ 102:../Libraries/src/cb.c **** 	}
+ 103:../Libraries/src/cb.c **** 
+ 104:../Libraries/src/cb.c **** 	if(UART_STAT[udev].send.SendCB_Full == FALSE){
+ 275              		.loc 1 104 0
+ 276 027c 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 277 0280 10029FE5 		ldr	r0, .L14
+ 278 0284 1010A0E3 		mov	r1, #16
+ 279 0288 0230A0E1 		mov	r3, r2
+ 280 028c 0331A0E1 		mov	r3, r3, asl #2
+ 281 0290 023083E0 		add	r3, r3, r2
+ 282 0294 8330A0E1 		mov	r3, r3, asl #1
+ 283 0298 023083E0 		add	r3, r3, r2
+ 284 029c 0331A0E1 		mov	r3, r3, asl #2
+ 285 02a0 033080E0 		add	r3, r0, r3
+ 286 02a4 013083E0 		add	r3, r3, r1
+ 287 02a8 0230D3E5 		ldrb	r3, [r3, #2]
+ 288 02ac FF3003E2 		and	r3, r3, #255
+ 289 02b0 000053E3 		cmp	r3, #0
+ 290 02b4 6500001A 		bne	.L12
+ 105:../Libraries/src/cb.c **** 		UART_STAT[udev].send.SendCB_Array[UART_STAT[udev].send.SendCB_In] = c;
+ 291              		.loc 1 105 0
+ 292 02b8 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 293 02bc 09105BE5 		ldrb	r1, [fp, #-9]	@ zero_extendqisi2
+ 294 02c0 D0C19FE5 		ldr	ip, .L14
+ 295 02c4 1000A0E3 		mov	r0, #16
+ 296 02c8 0130A0E1 		mov	r3, r1
+ 297 02cc 0331A0E1 		mov	r3, r3, asl #2
+ 298 02d0 013083E0 		add	r3, r3, r1
+ 299 02d4 8330A0E1 		mov	r3, r3, asl #1
+ 300 02d8 013083E0 		add	r3, r3, r1
+ 301 02dc 0331A0E1 		mov	r3, r3, asl #2
+ 302 02e0 03308CE0 		add	r3, ip, r3
+ 303 02e4 003083E0 		add	r3, r3, r0
+ 304 02e8 0030D3E5 		ldrb	r3, [r3, #0]
+ 305 02ec FF3003E2 		and	r3, r3, #255
+ 306 02f0 0300A0E1 		mov	r0, r3
+ 307 02f4 9C119FE5 		ldr	r1, .L14
+ 308 02f8 0230A0E1 		mov	r3, r2
+ 309 02fc 0331A0E1 		mov	r3, r3, asl #2
+ 310 0300 023083E0 		add	r3, r3, r2
+ 311 0304 8330A0E1 		mov	r3, r3, asl #1
+ 312 0308 023083E0 		add	r3, r3, r2
+ 313 030c 0331A0E1 		mov	r3, r3, asl #2
+ 314 0310 003083E0 		add	r3, r3, r0
+ 315 0314 033081E0 		add	r3, r1, r3
+ 316 0318 11205BE5 		ldrb	r2, [fp, #-17]
+ 317 031c 0020C3E5 		strb	r2, [r3, #0]
+ 106:../Libraries/src/cb.c **** 		UART_STAT[udev].send.SendCB_In = (UART_STAT[udev].send.SendCB_In + 1) % CB_SIZE;
+ 318              		.loc 1 106 0
+ 319 0320 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 320 0324 09105BE5 		ldrb	r1, [fp, #-9]	@ zero_extendqisi2
+ 321 0328 68C19FE5 		ldr	ip, .L14
+ 322 032c 1000A0E3 		mov	r0, #16
+ 323 0330 0130A0E1 		mov	r3, r1
+ 324 0334 0331A0E1 		mov	r3, r3, asl #2
+ 325 0338 013083E0 		add	r3, r3, r1
+ 326 033c 8330A0E1 		mov	r3, r3, asl #1
+ 327 0340 013083E0 		add	r3, r3, r1
+ 328 0344 0331A0E1 		mov	r3, r3, asl #2
+ 329 0348 03308CE0 		add	r3, ip, r3
+ 330 034c 003083E0 		add	r3, r3, r0
+ 331 0350 0030D3E5 		ldrb	r3, [r3, #0]
+ 332 0354 FF3003E2 		and	r3, r3, #255
+ 333 0358 011083E2 		add	r1, r3, #1
+ 334 035c C13FA0E1 		mov	r3, r1, asr #31
+ 335 0360 233EA0E1 		mov	r3, r3, lsr #28
+ 336 0364 031081E0 		add	r1, r1, r3
+ 337 0368 0F1001E2 		and	r1, r1, #15
+ 338 036c 013063E0 		rsb	r3, r3, r1
+ 339 0370 FF1003E2 		and	r1, r3, #255
+ 340 0374 1CC19FE5 		ldr	ip, .L14
+ 341 0378 1000A0E3 		mov	r0, #16
+ 342 037c 0230A0E1 		mov	r3, r2
+ 343 0380 0331A0E1 		mov	r3, r3, asl #2
+ 344 0384 023083E0 		add	r3, r3, r2
+ 345 0388 8330A0E1 		mov	r3, r3, asl #1
+ 346 038c 023083E0 		add	r3, r3, r2
+ 347 0390 0331A0E1 		mov	r3, r3, asl #2
+ 348 0394 03308CE0 		add	r3, ip, r3
+ 349 0398 003083E0 		add	r3, r3, r0
+ 350 039c 0120A0E1 		mov	r2, r1
+ 351 03a0 0020C3E5 		strb	r2, [r3, #0]
+ 107:../Libraries/src/cb.c **** 		if(UART_STAT[udev].send.SendCB_In == UART_STAT[udev].send.SendCB_Out){
+ 352              		.loc 1 107 0
+ 353 03a4 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 354 03a8 E8009FE5 		ldr	r0, .L14
+ 355 03ac 1010A0E3 		mov	r1, #16
+ 356 03b0 0230A0E1 		mov	r3, r2
+ 357 03b4 0331A0E1 		mov	r3, r3, asl #2
+ 358 03b8 023083E0 		add	r3, r3, r2
+ 359 03bc 8330A0E1 		mov	r3, r3, asl #1
+ 360 03c0 023083E0 		add	r3, r3, r2
+ 361 03c4 0331A0E1 		mov	r3, r3, asl #2
+ 362 03c8 033080E0 		add	r3, r0, r3
+ 363 03cc 013083E0 		add	r3, r3, r1
+ 364 03d0 0030D3E5 		ldrb	r3, [r3, #0]
+ 365 03d4 FF1003E2 		and	r1, r3, #255
+ 366 03d8 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 367 03dc B4C09FE5 		ldr	ip, .L14
+ 368 03e0 1000A0E3 		mov	r0, #16
+ 369 03e4 0230A0E1 		mov	r3, r2
+ 370 03e8 0331A0E1 		mov	r3, r3, asl #2
+ 371 03ec 023083E0 		add	r3, r3, r2
+ 372 03f0 8330A0E1 		mov	r3, r3, asl #1
+ 373 03f4 023083E0 		add	r3, r3, r2
+ 374 03f8 0331A0E1 		mov	r3, r3, asl #2
+ 375 03fc 03308CE0 		add	r3, ip, r3
+ 376 0400 003083E0 		add	r3, r3, r0
+ 377 0404 0130D3E5 		ldrb	r3, [r3, #1]
+ 378 0408 FF3003E2 		and	r3, r3, #255
+ 379 040c 030051E1 		cmp	r1, r3
+ 380 0410 0C00001A 		bne	.L13
+ 108:../Libraries/src/cb.c **** 			UART_STAT[udev].send.SendCB_Full = TRUE;
+ 381              		.loc 1 108 0
+ 382 0414 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 383 0418 78009FE5 		ldr	r0, .L14
+ 384 041c 1010A0E3 		mov	r1, #16
+ 385 0420 0230A0E1 		mov	r3, r2
+ 386 0424 0331A0E1 		mov	r3, r3, asl #2
+ 387 0428 023083E0 		add	r3, r3, r2
+ 388 042c 8330A0E1 		mov	r3, r3, asl #1
+ 389 0430 023083E0 		add	r3, r3, r2
+ 390 0434 0331A0E1 		mov	r3, r3, asl #2
+ 391 0438 033080E0 		add	r3, r0, r3
+ 392 043c 013083E0 		add	r3, r3, r1
+ 393 0440 0120A0E3 		mov	r2, #1
+ 394 0444 0220C3E5 		strb	r2, [r3, #2]
+ 395              	.L13:
+ 109:../Libraries/src/cb.c **** 		}
+ 110:../Libraries/src/cb.c **** 		ret = EOK;
+ 396              		.loc 1 110 0
+ 397 0448 0030A0E3 		mov	r3, #0
+ 398 044c 08300BE5 		str	r3, [fp, #-8]
+ 399              	.L12:
+ 111:../Libraries/src/cb.c **** 	}
+ 112:../Libraries/src/cb.c **** 	UART_STAT[udev].send.SendCB_Empty = FALSE;
+ 400              		.loc 1 112 0
+ 401 0450 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 402 0454 3C009FE5 		ldr	r0, .L14
+ 403 0458 1010A0E3 		mov	r1, #16
+ 404 045c 0230A0E1 		mov	r3, r2
+ 405 0460 0331A0E1 		mov	r3, r3, asl #2
+ 406 0464 023083E0 		add	r3, r3, r2
+ 407 0468 8330A0E1 		mov	r3, r3, asl #1
+ 408 046c 023083E0 		add	r3, r3, r2
+ 409 0470 0331A0E1 		mov	r3, r3, asl #2
+ 410 0474 033080E0 		add	r3, r0, r3
+ 411 0478 013083E0 		add	r3, r3, r1
+ 412 047c 0020A0E3 		mov	r2, #0
+ 413 0480 0320C3E5 		strb	r2, [r3, #3]
+ 113:../Libraries/src/cb.c **** 	return ret;
+ 414              		.loc 1 113 0
+ 415 0484 08301BE5 		ldr	r3, [fp, #-8]
+ 416              	.L11:
+ 114:../Libraries/src/cb.c **** }
+ 417              		.loc 1 114 0
+ 418 0488 0300A0E1 		mov	r0, r3
+ 419 048c 04D04BE2 		sub	sp, fp, #4
+ 420 0490 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 421 0494 1EFF2FE1 		bx	lr
+ 422              	.L15:
+ 423              		.align	2
+ 424              	.L14:
+ 425 0498 00000000 		.word	UART_STAT
+ 426              		.cfi_endproc
+ 427              	.LFE3:
+ 429              		.align	2
+ 430              		.global	getSendCB
+ 432              	getSendCB:
+ 433              	.LFB4:
+ 115:../Libraries/src/cb.c **** 
+ 116:../Libraries/src/cb.c **** /**
+ 117:../Libraries/src/cb.c ****  * @brief		Get character from outgoing circular buffers
+ 118:../Libraries/src/cb.c ****  *
+ 119:../Libraries/src/cb.c ****  * This function get a character in the send circular buffer.
+ 120:../Libraries/src/cb.c ****  *
+ 121:../Libraries/src/cb.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 122:../Libraries/src/cb.c ****  * 					- LPC_UART0: UART0 peripheral
+ 123:../Libraries/src/cb.c ****  * 					- LPC_UART1: UART1 peripheral
+ 124:../Libraries/src/cb.c ****  * 					- LPC_UART2: UART2 peripheral
+ 125:../Libraries/src/cb.c ****  * 					- LPC_UART3: UART3 peripheral
+ 126:../Libraries/src/cb.c ****  *
+ 127:../Libraries/src/cb.c ****  * @return		EOK if successful otherwise ECB!
+ 128:../Libraries/src/cb.c ****  */
+ 129:../Libraries/src/cb.c **** int32_t getSendCB(UART_T *dev, unsigned char *i)
+ 130:../Libraries/src/cb.c **** {
+ 434              		.loc 1 130 0
+ 435              		.cfi_startproc
+ 436              		@ Function supports interworking.
+ 437              		@ args = 0, pretend = 0, frame = 16
+ 438              		@ frame_needed = 1, uses_anonymous_args = 0
+ 439 049c 00482DE9 		stmfd	sp!, {fp, lr}
+ 440              	.LCFI8:
+ 441              		.cfi_def_cfa_offset 8
+ 442              		.cfi_offset 14, -4
+ 443              		.cfi_offset 11, -8
+ 444 04a0 04B08DE2 		add	fp, sp, #4
+ 445              	.LCFI9:
+ 446              		.cfi_def_cfa 11, 4
+ 447 04a4 10D04DE2 		sub	sp, sp, #16
+ 448 04a8 10000BE5 		str	r0, [fp, #-16]
+ 449 04ac 14100BE5 		str	r1, [fp, #-20]
+ 131:../Libraries/src/cb.c **** 	int32_t ret = ECB;
+ 450              		.loc 1 131 0
+ 451 04b0 0330E0E3 		mvn	r3, #3
+ 452 04b4 08300BE5 		str	r3, [fp, #-8]
+ 132:../Libraries/src/cb.c **** 	uint8_t udev;
+ 133:../Libraries/src/cb.c **** 
+ 134:../Libraries/src/cb.c **** 	udev = uart_getDevInInt(dev);	/* get device number */
+ 453              		.loc 1 134 0
+ 454 04b8 10001BE5 		ldr	r0, [fp, #-16]
+ 455 04bc FEFFFFEB 		bl	uart_getDevInInt
+ 456 04c0 0030A0E1 		mov	r3, r0
+ 457 04c4 09304BE5 		strb	r3, [fp, #-9]
+ 135:../Libraries/src/cb.c **** 	if(udev >= 4)					/* error */
+ 458              		.loc 1 135 0
+ 459 04c8 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 460 04cc 030053E3 		cmp	r3, #3
+ 461 04d0 0100009A 		bls	.L17
+ 136:../Libraries/src/cb.c **** 	{
+ 137:../Libraries/src/cb.c **** 		/* ERROR, *dev is wrong */
+ 138:../Libraries/src/cb.c **** 		return EINTERNAL;
+ 462              		.loc 1 138 0
+ 463 04d4 0030E0E3 		mvn	r3, #0
+ 464 04d8 830000EA 		b	.L18
+ 465              	.L17:
+ 139:../Libraries/src/cb.c **** 	}
+ 140:../Libraries/src/cb.c **** 
+ 141:../Libraries/src/cb.c **** 	if(UART_STAT[udev].send.SendCB_Empty == FALSE){
+ 466              		.loc 1 141 0
+ 467 04dc 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 468 04e0 14029FE5 		ldr	r0, .L21
+ 469 04e4 1010A0E3 		mov	r1, #16
+ 470 04e8 0230A0E1 		mov	r3, r2
+ 471 04ec 0331A0E1 		mov	r3, r3, asl #2
+ 472 04f0 023083E0 		add	r3, r3, r2
+ 473 04f4 8330A0E1 		mov	r3, r3, asl #1
+ 474 04f8 023083E0 		add	r3, r3, r2
+ 475 04fc 0331A0E1 		mov	r3, r3, asl #2
+ 476 0500 033080E0 		add	r3, r0, r3
+ 477 0504 013083E0 		add	r3, r3, r1
+ 478 0508 0330D3E5 		ldrb	r3, [r3, #3]
+ 479 050c FF3003E2 		and	r3, r3, #255
+ 480 0510 000053E3 		cmp	r3, #0
+ 481 0514 6600001A 		bne	.L19
+ 142:../Libraries/src/cb.c **** 		*i = UART_STAT[udev].send.SendCB_Array[UART_STAT[udev].send.SendCB_Out];
+ 482              		.loc 1 142 0
+ 483 0518 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 484 051c 09105BE5 		ldrb	r1, [fp, #-9]	@ zero_extendqisi2
+ 485 0520 D4C19FE5 		ldr	ip, .L21
+ 486 0524 1000A0E3 		mov	r0, #16
+ 487 0528 0130A0E1 		mov	r3, r1
+ 488 052c 0331A0E1 		mov	r3, r3, asl #2
+ 489 0530 013083E0 		add	r3, r3, r1
+ 490 0534 8330A0E1 		mov	r3, r3, asl #1
+ 491 0538 013083E0 		add	r3, r3, r1
+ 492 053c 0331A0E1 		mov	r3, r3, asl #2
+ 493 0540 03308CE0 		add	r3, ip, r3
+ 494 0544 003083E0 		add	r3, r3, r0
+ 495 0548 0130D3E5 		ldrb	r3, [r3, #1]
+ 496 054c FF3003E2 		and	r3, r3, #255
+ 497 0550 0300A0E1 		mov	r0, r3
+ 498 0554 A0119FE5 		ldr	r1, .L21
+ 499 0558 0230A0E1 		mov	r3, r2
+ 500 055c 0331A0E1 		mov	r3, r3, asl #2
+ 501 0560 023083E0 		add	r3, r3, r2
+ 502 0564 8330A0E1 		mov	r3, r3, asl #1
+ 503 0568 023083E0 		add	r3, r3, r2
+ 504 056c 0331A0E1 		mov	r3, r3, asl #2
+ 505 0570 003083E0 		add	r3, r3, r0
+ 506 0574 033081E0 		add	r3, r1, r3
+ 507 0578 0020D3E5 		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 508 057c 14301BE5 		ldr	r3, [fp, #-20]
+ 509 0580 0020C3E5 		strb	r2, [r3, #0]
+ 143:../Libraries/src/cb.c **** 		UART_STAT[udev].send.SendCB_Out = (UART_STAT[udev].send.SendCB_Out + 1) % CB_SIZE;
+ 510              		.loc 1 143 0
+ 511 0584 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 512 0588 09105BE5 		ldrb	r1, [fp, #-9]	@ zero_extendqisi2
+ 513 058c 68C19FE5 		ldr	ip, .L21
+ 514 0590 1000A0E3 		mov	r0, #16
+ 515 0594 0130A0E1 		mov	r3, r1
+ 516 0598 0331A0E1 		mov	r3, r3, asl #2
+ 517 059c 013083E0 		add	r3, r3, r1
+ 518 05a0 8330A0E1 		mov	r3, r3, asl #1
+ 519 05a4 013083E0 		add	r3, r3, r1
+ 520 05a8 0331A0E1 		mov	r3, r3, asl #2
+ 521 05ac 03308CE0 		add	r3, ip, r3
+ 522 05b0 003083E0 		add	r3, r3, r0
+ 523 05b4 0130D3E5 		ldrb	r3, [r3, #1]
+ 524 05b8 FF3003E2 		and	r3, r3, #255
+ 525 05bc 011083E2 		add	r1, r3, #1
+ 526 05c0 C13FA0E1 		mov	r3, r1, asr #31
+ 527 05c4 233EA0E1 		mov	r3, r3, lsr #28
+ 528 05c8 031081E0 		add	r1, r1, r3
+ 529 05cc 0F1001E2 		and	r1, r1, #15
+ 530 05d0 013063E0 		rsb	r3, r3, r1
+ 531 05d4 FF1003E2 		and	r1, r3, #255
+ 532 05d8 1CC19FE5 		ldr	ip, .L21
+ 533 05dc 1000A0E3 		mov	r0, #16
+ 534 05e0 0230A0E1 		mov	r3, r2
+ 535 05e4 0331A0E1 		mov	r3, r3, asl #2
+ 536 05e8 023083E0 		add	r3, r3, r2
+ 537 05ec 8330A0E1 		mov	r3, r3, asl #1
+ 538 05f0 023083E0 		add	r3, r3, r2
+ 539 05f4 0331A0E1 		mov	r3, r3, asl #2
+ 540 05f8 03308CE0 		add	r3, ip, r3
+ 541 05fc 003083E0 		add	r3, r3, r0
+ 542 0600 0120A0E1 		mov	r2, r1
+ 543 0604 0120C3E5 		strb	r2, [r3, #1]
+ 144:../Libraries/src/cb.c **** 		if(UART_STAT[udev].send.SendCB_In == UART_STAT[udev].send.SendCB_Out){
+ 544              		.loc 1 144 0
+ 545 0608 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 546 060c E8009FE5 		ldr	r0, .L21
+ 547 0610 1010A0E3 		mov	r1, #16
+ 548 0614 0230A0E1 		mov	r3, r2
+ 549 0618 0331A0E1 		mov	r3, r3, asl #2
+ 550 061c 023083E0 		add	r3, r3, r2
+ 551 0620 8330A0E1 		mov	r3, r3, asl #1
+ 552 0624 023083E0 		add	r3, r3, r2
+ 553 0628 0331A0E1 		mov	r3, r3, asl #2
+ 554 062c 033080E0 		add	r3, r0, r3
+ 555 0630 013083E0 		add	r3, r3, r1
+ 556 0634 0030D3E5 		ldrb	r3, [r3, #0]
+ 557 0638 FF1003E2 		and	r1, r3, #255
+ 558 063c 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 559 0640 B4C09FE5 		ldr	ip, .L21
+ 560 0644 1000A0E3 		mov	r0, #16
+ 561 0648 0230A0E1 		mov	r3, r2
+ 562 064c 0331A0E1 		mov	r3, r3, asl #2
+ 563 0650 023083E0 		add	r3, r3, r2
+ 564 0654 8330A0E1 		mov	r3, r3, asl #1
+ 565 0658 023083E0 		add	r3, r3, r2
+ 566 065c 0331A0E1 		mov	r3, r3, asl #2
+ 567 0660 03308CE0 		add	r3, ip, r3
+ 568 0664 003083E0 		add	r3, r3, r0
+ 569 0668 0130D3E5 		ldrb	r3, [r3, #1]
+ 570 066c FF3003E2 		and	r3, r3, #255
+ 571 0670 030051E1 		cmp	r1, r3
+ 572 0674 0C00001A 		bne	.L20
+ 145:../Libraries/src/cb.c **** 			UART_STAT[udev].send.SendCB_Empty = TRUE;
+ 573              		.loc 1 145 0
+ 574 0678 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 575 067c 78009FE5 		ldr	r0, .L21
+ 576 0680 1010A0E3 		mov	r1, #16
+ 577 0684 0230A0E1 		mov	r3, r2
+ 578 0688 0331A0E1 		mov	r3, r3, asl #2
+ 579 068c 023083E0 		add	r3, r3, r2
+ 580 0690 8330A0E1 		mov	r3, r3, asl #1
+ 581 0694 023083E0 		add	r3, r3, r2
+ 582 0698 0331A0E1 		mov	r3, r3, asl #2
+ 583 069c 033080E0 		add	r3, r0, r3
+ 584 06a0 013083E0 		add	r3, r3, r1
+ 585 06a4 0120A0E3 		mov	r2, #1
+ 586 06a8 0320C3E5 		strb	r2, [r3, #3]
+ 587              	.L20:
+ 146:../Libraries/src/cb.c **** 		}
+ 147:../Libraries/src/cb.c **** 		ret = EOK;
+ 588              		.loc 1 147 0
+ 589 06ac 0030A0E3 		mov	r3, #0
+ 590 06b0 08300BE5 		str	r3, [fp, #-8]
+ 591              	.L19:
+ 148:../Libraries/src/cb.c **** 	}
+ 149:../Libraries/src/cb.c **** 	UART_STAT[udev].send.SendCB_Full = FALSE;
+ 592              		.loc 1 149 0
+ 593 06b4 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 594 06b8 3C009FE5 		ldr	r0, .L21
+ 595 06bc 1010A0E3 		mov	r1, #16
+ 596 06c0 0230A0E1 		mov	r3, r2
+ 597 06c4 0331A0E1 		mov	r3, r3, asl #2
+ 598 06c8 023083E0 		add	r3, r3, r2
+ 599 06cc 8330A0E1 		mov	r3, r3, asl #1
+ 600 06d0 023083E0 		add	r3, r3, r2
+ 601 06d4 0331A0E1 		mov	r3, r3, asl #2
+ 602 06d8 033080E0 		add	r3, r0, r3
+ 603 06dc 013083E0 		add	r3, r3, r1
+ 604 06e0 0020A0E3 		mov	r2, #0
+ 605 06e4 0220C3E5 		strb	r2, [r3, #2]
+ 150:../Libraries/src/cb.c **** 	return ret;
+ 606              		.loc 1 150 0
+ 607 06e8 08301BE5 		ldr	r3, [fp, #-8]
+ 608              	.L18:
+ 151:../Libraries/src/cb.c **** }
+ 609              		.loc 1 151 0
+ 610 06ec 0300A0E1 		mov	r0, r3
+ 611 06f0 04D04BE2 		sub	sp, fp, #4
+ 612 06f4 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 613 06f8 1EFF2FE1 		bx	lr
+ 614              	.L22:
+ 615              		.align	2
+ 616              	.L21:
+ 617 06fc 00000000 		.word	UART_STAT
+ 618              		.cfi_endproc
+ 619              	.LFE4:
+ 621              		.align	2
+ 622              		.global	putRecvCB
+ 624              	putRecvCB:
+ 625              	.LFB5:
+ 152:../Libraries/src/cb.c **** 
+ 153:../Libraries/src/cb.c **** /**
+ 154:../Libraries/src/cb.c ****  * @brief		Send character to incoming circular buffers
+ 155:../Libraries/src/cb.c ****  *
+ 156:../Libraries/src/cb.c ****  * This function Put a character in the receive circular buffer.
+ 157:../Libraries/src/cb.c ****  *
+ 158:../Libraries/src/cb.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 159:../Libraries/src/cb.c ****  * 					- LPC_UART0: UART0 peripheral
+ 160:../Libraries/src/cb.c ****  * 					- LPC_UART1: UART1 peripheral
+ 161:../Libraries/src/cb.c ****  * 					- LPC_UART2: UART2 peripheral
+ 162:../Libraries/src/cb.c ****  * 					- LPC_UART3: UART3 peripheral
+ 163:../Libraries/src/cb.c ****  *
+ 164:../Libraries/src/cb.c ****  * @return		EOK if successful otherwise ECB!
+ 165:../Libraries/src/cb.c ****  */
+ 166:../Libraries/src/cb.c **** int32_t putRecvCB(UART_T *dev, unsigned char c)
+ 167:../Libraries/src/cb.c **** {
+ 626              		.loc 1 167 0
+ 627              		.cfi_startproc
+ 628              		@ Function supports interworking.
+ 629              		@ args = 0, pretend = 0, frame = 16
+ 630              		@ frame_needed = 1, uses_anonymous_args = 0
+ 631 0700 00482DE9 		stmfd	sp!, {fp, lr}
+ 632              	.LCFI10:
+ 633              		.cfi_def_cfa_offset 8
+ 634              		.cfi_offset 14, -4
+ 635              		.cfi_offset 11, -8
+ 636 0704 04B08DE2 		add	fp, sp, #4
+ 637              	.LCFI11:
+ 638              		.cfi_def_cfa 11, 4
+ 639 0708 10D04DE2 		sub	sp, sp, #16
+ 640 070c 10000BE5 		str	r0, [fp, #-16]
+ 641 0710 0130A0E1 		mov	r3, r1
+ 642 0714 11304BE5 		strb	r3, [fp, #-17]
+ 168:../Libraries/src/cb.c **** 	int32_t ret = ECB;
+ 643              		.loc 1 168 0
+ 644 0718 0330E0E3 		mvn	r3, #3
+ 645 071c 08300BE5 		str	r3, [fp, #-8]
+ 169:../Libraries/src/cb.c **** 	uint8_t udev;
+ 170:../Libraries/src/cb.c **** 
+ 171:../Libraries/src/cb.c **** 	udev = uart_getDevInInt(dev);	/* get device number */
+ 646              		.loc 1 171 0
+ 647 0720 10001BE5 		ldr	r0, [fp, #-16]
+ 648 0724 FEFFFFEB 		bl	uart_getDevInInt
+ 649 0728 0030A0E1 		mov	r3, r0
+ 650 072c 09304BE5 		strb	r3, [fp, #-9]
+ 172:../Libraries/src/cb.c **** 	if(udev >= 4)					/* error */
+ 651              		.loc 1 172 0
+ 652 0730 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 653 0734 030053E3 		cmp	r3, #3
+ 654 0738 0100009A 		bls	.L24
+ 173:../Libraries/src/cb.c **** 	{
+ 174:../Libraries/src/cb.c **** 		/* ERROR, *dev is wrong */
+ 175:../Libraries/src/cb.c **** 		return EINTERNAL;
+ 655              		.loc 1 175 0
+ 656 073c 0030E0E3 		mvn	r3, #0
+ 657 0740 840000EA 		b	.L25
+ 658              	.L24:
+ 176:../Libraries/src/cb.c **** 	}
+ 177:../Libraries/src/cb.c **** 
+ 178:../Libraries/src/cb.c **** 	if(UART_STAT[udev].recv.RecvCB_Full == FALSE){
+ 659              		.loc 1 178 0
+ 660 0744 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 661 0748 18029FE5 		ldr	r0, .L28
+ 662 074c 2010A0E3 		mov	r1, #32
+ 663 0750 0230A0E1 		mov	r3, r2
+ 664 0754 0331A0E1 		mov	r3, r3, asl #2
+ 665 0758 023083E0 		add	r3, r3, r2
+ 666 075c 8330A0E1 		mov	r3, r3, asl #1
+ 667 0760 023083E0 		add	r3, r3, r2
+ 668 0764 0331A0E1 		mov	r3, r3, asl #2
+ 669 0768 033080E0 		add	r3, r0, r3
+ 670 076c 013083E0 		add	r3, r3, r1
+ 671 0770 0630D3E5 		ldrb	r3, [r3, #6]
+ 672 0774 FF3003E2 		and	r3, r3, #255
+ 673 0778 000053E3 		cmp	r3, #0
+ 674 077c 6700001A 		bne	.L26
+ 179:../Libraries/src/cb.c **** 		UART_STAT[udev].recv.RecvCB_Array[UART_STAT[udev].recv.RecvCB_In] = c;
+ 675              		.loc 1 179 0
+ 676 0780 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 677 0784 09105BE5 		ldrb	r1, [fp, #-9]	@ zero_extendqisi2
+ 678 0788 D8C19FE5 		ldr	ip, .L28
+ 679 078c 2000A0E3 		mov	r0, #32
+ 680 0790 0130A0E1 		mov	r3, r1
+ 681 0794 0331A0E1 		mov	r3, r3, asl #2
+ 682 0798 013083E0 		add	r3, r3, r1
+ 683 079c 8330A0E1 		mov	r3, r3, asl #1
+ 684 07a0 013083E0 		add	r3, r3, r1
+ 685 07a4 0331A0E1 		mov	r3, r3, asl #2
+ 686 07a8 03308CE0 		add	r3, ip, r3
+ 687 07ac 003083E0 		add	r3, r3, r0
+ 688 07b0 0430D3E5 		ldrb	r3, [r3, #4]
+ 689 07b4 FF3003E2 		and	r3, r3, #255
+ 690 07b8 0300A0E1 		mov	r0, r3
+ 691 07bc A4C19FE5 		ldr	ip, .L28
+ 692 07c0 1010A0E3 		mov	r1, #16
+ 693 07c4 0230A0E1 		mov	r3, r2
+ 694 07c8 0331A0E1 		mov	r3, r3, asl #2
+ 695 07cc 023083E0 		add	r3, r3, r2
+ 696 07d0 8330A0E1 		mov	r3, r3, asl #1
+ 697 07d4 023083E0 		add	r3, r3, r2
+ 698 07d8 0331A0E1 		mov	r3, r3, asl #2
+ 699 07dc 03308CE0 		add	r3, ip, r3
+ 700 07e0 003083E0 		add	r3, r3, r0
+ 701 07e4 013083E0 		add	r3, r3, r1
+ 702 07e8 11205BE5 		ldrb	r2, [fp, #-17]
+ 703 07ec 0420C3E5 		strb	r2, [r3, #4]
+ 180:../Libraries/src/cb.c **** 		UART_STAT[udev].recv.RecvCB_In = (UART_STAT[udev].recv.RecvCB_In + 1) % CB_SIZE;
+ 704              		.loc 1 180 0
+ 705 07f0 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 706 07f4 09105BE5 		ldrb	r1, [fp, #-9]	@ zero_extendqisi2
+ 707 07f8 68C19FE5 		ldr	ip, .L28
+ 708 07fc 2000A0E3 		mov	r0, #32
+ 709 0800 0130A0E1 		mov	r3, r1
+ 710 0804 0331A0E1 		mov	r3, r3, asl #2
+ 711 0808 013083E0 		add	r3, r3, r1
+ 712 080c 8330A0E1 		mov	r3, r3, asl #1
+ 713 0810 013083E0 		add	r3, r3, r1
+ 714 0814 0331A0E1 		mov	r3, r3, asl #2
+ 715 0818 03308CE0 		add	r3, ip, r3
+ 716 081c 003083E0 		add	r3, r3, r0
+ 717 0820 0430D3E5 		ldrb	r3, [r3, #4]
+ 718 0824 FF3003E2 		and	r3, r3, #255
+ 719 0828 011083E2 		add	r1, r3, #1
+ 720 082c C13FA0E1 		mov	r3, r1, asr #31
+ 721 0830 233EA0E1 		mov	r3, r3, lsr #28
+ 722 0834 031081E0 		add	r1, r1, r3
+ 723 0838 0F1001E2 		and	r1, r1, #15
+ 724 083c 013063E0 		rsb	r3, r3, r1
+ 725 0840 FF1003E2 		and	r1, r3, #255
+ 726 0844 1CC19FE5 		ldr	ip, .L28
+ 727 0848 2000A0E3 		mov	r0, #32
+ 728 084c 0230A0E1 		mov	r3, r2
+ 729 0850 0331A0E1 		mov	r3, r3, asl #2
+ 730 0854 023083E0 		add	r3, r3, r2
+ 731 0858 8330A0E1 		mov	r3, r3, asl #1
+ 732 085c 023083E0 		add	r3, r3, r2
+ 733 0860 0331A0E1 		mov	r3, r3, asl #2
+ 734 0864 03308CE0 		add	r3, ip, r3
+ 735 0868 003083E0 		add	r3, r3, r0
+ 736 086c 0120A0E1 		mov	r2, r1
+ 737 0870 0420C3E5 		strb	r2, [r3, #4]
+ 181:../Libraries/src/cb.c **** 		if(UART_STAT[udev].recv.RecvCB_In == UART_STAT[udev].recv.RecvCB_Out){
+ 738              		.loc 1 181 0
+ 739 0874 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 740 0878 E8009FE5 		ldr	r0, .L28
+ 741 087c 2010A0E3 		mov	r1, #32
+ 742 0880 0230A0E1 		mov	r3, r2
+ 743 0884 0331A0E1 		mov	r3, r3, asl #2
+ 744 0888 023083E0 		add	r3, r3, r2
+ 745 088c 8330A0E1 		mov	r3, r3, asl #1
+ 746 0890 023083E0 		add	r3, r3, r2
+ 747 0894 0331A0E1 		mov	r3, r3, asl #2
+ 748 0898 033080E0 		add	r3, r0, r3
+ 749 089c 013083E0 		add	r3, r3, r1
+ 750 08a0 0430D3E5 		ldrb	r3, [r3, #4]
+ 751 08a4 FF1003E2 		and	r1, r3, #255
+ 752 08a8 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 753 08ac B4C09FE5 		ldr	ip, .L28
+ 754 08b0 2000A0E3 		mov	r0, #32
+ 755 08b4 0230A0E1 		mov	r3, r2
+ 756 08b8 0331A0E1 		mov	r3, r3, asl #2
+ 757 08bc 023083E0 		add	r3, r3, r2
+ 758 08c0 8330A0E1 		mov	r3, r3, asl #1
+ 759 08c4 023083E0 		add	r3, r3, r2
+ 760 08c8 0331A0E1 		mov	r3, r3, asl #2
+ 761 08cc 03308CE0 		add	r3, ip, r3
+ 762 08d0 003083E0 		add	r3, r3, r0
+ 763 08d4 0530D3E5 		ldrb	r3, [r3, #5]
+ 764 08d8 FF3003E2 		and	r3, r3, #255
+ 765 08dc 030051E1 		cmp	r1, r3
+ 766 08e0 0C00001A 		bne	.L27
+ 182:../Libraries/src/cb.c **** 			UART_STAT[udev].recv.RecvCB_Full = TRUE;
+ 767              		.loc 1 182 0
+ 768 08e4 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 769 08e8 78009FE5 		ldr	r0, .L28
+ 770 08ec 2010A0E3 		mov	r1, #32
+ 771 08f0 0230A0E1 		mov	r3, r2
+ 772 08f4 0331A0E1 		mov	r3, r3, asl #2
+ 773 08f8 023083E0 		add	r3, r3, r2
+ 774 08fc 8330A0E1 		mov	r3, r3, asl #1
+ 775 0900 023083E0 		add	r3, r3, r2
+ 776 0904 0331A0E1 		mov	r3, r3, asl #2
+ 777 0908 033080E0 		add	r3, r0, r3
+ 778 090c 013083E0 		add	r3, r3, r1
+ 779 0910 0120A0E3 		mov	r2, #1
+ 780 0914 0620C3E5 		strb	r2, [r3, #6]
+ 781              	.L27:
+ 183:../Libraries/src/cb.c **** 		}
+ 184:../Libraries/src/cb.c **** 		ret = EOK;
+ 782              		.loc 1 184 0
+ 783 0918 0030A0E3 		mov	r3, #0
+ 784 091c 08300BE5 		str	r3, [fp, #-8]
+ 785              	.L26:
+ 185:../Libraries/src/cb.c **** 	}
+ 186:../Libraries/src/cb.c **** 	UART_STAT[udev].recv.RecvCB_Empty = FALSE;
+ 786              		.loc 1 186 0
+ 787 0920 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 788 0924 3C009FE5 		ldr	r0, .L28
+ 789 0928 2010A0E3 		mov	r1, #32
+ 790 092c 0230A0E1 		mov	r3, r2
+ 791 0930 0331A0E1 		mov	r3, r3, asl #2
+ 792 0934 023083E0 		add	r3, r3, r2
+ 793 0938 8330A0E1 		mov	r3, r3, asl #1
+ 794 093c 023083E0 		add	r3, r3, r2
+ 795 0940 0331A0E1 		mov	r3, r3, asl #2
+ 796 0944 033080E0 		add	r3, r0, r3
+ 797 0948 013083E0 		add	r3, r3, r1
+ 798 094c 0020A0E3 		mov	r2, #0
+ 799 0950 0720C3E5 		strb	r2, [r3, #7]
+ 187:../Libraries/src/cb.c **** 	return ret;
+ 800              		.loc 1 187 0
+ 801 0954 08301BE5 		ldr	r3, [fp, #-8]
+ 802              	.L25:
+ 188:../Libraries/src/cb.c **** }
+ 803              		.loc 1 188 0
+ 804 0958 0300A0E1 		mov	r0, r3
+ 805 095c 04D04BE2 		sub	sp, fp, #4
+ 806 0960 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 807 0964 1EFF2FE1 		bx	lr
+ 808              	.L29:
+ 809              		.align	2
+ 810              	.L28:
+ 811 0968 00000000 		.word	UART_STAT
+ 812              		.cfi_endproc
+ 813              	.LFE5:
+ 815              		.align	2
+ 816              		.global	getRecvCB
+ 818              	getRecvCB:
+ 819              	.LFB6:
+ 189:../Libraries/src/cb.c **** 
+ 190:../Libraries/src/cb.c **** /**
+ 191:../Libraries/src/cb.c ****  * @brief		Get character from incoming circular buffers
+ 192:../Libraries/src/cb.c ****  *
+ 193:../Libraries/src/cb.c ****  * This function get a character in the receive circular buffer.
+ 194:../Libraries/src/cb.c ****  *
+ 195:../Libraries/src/cb.c ****  * @param[in]	dev	UART peripheral selected, should be:
+ 196:../Libraries/src/cb.c ****  * 					- LPC_UART0: UART0 peripheral
+ 197:../Libraries/src/cb.c ****  * 					- LPC_UART1: UART1 peripheral
+ 198:../Libraries/src/cb.c ****  * 					- LPC_UART2: UART2 peripheral
+ 199:../Libraries/src/cb.c ****  * 					- LPC_UART3: UART3 peripheral
+ 200:../Libraries/src/cb.c ****  *
+ 201:../Libraries/src/cb.c ****  * @return		EOK if successful otherwise ECB!
+ 202:../Libraries/src/cb.c ****  */
+ 203:../Libraries/src/cb.c **** int32_t getRecvCB(UART_T *dev, unsigned char *i)
+ 204:../Libraries/src/cb.c **** {
+ 820              		.loc 1 204 0
+ 821              		.cfi_startproc
+ 822              		@ Function supports interworking.
+ 823              		@ args = 0, pretend = 0, frame = 16
+ 824              		@ frame_needed = 1, uses_anonymous_args = 0
+ 825 096c 00482DE9 		stmfd	sp!, {fp, lr}
+ 826              	.LCFI12:
+ 827              		.cfi_def_cfa_offset 8
+ 828              		.cfi_offset 14, -4
+ 829              		.cfi_offset 11, -8
+ 830 0970 04B08DE2 		add	fp, sp, #4
+ 831              	.LCFI13:
+ 832              		.cfi_def_cfa 11, 4
+ 833 0974 10D04DE2 		sub	sp, sp, #16
+ 834 0978 10000BE5 		str	r0, [fp, #-16]
+ 835 097c 14100BE5 		str	r1, [fp, #-20]
+ 205:../Libraries/src/cb.c **** 	int32_t ret = ECB;
+ 836              		.loc 1 205 0
+ 837 0980 0330E0E3 		mvn	r3, #3
+ 838 0984 08300BE5 		str	r3, [fp, #-8]
+ 206:../Libraries/src/cb.c **** 	uint8_t udev;
+ 207:../Libraries/src/cb.c **** 
+ 208:../Libraries/src/cb.c **** 	udev = uart_getDevInInt(dev);	/* get device number */
+ 839              		.loc 1 208 0
+ 840 0988 10001BE5 		ldr	r0, [fp, #-16]
+ 841 098c FEFFFFEB 		bl	uart_getDevInInt
+ 842 0990 0030A0E1 		mov	r3, r0
+ 843 0994 09304BE5 		strb	r3, [fp, #-9]
+ 209:../Libraries/src/cb.c **** 	if(udev >= 4)					/* error */
+ 844              		.loc 1 209 0
+ 845 0998 09305BE5 		ldrb	r3, [fp, #-9]	@ zero_extendqisi2
+ 846 099c 030053E3 		cmp	r3, #3
+ 847 09a0 0100009A 		bls	.L31
+ 210:../Libraries/src/cb.c **** 	{
+ 211:../Libraries/src/cb.c **** 		/* ERROR, *dev is wrong */
+ 212:../Libraries/src/cb.c **** 		return EINTERNAL;
+ 848              		.loc 1 212 0
+ 849 09a4 0030E0E3 		mvn	r3, #0
+ 850 09a8 850000EA 		b	.L32
+ 851              	.L31:
+ 213:../Libraries/src/cb.c **** 	}
+ 214:../Libraries/src/cb.c **** 
+ 215:../Libraries/src/cb.c **** 	if(UART_STAT[udev].recv.RecvCB_Empty == FALSE){
+ 852              		.loc 1 215 0
+ 853 09ac 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 854 09b0 1C029FE5 		ldr	r0, .L35
+ 855 09b4 2010A0E3 		mov	r1, #32
+ 856 09b8 0230A0E1 		mov	r3, r2
+ 857 09bc 0331A0E1 		mov	r3, r3, asl #2
+ 858 09c0 023083E0 		add	r3, r3, r2
+ 859 09c4 8330A0E1 		mov	r3, r3, asl #1
+ 860 09c8 023083E0 		add	r3, r3, r2
+ 861 09cc 0331A0E1 		mov	r3, r3, asl #2
+ 862 09d0 033080E0 		add	r3, r0, r3
+ 863 09d4 013083E0 		add	r3, r3, r1
+ 864 09d8 0730D3E5 		ldrb	r3, [r3, #7]
+ 865 09dc FF3003E2 		and	r3, r3, #255
+ 866 09e0 000053E3 		cmp	r3, #0
+ 867 09e4 6800001A 		bne	.L33
+ 216:../Libraries/src/cb.c **** 		*i = UART_STAT[udev].recv.RecvCB_Array[UART_STAT[udev].recv.RecvCB_Out];
+ 868              		.loc 1 216 0
+ 869 09e8 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 870 09ec 09105BE5 		ldrb	r1, [fp, #-9]	@ zero_extendqisi2
+ 871 09f0 DCC19FE5 		ldr	ip, .L35
+ 872 09f4 2000A0E3 		mov	r0, #32
+ 873 09f8 0130A0E1 		mov	r3, r1
+ 874 09fc 0331A0E1 		mov	r3, r3, asl #2
+ 875 0a00 013083E0 		add	r3, r3, r1
+ 876 0a04 8330A0E1 		mov	r3, r3, asl #1
+ 877 0a08 013083E0 		add	r3, r3, r1
+ 878 0a0c 0331A0E1 		mov	r3, r3, asl #2
+ 879 0a10 03308CE0 		add	r3, ip, r3
+ 880 0a14 003083E0 		add	r3, r3, r0
+ 881 0a18 0530D3E5 		ldrb	r3, [r3, #5]
+ 882 0a1c FF3003E2 		and	r3, r3, #255
+ 883 0a20 0300A0E1 		mov	r0, r3
+ 884 0a24 A8C19FE5 		ldr	ip, .L35
+ 885 0a28 1010A0E3 		mov	r1, #16
+ 886 0a2c 0230A0E1 		mov	r3, r2
+ 887 0a30 0331A0E1 		mov	r3, r3, asl #2
+ 888 0a34 023083E0 		add	r3, r3, r2
+ 889 0a38 8330A0E1 		mov	r3, r3, asl #1
+ 890 0a3c 023083E0 		add	r3, r3, r2
+ 891 0a40 0331A0E1 		mov	r3, r3, asl #2
+ 892 0a44 03308CE0 		add	r3, ip, r3
+ 893 0a48 003083E0 		add	r3, r3, r0
+ 894 0a4c 013083E0 		add	r3, r3, r1
+ 895 0a50 0420D3E5 		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 896 0a54 14301BE5 		ldr	r3, [fp, #-20]
+ 897 0a58 0020C3E5 		strb	r2, [r3, #0]
+ 217:../Libraries/src/cb.c **** 		UART_STAT[udev].recv.RecvCB_Out = (UART_STAT[udev].recv.RecvCB_Out + 1) % CB_SIZE;
+ 898              		.loc 1 217 0
+ 899 0a5c 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 900 0a60 09105BE5 		ldrb	r1, [fp, #-9]	@ zero_extendqisi2
+ 901 0a64 68C19FE5 		ldr	ip, .L35
+ 902 0a68 2000A0E3 		mov	r0, #32
+ 903 0a6c 0130A0E1 		mov	r3, r1
+ 904 0a70 0331A0E1 		mov	r3, r3, asl #2
+ 905 0a74 013083E0 		add	r3, r3, r1
+ 906 0a78 8330A0E1 		mov	r3, r3, asl #1
+ 907 0a7c 013083E0 		add	r3, r3, r1
+ 908 0a80 0331A0E1 		mov	r3, r3, asl #2
+ 909 0a84 03308CE0 		add	r3, ip, r3
+ 910 0a88 003083E0 		add	r3, r3, r0
+ 911 0a8c 0530D3E5 		ldrb	r3, [r3, #5]
+ 912 0a90 FF3003E2 		and	r3, r3, #255
+ 913 0a94 011083E2 		add	r1, r3, #1
+ 914 0a98 C13FA0E1 		mov	r3, r1, asr #31
+ 915 0a9c 233EA0E1 		mov	r3, r3, lsr #28
+ 916 0aa0 031081E0 		add	r1, r1, r3
+ 917 0aa4 0F1001E2 		and	r1, r1, #15
+ 918 0aa8 013063E0 		rsb	r3, r3, r1
+ 919 0aac FF1003E2 		and	r1, r3, #255
+ 920 0ab0 1CC19FE5 		ldr	ip, .L35
+ 921 0ab4 2000A0E3 		mov	r0, #32
+ 922 0ab8 0230A0E1 		mov	r3, r2
+ 923 0abc 0331A0E1 		mov	r3, r3, asl #2
+ 924 0ac0 023083E0 		add	r3, r3, r2
+ 925 0ac4 8330A0E1 		mov	r3, r3, asl #1
+ 926 0ac8 023083E0 		add	r3, r3, r2
+ 927 0acc 0331A0E1 		mov	r3, r3, asl #2
+ 928 0ad0 03308CE0 		add	r3, ip, r3
+ 929 0ad4 003083E0 		add	r3, r3, r0
+ 930 0ad8 0120A0E1 		mov	r2, r1
+ 931 0adc 0520C3E5 		strb	r2, [r3, #5]
+ 218:../Libraries/src/cb.c **** 		if(UART_STAT[udev].recv.RecvCB_In == UART_STAT[udev].recv.RecvCB_Out){
+ 932              		.loc 1 218 0
+ 933 0ae0 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 934 0ae4 E8009FE5 		ldr	r0, .L35
+ 935 0ae8 2010A0E3 		mov	r1, #32
+ 936 0aec 0230A0E1 		mov	r3, r2
+ 937 0af0 0331A0E1 		mov	r3, r3, asl #2
+ 938 0af4 023083E0 		add	r3, r3, r2
+ 939 0af8 8330A0E1 		mov	r3, r3, asl #1
+ 940 0afc 023083E0 		add	r3, r3, r2
+ 941 0b00 0331A0E1 		mov	r3, r3, asl #2
+ 942 0b04 033080E0 		add	r3, r0, r3
+ 943 0b08 013083E0 		add	r3, r3, r1
+ 944 0b0c 0430D3E5 		ldrb	r3, [r3, #4]
+ 945 0b10 FF1003E2 		and	r1, r3, #255
+ 946 0b14 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 947 0b18 B4C09FE5 		ldr	ip, .L35
+ 948 0b1c 2000A0E3 		mov	r0, #32
+ 949 0b20 0230A0E1 		mov	r3, r2
+ 950 0b24 0331A0E1 		mov	r3, r3, asl #2
+ 951 0b28 023083E0 		add	r3, r3, r2
+ 952 0b2c 8330A0E1 		mov	r3, r3, asl #1
+ 953 0b30 023083E0 		add	r3, r3, r2
+ 954 0b34 0331A0E1 		mov	r3, r3, asl #2
+ 955 0b38 03308CE0 		add	r3, ip, r3
+ 956 0b3c 003083E0 		add	r3, r3, r0
+ 957 0b40 0530D3E5 		ldrb	r3, [r3, #5]
+ 958 0b44 FF3003E2 		and	r3, r3, #255
+ 959 0b48 030051E1 		cmp	r1, r3
+ 960 0b4c 0C00001A 		bne	.L34
+ 219:../Libraries/src/cb.c **** 			UART_STAT[udev].recv.RecvCB_Empty = TRUE;
+ 961              		.loc 1 219 0
+ 962 0b50 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 963 0b54 78009FE5 		ldr	r0, .L35
+ 964 0b58 2010A0E3 		mov	r1, #32
+ 965 0b5c 0230A0E1 		mov	r3, r2
+ 966 0b60 0331A0E1 		mov	r3, r3, asl #2
+ 967 0b64 023083E0 		add	r3, r3, r2
+ 968 0b68 8330A0E1 		mov	r3, r3, asl #1
+ 969 0b6c 023083E0 		add	r3, r3, r2
+ 970 0b70 0331A0E1 		mov	r3, r3, asl #2
+ 971 0b74 033080E0 		add	r3, r0, r3
+ 972 0b78 013083E0 		add	r3, r3, r1
+ 973 0b7c 0120A0E3 		mov	r2, #1
+ 974 0b80 0720C3E5 		strb	r2, [r3, #7]
+ 975              	.L34:
+ 220:../Libraries/src/cb.c **** 		}
+ 221:../Libraries/src/cb.c **** 		ret = EOK;
+ 976              		.loc 1 221 0
+ 977 0b84 0030A0E3 		mov	r3, #0
+ 978 0b88 08300BE5 		str	r3, [fp, #-8]
+ 979              	.L33:
+ 222:../Libraries/src/cb.c **** 	}
+ 223:../Libraries/src/cb.c **** 	UART_STAT[udev].recv.RecvCB_Full = FALSE;
+ 980              		.loc 1 223 0
+ 981 0b8c 09205BE5 		ldrb	r2, [fp, #-9]	@ zero_extendqisi2
+ 982 0b90 3C009FE5 		ldr	r0, .L35
+ 983 0b94 2010A0E3 		mov	r1, #32
+ 984 0b98 0230A0E1 		mov	r3, r2
+ 985 0b9c 0331A0E1 		mov	r3, r3, asl #2
+ 986 0ba0 023083E0 		add	r3, r3, r2
+ 987 0ba4 8330A0E1 		mov	r3, r3, asl #1
+ 988 0ba8 023083E0 		add	r3, r3, r2
+ 989 0bac 0331A0E1 		mov	r3, r3, asl #2
+ 990 0bb0 033080E0 		add	r3, r0, r3
+ 991 0bb4 013083E0 		add	r3, r3, r1
+ 992 0bb8 0020A0E3 		mov	r2, #0
+ 993 0bbc 0620C3E5 		strb	r2, [r3, #6]
+ 224:../Libraries/src/cb.c **** 	return ret;
+ 994              		.loc 1 224 0
+ 995 0bc0 08301BE5 		ldr	r3, [fp, #-8]
+ 996              	.L32:
+ 225:../Libraries/src/cb.c **** }
+ 997              		.loc 1 225 0
+ 998 0bc4 0300A0E1 		mov	r0, r3
+ 999 0bc8 04D04BE2 		sub	sp, fp, #4
+ 1000 0bcc 0048BDE8 		ldmfd	sp!, {fp, lr}
+ 1001 0bd0 1EFF2FE1 		bx	lr
+ 1002              	.L36:
+ 1003              		.align	2
+ 1004              	.L35:
+ 1005 0bd4 00000000 		.word	UART_STAT
+ 1006              		.cfi_endproc
+ 1007              	.LFE6:
+ 1009              	.Letext0:
+ 1010              		.file 2 "/home/es/CodeSourcery/Sourcery_CodeBench_Lite_for_ARM_EABI/bin/../lib/gcc/arm-none-eabi/4
+ 1011              		.file 3 "/home/es/Desktop/LPC2478_UART/Libraries/inc/UART.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 cb.c
+                            *COM*:000000b0 UART_STAT
+     /tmp/ccF0gLdD.s:17     .text:00000000 $a
+     /tmp/ccF0gLdD.s:19     .text:00000000 initSendCB
+     /tmp/ccF0gLdD.s:101    .text:000000f0 $d
+     /tmp/ccF0gLdD.s:105    .text:000000f4 $a
+     /tmp/ccF0gLdD.s:107    .text:000000f4 initRecvCB
+     /tmp/ccF0gLdD.s:188    .text:000001e4 $d
+     /tmp/ccF0gLdD.s:192    .text:000001e8 $a
+     /tmp/ccF0gLdD.s:195    .text:000001e8 initCB
+     /tmp/ccF0gLdD.s:240    .text:00000238 putSendCB
+     /tmp/ccF0gLdD.s:425    .text:00000498 $d
+     /tmp/ccF0gLdD.s:429    .text:0000049c $a
+     /tmp/ccF0gLdD.s:432    .text:0000049c getSendCB
+     /tmp/ccF0gLdD.s:617    .text:000006fc $d
+     /tmp/ccF0gLdD.s:621    .text:00000700 $a
+     /tmp/ccF0gLdD.s:624    .text:00000700 putRecvCB
+     /tmp/ccF0gLdD.s:811    .text:00000968 $d
+     /tmp/ccF0gLdD.s:815    .text:0000096c $a
+     /tmp/ccF0gLdD.s:818    .text:0000096c getRecvCB
+     /tmp/ccF0gLdD.s:1005   .text:00000bd4 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+uart_getDevInInt
