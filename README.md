@@ -1,23 +1,23 @@
 # LPC2478_UART
-Lecture: 	Embedded Systems 
+**Lecture:** 	Embedded Systems 
 
-Assignment: 	LPC2478 UART
+**Assignment:** 	LPC2478 UART
 
-Date: 		Dec 20, 2013
+**Date:** 		Dec 20, 2013
 
-Authors: 	Florian Berndl, Bernd Glatz
+**Authors:** 	Florian Berndl, Bernd Glatz
 
-Description:
+**Description:**
 
 Written files for this assignment:
 
 
-README.md
+* README.md
 
-main.c
+* main.c
 
-Libraries/src/UART.c
+* Libraries/src/UART.c
 
-Libraries/src/UART.h
+* Libraries/src/UART.h
 
 
