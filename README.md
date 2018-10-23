@@ -1,0 +1,2 @@
+# LPC2478_UART
+Assignment: LPC2478 UART
